@@ -1,0 +1,133 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+  </ol>
+</nav>
+
+<div
+	class="container shadow-sm p-3 mb-3 bg-body rounded container__size">
+	<div class="row">
+		<div class="col-xl-12 col-md-12 col-12 add__product-pc">
+			<label class="font__size-title">Phân quyền</label> <br> <br>
+			<div class="row">
+				<div class="col-xl-12 text-center mb-3">
+					<form action="">
+						<div class="mb-3 row">
+							<label for="" fullname"" class="col-sm-2 col-form-label">Họ
+								và tên</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="fullname">
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="" class="col-sm-2 col-form-label">Giới tính</label>
+							<div class="col-sm-8 text-start">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="gender"
+										id="gender" value="true" checked> <label
+										class="form-check-label" for="gender">Nam</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="gender"
+										id="gender" value="true"> <label
+										class="form-check-label" for="gender">Nữ</label>
+								</div>
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="" class="col-sm-2 col-form-label">Chức vụ</label>
+							<div class="col-sm-8 text-start">
+								<div class="form-check form-switch form-check-inline">
+									<input class="form-check-input" type="checkbox" id="a">
+									<label class="form-check-label" for="a">A</label>
+								</div>
+								<div class="form-check form-switch form-check-inline">
+									<input class="form-check-input" type="checkbox" id="b">
+									<label class="form-check-label" for="b">B</label>
+								</div>
+								<div class="form-check form-switch form-check-inline">
+									<input class="form-check-input" type="checkbox" id="c">
+									<label class="form-check-label" for="c">C</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr style="color: #757575 !important;">
+								<th>Ảnh <a href="#" class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th class="d-flex flex-row element__sort">Tên<a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Email<a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Giới tính <a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Chức vụ <a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Hoạt động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="text-center align-middle">
+									<button ng-click="edit()" class="btn text-warning">
+										<i class="fas fa-edit"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row mb-3 text-start">
+				<div class="col-6 text-start">
+					<label> 1/5 </label>
+				</div>
+				<div class="col-6 text-end">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<li class="page-item disabled"><a class="page-link">Previous</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div class="add__product-mobile text-center text-white fw-bold">
+			<img class="w-100 rounded-1 mb-2" src="/assets/images/bg_mmobile.jpg"
+				alt="Ảnh logo cửa hàng"> <label class="icon__mobile">
+				<i class="fas fa-laptop"></i>
+			</label>
+			<p class="content__mobile">
+				Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
+				tính
+			</p>
+		</div>
+	</div>
+</div>
+

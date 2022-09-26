@@ -1,0 +1,20 @@
+@media ( max-width : 64em) {
+	.j__between {
+		justify-content: space-between !important;
+		border-bottom: 1px solid black;
+		padding: 4px 10px; 
+	}
+	.btn__pc{
+		display: block;
+	}
+	
+	.btn__t-m {
+		display: none;	
+	}
+}
+
+@media ( min-width : 64.0625em) {
+	.btn__pc{
+		display: none;
+	}
+}

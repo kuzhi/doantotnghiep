@@ -1,0 +1,116 @@
+
+<div class="row text-start ms-3 mb-1">
+	<label class="text-muted">MÓN</label>
+</div>
+<div class="row">
+	<div class="col-5 btn__add-product rounded me-4 ms-5">
+		<div class="row d-flex align-items-center pt-2">
+			<div class="col-xl-3 col-md-4 text-center">
+				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
+					src="/assets/images/icon_food.png">
+			</div>
+			<div class="col-xl-6 col-md-5 text-start text-truncate">
+				<b>Tên món</b> <br> <small>0</small>
+			</div>
+			<div class="col-xl-3 col-md-3 text-center">
+				<button ng-click="edit()" class="btn text-warning" data-bs-toggle="modal"
+					data-bs-target="#editModal" data-bs-whatever="edit">
+					<i class="fas fa-edit"></i>
+				</button>
+				<button class="btn text-danger">
+					<i class="fas fa-ban"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<button ng-click="insert()" type="button"
+		class="col-5 btn btn__add-product text-center text-primary rounded"
+		data-bs-toggle="modal" data-bs-target="#editModal"
+		data-bs-whatever="add">
+		<i class="fas fa-plus-circle"></i> Thêm món
+	</button>
+</div>
+
+<!-- Full screen modal add product -->
+<div class="modal fade" id="editModal" tabindex="-2"
+	aria-labelledby="exModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+				<h5 class="modal-title" id="exModalLabel">{{titleTable}}</h5>
+				<button ng-disabled="productForm.$invalid" type="button"
+					class="btn btn-primary">Cập nhật</button>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="table align-middle table-borderless text-start">
+						<tbody>
+							<tr>
+								<td class="fw-bold">Tên món <small
+									ng-show="productForm.name_product2.$valid"> <i
+										class="fas fa-check text-success"></i>
+								</small>
+								</td>
+								<td><input ng-model="name_product2" name="name_product2"
+									class="w-100 form-control" placeholder="Nhập tên món" required>
+									<div
+										ng-show="productForm.name_product2.$dirty && productForm.name_product2.$invalid">
+										<small class="text-danger fst-italic"
+											ng-show="productForm.name_product2.$error.required">Vui
+											lòng không để trống*</small>
+									</div></td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Giá <small
+									ng-show="productForm.price_product2.$valid"> <i
+										class="fas fa-check text-success"></i>
+								</small>
+								</td>
+								<td><input ng-model="price_product2" name="price_product2"
+									type="number" min="1" max="9999999999"
+									class="w-100 form-control" placeholder="0" required>
+									<div
+										ng-show="productForm.price_product2.$dirty && productForm.price_product2.$invalid">
+										<small class="text-danger fst-italic"
+											ng-show="productForm.price_product2.$error.required">Vui
+											lòng không để trống*</small> <small
+											class="text-danger fst-italic error"
+											ng-show="productForm.price_product2.$invalid">Giá bán
+											không phù hợp*</small>
+									</div></td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Loại món</td>
+								<td class="text-start">
+									<div class="form-floating">
+										<select class="form-select" id="floatingSelect"
+											aria-label="Floating label select example">
+											<option value="1">Cơm</option>
+											<option value="2">Thức uống</option>
+											<option value="3">Súp</option>
+										</select> <label for="floatingSelect">Chọn loại món</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Mô tả</td>
+								<td><input class="w-100 form-control"
+									placeholder="Nhập mô tả món"></td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Chọn ảnh</td>
+								<td class="text-center"><img
+									class="img__food rounded-circle mb-2"
+									src="/assets/images/icon_food.png" alt="Ảnh sản phẩm">
+									<div class="small font-italic text-muted mb-4">Ảnh có
+										kích thước nhỏ hơn 10MB</div> <input type="file"
+									class="form-control"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

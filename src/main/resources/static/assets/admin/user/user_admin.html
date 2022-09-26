@@ -1,0 +1,221 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+  </ol>
+</nav>
+
+<div
+	class="container shadow-sm p-3 mb-3 bg-body rounded container__size">
+	<div class="row">
+		<div class="col-xl-12 col-md-12 col-12 add__product-pc">
+			<label class="font__size-title">Tài khoản quản trị</label> <br> <br>
+			<div class="row">
+				<div class="col-xl-4 text-center mb-3">
+					<form class="d-flex" role="search">
+						<button class="btn btn-outline-success rounded-4" type="submit">
+							<i class="fas fa-search"></i>
+						</button>
+						&nbsp; <input class="form-control me-2" type="search"
+							placeholder="Nhập tên nhân viên" aria-label="Search">
+					</form>
+				</div>
+				<div class="col-xl-2 text-star mb-3">
+					<button ng-click="insert()" class="btn btn-primary rounded-circle"
+						data-bs-toggle="modal" data-bs-target="#addModal"
+						data-bs-whatever="add">
+						<i class="fas fa-plus"></i>
+					</button>
+					<button class="btn btn-primary rounded-circle">
+						<i class="fas fa-redo-alt"></i>
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr style="color: #757575 !important;">
+								<th class="d-flex flex-row element__sort">Tên<a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Email<a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Ngày sinh<a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Giới tính <a href="#"
+									class="text-decoration-none icon__sort"><i
+										class="fas fa-sort-amount-up-alt"></i></a>
+								</th>
+								<th>Hoạt động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="align-middle">1</td>
+								<td class="text-center align-middle">
+									<button ng-click="edit()" class="btn text-warning"
+										data-bs-toggle="modal" data-bs-target="#addModal"
+										data-bs-whatever="add">
+										<i class="fas fa-edit"></i>
+									</button>
+									<button class="btn text-danger">
+										<i class="fas fa-ban"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row mb-3 text-start">
+				<div class="col-6 text-start">
+					<label> 1/5 </label>
+				</div>
+				<div class="col-6 text-end">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<li class="page-item disabled"><a class="page-link">Previous</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<div class="add__product-mobile text-center text-white fw-bold">
+			<img class="w-100 rounded-1 mb-2" src="/assets/images/bg_mmobile.jpg"
+				alt="Ảnh logo cửa hàng"> <label class="icon__mobile">
+				<i class="fas fa-laptop"></i>
+			</label>
+			<p class="content__mobile">
+				Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
+				tính
+			</p>
+		</div>
+	</div>
+</div>
+
+<!-- Full screen modal add product -->
+<div class="modal fade" id="addModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<form name="userForm" action="" novalidate>
+				<div class="modal-header">
+					<button type="button" class="btn btn-danger"
+						data-bs-dismiss="modal">X</button>
+					<h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+					<button ng-disabled="userForm.$invalid" type="button"
+						class="btn btn-primary">Lưu</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table align-middle table-borderless">
+							<tbody>
+								<tr>
+									<td class="fw-bold">Tên đăng nhập <small
+										ng-show="userForm.username.$valid"> <i
+											class="fas fa-check text-success"></i>
+									</small>
+									</td>
+									<td><input ng-model="username" name="username"
+										ng-readonly="statusInput == false"
+										ng-disabled="statusInput == false" class="w-100 form-control"
+										placeholder="Nhập tên đăng nhập*" required>
+										<div
+											ng-show="userForm.username.$dirty && userForm.username.$invalid">
+											<small class="text-danger fst-italic"
+												ng-show="userForm.username.$error.required">Vui lòng
+												không để trống*</small>
+										</div></td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Mật khẩu <small
+										ng-show="userForm.password.$valid"> <i
+											class="fas fa-check text-success"></i>
+									</small>
+									</td>
+									<td><input ng-model="password" name="password" type="password"
+										class="w-100 form-control" placeholder="Nhập mật khẩu*"
+										required>
+										<div
+											ng-show="userForm.password.$dirty && userForm.password.$invalid">
+											<small class="text-danger fst-italic"
+												ng-show="userForm.password.$error.required">Vui lòng
+												không để trống* </small>
+										</div></td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Họ và tên <small
+										ng-show="userForm.fullname.$valid"> <i
+											class="fas fa-check text-success"></i>
+									</small>
+									</td>
+									<td><input ng-model="fullname" name="fullname"
+										class="w-100 form-control" placeholder="Nhập họ tên đầy đủ*"
+										required>
+										<div
+											ng-show="userForm.fullname.$dirty && userForm.fullname.$invalid">
+											<small class="text-danger fst-italic"
+												ng-show="userForm.fullname.$error.required">Vui lòng
+												không để trống*</small>
+										</div></td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Email <small
+										ng-show="userForm.email.$valid"> <i
+											class="fas fa-check text-success"></i>
+									</small>
+									</td>
+									<td><input ng-model="email" name="email" type="email"
+										class="w-100 form-control" placeholder="Nhập email*" required>
+										<div
+											ng-show="userForm.email.$dirty && userForm.email.$invalid && userForm.email.$error.email">
+											<small class="text-danger fst-italic"
+												ng-show="userForm.email.$error.required">Vui lòng
+												không để trống*</small> <small class="text-danger fst-italic"
+												ng-show="userForm.email.$error.email">Email chưa
+												đúng định dạng*</small>
+										</div></td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Giới tính</td>
+									<td class="d-flex">
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios1" value="true" checked>
+											<label class="form-check-label" for="gridRadios1">
+												Nam </label>
+										</div> &nbsp;&nbsp;
+										<div class="form-check">
+											<input class="form-check-input" type="radio"
+												name="gridRadios" id="gridRadios2" value="false"> <label
+												class="form-check-label" for="gridRadios2"> Nữ </label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Ngày sinh</td>
+									<td><input class="w-100 form-control" type="date"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

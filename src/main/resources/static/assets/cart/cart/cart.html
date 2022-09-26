@@ -1,0 +1,46 @@
+<div ng-if="check == false">
+	<img alt="" src="/assets/images/icon_cart_blank.png" style="width: 225px;"> <label
+		class="text-muted">Không có món ăn trong giỏ hàng</label>
+</div>
+<div ng-if="check == true" class="container">
+	<div class="row">
+		<div class="col text-start">
+			<label>Món bạn đã chọn</label>
+		</div>
+		<div class="col text-end">
+			<button class="btn btn-sm btn-outline-danger">
+				<i class="fas fa-trash-alt"></i>
+			</button>
+		</div>
+	</div>
+	<div class="container p-3 shadow-lg rounded mt-3 mb-3">
+		<div class="row mb-3">
+			<div class="col-9 text-start">
+				<p class="text-truncate">Tên món Tên món Tên món Tên món Tên món </p>
+			</div>
+			<div class="col-3 text-end">
+				<button class="btn btn-sm btn-outline-warning"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<i class="fas fa-edit"></i>
+				</button>
+			</div>
+		</div>
+		<div class="row text-end text-muted">
+			<small>x1 : 0</small>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col text-start">
+			<h6>Thành tiền:</h6>
+		</div>
+		<div class="col text-end">
+			<h6>0 đ</h6>
+		</div>
+	</div>
+
+	<div class="row">
+		<a ng-href="/assets/cart/cart/cart_detail.html" class="btn btn-warning">
+			Tiếp tục
+		</a>
+	</div>
+</div>

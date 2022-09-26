@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chickens | Kính chào quý khách</title>
+<!-- Icon tab web -->
+<link rel="shortcut icon"
+	href="https://img.icons8.com/cute-clipart/344/shortcuts.png" />
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Angular JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- Angular Route -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<!-- Icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<!-- Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" href="/assets/css/cart/index.css">
+
+</head>
+
+<body>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="row text-start mt-4 ">
+						<div class="col-xl-1">
+							<a ng-href="/assets/cart/index.html"
+								class="btn bg-light rounded-5"> <i
+								class="fas fa-long-arrow-alt-left"></i>
+							</a>
+						</div>
+						<div class="col-xl">
+							<h3 class="fw-bold">Sản phẩm được yêu thích</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row row-cols-1 row-cols-md-3 g-4 text-center ps-5 pe-5">
+				<div class="col">
+					<div class="card">
+						<label data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+							src="/assets/images/sp1.jpg"
+							class="card-img-top img__product-menu img__hover" alt="..."></label>
+						<div class="card-body text-start">
+							<h5 class="card-title text-truncate">This text is quite
+								long, and will be truncated once displayed.</h5>
+							<div class="row">
+								<div class="col text-warning fw-bold">0</div>
+								<div class="col text-end">
+									<button class="btn btn-secondary rounded-circle">
+										<i class="fas fa-heart-broken"></i>
+									</button>
+									<button ng-click="add()" class="btn btn-warning rounded-circle">
+										<i class="far fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img src="/assets/images/double-burger.jpg"
+							class="card-img-top img__product-menu img__hover" alt="...">
+						<div class="card-body text-start">
+							<h5 class="card-title text-truncate">This text is quite
+								long, and will be truncated once displayed.</h5>
+							<div class="row">
+								<div class="col text-warning fw-bold">0</div>
+								<div class="col text-end">
+									<button class="btn btn-secondary rounded-circle">
+										<i class="fas fa-heart-broken"></i>
+									</button>
+									<button ng-click="add()" class="btn btn-warning rounded-circle">
+										<i class="far fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img src="/assets/images/sp3.jpeg"
+							class="card-img-top img__product-menu img__hover" alt="...">
+						<div class="card-body text-start">
+							<h5 class="card-title text-truncate">This text is quite
+								long, and will be truncated once displayed.</h5>
+							<div class="row">
+								<div class="col text-warning fw-bold">0</div>
+								<div class="col text-end">
+									<button class="btn btn-secondary rounded-circle">
+										<i class="fas fa-heart-broken"></i>
+									</button>
+									<button ng-click="add()" class="btn btn-warning rounded-circle">
+										<i class="far fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div class="card">
+						<img src="/assets/images/sp4.jpeg"
+							class="card-img-top img__product-menu img__hover" alt="...">
+						<div class="card-body text-start">
+							<h5 class="card-title text-truncate">This text is quite
+								long, and will be truncated once displayed.</h5>
+							<div class="row">
+								<div class="col text-warning fw-bold">0</div>
+								<div class="col text-end">
+									<button class="btn btn-secondary rounded-circle">
+										<i class="fas fa-heart-broken"></i>
+									</button>
+									<button ng-click="add()" class="btn btn-warning rounded-circle">
+										<i class="far fa-plus"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

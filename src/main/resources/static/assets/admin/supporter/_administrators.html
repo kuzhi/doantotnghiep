@@ -1,0 +1,141 @@
+
+<div class="row text-start ms-3 mb-1">
+	<label class="text-muted">Danh sách kênh</label>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
+		<div class="row d-flex align-items-center pt-2">
+			<div class="col-xl-3 col-md-4 text-center">
+				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
+					src="/assets/images/icon_food.png">
+			</div>
+			<div class="col-xl-6 col-md-5 text-start text-truncate">
+				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
+			</div>
+			<div class="col-xl-3 col-md-3 text-center">
+				<button ng-click="edit()" class="btn text-warning"
+					data-bs-toggle="modal" data-bs-target="#editModal"
+					data-bs-whatever="edit">
+					<i class="fas fa-edit"></i>
+				</button>
+				<button class="btn text-danger">
+					<i class="fas fa-ban"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
+		<div class="row d-flex align-items-center pt-2">
+			<div class="col-xl-3 col-md-4 text-center">
+				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
+					src="/assets/images/icon_food.png">
+			</div>
+			<div class="col-xl-6 col-md-5 text-start text-truncate">
+				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
+			</div>
+			<div class="col-xl-3 col-md-3 text-center">
+				<button ng-click="edit()" class="btn text-warning"
+					data-bs-toggle="modal" data-bs-target="#editModal"
+					data-bs-whatever="edit">
+					<i class="fas fa-edit"></i>
+				</button>
+				<button class="btn text-danger">
+					<i class="fas fa-ban"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
+		<div class="row d-flex align-items-center pt-2">
+			<div class="col-xl-3 col-md-4 text-center">
+				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
+					src="/assets/images/icon_food.png">
+			</div>
+			<div class="col-xl-6 col-md-5 text-start text-truncate">
+				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
+			</div>
+			<div class="col-xl-3 col-md-3 text-center">
+				<button ng-click="edit()" class="btn text-warning"
+					data-bs-toggle="modal" data-bs-target="#editModal"
+					data-bs-whatever="edit">
+					<i class="fas fa-edit"></i>
+				</button>
+				<button class="btn text-danger">
+					<i class="fas fa-ban"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
+		<div class="row d-flex align-items-center pt-2">
+			<div class="col-xl-3 col-md-4 text-center">
+				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
+					src="/assets/images/icon_food.png">
+			</div>
+			<div class="col-xl-6 col-md-5 text-start text-truncate">
+				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
+			</div>
+			<div class="col-xl-3 col-md-3 text-center">
+				<button ng-click="edit()" class="btn text-warning"
+					data-bs-toggle="modal" data-bs-target="#editModal"
+					data-bs-whatever="edit">
+					<i class="fas fa-edit"></i>
+				</button>
+				<button class="btn text-danger">
+					<i class="fas fa-ban"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Full screen modal add product -->
+<div class="modal fade" id="editModal" tabindex="-2"
+	aria-labelledby="exModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+				<h5 class="modal-title" id="exModalLabel">{{titleTable}}</h5>
+				<button ng-disabled="productForm.$invalid" type="button"
+					class="btn btn-primary">Cập nhật</button>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="table align-middle table-borderless text-start">
+						<tbody>
+							<tr>
+								<td class="fw-bold">Tên kênh</td>
+								<td><input class="w-100 form-control" readonly></td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Tên chủ kênh</td>
+								<td><input class="w-100 form-control" readonly></td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Người quản trị</td>
+								<td class="text-start">
+									<div class="form-floating">
+										<select class="form-select" id="floatingSelect"
+											aria-label="Floating label select example">
+											<option value="1">An</option>
+											<option value="2">Bình</option>
+											<option value="3">Chánh</option>
+										</select> <label for="floatingSelect">Chọn người quản trị cho
+											kênh</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="fw-bold">Trạng thái</td>
+								<td class="d-flex align-items-center">
+									<i class="fas fa-circle text-success"></i> &nbsp; <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Đang hoạt động">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

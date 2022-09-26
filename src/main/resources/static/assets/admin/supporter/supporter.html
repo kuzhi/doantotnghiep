@@ -1,0 +1,57 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+	</ol>
+</nav>
+
+<div
+	class="container shadow-sm p-3 mb-3 bg-body rounded container__size">
+
+	<div class="col-xl-12 col-md-12 col-12  add__product-pc">
+		<div class="row border-bottom mb-2">
+			<div class="col-10">
+				<label class="font__size-title">Cấp quyền quản trị</label> <br>
+			</div>
+			<div class="col-2 text-end">
+				<button type="submit" class="btn text-primary font__size-btn">
+					<i class="fas fa-sort-amount-down-alt"></i> Sắp xếp
+				</button>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<form ng-include=" '/assets/admin/supporter/_administrators.html' "
+				name="productForm" class="col-9" novalidate></form>
+				
+			<div class="col-3 text-start border-start">
+				<div class="row text-start ms-1 mb-1">
+					<label class="text-muted">Danh sách nhân viên</label>
+				</div>
+
+				<div class="row btn__add-cate rounded m-0 mb-2">
+					<button class="btn btn-primary fs-4">Tên quản trị viên</button>
+				</div>
+
+				<div class="row btn__add-cate rounded m-0 mb-2">
+					<button class="btn btn-primary fs-4">Tên quản trị viên</button>
+				</div>
+
+				<div class="row btn__add-cate rounded m-0 mb-2">
+					<button class="btn btn-primary fs-4">Tên quản trị viên</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="add__product-mobile text-center text-white fw-bold">
+		<img class="w-100 rounded-1 mb-2" src="/assets/images/bg_mmobile.jpg"
+			alt="Ảnh logo cửa hàng"> <label class="icon__mobile"> <i
+			class="fas fa-laptop"></i>
+		</label>
+		<p class="content__mobile">
+			Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
+			tính
+		</p>
+	</div>
+</div>

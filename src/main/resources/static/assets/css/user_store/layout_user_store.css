@@ -1,0 +1,154 @@
+main {
+	background-color: #ecf0f4;
+}
+
+input.ng-valid {
+	border: 1px solid green;
+}
+
+.icon__sort {
+	color: #757575 !important;
+	display: none;
+}
+
+.element__sort:hover .icon__sort {
+	display: block;
+}
+
+header {
+	height: 60px;
+	max-height: 60px;
+	background-color: #fff;
+}
+
+.navbar__admin {
+	height: 3.8125em;
+}
+
+.div__logo {
+	border-right: 1px solid #f5f5f5;
+}
+
+.img__logo {
+	width: 50%;
+}
+
+.img__user {
+	width: 30px;
+	height: 30px;
+}
+
+.account__user {
+	margin-right: 50px;
+}
+
+.account__user-mobile {
+	display: none;
+}
+
+/* Mobile */
+@media ( max-width : 47.9375em) {
+	.account__user {
+		display: none;
+	}
+	.account__user-mobile {
+		display: block;
+	}
+	.add__product-pc {
+		display: none;
+	}
+	.add__product-mobile {
+		display: block;
+	}
+	/*
+	.content__mobile {
+		top: 480px;
+		left: 43px;
+		position: absolute;
+	}
+	.icon__mobile {
+		top: 280px;
+		left: 6.25rem;
+		font-size: 150px;
+		position: absolute;
+	}*/
+	.img__logo {
+		display: none;
+	}
+	.list__menu {
+		display: block;
+	}
+	.menu__admin {
+		display: none;
+	}
+}
+
+/* Tablet */
+@media ( min-width : 48em) and (max-width : 74.9375em) {
+	.menu__admin {
+		display: none;
+	}
+	.div__logo {
+		display: none;
+	}
+	.list__menu {
+		margin-left: 1.25em;
+	}
+	.add__product-mobile {
+		display: none;
+	}
+}
+
+/* PC */
+@media ( min-width : 75em) {
+	.container__size {
+		height: 37.5em;
+	}
+	.add__product-mobile {
+		display: none;
+	} 
+	.list__menu {
+		display: none;
+	}
+}
+
+.size-icon {
+	font-size: 24px;
+}
+
+.size-icon-sm {
+	font-size: 20px;
+}
+
+.menu__item {
+	cursor: pointer;
+}
+
+.menu__item:hover {
+	border-bottom: 1px solid #333;
+}
+
+.list__item {
+	margin-left: 35px;
+	border-left: 2px solid rgba(0, 0, 0, 0.5);
+	padding-left: 5px;
+	margin-bottom: 10px;
+	transition: padding-left .5s;
+}
+
+.list__item:hover {
+	color: green !important;
+	cursor: pointer;
+	padding-left: 20px;
+}
+
+.font__size-title {
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 42px;
+}
+
+font__size-btn {
+	font-size: 11px;
+	line-height: 11px;
+}

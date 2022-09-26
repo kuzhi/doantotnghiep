@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chickens | Kính chào quý khách</title>
+<!-- Icon tab web -->
+<link rel="shortcut icon"
+	href="https://img.icons8.com/cute-clipart/344/shortcuts.png" />
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Angular JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- Angular Route -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<!-- Icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<!-- Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" href="/assets/css/cart/index.css">
+
+</head>
+
+<body ng-app="cart-detail__app" ng-controller="cart-detail__app-ctrl">
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="row text-start mt-4 ">
+						<div class="col-1">
+							<a ng-href="/assets/cart/index.html" class="btn bg-light rounded-5">
+								<i class="fas fa-long-arrow-alt-left"></i>
+							</a>
+						</div>
+						<div class="col">
+							<h3 class="fw-bold">Thông tin giỏ hàng</h3>
+						</div>
+					</div>
+
+					<ul class="nav nav-tabs fw-bold nav-pills nav-fill" id="myTab" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button ng-click="editTab1()" class="nav-link active" id="online-tab" data-bs-toggle="tab"
+								data-bs-target="#online-tab-pane" type="button" role="tab"
+								aria-controls="online-tab-pane" aria-selected="true">Giao
+								hàng</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button ng-click="editTab2()" class="nav-link" id="offline-tab"
+								data-bs-toggle="tab" data-bs-target="#offline-tab-pane"
+								type="button" role="tab" aria-controls="offline-tab-pane"
+								aria-selected="false">Tự đến lấy</button>
+						</li>
+					</ul>
+					
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="online-tab-pane" role="tabpanel"
+							aria-labelledby="online-tab">
+							<div ng-include="'/assets/cart/cart/_online-tab.html'"></div>
+						</div>
+						<div class="tab-pane fade" id="offline-tab-pane"
+							role="tabpanel" aria-labelledby="offline-tab">
+							<div ng-include="'/assets/cart/cart/_offline-tab.html'"></div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-xl-5 ms-auto p-3 pt-5"
+					style="background-color: #d3d3d4;">
+					<div class="row mt-5">
+						<div class="col">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">Tổng cộng 1 sản phẩm:</div>
+										<div class="col-4 text-end">0 đ</div>
+									</div>
+								</li>
+								<li ng-if="shipMoney==1" class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">Phí vận chuyển (0km):</div>
+										<div class="col-4 text-end">0 đ</div>
+									</div>
+								</li>
+								<li class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">
+											<h5>Tiền phải thanh toán:</h5>
+										</div>
+										<div class="col-4 text-end">
+											<h5>0 đ</h5>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item list-group-item-dark">
+									<button ng-click="orderFinish()" class="btn btn-warning w-100 text-white">Đặt
+										hàng</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Modal address -->
+	<div class="modal fade" id="addressModal" tabindex="-1"
+		aria-labelledby="addressModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addressModalLabel">CHỌN ĐỊA CHỈ
+						GIAO HÀNG</h5>
+				</div>
+				<div class="modal-body">
+					<div
+						class="container shadow-sm border border-2 border-success rounded p-2">
+						<div class="row text-dark">
+							<div class="col-10 mt-1">
+								<h6>Địa chỉ</h6>
+								<label>Tên khách hàng | Số điện thoại</label>
+							</div>
+							<div class="col-2 text-center">
+								<button class="btn border border-0">
+									<i class="fas fa-trash-alt text-danger"></i>
+								</button>
+								<button class="btn border border-0" data-bs-toggle="modal"
+									data-bs-target="#addAddressModal">
+									<i class="fas fa-edit text-warning"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button"
+						class="btn border border-0 w-100 text-warning"
+						data-bs-toggle="modal" data-bs-target="#addAddressModal">
+						<i class="fas fa-plus-circle"></i> Thêm địa chỉ
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal add - edit address -->
+	<div class="modal fade" id="addAddressModal" tabindex="-1"
+		aria-labelledby="addAddressModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addAddressModalLabel">Thông tin
+						giao hàng</h5>
+				</div>
+				<div class="modal-body">
+					<form name="addressForm" class="container p-3">
+						<div class="row text-dark">
+							<div class="col-xl-6 p-1">
+								<div class="mb-3">
+									<label for="name" class="form-label">Tên người nhận</label> <small
+										ng-show="addressForm.name.$valid"> <i
+										class="fas fa-check text-success"></i>
+									</small> <input ng-model="name" name="name" required type="text"
+										class="form-control bg-light" id="name"
+										placeholder="Tên người nhận">
+									<div
+										ng-show="addressForm.name.$dirty && addressForm.name.$invalid">
+										<small class="text-danger fst-italic"
+											ng-show="addressForm.name.$error.required">Vui lòng
+											không để trống*</small>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-6 p-1">
+								<div class="mb-3">
+									<label for="phone" class="form-label">Số điện thoại</label> <small
+										ng-show="addressForm.phone.$valid"> <i
+										class="fas fa-check text-success"></i>
+									</small> <input ng-model="phone" name="phone" ng-pattern="regexPhone"
+										type="number" class="form-control bg-light" id="phone"
+										placeholder="Số điện thoại" required>
+									<div
+										ng-show="addressForm.phone.$dirty && addressForm.phone.$invalid || addressForm.phone.$error.pattern">
+										<small class="text-danger fst-italic"
+											ng-show="addressForm.phone.$error.pattern && addressForm.phone.$invalid">Số
+											điện thoại chưa phù hợp*</small> <small
+											class="text-danger fst-italic"
+											ng-show="addressForm.phone.$error.required">Vui lòng
+											không để trống*</small>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row text-dark">
+							<div class="col-xl-12 p-1">
+								<div>
+									<label class="form-label">Địa chỉ giao hàng</label> <small
+										ng-show="addressForm.address.$valid"> <i
+										class="fas fa-check text-success"></i>
+									</small> <input ng-model="address" name="address" required type="text"
+										class="form-control bg-light mb-3" id="address"
+										placeholder="Địa chỉ nhận hàng, số nhà, tên đường,...">
+									<div
+										ng-show="addressForm.address.$dirty && addressForm.address.$invalid">
+										<small class="text-danger fst-italic"
+											ng-show="addressForm.address.$error.required">Vui
+											lòng không để trống*</small>
+									</div>
+									<input type="text" class="form-control bg-light"
+										id="addressDetail"
+										placeholder="Thêm địa chỉ chi tiết:Số nhà, ngõ, ngách hoặc Tòa nhà...">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button ng-disabled="addressForm.$invalid" type="button"
+						class="btn btn-warning w-100 text-white" data-bs-toggle="modal"
+						data-bs-target="#addAddressModal">Xác nhận</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal paymentMethods -->
+	<div class="modal fade" id="paymentMethodsModal" tabindex="-1"
+		aria-labelledby="paymentMethodsModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="paymentMethodsModalLabel">Phương
+						thức thanh toán</h5>
+				</div>
+				<div class="modal-body">
+					<div class="form-check mb-3">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault1" checked>
+						<div class="bg-light">
+							<label class="form-check-label fw-bold" for="flexRadioDefault1">
+								Thanh toán khi nhận hàng </label>
+						</div>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio"
+							name="flexRadioDefault" id="flexRadioDefault2">
+						<div class="bg-light">
+							<label class="form-check-label fw-bold" for="flexRadioDefault2">
+								Thanh toán bằng tài khoản ngân hàng </label> <br> <small>Số
+								tài khoản: 0000000000000</small>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal voucher -->
+	<div class="modal fade" id="voncherModal" tabindex="-1"
+		aria-labelledby="voucherModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="voucherModalLabel">Mã giảm giá</h5>
+				</div>
+				<div class="modal-body">
+					<div class="input-group mb-3">
+						<button class="input-group-text btn btn-success">Áp dụng</button>
+						<div class="form-floating">
+							<input type="text" class="form-control" id="floatingInputGroup1"
+								placeholder="Bạn có mã giảm giá?"> <label for="floatingInputGroup1">Bạn có mã giảm giá?</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/assets/js/cart/cart__detail-ctrl.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

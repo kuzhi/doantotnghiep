@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chickens | Kính chào quý khách</title>
+<!-- Icon tab web -->
+<link rel="shortcut icon"
+	href="https://img.icons8.com/cute-clipart/344/shortcuts.png" />
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Angular JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<!-- Angular Route -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<!-- Icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<!-- Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" href="/assets/css/cart/index.css">
+
+</head>
+
+<body ng-app="order__app" ng-controller="order__app-ctrl">
+	<main>
+		<div class="container">
+			<div class="row text-start mt-4 ">
+				<div class="col-1">
+					<a ng-href="/assets/cart/index.html" class="btn bg-light rounded-5">
+						<i class="fas fa-long-arrow-alt-left"></i>
+					</a>
+				</div>
+				<div class="col">
+					<h3 class="fw-bold">Đơn hàng của bạn</h3>
+				</div>
+			</div>
+			<div class="row text-start mt-4 ">
+				<div class="col-xl-12">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr class="text-center" style="color: #757575 !important;">
+									<th>#</th>
+									<th>Mã đơn</th>
+									<th>Ngày tạo</th>
+									<th>Địa điểm đặt</th>
+									<th>Tổng tiền</th>
+									<th>Trạng thái</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="align-middle text-center">1</td>
+									<td class="align-middle text-start">1</td>
+									<td class="align-middle text-center">1</td>
+									<td class="align-middle text-start">Tên cửa hàng</td>
+									<td class="align-middle text-end">Đang xử lý</td>
+									<td class="text-center align-middle">
+										<button ng-click="edit()" class="btn text-primary"
+											data-bs-toggle="modal" data-bs-target="#viewModal">Xem
+											chi tiết</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!-- Modal address -->
+	<div class="modal fade" id="viewModal" tabindex="-1"
+		aria-labelledby="addressModalLabel" aria-hidden="true">
+		<div class="modal-dialog model-lg">
+			<div class="modal-content">
+				<div class="modal-header text-start">
+					<h5 class="modal-title" id="addressModalLabel">Mã đơn: 1</h5>
+					<small>Đang xử lý</small>
+				</div>
+				<div class="modal-body">
+					<div class="row shadow-sm p-2 rounded mb-3 mt-3"
+						style="background-color: #f8f8f8;">
+						<div class="col-xl-12 ps-4">
+							<div class="row mb-3">
+								<h4>Giao hàng tận nơi</h4>
+							</div>
+							<div class="row text-start mb-3">
+								<h6>Tên cửa hàng</h6>
+								<label class="text-truncate">Địa chỉ cửa hàng</label>
+							</div>
+							<hr>
+							<div class="row text-start">
+								<h6>Tên khách hàng</h6>
+								<label class="text-truncate">Địa chỉ khách hàng</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row shadow-sm p-2 rounded mb-3"
+						style="background-color: #f8f8f8;">
+						<div class="container">
+							<div class="row">
+								<div class="col text-start">
+									<label>Danh sách món</label>
+								</div>
+							</div>
+							<div class="container p-3 shadow-lg rounded mt-3 mb-3">
+								<div class="row mb-3">
+									<div class="col-9 text-start">
+										<p class="text-truncate">Tên món Tên món Tên món Tên món
+											Tên món</p>
+									</div>
+								</div>
+								<div class="row text-end text-muted">
+									<small>x1 : 0</small>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">Tổng cộng 1 sản phẩm:</div>
+										<div class="col-4 text-end">0 đ</div>
+									</div>
+								</li>
+								<li class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">Phí vận chuyển (0km):</div>
+										<div class="col-4 text-end">0 đ</div>
+									</div>
+								</li>
+								<li class="list-group-item list-group-item-dark">
+									<div class="row">
+										<div class="col-8 text-start">
+											<h5>Tiền phải thanh toán:</h5>
+										</div>
+										<div class="col-4 text-end">
+											<h5>0 đ</h5>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn w-100 btn-outline-danger"
+						data-bs-toggle="modal" data-bs-target="#addAddressModal">
+						Hủy đơn</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/assets/js/cart/view__order-ctrl.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
