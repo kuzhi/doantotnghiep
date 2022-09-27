@@ -1,6 +1,6 @@
 app.controller("user-admin-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Người dùng';
-	$scope.titleBread = 'Quản trị';
+	$scope.titleBread = 'Nhân viên';
 
 	$scope.insert = function () {
 		$scope.title = 'Thêm nhân viên quản trị mới';
