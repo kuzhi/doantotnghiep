@@ -1,0 +1,141 @@
+<div ng-show="showI">
+	<div class="row">
+		<h2>Thông tin người dùng</h2>
+	</div>
+	
+	<div class="row shadow rounded p-3 mb-3">
+		<div class="col">
+			<div class="row">
+				<h5 class="fw-bold text-secondary">Thông tin cá nhân</h5>
+			</div>
+			
+			<div class="row">
+				<div class="col-xl-6 border-end">
+					<div class="row">
+						<div class="col-xl-2 image-upload text-end">
+							<label for="file-input">
+								<img 
+									th:src="@{/assets/images/user_admin/testimonials-1.jpg}" 
+									class="rounded-circle border border-2 border-primary
+									mt-2" style="width: 60px; height: 60px;">
+						    </label>
+						
+						    <input id="file-input" type="file" />
+						</div>
+						
+						<div class="col-xl-10 text-start">
+						  <div class="my-1 row">
+						    <label class="mx-4">
+						    	Tên đăng nhập: <b>anv123</b>
+						    </label>
+						  </div>
+						  <div class="mb-1 row">
+						    <label class="col-xl-3 text-end">Họ tên</label>
+						    <div class="col-xl-9">
+						      <input type="text" class="form-control form-control-sm" id="inputFullname">
+						    </div>
+						  </div>
+						</div>
+					</div>
+					
+					<div class="row my-2">
+						<div class="col-xl fw-bold"> <b>Ngày sinh</b> </div>
+						<div class="col-xl-9">
+							<input type="date" class="form-control form-control-sm ">
+						</div>
+					</div>
+	
+					<div class="row my-2">
+						<div class="col-xl fw-bold"> <b>Giới tính</b> </div>
+						<div class="col-xl-9">
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" checked="checked"
+							  	name="inlineRadioOptions" id="inlineRadio1" value="option1">
+							  <label class="form-check-label" for="inlineRadio1" >Nam</label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <input class="form-check-input" type="radio" 
+							  	name="inlineRadioOptions" id="inlineRadio2" value="option2">
+							  <label class="form-check-label" for="inlineRadio2">Nữ</label>
+							</div>
+						</div>
+					</div>
+	
+					<div class="row my-2">
+						<div class="col-xl fw-bold"> <b>Địa chỉ</b> </div>
+						<div class="col-xl-9">
+							<input class="form-control form-control-sm">
+						</div>
+					</div>
+					
+					<div class="row my-4">
+						<div class="col text-center">
+							<button 
+								ng-click="updateProfile()"
+								class="btn btn-primary w-75"
+							>
+								Lưu thay đổi
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<div class="row mb-3">
+						<small> <b>Số điện thoại - email</b> </small>
+					</div>
+					<div class="row">
+						<div class="col-xl-9 px-5">
+							<small> <b>Số điện thoại</b> </small> <br>
+							<small > <i>{{phone ? phone : 'Thêm số điện thoại'}}</i> </small>
+							<hr>
+						</div>
+						<div class="col-xl-3">
+							<button 
+								ng-click="updatePhone()"
+								class="btn btn-sm btn-warning fw-bold text-white mt-2"
+							>
+								Cập nhật
+							</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-9 px-5">
+							<small> <b>Email</b> </small> <br>
+							<small> <i>{{email ? email : 'Thêm email'}}</i> </small>
+							<hr>
+						</div>
+						<div class="col-xl-3">
+							<button 
+								ng-click="updateEmail()"
+								class="btn btn-sm btn-warning fw-bold text-white mt-2"
+							>
+								Cập nhật
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row shadow rounded p-3 my-4">
+		<div class="col">
+			<div class="row">
+				<h5 class="fw-bold text-secondary">Thông tin thanh toán</h5>
+			</div>
+			
+			<div class="row">
+				<div class="col-xl-6">
+					<h6>Tên người nhận:</h6>
+					<h6>Địa chỉ:</h6>
+					<h6>Số điện thoại:</h6>
+				</div>
+				<div class="col-xl-6">
+					<span>Nguyễn Văn A</span> <br>
+					<span>Cà Mau</span> <br>
+					<span>0942.xxx.xxx</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

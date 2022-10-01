@@ -1,0 +1,79 @@
+	<div ng-if="showV">
+		<div class="row">
+			<h2>Mã giảm giá</h2>
+		</div>
+	
+		<div class="row">
+			<div>
+				<span
+					ng-click="allVoucher()"
+					class="mx-3"
+					style="cursor: pointer;"
+				>
+					Tất cả
+				</span> |
+				<span
+					ng-click="myVoucher()"
+					class="mx-3"
+					style="cursor: pointer;"
+				>
+					Mã của tôi
+				</span> |
+				<span
+					ng-click="maxVoucher()"
+					class="mx-3"
+					style="cursor: pointer;"
+				>
+					Mã hết hạn
+				</span>
+			</div>
+		</div>
+		
+		
+		<!-- All voucher -->
+		<div 
+			ng-show="allV"
+			ng-repeat="a in voucherArr.all"
+			class="row my-3 shadow p-4 rounded"
+		>
+			<div class="col-xl-10">
+				<h6 class="fw-bold"> {{a.name}} </h6>
+				<small>{{a.code}}</small>
+			</div>
+			<div class="col-xl-2">
+				<button 
+					ng-click="saveVoucher()"
+					ng-show="showBtnSave"
+					class="btn btn-primary w-100 h-100 fw-bold"
+				>Lưu</button>
+				<button 
+					ng-show="!showBtnSave"
+					class="btn btn-secondary w-100 h-100 fw-bold"
+				>Đã lưu</button>
+			</div>
+		</div>
+
+		<!-- My voucher -->
+		<div 
+			ng-show="myV"
+			ng-repeat="a in voucherArr.my"
+			class="row my-3 shadow p-4 rounded"
+		>
+			<div class="col-xl-10">
+				<h6 class="fw-bold"> {{a.name}} </h6>
+				<small>{{a.code}}</small>
+			</div>
+		</div>
+
+		<!-- Max voucher -->
+		<div 
+			ng-show="maxV"
+			ng-repeat="a in voucherArr.max"
+			class="row my-3 shadow p-4 rounded"
+		>
+			<div class="col-xl-10">
+				<h6 class="fw-bold"> {{a.name}} </h6>
+				<small>{{a.code}}</small>
+			</div>
+		</div>
+	</div>
