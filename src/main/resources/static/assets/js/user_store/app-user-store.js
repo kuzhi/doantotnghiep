@@ -1,9 +1,5 @@
 app = angular.module("app-user-store", ["ngRoute"]);
 
-app.controller("app-user-store-ctrl", function($scope, $http, $location) {
-	$scope.showList = true;
-})
-
 // Định tuyến trang admin chủ cửa hàng
 app.config(function($routeProvider) {
 	$routeProvider
@@ -51,18 +47,6 @@ app.config(function($routeProvider) {
 		.when("/report-all", {
 			templateUrl: "/assets/user_store/manage/report.html",
 			controller: "report-all-ctrl"
-		})
-		.when("/report-sale", {
-			templateUrl: "/assets/user_store/manage/report_sale.html",
-			controller: "report-sale-ctrl"
-		})
-		.when("/report-product", {
-			templateUrl: "/assets/user_store/manage/report_product.html",
-			controller: "report-product-ctrl"
-		})
-		.when("/report-client", {
-			templateUrl: "/assets/user_store/manage/report_client.html",
-			controller: "report-client-ctrl"
 		})
 		.when("/feedback__product", {
 			templateUrl: "/assets/user_store/manage/feedback_product.html",

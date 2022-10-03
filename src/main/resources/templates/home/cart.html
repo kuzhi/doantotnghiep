@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
+<head>
+<title>Chi tiết sản phẩm</title>
+</head>
+<body>
+	<section class="container my-3">
+		<div class="row">
+			<h2 class="text-start my-2" >
+				<i class="fa-solid fa-basket-shopping"></i>
+				GIỎ HÀNG
+			</h2>
+		</div>
+		<div class="row">
+			<div class="col-xl-8 col-sm-12">
+				<div class="row bg-white rounded p-3">
+					<div class="hstack gap-3">
+					  <div class="col-xl-4">
+						<h6 class="mb-0">Thông tin nhận hàng</h6>
+						<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
+					  </div>
+					  <div class="col-xl-8 text-end">
+					  	<a
+					  		th:href="@{/home/client}"
+					  		class="text-secondary text-decoration-none"
+					  	>
+					  		<small> <i class="fas fa-edit"></i> </small>
+					  	</a>
+					  	<div class="vr"></div>
+					  	<a 
+					  		th:href="@{/home/client}"
+					  		class="text-secondary text-decoration-none"
+					  	>
+					  		<small>Lựa chọn khác</small>
+					  	</a>
+					  	
+					  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
+					  		There are many variations of passages of Lorem Ipsum available, 
+					  		but the majority have suffered alteration in some form, by injected humour, 
+					  		or randomised words which don't look even slightly believable. If you are going to use a passage of 
+					  		Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+					  		 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
+					  		 making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, 
+					  		 combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. 
+					  		 The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic 
+					  		 words etc.
+					  	</p>
+					  </div>
+					</div>
+				</div>
+				
+				<div 
+					ng-repeat="p in arr2.products2"
+					class="row bg-white rounded my-3 py-2"
+				>
+					<div class="col-xl-2 text-center">
+						<img 
+							th:src="@{/assets/images/{{p.image}}}" 
+							style="width: 50px; height: 50px; border-radius: 10px;"
+						>
+					</div>
+					<div class="col-xl-10">
+						<div class="row">
+							<div class="col-xl-9">
+								<span class="text-truncate"> <b>{{p.name}}</b> </span>
+							</div>
+							<div class="col-xl-3 text-end">
+								<span class="text-secondary text-truncate"> 
+									{{p.price | number}} đ
+								</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xl-3">
+								<div class="input-group input-group-sm mb-3">
+								  <button 
+								  	ng-click="number = number - 1"
+								  	class="input-group-text bg-white"
+								  >
+								  	<i class="fa-solid fa-minus"></i>
+								  </button>
+								  <input 
+									   ng-model="number"
+									   class="form-control text-center"
+								  >
+								  <button 
+								  	ng-click="number = number + 1"	
+								  	class="input-group-text bg-white"
+								  >
+									<i class="fa-solid fa-plus"></i>
+								  </button>
+								</div>
+							</div>
+							<div class="col-xl-9 text-end">
+								<span 
+									ng-click="delete()" 
+									class="text-danger"
+									style="cursor: pointer;"	
+								> 
+									<i class="fa-solid fa-trash-can"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-sm-12 text-center">
+				<div class="bg-white p-4 rounded">
+					<h5 class="fw-bold">Thông tin vận chuyển</h5>
+					<hr>
+					<div class="row">
+						<div class="col-xl-6 text-start">
+							<h6>Tổng tiền sản phẩm: </h6>
+							<h6>Tổng tiền vận chuyển: </h6>
+							<h6>Tổng tiền thanh toán: </h6>							
+						</div>
+						<div class="col-xl-6 text-end">
+							<span>449,000 đ</span> <br>
+							<span>0 đ</span> <br>
+							<span> <b>449,000 đ</b> </span>
+						</div>
+					</div>
+					<hr>
+					<div class="text-start mb-1">
+						<i class="fa-solid fa-money-bill-wave text-warning"></i>
+						<small>Mã giảm giá</small>
+					</div>
+					<div class="input-group input-group-sm mb-3">
+					  <button class="input-group-text" 
+					  	id="inputGroup-sizing-sm"
+					  	style="background: linear-gradient(90deg, #EB3349 0%, #F45C43 100%);
+					  		color: #fff"
+					  >
+					  	Áp dụng
+					  </button>
+					  <input type="text" class="form-control" 
+					    aria-label="Sizing example input" 
+					    aria-describedby="inputGroup-sizing-sm"
+					  	placeholder="Nhập mã giảm giá"
+					  >
+					</div>
+					<hr>
+					<div class="row">
+					    <h6 class="d-flex justify-content-between"
+					    	data-bs-toggle="collapse" 
+					    	data-bs-target="#collapseBussiness" 
+					    	aria-expanded="false" 
+					    	aria-controls="collapseExample"
+					    	style="cursor: pointer;"
+					    >
+					      Phương thức thanh toán
+					      <i class="fa-solid fa-sort-down"></i>
+					    </h6>
+						<div class="collapse" id="collapseBussiness">
+						  <div class="form-check text-start" >
+							  <input class="form-check-input" 
+								  type="radio" value="true" 
+								  name="bussiness" id="bussiness" checked>
+							  <label class="form-check-label" for="bussiness">
+							    Thanh toán bằng tiền mặt
+							  </label>
+						  </div>
+						  
+						  <div class="form-check text-start" >
+							  <input class="form-check-input" 
+								  type="radio" value="false" 
+								  name="bussiness" id="bussiness">
+							  <label class="form-check-label" for="bussiness">
+							    Thanh toán bằng thẻ ngân hàng
+							  </label>
+						  </div>
+						</div>
+					</div>	
+					<hr>
+					<button
+					 ng-click="pay()"
+					 class="btn btn-primary w-100 fw-bold">
+						Đặt ngay
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

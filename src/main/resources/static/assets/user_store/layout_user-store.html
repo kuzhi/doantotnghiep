@@ -25,8 +25,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <!-- Alert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- Char -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <link rel="stylesheet" href="/assets/css/user_store/layout_user_store.css">
 <link rel="stylesheet" href="/assets/css/user_store/name_store.css">
@@ -35,451 +33,226 @@
 <link rel="stylesheet" href="/assets/css/user_store/product_management.css">
 </head>
 
-<body ng-app="app-user-store" ng-controller="app-user-store-ctrl">
-
-	<!-- ======= Main ======= -->
+<body ng-app="app-user-store">
 	<main>
-	
-		<!-- ======= Nav ======= -->
 		<nav class="navbar navbar-light bg-light">
 			<div class="container-fluid">
-			
-				<!-- ======= Button List ======= -->
 				<div class="fw-bold list__menu">
-					<label 
-						class="btn" 
-						data-bs-toggle="offcanvas"
+					<label class="btn" data-bs-toggle="offcanvas"
 						data-bs-target="#offcanvasDarkNavbar"
-						aria-controls="offcanvasDarkNavbar"
-					> <i class="fa-solid fa-bars-progress"></i>
+						aria-controls="offcanvasDarkNavbar"> <i
+						class="fa-solid fa-bars-progress"></i>
 					</label>
 				</div>
-				<!-- ======= /Button List ======= -->
-				
-				<!-- ======= Logo ======= -->
 				<div class="text-center div__logo">
-					<img 
-						class="img__logo" 
-						src="/assets/images/logo.png" 
-						alt="Logo"
-					/>
+					<img class="img__logo" src="/assets/images/logo.png" alt="Logo">
 				</div>
-				<!-- ======= /Logo ======= -->
-				
-				<!-- ======= Accout PC ======= -->
 				<div class="btn-group account__user">
-					<label 
-						class="dropdown-toggle" 
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					> Tên người dùng 
-						<img 
-							class="img__user rounded-4" 
-							alt="Ảnh người dùng"
-							src="/assets/images/icon_user.png"
-						>
+					<label class="dropdown-toggle" data-bs-toggle="dropdown"
+						aria-expanded="false"> Tên người dùng <img
+						class="img__user rounded-4" alt="Ảnh người dùng"
+						src="/assets/images/icon_user.png">
 					</label>
 					<ul class="dropdown-menu">
-						<li>
-							<a 
-								class="dropdown-item" 
-								href="/assets/home/my-profile.html"
-							> <i class="fas fa-user-circle size-icon-sm text-muted"></i> 
-							Thông tin cá nhân
-							</a>
-						</li>
-						<li>
-							<a 
-								class="dropdown-item" 
-								href="/assets/home/change.html"
-							> <i class="fas fa-unlock-alt size-icon-sm text-muted"></i> 
-							Đổi mật khẩu
-							</a>
-						</li>
-						<li>
-						<a 
-							class="dropdown-item" 
-							href="#"
-						> <iclass="fas fa-sign-out-alt size-icon-sm text-muted"></i> 
-							Đăng xuất
-						</a>
-						</li>
+						<li><a class="dropdown-item" href="/assets/home/my-profile.html"> <i
+								class="fas fa-user-circle size-icon-sm text-muted"></i> Thông
+								tin cá nhân
+						</a></li>
+						<li><a class="dropdown-item" href="/assets/home/change.html"> <i
+								class="fas fa-unlock-alt size-icon-sm text-muted"></i> Đổi mật
+								khẩu
+						</a></li>
+						<li><a class="dropdown-item" href="#"> <i
+								class="fas fa-sign-out-alt size-icon-sm text-muted"></i> Đăng
+								xuất
+						</a></li>
 					</ul>
 				</div>
-				<!-- ======= /Accout PC ======= -->
 
-				<!-- ======= Accout Mobile ======= -->
 				<div class="dropdown dropstart account__user-mobile">
-					<label 
-						class="btn dropdown-toggle" 
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					> <img 
-						class="img__user rounded-4"
-						alt="Ảnh người dùng" 
-						src="/assets/images/icon_user.png"
-						>
-					</label>
+					<label class="btn dropdown-toggle" data-bs-toggle="dropdown"
+						aria-expanded="false"> <img class="img__user rounded-4"
+						alt="Ảnh người dùng" src="/assets/images/icon_user.png"></label>
 					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#"
-							> <i class="fas fa-user-circle size-icon-sm text-muted"></i> 
-								Thông tin cá nhân
-							</a>
-						</li>
-						<li>
-						<a class="dropdown-item" href="#"
-						> <i class="fas fa-unlock-alt size-icon-sm text-muted"></i> 
-							Đổi mật khẩu
-						</a>
-						</li>
-						<li>
-						<a class="dropdown-item" href="#"
-						> <i class="fas fa-sign-out-alt size-icon-sm text-muted"></i> 
-							Đăng xuất
-						</a>
-						</li>
+						<li><a class="dropdown-item" href="#"> <i
+								class="fas fa-user-circle size-icon-sm text-muted"></i> Thông
+								tin cá nhân
+						</a></li>
+						<li><a class="dropdown-item" href="#"> <i
+								class="fas fa-unlock-alt size-icon-sm text-muted"></i> Đổi mật
+								khẩu
+						</a></li>
+						<li><a class="dropdown-item" href="#"> <i
+								class="fas fa-sign-out-alt size-icon-sm text-muted"></i> Đăng
+								xuất
+						</a></li>
 					</ul>
 				</div>
-				<!-- ======= /Accout Mobile ======= -->
-				
-				<!-- ======= Menu Mobile ======= -->
-				<div 
-					class="offcanvas offcanvas-start text-bg-light w-75"
-					tabindex="-1" 
-					id="offcanvasDarkNavbar"
-					aria-labelledby="offcanvasDarkNavbarLabel" >
-				
+				<!-- Menu -->
+				<div class="offcanvas offcanvas-start text-bg-light w-75"
+					tabindex="-1" id="offcanvasDarkNavbar"
+					aria-labelledby="offcanvasDarkNavbarLabel">
 					<div class="offcanvas-header">
-						<h5 
-							class="offcanvas-title fw-bold" 
-							id="offcanvasDarkNavbarLabel"
-						>
-							Lựa chọn dịch vụ
-						</h5>
-						<label data-bs-dismiss="offcanvas" aria-label="Close"> 
-							<i 
-								class="fa-solid fa-square-xmark size-icon text-danger"
-							></i>
+						<h5 class="offcanvas-title fw-bold" id="offcanvasDarkNavbarLabel">Lựa
+							chọn dịch vụ</h5>
+						<label data-bs-dismiss="offcanvas" aria-label="Close"> <i
+							class="fa-solid fa-square-xmark size-icon text-danger"></i>
 						</label>
 					</div>
-					
 					<div class="offcanvas-body">
-					
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-						
 							<!-- Thông tin cửa hàng -->
-							<li 
-								class="menu__item" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseInfo" 
-								aria-expanded="false"
-								aria-controls="collapseInfo"
-							>
-								<i class="fa-solid fa-store size-icon text-muted" ></i> 
-								<span class="fw-semibold text-body" >
-									Thông tin cửa hàng
-								</span>
-							</li>
-							
+							<li class="menu__item" data-bs-toggle="collapse"
+								data-bs-target="#collapseInfo" aria-expanded="false"
+								aria-controls="collapseInfo"><i
+								class="fa-solid fa-store size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Thông tin cửa hàng</span></li>
 							<del class="collapse text-decoration-none" id="collapseInfo">
-								<a 
-									href="#!name__store"
+								<a href="#!name__store"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tên và liên hệ 
-								</a>
+									Tên và liên hệ </a> <br> <a href="#!sales__time"
+									class="text-decoration-none text-black-50 fw-semibold list__item">
+									Thời gian bán hàng </a> <br> <a href="#!business__form"
+									class="text-decoration-none text-black-50 fw-semibold list__item">
+									Hình thức bán hàng </a>
 							</del>
-							
 							<!-- Sản phẩm -->
-							<li 
-								class="menu__item" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseProduct" 
-								aria-expanded="false"
-								aria-controls="collapseProduct"
-							>
-								<i class="fa-solid fa-bell-concierge size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Thực đơn
-								</span>
-							</li>
-							
+							<li class="menu__item" data-bs-toggle="collapse"
+								data-bs-target="#collapseProduct" aria-expanded="false"
+								aria-controls="collapseProduct"><i
+								class="fa-solid fa-bell-concierge size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Thực đơn</span></li>
 							<del class="collapse text-decoration-none" id="collapseProduct">
-								<a 
-									href="#!product__management"
+								<a href="#!product__management"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Món ăn
-								</a>
+									Món ăn </a>
 							</del>
-							
 							<!-- Đơn hàng -->
-							<li 
-								class="menu__item" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseOrder" 
-								aria-expanded="false"
-								aria-controls="collapseOrder"
-							>
-								<i class="fa-solid fa-wallet size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Đơn hàng
-								</span>
-							</li>
-							
+							<li class="menu__item" data-bs-toggle="collapse"
+								data-bs-target="#collapseOrder" aria-expanded="false"
+								aria-controls="collapseOrder"><i
+								class="fa-solid fa-wallet size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Đơn hàng</span></li>
 							<del class="collapse text-decoration-none" id="collapseOrder">
-								<a 
-									href="#!order__management-all"
+								<a href="#!order__management-all"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tất cả 
-								</a> <br> 
-								<a 
-									href="#!order__management-loading"
+									Tất cả </a> <br> <a href="#!order__management-loading"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Chờ duyệt 
-								</a> <br> 
-								<a 
-									href="#!order__management-success"
+									Chờ duyệt </a> <br> <a href="#!order__management-success"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Đã duyệt 
-								</a>
+									Đã duyệt </a>
 							</del>
-							
 							<!-- Nhân viên -->
-							<li 
-								class="menu__item" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseUser" 
-								aria-expanded="false"
-								aria-controls="collapseUser"
-							>
-								<i class="fas fa-users size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Nhân viên
-								</span>
-							</li>
-							
+							<li class="menu__item" data-bs-toggle="collapse"
+								data-bs-target="#collapseUser" aria-expanded="false"
+								aria-controls="collapseUser"><i
+								class="fas fa-users size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Nhân viên</span></li>
 							<del class="collapse text-decoration-none" id="collapseUser">
-								<a 
-									href="#!user__management"
+								<a href="#!user__management"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tất cả 
-								</a> <br> 
-								<a 
-									href="#!authorization"
+									Tất cả </a> <br> <a href="#!authorization"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Cấp quyền 
-								</a>
+									Cấp quyền </a>
 							</del>
-							
 							<!-- Báo cáo -->
-							<li 
-								class="menu__item" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseReport" 
-								aria-expanded="false"
-								aria-controls="collapseReport"
-							>
-								<i class="fas fa-chart-bar size-icon text-muted"></i>
-								<span class="fw-semibold text-body">
-									Báo cáo
-								</span>
-							</li>
-							
+							<li class="menu__item" data-bs-toggle="collapse"
+								data-bs-target="#collapseReport" aria-expanded="false"
+								aria-controls="collapseReport"><i
+								class="fas fa-chart-bar size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Báo cáo</span></li>
 							<del class="collapse text-decoration-none" id="collapseReport">
-								<a 
-									href="#!report-all"
+								<a href="#!report-all"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tổng quan
-								 </a> <br> 
-								 <a 
-									href="#!feedback__product"
+									Tổng quan </a> <br> <a href="#!feedback__product"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Đánh giá sản phẩm 
-								</a>
+									Đánh giá sản phẩm </a>
 							</del>
-							
 						</ul>
-						
 					</div>
-					
 				</div>
-				<!-- ======= /Menu Mobile ======= -->
-				
 			</div>
-			
 		</nav>
-		<!-- ======= /Nav ======= -->
 
-		
 		<div class="container-fluid">
-		
 			<div class="row">
-				<!-- ======= Menu PC ======= -->
 				<div class="col-2 bg-white p-2 ps-4 menu__admin">
-				
 					<div class="row pt-3">
-					
 						<ul class="navbar-nav justify-content-end flex-grow-1">
-						
 							<!-- Thông tin cửa hàng -->
-							<li 
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseInfo" 
-								aria-expanded="false"
-								aria-controls="collapseInfo"
-							>
-								<i class="fa-solid fa-store size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Thông tin cửa hàng
-								</span>
-							</li>
+							<li class="menu__item mb-3" data-bs-toggle="collapse"
+								data-bs-target="#collapseInfo" aria-expanded="false"
+								aria-controls="collapseInfo"><i
+								class="fa-solid fa-store size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Thông tin cửa hàng</span></li>
 							<del class="collapse text-decoration-none" id="collapseInfo">
-								<a 
-									href="#!name__store"
+								<a href="#!name__store"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tên và liên hệ 
-								</a>
+									Tên và liên hệ </a> <br> <a href="#!sales__time"
+									class="text-decoration-none text-black-50 fw-semibold list__item">
+									Thời gian bán hàng </a> <br> <a href="#!business__form"
+									class="text-decoration-none text-black-50 fw-semibold list__item">
+									Hình thức bán hàng </a>
 							</del>
-							
 							<!-- Sản phẩm -->
-							<li 
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseProduct" 
-								aria-expanded="false"
-								aria-controls="collapseProduct"
-							>
-								<i class="fa-solid fa-bell-concierge size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Thực đơn
-								</span>
-							</li>
+							<li class="menu__item mb-3" data-bs-toggle="collapse"
+								data-bs-target="#collapseProduct" aria-expanded="false"
+								aria-controls="collapseProduct"><i
+								class="fa-solid fa-bell-concierge size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Thực đơn</span></li>
 							<del class="collapse text-decoration-none" id="collapseProduct">
-								<a 
-									href="#!product__management"
+								<a href="#!product__management"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Món ăn 
-								</a>
+									Món ăn </a>
 							</del>
-							
 							<!-- Đơn hàng -->
-							<li 
-								ng-if="showList"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseOrder" 
-								aria-expanded="false"
-								aria-controls="collapseOrder"
-							>
-								<i class="fa-solid fa-wallet size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Đơn hàng
-								</span>
-							</li>
+							<li class="menu__item mb-3" data-bs-toggle="collapse"
+								data-bs-target="#collapseOrder" aria-expanded="false"
+								aria-controls="collapseOrder"><i
+								class="fa-solid fa-wallet size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Đơn hàng</span></li>
 							<del class="collapse text-decoration-none" id="collapseOrder">
-								<a 
-									href="#!order__management-all"
+								<a href="#!order__management-all"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tất cả 
-								</a> <br> 
-								<a 
-									href="#!order__management-loading"
+									Tất cả </a> <br> <a href="#!order__management-loading"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Chờ duyệt 
-								</a> <br> 
-								<a 
-									href="#!order__management-success"
+									Chờ duyệt </a> <br> <a href="#!order__management-success"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Đã duyệt 
-								</a>
+									Đã duyệt </a>
 							</del>
-							
 							<!-- Nhân viên -->
-							<li 
-								ng-if="showList"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseUser" 
-								aria-expanded="false"
-								aria-controls="collapseUser"
-							>
-								<i class="fas fa-users size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Nhân viên
-								</span>
-							</li>
+							<li class="menu__item mb-3" data-bs-toggle="collapse"
+								data-bs-target="#collapseUser" aria-expanded="false"
+								aria-controls="collapseUser"><i
+								class="fas fa-users size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Nhân viên</span></li>
 							<del class="collapse text-decoration-none" id="collapseUser">
-								<a 
-									href="#!user__management"
+								<a href="#!user__management"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tất cả
-								 </a> <br> 
-								 <a 
-									href="#!authorization"
+									Tất cả </a> <br> <a href="#!authorization"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Cấp quyền 
-								</a>
+									Cấp quyền </a>
 							</del>
-							
 							<!-- Báo cáo -->
-							<li 
-								ng-if="showList"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								data-bs-target="#collapseReport" 
-								aria-expanded="false"
-								aria-controls="collapseReport"
-							>
-								<i class="fas fa-chart-bar size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Báo cáo
-								</span>
-							</li>
+							<li class="menu__item mb-3" data-bs-toggle="collapse"
+								data-bs-target="#collapseReport" aria-expanded="false"
+								aria-controls="collapseReport"><i
+								class="fas fa-chart-bar size-icon text-muted"></i> <span
+								class="fw-semibold text-body">Báo cáo</span></li>
 							<del class="collapse text-decoration-none" id="collapseReport">
-								<a 
-									href="#!report-all"
+								<a href="#!report-all"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Tổng quan 
-								</a> <br> 
-								<a 
-									href="#!report-sale"
+									Tổng quan </a> <br> <a href="#!feedback__product"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Doanh thu bán hàng
-								</a> <br> 
-								<a 
-									href="#!report-product"
-									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Doanh thu sản phẩm 
-								</a> <br> 
-								<a 
-									href="#!report-client"
-									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Doanh thu khách hàng 
-								</a> <br> 
-								<a 
-									href="#!feedback__product"
-									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Đánh giá sản phẩm 
-								</a>
+									Đánh giá sản phẩm </a>
 							</del>
-							
 						</ul>
-						
 					</div>
-					
 				</div>
-				<!-- ======= /Menu PC ======= -->
-				
-				<!-- ======= View ======= -->
 				<div class="col-xl-10 col-md-12 col-12 ng-view p-3"></div>
-				<!-- ======= /View ======= -->
-			
 			</div>
-		
 		</div>
 	</main>
-	<!-- ======= /Main ======= -->
 
 	<script src="/assets/js/user_store/app-user-store.js"></script>
 	<script src="/assets/js/user_store/authorization-ctrl.js"></script>
@@ -489,9 +262,6 @@
 	<script src="/assets/js/user_store/order_management-ctrl.js"></script>
 	<script src="/assets/js/user_store/product__management-ctrl.js"></script>
 	<script src="/assets/js/user_store/report-ctrl.js"></script>
-	<script src="/assets/js/user_store/report-sale-ctrl.js"></script>
-	<script src="/assets/js/user_store/report-product-ctrl.js"></script>
-	<script src="/assets/js/user_store/report-client-ctrl.js"></script>
 	<script src="/assets/js/user_store/sales__time-ctrl.js"></script>
 	<script src="/assets/js/user_store/user__management-ctrl.js"></script>
 

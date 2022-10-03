@@ -1,0 +1,106 @@
+	<div ng-if="showA">
+		<div class="row">
+			<h2>Sổ địa chỉ</h2>
+		</div>
+		
+		<div class="row shadow rounded p-4 mb-3">
+			<div 
+				ng-click="addAddress()"
+				data-bs-toggle="modal" 
+				data-bs-target="#exampleModal"
+				class="col text-center"
+				style="cursor: pointer;"
+			>
+					<i class="fa-solid fa-circle-plus"></i> <br>
+					Thêm địa chỉ mới
+			</div>
+		</div>
+		
+		<div 
+			ng-repeat="a in addressArr.myAddress"
+			class="row shadow rounded p-4 my-4"
+		>
+			<div class="col">
+				<div class="row border-bottom border-danger pb-2">
+					<div class="col-xl-6 d-flex">
+						<h6 class="fw-bold mb-0">{{a.name}}</h6>
+						<small class="text-success fst-italic mx-2 mb-0"> 
+							{{a.status ? "Địa chỉ mặc định" : ""}}
+						</small>
+					</div>
+					<div class="col-xl-6 text-end">
+						<small 
+							ng-click="editAddress()"
+							data-bs-toggle="modal" 
+							data-bs-target="#exampleModal"
+							style="cursor: pointer;"
+						>Chỉnh sửa</small>
+					</div>
+				</div>
+				
+				<div class="row mt-2">
+					<div class="col-xl-2">
+						<span class="fw-bold">Địa chỉ</span>
+					</div> 
+					<div class="col-xl-10">
+						<label class="text-truncate fst-italic">
+							{{a.address}}
+						</label>
+					</div> 
+				</div>
+
+				<div class="row">
+					<div class="col-xl-2">
+						<span class="fw-bold">Số điện thoại</span>
+					</div> 
+					<div class="col-xl-10">
+						<label class="text-truncate fst-italic">
+							{{a.phone}}
+						</label>
+					</div> 
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{titleModal}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+       <form action="">
+	      <div class="modal-body">
+			<div class="form-check form-switch mb-3">
+			  	<input class="form-check-input" type="checkbox" role="switch" id="status" checked>
+			  	<label class="form-check-label" for="status">Đặt làm địa chỉ mặc định</label>
+			</div>
+        	<div class="mb-3">
+			  <label for="fullname" class="form-label">Họ và tên</label>
+			  <input type="text" class="form-control" id="fullname">
+			</div>
+        	<div class="mb-3">
+			  <label for=""phone"" class="form-label">Số điện thoại</label>
+			  <input type="text" class="form-control" id="phone">
+			</div>
+			<div class="mb-3">
+			  <label for="address" class="form-label">Địa chỉ</label>
+			  <textarea class="form-control" id="address" rows="2"></textarea>
+			</div>
+    	  </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+	        <button 
+	        	ng-click="updateAddress()"
+	        	type="button" 
+	        	class="btn btn-primary"
+	        >
+	        	<i class="fa-solid fa-bookmark"></i> Lưu
+	        </button>
+	      </div>
+        </form>
+    </div>
+  </div>
+</div>
