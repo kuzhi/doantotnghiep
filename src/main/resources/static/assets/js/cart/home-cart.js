@@ -116,7 +116,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				price: 100000,
 				discount: 20,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
+				amount: 1,
 				image: 'sp1.jpg'
 			},
 			{
@@ -125,7 +125,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				price: 50000,
 				discount: 17.5,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
+				amount: 1,
 				image: 'sp3.jpeg'
 			},
 			{
@@ -134,7 +134,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				price: 199000,
 				discount: 27,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
+				amount: 1,
 				image: 'sp4.jpeg'
 			},
 			{
@@ -143,7 +143,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				price: 100000,
 				discount: 20,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
+				amount: 1,
 				image: 'sp1.jpg'
 			}
 		]
@@ -437,5 +437,64 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.showBtnSave = true
 	$scope.saveVoucher = function() {
 		$scope.showBtnSave = false
+	}
+	
+	// Order manager
+	$scope.statusArr = {
+		statusOrder: [
+			{
+				id: 1,
+				name: 'Đang xử lý'
+			},
+			{
+				id: 2,
+				name: 'Đang giao'
+			},
+			{
+				id: 3,
+				name: 'Giao hàng thành công'
+			},
+			{
+				id: 4,
+				name: 'Đã hủy'
+			}
+		]
+	}
+	
+	$scope.orderArr = {
+		myOrder: [
+			{
+				id: 'DH100001',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 0
+			},
+			{
+				id: 'DH100002',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 0
+			},
+			{
+				id: 'DH100003',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 30000
+			},
+			{
+				id: 'DH100004',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 0
+			},
+		]
 	}
 })

@@ -18,4 +18,9 @@ public class CilentController {
 	public String view_Profile() {
 		return "home/my-profile";
 	}
+	
+	@RequestMapping("/_order-detail")
+	public String view_OrderDetail() {
+		return "home/_order-detail";
+	}
 }
