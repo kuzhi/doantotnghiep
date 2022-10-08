@@ -14,34 +14,32 @@
 			</h2>
 		</div>
 		<div class="row">
-			<div class="col-xl-8 col-sm-12">
+			<div class="col-xl-8">
 				<div class="row bg-white rounded p-3">
-					<div class="hstack gap-3">
-					  <div class="col-xl-4">
-						<h6 class="mb-0">Thông tin nhận hàng</h6>
-						<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
-					  </div>
-					  <div class="col-xl-8 text-end">
-					  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
-					  		There are many variations of passages of Lorem Ipsum available, 
-					  		but the majority have suffered alteration in some form, by injected humour, 
-					  		or randomised words which don't look even slightly believable. If you are going to use a passage of 
-					  		Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
-					  		 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
-					  		 making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, 
-					  		 combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. 
-					  		 The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic 
-					  		 words etc.
-					  	</p>
-					  </div>
-					</div>
+				  <div class="col-xl-4 mb-2">
+					<h6 class="mb-0">Thông tin nhận hàng</h6>
+					<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
+				  </div>
+				  <div class="col-xl-8 text-end">
+				  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
+				  		There are many variations of passages of Lorem Ipsum available, 
+				  		but the majority have suffered alteration in some form, by injected humour, 
+				  		or randomised words which don't look even slightly believable. If you are going to use a passage of 
+				  		Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+				  		 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
+				  		 making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, 
+				  		 combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. 
+				  		 The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic 
+				  		 words etc.
+				  	</p>
+				  </div>
 				</div>
 				
 				<div 
 					ng-repeat="p in arr2.products2"
-					class="row bg-white rounded my-3 py-2"
+					class="row bg-white rounded my-3 py-2 mx-1"
 				>
-					<div class="col-xl-2 text-center">
+					<div class="col-xl-2 mb-2 text-end text-end-mb">
 						<img 
 							th:src="@{/assets/images/{{p.image}}}" 
 							style="width: 50px; height: 50px; border-radius: 10px;"
@@ -49,13 +47,14 @@
 					</div>
 					<div class="col-xl-10">
 						<div class="row">
-							<div class="col-xl-9">
+							<div class="col-xl-9 col-8">
 								<span class="text-truncate"> <b>{{p.name}}</b> </span>
 							</div>
-							<div class="col-xl-3 text-end">
-								<span class="text-secondary text-truncate"> 
-									{{p.price | currency : '' : 2}} đ
-								</span>
+							<div class="col-xl-3 col-4 d-flex justify-content-end">
+								<p class="text-secondary text-truncate"> 
+									{{p.price | currency : '' : 0}} 
+								</p>
+								<span class="mx-1">đ</span>
 							</div>
 						</div>
 						<div class="row">
@@ -107,7 +106,7 @@
 						<div class="col-xl-6 text-start">
 							<small class="fw-bold">Phương thức thanh toán: </small>
 						</div>
-						<div class="col-xl-6 text-end">
+						<div class="col-xl-6 text-end text-end-mb">
 							<small>Thanh toán bằng tiền mặt</small>
 						</div>
 					</div>	
@@ -117,7 +116,7 @@
 						Đã nhận được hàng
 					</button>
 					<button
-					 class="btn btn-danger w-100 fw-bold mb-3">
+					 class="btn btn-outline-danger w-100 fw-bold mb-3">
 						Hủy đơn
 					</button>
 				</div>

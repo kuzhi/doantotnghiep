@@ -9,7 +9,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	// list product
 	$scope.titleStore = 'Chickens gang'
 	$scope.favorite = false;
-	$scope.arr = {
+	$scope.arr1 = {
 		products: [
 			{
 				id: '01',
@@ -113,7 +113,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			{
 				id: '01',
 				name: 'Sản phẩm 1',
-				price: 100000,
+				price: 10000000000000000,
 				discount: 20,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
 				amount: 1,
@@ -146,7 +146,10 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				amount: 1,
 				image: 'sp1.jpg'
 			}
-		]
+		],
+		amount: 10000000,
+		ship: 0,
+		total: 10000000
 	}
 	
 	//Cart
@@ -461,7 +464,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		]
 	}
 	
-	$scope.orderArr = {
+	$scope.order = {
 		myOrder: [
 			{
 				id: 'DH100001',
@@ -476,15 +479,15 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				quantily: 1,
 				price: 15000000,
 				sales: 10,
-				status: 1,
+				status: 2,
 				ship: 0
 			},
 			{
 				id: 'DH100003',
 				quantily: 1,
-				price: 15000000,
+				price: 150000000000000,
 				sales: 10,
-				status: 1,
+				status: 3,
 				ship: 30000
 			},
 			{
@@ -492,9 +495,29 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				quantily: 1,
 				price: 15000000,
 				sales: 10,
-				status: 1,
+				status: 4,
 				ship: 0
 			},
-		]
+		],
+		
+		
 	}
+	$scope.arr = []
+	$scope.check = 1;
+	$scope.selected = function(key) {
+		if(key == 1){
+			console.log('Đang xử ý')
+		}else if(key == 2){
+			console.log('Đang giao')
+		}else if(key == 3) {
+			console.log('Giao hàng thành công')
+		}else {
+			console.log('Đã hủy')
+		}
+	}
+	$scope.all = function() {
+		$scope.arr = $scope.order.myOrder;
+	}
+	$scope.all();
+	
 })

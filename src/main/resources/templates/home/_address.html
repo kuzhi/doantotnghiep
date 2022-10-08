@@ -3,7 +3,7 @@
 			<h2>Sổ địa chỉ</h2>
 		</div>
 		
-		<div class="row shadow rounded p-4 mb-3">
+		<div class="row shadow rounded p-4 mb-3 mx-1">
 			<div 
 				ng-click="addAddress()"
 				data-bs-toggle="modal" 
@@ -18,7 +18,7 @@
 		
 		<div 
 			ng-repeat="a in addressArr.myAddress"
-			class="row shadow rounded p-4 my-4"
+			class="row shadow rounded p-4 my-4 mx-1"
 		>
 			<div class="col">
 				<div class="row border-bottom border-danger pb-2">
@@ -28,7 +28,7 @@
 							{{a.status ? "Địa chỉ mặc định" : ""}}
 						</small>
 					</div>
-					<div class="col-xl-6 text-end">
+					<div class="col-xl-6 text-edit">
 						<small 
 							ng-click="editAddress()"
 							data-bs-toggle="modal" 
@@ -39,10 +39,10 @@
 				</div>
 				
 				<div class="row mt-2">
-					<div class="col-xl-2">
+					<div class="col-xl-2 col-6">
 						<span class="fw-bold">Địa chỉ</span>
 					</div> 
-					<div class="col-xl-10">
+					<div class="col-xl-10 col-6">
 						<label class="text-truncate fst-italic">
 							{{a.address}}
 						</label>
@@ -50,10 +50,10 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xl-2">
+					<div class="col-xl-2 col-6">
 						<span class="fw-bold">Số điện thoại</span>
 					</div> 
-					<div class="col-xl-10">
+					<div class="col-xl-10 col-6">
 						<label class="text-truncate fst-italic">
 							{{a.phone}}
 						</label>
