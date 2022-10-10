@@ -125,12 +125,15 @@
 				<div class="card-body">
 					<h5 class="card-title text-truncate">{{p.name}}</h5>
 					
-					<div class="d-flex justify-content-between">
-						<div>
-							<span><b>{{p.price - (p.price * p.discount / 100) | number}}đ</b> </span> 
-							<h3 class="badge rounded-pill text-bg-danger mx-2">{{p.discount}}%</h3>
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="d-flex">
+								<b class="text-truncate">{{p.price - (p.price * p.discount / 100) | currency:'':0}}</b>
+								<b>đ</b>
+								<h3 class="badge rounded-pill text-bg-danger mx-2">{{p.discount}}%</h3>
+							</div>
 						</div>
-						<div>
+						<div class="col-xl-12">
 							<small><i class="fa-solid fa-star text-warning"></i></small>
 							<small><i class="fa-solid fa-star text-warning"></i></small>
 							<small><i class="fa-solid fa-star text-warning"></i></small>
@@ -138,14 +141,19 @@
 							<small><i class="fa-solid fa-star text-warning"></i></small>
 						</div>
 					</div>
-					<div class="d-flex justify-content-between">
-						<div>
-							<small> Giá gốc: </small>
-							<span class="fw-bold text-secondary text-decoration-line-through">
-								{{p.price | number}}đ
-							</span>
+					<div class="row">
+						<div class="col-xl-10 col-10">
+							<div class="d-flex">
+								<small style="white-space: nowrap; margin-right: 8px; line-height: 25px;"> 
+									Giá gốc: 
+								</small>
+								<span class="fw-bold text-truncate text-secondary text-decoration-line-through">
+									{{p.price | currency:'':0}}
+								</span>
+								<span class="fw-bold text-secondary">đ</span>	
+							</div>
 						</div>
-						<div>
+						<div class="col-xl-2 col-2">
 							<a 
 								ng-show="!favorite"
 								href="">

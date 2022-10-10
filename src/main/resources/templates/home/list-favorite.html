@@ -3,7 +3,7 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
 <head>
-<title>Trang chủ</title>
+<title>Sản phẩm yêu thích</title>
 </head>
 <body>
 
@@ -18,93 +18,21 @@
 							class="text-decoration-none text-dark"
 						>Trang chủ</a>
 					</li>
-					<li class="breadcrumb-item" aria-current="page">
-						<a 
-							href="#"
-							class="text-decoration-none text-dark"
-						>Sản phẩm của <b class="text-primary">{{titleStore}}</b></a>
-					</li>
 					<li class="breadcrumb-item active">
 						<a 
 							href="#"
 							class="text-decoration-none text-dark"
-						>Tất cả</a>
+						>Sản phẩm yêu thích</a>
 					</li>
 				</ol>
 			</nav>
 		</div>
 		<div class="row">
-			<div class="col-xl-2">
-				<!-- ======= Loại ======= -->
-				<div class="row mb-1">
-				    <h6 class="d-flex justify-content-between"
-				    	data-bs-toggle="collapse" 
-				    	data-bs-target="#collapseCate" 
-				    	aria-expanded="false" 
-				    	aria-controls="collapseExample"
-				    	style="cursor: pointer;"
-				    >
-				      Loại 
-				      <i class="fa-solid fa-sort-down"></i>
-				    </h6>
-					<div class="collapse show" id="collapseCate">
-					  <div class="form-check" >
-						  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-						  <label class="form-check-label" for="flexCheckDefault">
-						    Tất cả
-						  </label>
-					  </div>
-					  <div
-					  	ng-repeat="c in cateArr.cates"
-					  	
-					  	class="form-check"
-					  >
-						  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						  <label class="form-check-label" for="flexCheckDefault">
-						    {{c.name}}
-						  </label>
-					  </div>
-					</div>
-				</div>
-				
-				<!-- ======= Giá ======= -->
-				<div class="row  mb-3">
-				    <h6 class="d-flex justify-content-between"
-				    	data-bs-toggle="collapse" 
-				    	data-bs-target="#collapsePrice" 
-				    	aria-expanded="false" 
-				    	aria-controls="collapseExample"
-				    	style="cursor: pointer;"
-				    >
-				      Giá 
-				      <i class="fa-solid fa-sort-down"></i>
-				    </h6>
-					<div class="collapse" id="collapsePrice">
-					  <div
-					  	class="form-check"
-					  >
-						  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						  <label class="form-check-label" for="flexCheckDefault">
-						    Cao - Thấp
-						  </label>
-					  </div>
-					  <div
-					  	class="form-check"
-					  >
-						  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-						  <label class="form-check-label" for="flexCheckDefault">
-						    Thấp - Cao
-						  </label>
-					  </div>
-					</div>
-				</div>
-			</div>
-			
 			<!-- ======= Danh sách sản phẩm ======= -->
-			<div class="col-xl-10">
+			<div class="col-xl">
 				<div class="row">
 					<div 
-						ng-repeat="p in arr1.products"
+						ng-repeat="p in arr3.products3"
 						class="col-xl-3 col-sm-6 card border border-0 px-4 bg-light">
 						<a 
 							th:href="@{/home/product/detail}"
@@ -145,12 +73,12 @@
 								</div>
 								<div class="col-xl-2 col-2">
 									<a 
-										ng-show="!favorite"
+										ng-show="favorite"
 										href="">
 										<h5><i class="fas fa-heart text-secondary mx-2"></i></h5>
 									</a>
 									<a 
-										ng-show="favorite"
+										ng-show="!favorite"
 										href="">
 										<h5><i class="fas fa-heart text-danger mx-2"></i></h5>
 									</a>

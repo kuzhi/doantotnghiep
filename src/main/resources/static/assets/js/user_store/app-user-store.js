@@ -8,14 +8,6 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/info_store/name_store.html",
 			controller: "name__store-ctrl"
 		})
-		.when("/sales__time", {
-			templateUrl: "/assets/user_store/info_store/sales_time.html",
-			controller: "sales__time-ctrl"
-		})
-		.when("/business__form", {
-			templateUrl: "/assets/user_store/info_store/business_form.html",
-			controller: "business__form-ctrl"
-		})
 		// Sản phẩm
 		.when("/product__management", {
 			templateUrl: "/assets/user_store/manage/product_management.html",
@@ -53,7 +45,7 @@ app.config(function($routeProvider) {
 			controller: "feedback__product-ctrl"
 		})
 		.otherwise({
-			templateUrl: "/assets/user_store/info_store/name_store.html",
-			controller: "name__store-ctrl"
+			templateUrl: "/assets/user_store/manage/report.html",
+			controller: "report-all-ctrl"
 		})
 })

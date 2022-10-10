@@ -23,4 +23,9 @@ public class CilentController {
 	public String view_OrderDetail() {
 		return "home/_order-detail";
 	}
+
+	@RequestMapping("/list-favorite")
+	public String view_ListFavorite() {
+		return "home/list-favorite";
+	}
 }
