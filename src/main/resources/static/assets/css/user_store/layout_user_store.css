@@ -9,6 +9,21 @@ main {
 
 .form-control {
 	background: #fff;
+	border: 1px solid #ced4da;
+}
+
+.form-select {
+	background: #fff;
+	border: 1px solid #ced4da;
+}
+
+.form-select:focus {
+	background: #fff;
+	box-shadow: 0 0 0 0.25rem white !important;
+}
+
+.form-check-input {
+	background-color: #fff;
 }
 
 .image-upload>input {
@@ -93,6 +108,10 @@ header {
 	}
 	.menu__admin {
 		display: none;
+	}
+	
+	.border-end {
+		border: 0px !important;
 	}
 }
 

@@ -55,4 +55,45 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
             responsive: true
         }
     });
+    
+    //List top 5
+    $scope.productArr = {
+		product: [
+			{
+				id: 'sp1',
+				name: 'Gà rán',
+				img: 'sp1.jpg',
+				cate: 'KFC',
+				price: 100000000
+			},
+			{
+				id: 'sp2',
+				name: 'Khoai tây chiên',
+				img: 'sp3.jpeg',
+				cate: 'KFC',
+				price: 100000000
+			},
+			{
+				id: 'sp3',
+				name: 'Hamberger',
+				img: 'sp4.jpeg',
+				cate: 'KFC',
+				price: 100000000
+			},
+			{
+				id: 'sp1',
+				name: 'Gà rán',
+				img: 'sp1.jpg',
+				cate: 'KFC',
+				price: 100000000
+			},
+			{
+				id: 'sp2',
+				name: 'Khoai tây chiên',
+				img: 'sp3.jpeg',
+				cate: 'KFC',
+				price: 100000000
+			},
+		]
+	}
 })

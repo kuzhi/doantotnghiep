@@ -1,11 +1,15 @@
 /********** Template CSS **********/
 :root {
-    --primary: #0d6efd;
+    --primary: #ff512f;
     --secondary: #fff;
     --light: #6C7293;
     --dark: #e9ecef;
 }
 
+body {
+	font-family: 'Krub', sans-serif;
+	background-color: #f8f9fa;
+}
 /*** Spinner ***/
 #spinner {
     opacity: 0;
