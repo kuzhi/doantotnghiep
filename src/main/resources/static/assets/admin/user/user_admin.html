@@ -6,10 +6,10 @@
 </nav>
 
 <div
-	class="container shadow-sm p-3 mb-3 bg-body rounded container__size">
+	class="container shadow-sm p-3 mb-3 bg-body rounded">
 	<div class="row">
 		<div class="col-xl-12 col-md-12 col-12 add__product-pc">
-			<label class="font__size-title">Tài khoản quản trị</label> <br> <br>
+			<label class="font__size-title">Tài khoản nhân viên</label> <br> <br>
 			<div class="row">
 				<div class="col-xl-4 text-center mb-3">
 					<form class="d-flex" role="search">
@@ -32,43 +32,55 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col-10">
+					<label class="fs-4">Danh sách nhân viên</label> <br>
+				</div>
+				<div class="col-2 text-end">
+					<label type="submit" class="btn text-primary font__size-btn">
+						<i class="fas fa-sort-amount-down-alt"></i> Sắp xếp
+					</label>
+				</div>
+			</div>
+			
+			<div class="row">
 				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr style="color: #757575 !important;">
-								<th class="d-flex flex-row element__sort">Tên<a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Email<a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Ngày sinh<a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Giới tính <a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
+					<table 
+	                 	class="table text-start align-middle table-bordered border-white table-hover mb-0"
+	                 >
+	                     <thead class="text-center" style="background-color: #ff512f !important;">
+	                     	<tr class="text-white">
+								<th>Tên</th>
+								<th>Email</th>
+								<th>Ngày sinh</th>
+								<th>Giới tính</th>
 								<th>Hoạt động</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
+						<tbody class="table table-primary">
+							<tr
+								ng-repeat="u in list.user"
+							>
+								<td class="align-middle">
+									{{u.name}}
+								</td>
+								<td class="align-middle">
+									{{u.email}}
+								</td>
+								<td class="align-middle">
+									{{u.birtday}}
+								</td>
+								<td class="align-middle">
+									{{u.gender ? 'Nam' : 'Nữ'}}
+								</td>
 								<td class="text-center align-middle">
-									<button ng-click="edit()" class="btn text-warning"
-										data-bs-toggle="modal" data-bs-target="#addModal"
-										data-bs-whatever="add">
+									<button 
+										ng-click="edit()" 
+										class="btn text-warning"
+										data-bs-toggle="modal" 
+										data-bs-target="#addModal"
+										data-bs-whatever="add"
+									>
 										<i class="fas fa-edit"></i>
-									</button>
-									<button class="btn text-danger">
-										<i class="fas fa-ban"></i>
 									</button>
 								</td>
 							</tr>
@@ -76,31 +88,29 @@
 					</table>
 				</div>
 			</div>
-			<div class="row mb-3 text-start">
+			<div class="row my-3 text-start">
 				<div class="col-6 text-start">
 					<label> 1/5 </label>
 				</div>
 				<div class="col-6 text-end">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-end">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
+							<li class="page-item disabled"><a class="page-link"> << </a>
 							</li>
 							<li class="page-item"><a class="page-link" href="#">1</a></li>
 							<li class="page-item"><a class="page-link" href="#">2</a></li>
 							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
+							<li class="page-item"><a class="page-link" href="#"> >> </a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
-		<div class="add__product-mobile text-center text-white fw-bold">
-			<img class="w-100 rounded-1 mb-2" src="/assets/images/bg_mmobile.jpg"
-				alt="Ảnh logo cửa hàng"> <label class="icon__mobile">
-				<i class="fas fa-laptop"></i>
-			</label>
-			<p class="content__mobile">
+		
+		<div class="add__product-mobile text-center text-white fw-bold p-5">
+			<i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 80px;"></i>
+			<p class="content__mobile text-dark">
 				Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
 				tính
 			</p>

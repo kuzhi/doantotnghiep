@@ -198,3 +198,15 @@ font__size-btn {
 	background: #ff512f !important;
 	border: 1px solid #ff512f !important;
 }
+
+.table-primary {
+    --bs-table-bg: #fbd0d0;
+    --bs-table-striped-bg: #eec6c6;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #e2bbbb;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #e8c0c0;
+    --bs-table-hover-color: #000;
+    color: #000;
+    border-color: #e2bbbb;
+}
