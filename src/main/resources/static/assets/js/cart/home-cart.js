@@ -9,12 +9,16 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	// list product
 	$scope.titleStore = 'Chickens gang'
 	$scope.favorite = false;
-	$scope.arr = {
+
+	$scope.arr1 = {
+
 		products: [
 			{
 				id: '01',
 				name: 'Sản phẩm 1',
-				price: 100000,
+
+				price: 100000000000000000000,
+
 				discount: 20,
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
 				amount: 100,
@@ -107,9 +111,38 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		]
 	}
 	
-	// product detail
-	$scope.arr2 = {
-		products2: [
+
+	//list favorite
+	$scope.arr3 = {
+		products3: [
+			{
+				id: '01',
+				name: 'Sản phẩm 1',
+				price: 100000000000000000000,
+				discount: 20,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 100,
+				image: 'sp1.jpg'
+			},
+			{
+				id: '02',
+				name: 'Sản phẩm 2',
+				price: 50000,
+				discount: 17.5,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 100,
+				image: 'sp3.jpeg'
+			},
+			{
+				id: '03',
+				name: 'Sản phẩm 3',
+				price: 199000,
+				discount: 27,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 100,
+				image: 'sp4.jpeg'
+			},
+
 			{
 				id: '01',
 				name: 'Sản phẩm 1',
@@ -145,10 +178,68 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
 				amount: 100,
 				image: 'sp1.jpg'
+
+			},
+			{
+				id: '02',
+				name: 'Sản phẩm 2',
+				price: 50000,
+				discount: 17.5,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 100,
+				image: 'sp3.jpeg'
+
 			}
 		]
 	}
 	
+
+	// product detail
+	$scope.arr2 = {
+		products2: [
+			{
+				id: '01',
+				name: 'Sản phẩm 1',
+				price: 100000000000000000000,
+				discount: 20,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 1,
+				image: 'sp1.jpg'
+			},
+			{
+				id: '02',
+				name: 'Sản phẩm 2',
+				price: 50000,
+				discount: 17.5,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 1,
+				image: 'sp3.jpeg'
+			},
+			{
+				id: '03',
+				name: 'Sản phẩm 3',
+				price: 199000,
+				discount: 27,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 1,
+				image: 'sp4.jpeg'
+			},
+			{
+				id: '01',
+				name: 'Sản phẩm 1',
+				price: 100000,
+				discount: 20,
+				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+				amount: 1,
+				image: 'sp1.jpg'
+			}
+		],
+		amount: 10000000,
+		ship: 0,
+		total: 10000000
+	}
+	
+
 	//Cart
 	$scope.number = 1;
 	
@@ -438,4 +529,85 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.saveVoucher = function() {
 		$scope.showBtnSave = false
 	}
+
+	
+	// Order manager
+	$scope.statusArr = {
+		statusOrder: [
+			{
+				id: 1,
+				name: 'Đang xử lý'
+			},
+			{
+				id: 2,
+				name: 'Đang giao'
+			},
+			{
+				id: 3,
+				name: 'Giao hàng thành công'
+			},
+			{
+				id: 4,
+				name: 'Đã hủy'
+			}
+		]
+	}
+	
+	$scope.order = {
+		myOrder: [
+			{
+				id: 'DH100001',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 0
+			},
+			{
+				id: 'DH100002',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 2,
+				ship: 0
+			},
+			{
+				id: 'DH100003',
+				quantily: 1,
+				price: 150000000000000,
+				sales: 10,
+				status: 3,
+				ship: 30000
+			},
+			{
+				id: 'DH100004',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 4,
+				ship: 0
+			},
+		],
+		
+		
+	}
+	$scope.arr = []
+	$scope.check = 1;
+	$scope.selected = function(key) {
+		if(key == 1){
+			console.log('Đang xử ý')
+		}else if(key == 2){
+			console.log('Đang giao')
+		}else if(key == 3) {
+			console.log('Giao hàng thành công')
+		}else {
+			console.log('Đã hủy')
+		}
+	}
+	$scope.all = function() {
+		$scope.arr = $scope.order.myOrder;
+	}
+	$scope.all();
+	
+
 })

@@ -25,29 +25,50 @@
 					<button class="btn btn-outline-info">1 SAO (0)</button>
 				</div>
 			</div>
-			<div class="row">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr style="color: #757575 !important;">
-								<th class="d-flex flex-row element__sort">Tên <a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Nội dung<a href="#" class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div class="row mx-5">
+			<div class="table-responsive">
+				<table class="table text-start align-middle table-bordered border-white table-hover mb-0">
+					<thead class="text-center" style="background-color: #ff512f !important;">
+                         <tr class="text-white">
+							<th>Tên</th>
+							<th>Giá</th>
+						</tr>
+					</thead>
+					<tbody class="table table-primary">
+						<tr 
+							ng-repeat="p in fiveS.product5"
+							class="px-2"
+						>
+							<td class="align-middle">
+								{{p.name}}
+							</td>
+							<td class="align-middle text-end">
+								{{p.price | currency:'':0}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+		</div>
+		
+		<div class="row my-3 text-start px-5">
+			<div class="col-6 text-start">
+				<label> 1/5 </label>
+			</div>
+			<div class="col-6 text-end">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-end">
+						<li class="page-item disabled"><a class="page-link"> << </a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"> >> </a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>

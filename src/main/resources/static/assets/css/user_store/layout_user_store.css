@@ -2,6 +2,34 @@ main {
 	background-color: #ecf0f4;
 }
 
+.form-control:focus {
+	background: #fff;
+	box-shadow: 0 0 0 0.25rem white !important;
+}
+
+.form-control {
+	background: #fff;
+	border: 1px solid #ced4da;
+}
+
+.form-select {
+	background: #fff;
+	border: 1px solid #ced4da;
+}
+
+.form-select:focus {
+	background: #fff;
+	box-shadow: 0 0 0 0.25rem white !important;
+}
+
+.form-check-input {
+	background-color: #fff;
+}
+
+.image-upload>input {
+  display: none;
+}
+
 input.ng-valid {
 	border: 1px solid green;
 }
@@ -81,6 +109,10 @@ header {
 	.menu__admin {
 		display: none;
 	}
+	
+	.border-end {
+		border: 0px !important;
+	}
 }
 
 /* Tablet */
@@ -151,4 +183,30 @@ header {
 font__size-btn {
 	font-size: 11px;
 	line-height: 11px;
+}
+
+.text-primary {
+	color: #ff8008 !important;
+}
+
+.btn-primary {
+	background: #ff8008 !important;
+	border: 1px solid #ff512f !important;
+}
+
+.btn-primary:hover {
+	background: #ff512f !important;
+	border: 1px solid #ff512f !important;
+}
+
+.table-primary {
+    --bs-table-bg: #fbd0d0;
+    --bs-table-striped-bg: #eec6c6;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #e2bbbb;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #e8c0c0;
+    --bs-table-hover-color: #000;
+    color: #000;
+    border-color: #e2bbbb;
 }

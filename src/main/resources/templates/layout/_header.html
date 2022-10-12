@@ -1,51 +1,52 @@
 <nav class="navbar navbar-expand-lg bg-white shadow-sm px-5 mb-3 header">
-	<div class="container-fluid">
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+		data-bs-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-			data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+	<a class="navbar-brand" th:href="@{/home/client}"> <img alt=""
+		th:src="@{/assets/images/logo.png}"
+		class="img-fluid mx-auto d-block w-50 img__logo">
+	</a>
 
-		<a class="navbar-brand" th:href="@{/home/client}"> <img alt=""
-			th:src="@{/assets/images/logo.png}"
-			class="img-fluid mx-auto d-block w-50 img__logo">
-		</a>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-			<div>
-				<a th:href="@{/home/cart/view}" class="btn btn-light btn-sm rounded-4 position-relative">
-					<i class="fa-solid fa-cart-shopping text-secondary"></i>				
-					<span
-						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-						{{amountItems}} <small ng-show="amountItems > 10">+</small>
-						 <span class="visually-hidden">unread messages</span>
-					</span>
-				</a>
-			</div>
-			
-			<div 
-				ng-show="!auth"
-				>
-				<a href="" class="btn btn-primary mx-4 rounded-5 fw-bold">Đăng nhập</a>
-			</div>
-			
-			<div 
-				ng-show="auth"
-				class="nav-item dropdown mx-4"
+	<div class="collapse collapse-header navbar-collapse" id="navbarSupportedContent">
+		
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+		<div>
+			<a th:href="@{/home/cart/view}" class="btn btn-light btn-sm rounded-4 position-relative">
+				<i class="fa-solid fa-cart-shopping text-secondary"></i>				
+				<span
+					class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					{{amountItems}} <small ng-show="amountItems > 10">+</small>
+					 <span class="visually-hidden">unread messages</span>
+				</span>
+			</a>
+		</div>
+		
+		<div 
+			ng-show="!auth"
 			>
-				<a class="nav-link dropdown-toggle text-sm" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> Tên tài khoản
-				</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" th:href="@{/home/client/my-profile}">Hồ sơ cá nhân</a></li>
-					<li><a class="dropdown-item" href="/assets/home/change.html">Đổi mật khẩu</a></li>
-					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-				</ul>
-			</div>
+			<a href="" class="btn btn-primary mx-4 rounded-3 fw-bold">Đăng nhập</a>
+		</div>
+		
+		<div 
+			ng-show="auth"
+			class="nav-item dropdown mx-4"
+		>
+			<a class="nav-link dropdown-toggle text-sm" href="#" role="button"
+				data-bs-toggle="dropdown" aria-expanded="false"> Tên tài khoản
+			</a>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>
+				<li><a class="dropdown-item" th:href="@{/home/client/my-profile}">Hồ sơ cá nhân</a></li>
+				<li><a class="dropdown-item" th:href="@{/home/client/list-favorite}">Sản phẩm yêu thích</a></li>
+				<li><a class="dropdown-item" href="/assets/home/change.html">Đổi mật khẩu</a></li>
+				<li><hr class="dropdown-divider"></li>
+				<li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+			</ul>
+
 		</div>
 	</div>
 </nav>

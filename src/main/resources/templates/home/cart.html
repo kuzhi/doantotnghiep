@@ -3,7 +3,8 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
 <head>
-<title>Chi tiết sản phẩm</title>
+<title>Giỏ hàng</title>
+
 </head>
 <body>
 	<section class="container my-3">
@@ -13,49 +14,41 @@
 				GIỎ HÀNG
 			</h2>
 		</div>
-		<div class="row">
-			<div class="col-xl-8 col-sm-12">
-				<div class="row bg-white rounded p-3">
-					<div class="hstack gap-3">
-					  <div class="col-xl-4">
-						<h6 class="mb-0">Thông tin nhận hàng</h6>
-						<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
-					  </div>
-					  <div class="col-xl-8 text-end">
-					  	<a
-					  		th:href="@{/home/client}"
-					  		class="text-secondary text-decoration-none"
-					  	>
-					  		<small> <i class="fas fa-edit"></i> </small>
-					  	</a>
-					  	<div class="vr"></div>
-					  	<a 
-					  		th:href="@{/home/client}"
-					  		class="text-secondary text-decoration-none"
-					  	>
-					  		<small>Lựa chọn khác</small>
-					  	</a>
-					  	
-					  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
-					  		There are many variations of passages of Lorem Ipsum available, 
-					  		but the majority have suffered alteration in some form, by injected humour, 
-					  		or randomised words which don't look even slightly believable. If you are going to use a passage of 
-					  		Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
-					  		 All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, 
-					  		 making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, 
-					  		 combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. 
-					  		 The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic 
-					  		 words etc.
-					  	</p>
-					  </div>
-					</div>
+		<div class="row px-2">
+			<div class="col-xl-8">
+				<div class="row rounded p-3">
+				  <div class="col-xl-4 col-12">
+					<h6 class="mb-0">Thông tin nhận hàng</h6>
+					<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
+				  </div>
+				  
+				  <div class="col-xl-8 col-12 text-end mt-2">
+				  	<a
+				  		th:href="@{/home/client/my-profile}"
+				  		class="text-secondary text-decoration-none"
+				  	>
+				  		<small> <i class="fas fa-edit"></i> </small>
+				  	</a>
+				  	<div class="vr"></div>
+				  	<a 
+				  		th:href="@{/home/client}"
+				  		class="text-secondary text-decoration-none"
+				  	>
+				  		<small>Lựa chọn khác</small>
+				  	</a>
+				  	
+				  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
+				  		305e, đường Nguyễn Văn Linh, phường An Khánh, quận Ninh Kiều, Cần Thơ
+				  	</p>
+				  </div>
+
 				</div>
 				
 				<div 
 					ng-repeat="p in arr2.products2"
-					class="row bg-white rounded my-3 py-2"
-				>
-					<div class="col-xl-2 text-center">
+					class="row shadow rounded my-3 py-3">
+					<div class="col-xl-2 text-end text-end-mb">
+
 						<img 
 							th:src="@{/assets/images/{{p.image}}}" 
 							style="width: 50px; height: 50px; border-radius: 10px;"
@@ -63,17 +56,19 @@
 					</div>
 					<div class="col-xl-10">
 						<div class="row">
-							<div class="col-xl-9">
+							<div class="col-xl-9 col-8">
 								<span class="text-truncate"> <b>{{p.name}}</b> </span>
 							</div>
-							<div class="col-xl-3 text-end">
-								<span class="text-secondary text-truncate"> 
-									{{p.price | number}} đ
-								</span>
+							<div class="col-xl-3 col-4 d-flex justify-content-end">
+								<p class="text-secondary text-truncate"> 
+									{{p.price | currency : '' : 0}} 
+								</p>
+								<span class="mx-1">đ</span>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-xl-3">
+							<div class="col-xl-3 col-4">
+
 								<div class="input-group input-group-sm mb-3">
 								  <button 
 								  	ng-click="number = number - 1"
@@ -93,7 +88,8 @@
 								  </button>
 								</div>
 							</div>
-							<div class="col-xl-9 text-end">
+							<div class="col-xl-9 col-8 text-end">
+
 								<span 
 									ng-click="delete()" 
 									class="text-danger"
@@ -111,15 +107,37 @@
 					<h5 class="fw-bold">Thông tin vận chuyển</h5>
 					<hr>
 					<div class="row">
-						<div class="col-xl-6 text-start">
+						<div class="col-xl-6 col-8 text-start">
 							<h6>Tổng tiền sản phẩm: </h6>
+						</div>
+						<div class="col-xl-6 col-4 d-flex justify-content-end">
+							<p class="text-secondary text-truncate mb-0"> 
+								{{arr2.amount | currency : '' : 0}} 
+							</p>
+							<span class="mx-1">đ</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-6 col-8 text-start">
 							<h6>Tổng tiền vận chuyển: </h6>
+						</div>
+						<div class="col-xl-6 col-4 d-flex justify-content-end">
+							<p class="text-secondary text-truncate mb-0"> 
+								{{arr2.ship | currency : '' : 0}} 
+							</p>
+							<span class="mx-1">đ</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xl-6 col-8 text-start">
 							<h6>Tổng tiền thanh toán: </h6>							
 						</div>
-						<div class="col-xl-6 text-end">
-							<span>449,000 đ</span> <br>
-							<span>0 đ</span> <br>
-							<span> <b>449,000 đ</b> </span>
+						<div class="col-xl-6 col-4 d-flex justify-content-end">
+							<p class="text-secondary text-truncate mb-0"> 
+								{{arr2.total | currency : '' : 0}} 
+							</p>
+							<span class="mx-1">đ</span>
+
 						</div>
 					</div>
 					<hr>
@@ -153,7 +171,8 @@
 					      Phương thức thanh toán
 					      <i class="fa-solid fa-sort-down"></i>
 					    </h6>
-						<div class="collapse" id="collapseBussiness">
+						<div class="collapse show" id="collapseBussiness">
+
 						  <div class="form-check text-start" >
 							  <input class="form-check-input" 
 								  type="radio" value="true" 

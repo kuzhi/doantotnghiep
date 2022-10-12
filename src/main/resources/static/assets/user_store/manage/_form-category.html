@@ -2,18 +2,25 @@
 	<label class="text-muted">LOẠI MÓN</label>
 </div>
 
-<div class="row btn__add-cate rounded m-0 mb-2">
+<div 
+	ng-repeat="c in list.cate"
+	class="row btn__add-cate rounded m-0 mb-2"
+>
 	<div class="col-xl-8 col-md-7 text-start p-3 text-truncat">
-		<b>Tên loại</b>
+		<b>{{c.name}}</b>
 	</div>
 	<div class="col-xl-4 col-md-5 text-center">
-		<button ng-click="editCate()" class="btn text-warning" data-bs-toggle="modal"
-			data-bs-target="#addCateModal" data-bs-whatever="edit">
-			<i class="fas fa-edit"></i>
-		</button>
-		<button class="btn text-danger">
-			<i class="fas fa-ban"></i>
-		</button>
+		<button 
+			ng-click="editCate()"
+			class="btn text-warning" 
+			data-bs-toggle="modal"
+			data-bs-target="#addCateModal" 
+			data-bs-whatever="edit"
+		> <i class="fas fa-edit"></i> </button>
+		<button 
+			ng-click="deleteC()"		
+			class="btn text-danger"
+		> <i class="fas fa-ban"></i> </button>
 	</div>
 </div>
 
@@ -30,7 +37,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">X</button>
-				<h5 class="modal-title" id="exampleModalLabel">{{titleTable}}</h5>
+				<h5 class="modal-title text-dark" id="exampleModalLabel">{{titleTable}}</h5>
 				<button ng-disabled="cateForm.$invalid" type="button"
 					class="btn btn-primary">Lưu</button>
 			</div>
@@ -39,19 +46,30 @@
 					<table class="table align-middle table-borderless">
 						<tbody>
 							<tr>
-								<td class="fw-bold">Tên loại <small
-									ng-show="cateForm.name_cate.$valid"> <i
-										class="fas fa-check text-success"></i>
-								</small>
+								<td class="fw-bold">
+									Tên loại 
+									<small
+										ng-show="cateForm.name_cate.$valid"
+									> <i class="fas fa-check text-success"></i>
+									</small>
 								</td>
-								<td><input ng-model="name_cate" name="name_cate"
-									class="w-100 form-control" placeholder="Nhập tên món" required>
+								<td>
+									<input 
+										ng-model="name_cate" 
+										name="name_cate"
+										class="w-100 form-control" 
+										placeholder="Nhập tên món" 
+										required
+									>
 									<div
-										ng-show="cateForm.name_cate.$dirty && cateForm.name_cate.$invalid">
-										<small class="text-danger fst-italic"
-											ng-show="cateForm.name_cate.$error.required">Vui lòng
-											không để trống*</small>
-									</div></td>
+										ng-show="cateForm.name_cate.$dirty && cateForm.name_cate.$invalid"
+									>
+										<small 
+											class="text-danger fst-italic"
+											ng-show="cateForm.name_cate.$error.required"
+										>Vui lòng không để trống*</small>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
