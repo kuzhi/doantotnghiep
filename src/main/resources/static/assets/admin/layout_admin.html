@@ -42,20 +42,21 @@
 		<nav class="navbar navbar-light bg-light">
 			<div class="container-fluid">
 				<div class="fw-bold list__menu">
-					<label class="btn" data-bs-toggle="offcanvas"
+					<label 
+						class="btn" 
+						data-bs-toggle="offcanvas"
+						aria-controls="offcanvasDarkNavbar"
 						data-bs-target="#offcanvasDarkNavbar"
-						aria-controls="offcanvasDarkNavbar"> <i
-						class="fa-solid fa-bars-progress"></i>
-					</label>
+					> <i class="fa-solid fa-bars-progress"></i> </label>
 				</div>
 				<div class="text-center div__logo">
 					<img class="img__logo" src="/assets/images/logo.png" alt="Logo">
 				</div>
 				<div class="btn-group account__user">
 					<label 
+						aria-expanded="false"
 						class="dropdown-toggle" 
 						data-bs-toggle="dropdown"
-						aria-expanded="false"
 					> Tên người dùng </label>
 					<ul class="dropdown-menu">
 						<li>
@@ -78,47 +79,53 @@
 
 				<div class="dropdown dropstart account__user-mobile">
 					<label 
-						class="btn dropdown-toggle" 
-						data-bs-toggle="dropdown"
 						aria-expanded="false"
+						data-bs-toggle="dropdown"
+						class="btn dropdown-toggle" 
 					> 
 						<img 
-							class="img__user rounded-4" 
 							alt="Ảnh người dùng" 
+							class="img__user rounded-4" 
 							src="/assets/images/icon_user.png"
 						>
 					</label>
 					<ul class="dropdown-menu">
 						<li>
-							<a class="dropdown-item" href="#"> 
-								Thôn tin cá nhân
-							</a>
+							<a 
+								class="dropdown-item" 
+								href="#!profile"
+							>  Thôn tin cá nhân </a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#"> 
-								Đổi mật khẩu
-							</a>
+							<a 
+								class="dropdown-item" 
+								href="/assets/home/change.html"
+							> Đổi mật khẩu </a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#"> 
-								Đăng xuất
-							</a>
+							<a 
+								class="dropdown-item" 
+								href="#"
+							> Đăng xuất </a>
 						</li>
 					</ul>
 				</div>
 
 				<!-- Menu -->
-				<div class="offcanvas offcanvas-start text-bg-light w-75"
-					tabindex="-1" id="offcanvasDarkNavbar"
-					aria-labelledby="offcanvasDarkNavbarLabel">
+				<div 
+					tabindex="-1" 
+					id="offcanvasDarkNavbar"
+					aria-labelledby="offcanvasDarkNavbarLabel"
+					class="offcanvas offcanvas-start text-bg-light w-75"
+				>
 					<div class="offcanvas-header">
 						<h5 
-							class="offcanvas-title fw-bold" 
 							id="offcanvasDarkNavbarLabel"
+							class="offcanvas-title fw-bold" 
 						>Lựa chọn dịch vụ</h5>
 						<label 
-							data-bs-dismiss="offcanvas" 
 							aria-label="Close"
+							data-bs-dismiss="offcanvas" 
 						> 
 							<i class="fa-solid fa-square-xmark size-icon text-danger"></i>
 						</label>
@@ -127,17 +134,18 @@
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 							<!-- Kênh bán hàng -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseInfo" 
-								aria-expanded="false"
 								aria-controls="collapseInfo"
+								data-bs-target="#collapseInfo" 
 							>
 								<i class="fas fa-street-view size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
 									Kênh bán hàng 
 								</span>
 							</li>
+							
 							<del class="collapse text-decoration-none" id="collapseInfo">
 								<a 
 									href="#!sales-channel"
@@ -146,17 +154,18 @@
 							</del>
 							<!-- Người hỗ trợ -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseProduct" 
-								aria-expanded="false"
 								aria-controls="collapseProduct"
+								data-bs-target="#collapseProduct" 
 							>
 								<i class="fas fa-people-arrows size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
 									Cấp quyền
 								</span>
 							</li>
+							
 							<del class="collapse text-decoration-none" id="collapseProduct">
 								<a 
 									href="#!supporter"
@@ -165,17 +174,18 @@
 							</del>
 							<!-- Phân quyền -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseOrder" 
-								aria-expanded="false"
 								aria-controls="collapseOrder"
+								data-bs-target="#collapseOrder" 
 							>
 								<i class="fas fa-user-cog size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
 									Phân quyền
 								</span>
 							</li>
+							
 							<del class="collapse text-decoration-none" id="collapseOrder">
 								<a 
 									href="#!decentralization"
@@ -184,17 +194,18 @@
 							</del>
 							<!-- Người dùng -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseUser" 
-								aria-expanded="false"
 								aria-controls="collapseUser"
+								data-bs-target="#collapseUser" 
 							>
 								<i class="fas fa-users size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
 									Người dùng
 								</span>
 							</li>
+							
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
@@ -208,17 +219,18 @@
 							
 							<!-- Báo cáo -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseReport" 
-								aria-expanded="false"
 								aria-controls="collapseReport"
+								data-bs-target="#collapseReport" 
 							>	
 								<i class="fas fa-chart-bar size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
 									Báo cáo
 								</span>
 							</li>
+							
 							<del class="collapse text-decoration-none" id="collapseReport">
 								<a 
 									href="#!report"
@@ -237,16 +249,17 @@
 
 		<div class="container-fluid">
 			<div class="row">
+			
 				<div class="col-xl-2 bg-white p-2 ps-4 menu__admin">
 					<div class="row pt-3">
 						<ul class="navbar-nav justify-content-end flex-grow-1">
 							<!-- Kênh bán hàng -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseInfo" 
-								aria-expanded="false"
 								aria-controls="collapseInfo"
+								data-bs-target="#collapseInfo" 
 							>
 								<i class="fas fa-street-view size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
@@ -261,11 +274,11 @@
 							</del>
 							<!-- Người hỗ trợ -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseProduct" 
-								aria-expanded="false"
 								aria-controls="collapseProduct"
+								data-bs-target="#collapseProduct" 
 							>
 								<i class="fas fa-people-arrows size-icon text-muted"></i> 
 									<span class="fw-semibold text-body">
@@ -279,11 +292,11 @@
 							</del>
 							<!-- Phân quyền -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseOrder" 
-								aria-expanded="false"
 								aria-controls="collapseOrder"
+								data-bs-target="#collapseOrder" 
 							>
 								<i class="fas fa-user-cog size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
@@ -298,11 +311,11 @@
 							</del>
 							<!-- Người dùng -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseUser" 
-								aria-expanded="false"
 								aria-controls="collapseUser"
+								data-bs-target="#collapseUser" 
 							>
 								<i class="fas fa-users size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
@@ -321,11 +334,11 @@
 							</del>
 							<!-- Báo cáo -->
 							<li 
+								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								data-bs-target="#collapseReport" 
-								aria-expanded="false"
 								aria-controls="collapseReport"
+								data-bs-target="#collapseReport" 
 							>
 								<i class="fas fa-chart-bar size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
@@ -336,14 +349,16 @@
 								<a 
 									href="#!report"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-									>
-									Tổng quan </a> <br> <a href="#!feedback"
-									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Phản hồi </a>
+								> Tổng quan </a> <br> 
+								<a 
+									href="#!feedback"
+									class="text-decoration-none text-black-50 fw-semibold list__item"
+								> Phản hồi </a>
 							</del>
 						</ul>
 					</div>
 				</div>
+				
 				<div class="col-xl-10 col-md-12 col-12 ng-view p-3"></div>
 			</div>
 		</div>
@@ -360,8 +375,7 @@
 	<script src="/assets/js/admin/feedback.js"></script>
 	<script src="/assets/js/admin/myprofile.js"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
