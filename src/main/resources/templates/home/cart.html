@@ -4,6 +4,7 @@
 	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
 <head>
 <title>Giỏ hàng</title>
+
 </head>
 <body>
 	<section class="container my-3">
@@ -40,13 +41,14 @@
 				  		305e, đường Nguyễn Văn Linh, phường An Khánh, quận Ninh Kiều, Cần Thơ
 				  	</p>
 				  </div>
+
 				</div>
 				
 				<div 
 					ng-repeat="p in arr2.products2"
-					class="row shadow rounded my-3 py-3"
-				>
+					class="row shadow rounded my-3 py-3">
 					<div class="col-xl-2 text-end text-end-mb">
+
 						<img 
 							th:src="@{/assets/images/{{p.image}}}" 
 							style="width: 50px; height: 50px; border-radius: 10px;"
@@ -66,6 +68,7 @@
 						</div>
 						<div class="row">
 							<div class="col-xl-3 col-4">
+
 								<div class="input-group input-group-sm mb-3">
 								  <button 
 								  	ng-click="number = number - 1"
@@ -86,6 +89,7 @@
 								</div>
 							</div>
 							<div class="col-xl-9 col-8 text-end">
+
 								<span 
 									ng-click="delete()" 
 									class="text-danger"
@@ -133,6 +137,7 @@
 								{{arr2.total | currency : '' : 0}} 
 							</p>
 							<span class="mx-1">đ</span>
+
 						</div>
 					</div>
 					<hr>
@@ -167,6 +172,7 @@
 					      <i class="fa-solid fa-sort-down"></i>
 					    </h6>
 						<div class="collapse show" id="collapseBussiness">
+
 						  <div class="form-check text-start" >
 							  <input class="form-check-input" 
 								  type="radio" value="true" 
