@@ -27,6 +27,10 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/admin/user/user.html",
 			controller: "user-ctrl"
 		})
+		.when("/profile", {
+			templateUrl: "/assets/admin/user/my-profile.html",
+			controller: "myprofile-ctrl"
+		})
 		// Báo cáo
 		.when("/report", {
 			templateUrl: "/assets/admin/report/report.html",
