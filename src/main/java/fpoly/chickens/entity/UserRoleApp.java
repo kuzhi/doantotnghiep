@@ -39,4 +39,10 @@ public class UserRoleApp implements Serializable {
 	@JoinColumn(name = "Roleappid")
 	RoleApp roleapp;
 	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+	
 }

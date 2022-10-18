@@ -40,4 +40,10 @@ public class Favorite {
 	@JoinColumn(name="Productid")
 	Product product;
 	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+	
 }

@@ -15,22 +15,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Paymenttype")
-public class PaymentType {
+@Table(name = "Role")
+public class Role {
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
-	@Column(name = "Paymentname")
-	private String PaymentName;
+	@Column(name = "Rolename")
+	private String RoleName;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;

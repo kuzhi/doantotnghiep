@@ -1,6 +1,8 @@
 package fpoly.chickens.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,4 +31,11 @@ public class RoleApp  implements Serializable{
 
 	@Column(name = "Rolename")
 	private String RoleName;
+	
+
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
 }

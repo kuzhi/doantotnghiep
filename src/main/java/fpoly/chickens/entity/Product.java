@@ -1,5 +1,7 @@
 package fpoly.chickens.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +30,9 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
+	@Column(name = "Productcode")
+	private String Productcode;
+	
 	@Column(name = "Name")
 	private String Name;
 	
@@ -54,7 +59,11 @@ public class Product {
 	@Column(name = "Deleted")
 	private Boolean Deleted;
 	
-	@Column(name = "Status")
-	private Boolean Status;
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+	
 	
 }
