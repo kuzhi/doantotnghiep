@@ -1,5 +1,6 @@
 package fpoly.chickens.entity;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,4 +45,10 @@ public class OrderDetail {
 	@Column(name = "Total")
 	private Integer Total;
 	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+
 }

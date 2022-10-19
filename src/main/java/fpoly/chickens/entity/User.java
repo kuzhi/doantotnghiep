@@ -48,12 +48,24 @@ public class User {
 
 	@Column(name = "Email")
 	private String Email;
+	
+	@Column(name = "Photo")
+	private String Photo;
 
 	@Column(name = "Birthday")
 	private Date Birthday;
+	
+	@Column(name = "Status")
+	private Boolean Status;
 
 	@Column(name = "Citizenidentitycard")
 	private String Citizenidentitycard;
+	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;

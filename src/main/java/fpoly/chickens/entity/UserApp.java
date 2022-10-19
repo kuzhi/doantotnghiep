@@ -46,9 +46,16 @@ public class UserApp implements Serializable {
 
 	@Column(name = "Birthday")
 	private Date Birthday;
-
+	
 	@Column(name = "Citizenidentitycard")
 	private String Citizenidentitycard;
+	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;

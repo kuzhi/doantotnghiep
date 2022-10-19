@@ -31,6 +31,9 @@ public class Store {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
+	@Column(name = "Storecode")
+	private String Storecode;
+	
 	@Column(name = "Name")	
 	private String Name;
 	
@@ -49,4 +52,14 @@ public class Store {
 	@ManyToOne
 	@JoinColumn(name = "Promotionid")
 	Promotion promotion;
+	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+	
+	@Column(name = "Deleted")
+	private Boolean Deleted;
+
 }

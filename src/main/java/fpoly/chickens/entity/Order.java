@@ -27,6 +27,10 @@ public class Order {
 	@Id
 	@Column(name = "Id")
 	private String Id;
+	
+	@Column(name = "Ordercode")
+	private String Ordercode;
+
 
 	@ManyToOne
 	@JoinColumn(name="Userid")
@@ -62,4 +66,13 @@ public class Order {
 	@JoinColumn(name="Promotionid")
 	Promotion promotion;
 	
+	@Column(name = "Create_at")
+	private Date Create_at;
+	
+	@Column(name = "Update_at")
+	private Date Update_at;
+	
+	@Column(name = "Deleted")
+	private Boolean Deleted;
+
 }
