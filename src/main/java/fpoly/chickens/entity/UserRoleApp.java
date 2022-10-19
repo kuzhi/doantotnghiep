@@ -45,4 +45,5 @@ public class UserRoleApp implements Serializable {
 	@Column(name = "Update_at")
 	private Date Update_at;
 	
+
 }

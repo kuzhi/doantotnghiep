@@ -31,6 +31,7 @@ public class Order {
 	@Column(name = "Ordercode")
 	private String Ordercode;
 
+
 	@ManyToOne
 	@JoinColumn(name="Userid")
 	User user;
@@ -73,4 +74,5 @@ public class Order {
 	
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
 }

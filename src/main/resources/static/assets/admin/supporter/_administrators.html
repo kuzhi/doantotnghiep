@@ -3,90 +3,40 @@
 	<label class="text-muted">Danh sách kênh</label>
 </div>
 <div class="row row-cols-1 row-cols-md-2 g-4">
-	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
+
+	<div 
+		ng-repeat="s in list.suporter"
+		class="col-xl-5 btn__add-product rounded ms-auto me-auto"
+	>
 		<div class="row d-flex align-items-center pt-2">
+			
 			<div class="col-xl-3 col-md-4 text-center">
-				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
-					src="/assets/images/icon_food.png">
+				<img 
+					class="img__food rounded-4" 
+					alt="Ảnh sản phẩm"
+					src="/assets/images/{{s.img}}"
+				>
 			</div>
 			<div class="col-xl-6 col-md-5 text-start text-truncate">
-				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
+				<b>{{s.name}}</b> <br> 
+				<small>{{s.username}}</small>
 			</div>
+			
 			<div class="col-xl-3 col-md-3 text-center">
-				<button ng-click="edit()" class="btn text-warning"
-					data-bs-toggle="modal" data-bs-target="#editModal"
-					data-bs-whatever="edit">
-					<i class="fas fa-edit"></i>
-				</button>
+				<button 
+					ng-click="edit()" 
+					class="btn text-warning"
+					data-bs-toggle="modal" 
+					data-bs-target="#editModal"
+					data-bs-whatever="edit"
+				> <i class="fas fa-edit"></i> </button>
 				<button class="btn text-danger">
 					<i class="fas fa-ban"></i>
 				</button>
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
-		<div class="row d-flex align-items-center pt-2">
-			<div class="col-xl-3 col-md-4 text-center">
-				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
-					src="/assets/images/icon_food.png">
-			</div>
-			<div class="col-xl-6 col-md-5 text-start text-truncate">
-				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
-			</div>
-			<div class="col-xl-3 col-md-3 text-center">
-				<button ng-click="edit()" class="btn text-warning"
-					data-bs-toggle="modal" data-bs-target="#editModal"
-					data-bs-whatever="edit">
-					<i class="fas fa-edit"></i>
-				</button>
-				<button class="btn text-danger">
-					<i class="fas fa-ban"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
-		<div class="row d-flex align-items-center pt-2">
-			<div class="col-xl-3 col-md-4 text-center">
-				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
-					src="/assets/images/icon_food.png">
-			</div>
-			<div class="col-xl-6 col-md-5 text-start text-truncate">
-				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
-			</div>
-			<div class="col-xl-3 col-md-3 text-center">
-				<button ng-click="edit()" class="btn text-warning"
-					data-bs-toggle="modal" data-bs-target="#editModal"
-					data-bs-whatever="edit">
-					<i class="fas fa-edit"></i>
-				</button>
-				<button class="btn text-danger">
-					<i class="fas fa-ban"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-5 btn__add-product rounded ms-auto me-auto">
-		<div class="row d-flex align-items-center pt-2">
-			<div class="col-xl-3 col-md-4 text-center">
-				<img class="img__food rounded-4" alt="Ảnh sản phẩm"
-					src="/assets/images/icon_food.png">
-			</div>
-			<div class="col-xl-6 col-md-5 text-start text-truncate">
-				<b>Tên kênh</b> <br> <small>Tên chủ kênh</small>
-			</div>
-			<div class="col-xl-3 col-md-3 text-center">
-				<button ng-click="edit()" class="btn text-warning"
-					data-bs-toggle="modal" data-bs-target="#editModal"
-					data-bs-whatever="edit">
-					<i class="fas fa-edit"></i>
-				</button>
-				<button class="btn text-danger">
-					<i class="fas fa-ban"></i>
-				</button>
-			</div>
-		</div>
-	</div>
+	
 </div>
 
 <!-- Full screen modal add product -->

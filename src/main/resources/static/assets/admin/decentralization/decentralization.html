@@ -6,7 +6,7 @@
 </nav>
 
 <div
-	class="container shadow-sm p-3 mb-3 bg-body rounded container__size">
+	class="container shadow-sm p-3 mb-3 bg-body rounded">
 	<div class="row">
 		<div class="col-xl-12 col-md-12 col-12 add__product-pc">
 			<label class="font__size-title">Phân quyền</label> <br> <br>
@@ -14,8 +14,10 @@
 				<div class="col-xl-12 text-center mb-3">
 					<form action="">
 						<div class="mb-3 row">
-							<label for="" fullname"" class="col-sm-2 col-form-label">Họ
-								và tên</label>
+							<label 
+								for="fullname" 
+								class="col-sm-2 col-form-label"
+							> Họ và tên</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" id="fullname">
 							</div>
@@ -24,14 +26,25 @@
 							<label for="" class="col-sm-2 col-form-label">Giới tính</label>
 							<div class="col-sm-8 text-start">
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="gender"
-										id="gender" value="true" checked> <label
-										class="form-check-label" for="gender">Nam</label>
+									<input 
+										class="form-check-input" 
+										type="radio" 
+										name="gender"
+										id="gender" 
+										value="true" 
+										checked
+									> 
+									<label class="form-check-label" for="gender">Nam</label>
 								</div>
 								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="gender"
-										id="gender" value="true"> <label
-										class="form-check-label" for="gender">Nữ</label>
+									<input 
+										class="form-check-input" 
+										type="radio" 
+										name="gender"
+										id="gender" 
+										value="true"
+									> 
+									<label class="form-check-label" for="gender">Nữ</label>
 								</div>
 							</div>
 						</div>
@@ -52,45 +65,69 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="row px-5">
+							<button class="btn btn-primary">Lưu thay đổi</button>
+						</div>
 					</form>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-10">
+					<label class="fs-4">Danh sách nhân viên</label> <br>
+				</div>
+				<div class="col-2 text-end">
+					<label type="submit" class="btn text-primary font__size-btn">
+						<i class="fas fa-sort-amount-down-alt"></i> Sắp xếp
+					</label>
+				</div>
+			</div>	
+			
 			<div class="row">
 				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<tr style="color: #757575 !important;">
-								<th>Ảnh <a href="#" class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th class="d-flex flex-row element__sort">Tên<a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Email<a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Giới tính <a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
-								<th>Chức vụ <a href="#"
-									class="text-decoration-none icon__sort"><i
-										class="fas fa-sort-amount-up-alt"></i></a>
-								</th>
+					<table 
+	                 	class="table text-start align-middle table-bordered border-white table-hover mb-0"
+	                 >
+	                     <thead class="text-center" style="background-color: #ff512f !important;">
+	                     	<tr class="text-white">
+								<th>Ảnh</th>
+								<th>Tên</th>
+								<th>Email</th>
+								<th>Giới tính</th>
+								<th>Chức vụ</th>
 								<th>Hoạt động</th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
-								<td class="align-middle">1</td>
+						<tbody class="table table-primary">
+							<tr
+								ng-repeat="u in list.user"
+							>
+								<td class="align-middle text-center">
+									<img 
+	                                 	class="rounded-circle" 
+	                                 	src="/assets/images/{{u.img}}" 
+	                                 	alt="ảnh món" 
+	                                 	style="width: 40px; height: 40px;"
+	                                 >
+								</td>
+								<td class="align-middle">
+									{{u.fullname}}
+								</td>
+								<td class="align-middle">
+									{{u.email}}
+								</td>
+								<td class="align-middle">
+									{{u.gender ? 'Nam' : 'Nữ'}}
+								</td>
+								<td class="align-middle">
+									{{u.admin ? 'Admin' : 'Nhân viên'}}
+								</td>
 								<td class="text-center align-middle">
-									<button ng-click="edit()" class="btn text-warning">
+									<button 
+										ng-click="edit()" 
+										class="btn text-warning"
+									>
 										<i class="fas fa-edit"></i>
 									</button>
 								</td>
@@ -99,31 +136,29 @@
 					</table>
 				</div>
 			</div>
-			<div class="row mb-3 text-start">
+			<div class="row my-3 text-start">
 				<div class="col-6 text-start">
 					<label> 1/5 </label>
 				</div>
 				<div class="col-6 text-end">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-end">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
+							<li class="page-item disabled"><a class="page-link"> << </a>
 							</li>
 							<li class="page-item"><a class="page-link" href="#">1</a></li>
 							<li class="page-item"><a class="page-link" href="#">2</a></li>
 							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
+							<li class="page-item"><a class="page-link" href="#"> >> </a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 			</div>
 		</div>
-		<div class="add__product-mobile text-center text-white fw-bold">
-			<img class="w-100 rounded-1 mb-2" src="/assets/images/bg_mmobile.jpg"
-				alt="Ảnh logo cửa hàng"> <label class="icon__mobile">
-				<i class="fas fa-laptop"></i>
-			</label>
-			<p class="content__mobile">
+		
+		<div class="add__product-mobile text-center text-white fw-bold p-5">
+			<i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 80px;"></i>
+			<p class="content__mobile text-dark">
 				Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
 				tính
 			</p>

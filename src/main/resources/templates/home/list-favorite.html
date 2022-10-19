@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
+<head>
+<title>Sản phẩm yêu thích</title>
+</head>
+<body>
+
+	<section class="container">
+		<div class="row">
+			<nav style="--bs-breadcrumb-divider: '>'; font-size: 14px;"
+				aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a 
+							th:href="@{/home/client}"
+							class="text-decoration-none text-dark"
+						>Trang chủ</a>
+					</li>
+					<li class="breadcrumb-item active">
+						<a 
+							href="#"
+							class="text-decoration-none text-dark"
+						>Sản phẩm yêu thích</a>
+					</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="row">
+			<!-- ======= Danh sách sản phẩm ======= -->
+			<div class="col-xl">
+				<div class="row">
+					<div 
+						ng-repeat="p in arr3.products3"
+						class="col-xl-3 col-sm-6 card border border-0 px-4 bg-light">
+						<a 
+							th:href="@{/home/product/detail}"
+						>
+							<img 
+								th:src="@{/assets/images/{{p.image}}}" 
+								class="card-img-top" alt="" 
+								style="width: 100%; height: 12.5em;">
+						</a>
+						<div class="card-body px-0">
+							<h5 class="card-title text-truncate">{{p.name}}</h5>
+							
+							<div>
+								<div class="d-flex">
+									<b class="text-truncate">{{p.price - (p.price * p.discount / 100) | currency:'':0}}</b>
+									<b>đ</b>
+									<h3 class="badge rounded-pill text-bg-danger mx-2">{{p.discount}}%</h3>
+								</div>
+							</div>
+							<div>
+								<small><i class="fa-solid fa-star text-warning"></i></small>
+								<small><i class="fa-solid fa-star text-warning"></i></small>
+								<small><i class="fa-solid fa-star text-warning"></i></small>
+								<small><i class="fa-solid fa-star text-warning"></i></small>
+								<small><i class="fa-solid fa-star text-warning"></i></small>
+							</div>
+							<div class="d-flex justify-content-between">
+								<div class="col-xl-10 col-10">
+									<div class="d-flex">
+										<small style="white-space: nowrap; margin-right: 8px; line-height: 25px;"> 
+											Giá gốc: 
+										</small>
+										<span class="fw-bold text-truncate text-secondary text-decoration-line-through">
+											{{p.price | currency:'':0}}
+										</span>
+										<span class="fw-bold text-secondary">đ</span>	
+									</div>
+								</div>
+								<div class="col-xl-2 col-2">
+									<a 
+										ng-show="favorite"
+										href="">
+										<h5><i class="fas fa-heart text-secondary mx-2"></i></h5>
+									</a>
+									<a 
+										ng-show="!favorite"
+										href="">
+										<h5><i class="fas fa-heart text-danger mx-2"></i></h5>
+									</a>
+								</div>
+							</div>
+							
+							<a href="#" class="btn btn-primary w-100 mt-2 fw-bold">Mua ngay</a>
+							<a th:href="@{/home/cart/view}" class="btn btn-outline-danger w-100 mt-2">
+								<i class="fa-solid fa-circle-plus mx-2"></i>
+								Thêm vào giỏ hàng
+							</a>
+						</div>
+					</div>
+					
+					<div class="text-center my-3">
+						<button class="btn btn-outline-primary mx-1"><i class="fa-solid fa-angles-left"></i></button>
+						<button class="btn btn-outline-primary mx-1"><i class="fa-solid fa-angle-left"></i></button>
+						<small class="fw-bold mx-2">1 / 5</small>
+						<button class="btn btn-outline-primary mx-1"><i class="fa-solid fa-angle-right"></i></button>
+						<button class="btn btn-outline-primary mx-1"><i class="fa-solid fa-angles-right"></i></button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

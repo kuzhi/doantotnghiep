@@ -61,4 +61,5 @@ public class Store {
 	
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
 }

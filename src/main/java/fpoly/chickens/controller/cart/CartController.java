@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping({"/cart", "/cart/menu"})
+@RequestMapping("/home/cart/")
 public class CartController {
-	@RequestMapping()
-	public String view_Cart() {
-		return "redirect:/assets/cart/index.html";
+	@RequestMapping("view")
+	public String viewCart() {
+		return "home/cart";
 	}
 }

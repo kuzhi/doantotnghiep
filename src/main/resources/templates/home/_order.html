@@ -1,0 +1,41 @@
+	<div ng-if="showO">
+
+		<div class="row">
+			<h2>Quản lí đơn hàng</h2>
+		</div>
+		
+		<div class="row my-3">
+			<div class="col-xl text-center text-center-mb px-3">
+				<label ng-click="all()">Tất cả</label>
+			</div>
+			<div 
+				ng-repeat="(key, value) in statusArr.statusOrder"
+				ng-click="selected(value.id)"
+				class="col-xl text-center text-center-mb px-3"
+			>
+				<label style="cursor: pointer;">{{value.name}}</label>
+			</div>
+		</div>
+		
+		<div 
+			ng-repeat="o in arr"
+			class="row shadow-sm px-2 py-3 rounded mb-3 mx-1"
+		>	
+			<div class="col-xl-6 col-6">
+				<h5>{{o.id}}</h5>
+				<small>Số lượng: {{o.quantily}}</small>
+			</div>
+			<div class="col-xl-6 col-6 text-end">
+				<h5 class="text-truncate">{{ o.price - (o.price * o.sales / 100) | currency: '' :0}} đ</h5>
+				<small class="text-truncate text-decoration-line-through">{{o.price | currency : '' : 0}} đ</small>
+			</div>
+			<hr>
+			<div class="col-xl-6">
+				<a th:href="@{/home/client/_order-detail}" class="btn btn-primary">Xem chi tiết</a>
+			</div>
+			<div class="col-xl-6 d-flex justify-content-end align-items-center">
+				<h5 class="text-hide">Phí vận chuyển: <small>{{o.ship == 0 ? 'Miễn phí' : ( o.ship | currency : '' : 0 )}} đ</small> </h5>
+			</div>
+		</div>
+
+	</div>

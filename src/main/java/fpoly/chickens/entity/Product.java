@@ -1,7 +1,6 @@
 package fpoly.chickens.entity;
 
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,5 +64,7 @@ public class Product {
 	@Column(name = "Update_at")
 	private Date Update_at;
 	
+	@Column(name = "Status")
+	private Boolean Status;
 	
 }

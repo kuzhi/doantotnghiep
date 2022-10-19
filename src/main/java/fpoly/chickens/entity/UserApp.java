@@ -56,6 +56,7 @@ public class UserApp implements Serializable {
 	@Column(name = "Update_at")
 	private Date Update_at;
 
+
 	@Column(name = "Deleted")
 	private Boolean Deleted;
 }

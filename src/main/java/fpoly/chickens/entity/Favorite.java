@@ -46,4 +46,5 @@ public class Favorite {
 	@Column(name = "Update_at")
 	private Date Update_at;
 	
+
 }
