@@ -1,15 +1,42 @@
 /********** Template CSS **********/
 :root {
-    --primary: #ff512f;
-    --secondary: #fff;
-    --light: #6C7293;
-    --dark: #e9ecef;
+    --primary: #BCFEFE;
+    --secondary: #001C44;
+    --light: #F8DAD0;
+    --dark: #0C5776;
+    --body: #2D99AE;
 }
 
 body {
 	font-family: 'Krub', sans-serif;
-	background-color: #f8f9fa;
 }
+
+/*** Class Bootstrap ***/
+.text-ck {
+	color: var(--primary) !important;
+}
+
+.bg-second {
+	background-color: var(--secondary) !important;
+}
+
+.bg-table {
+	color: var(--secondary) !important;
+	background-color: var(--primary) !important;
+}
+
+button:focus {
+	box-shadow: none !important; 
+}
+
+input.form-control:focus {
+	box-shadow: none !important; 
+}
+
+select.form-select:focus {
+	box-shadow: none !important; 
+}
+
 /*** Spinner ***/
 #spinner {
     opacity: 0;
@@ -87,7 +114,7 @@ body {
 .content {
     margin-left: 250px;
     min-height: 100vh;
-    background: var(--dark);
+    background: var(--body);
     transition: 0.5s;
 }
 
@@ -99,6 +126,10 @@ body {
     .sidebar.open {
         margin-left: -250px;
     }
+    
+    .sidebar.close {
+        margin-left: 0;
+    }
 
     .content {
         width: calc(100% - 250px);
@@ -107,6 +138,11 @@ body {
     .content.open {
         width: 100%;
         margin-left: 0;
+    }
+
+    .content.close {
+        width: calc(100% - 250px);
+        margin-left: 250px;
     }
 }
 
@@ -294,4 +330,22 @@ body {
 .testimonial-carousel .owl-dot.active {
     background: var(--dark);
     border-color: var(--primary);
+}
+
+/*** Breadcrumb ***/
+
+li.breadcrumb-item {
+	color: #fff;
+}
+
+li.breadcrumb-item.active {
+	color: #fff;
+	font-weight: bold;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    float: left;
+    padding-right: 0.5rem;
+    color: #fff;
+    content: var(--bs-breadcrumb-divider, ">") /* rtl: var(--bs-breadcrumb-divider, "/") */;
 }

@@ -7,11 +7,11 @@
 
 <form 
 	name="nameStoreForm" 
-	class="row shadow-sm bg-white mx-3 py-3 rounded" 
+	class="row shadow-sm bg-second mx-3 py-3 rounded" 
 	novalidate
 >
 	<div class="col-xl-5 col-12">
-		<label class="font__size-title mb-2">Tên và liên hệ</label>
+		<label class="font__size-title color-text mb-2">Tên và liên hệ</label>
 		<div class="mb-3">
 			<div class="form-floating mb-3">
 				<input 
@@ -20,7 +20,7 @@
 					name="name" 
 					id="nameStore"
 					class="form-control form-control-sm" 
-					placeholder="Nhập tên cửa hàng của bạn" required>
+					placeholder="--Vui lòng nhập--" required>
 				<div
 					ng-show="nameStoreForm.name.$dirty && nameStoreForm.name.$invalid">
 					<small 
@@ -46,7 +46,7 @@
 					id="phoneStore"
 					name="phone" 
 					class="form-control form-control-sm" 
-					placeholder="Nhập số điện thoại của bạn" required>
+					placeholder="--Vui lòng nhập--" required>
 				<div
 					ng-show="nameStoreForm.phone.$dirty && nameStoreForm.phone.$invalid || nameStoreForm.phone.$error.pattern">
 					<small 
@@ -116,13 +116,13 @@
 				ng-disabled="nameStoreForm.$invalid" 
 				ng-click="update()"
 				type="submit"
-				class="btn btn-primary btn-lg btn__t-m"
+				class="btn btn-info btn-lg btn__t-m"
 			>Cập nhật</button>
 			<button 
 				ng-disabled="nameStoreForm.$invalid"
 				ng-click="update()" 
 				type="submit"
-				class="btn btn-primary btn-lg btn__pc w-100"
+				class="btn btn-info btn-lg btn__pc w-100"
 			>Cập nhật</button>
 		</div>
 	</div>

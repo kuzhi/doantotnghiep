@@ -99,19 +99,18 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			{
 				id: '1',
 				name: 'Khoai chiên',
-				img: 'sp1.jpg',
-				price: 15000
+				price: 15000,
+				donVi: 'Phần',
+				cate: 'KFC'
 			},
 			{
 				id: '2',
 				name: 'Hamberger',
-				img: 'sp3.jpeg',
 				price: 15000
 			},
 			{
 				id: '3',
 				name: 'Nước ngọt',
-				img: 'sp4.jpeg',
 				price: 15000
 			},
 		],

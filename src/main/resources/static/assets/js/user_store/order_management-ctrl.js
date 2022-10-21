@@ -79,6 +79,35 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 				staff: 'Nguyễn Văn A',
 				status: 1
 			},
+		],
+		detailOrder: [
+			{
+				id: 'sp1',
+				name: 'Khoai tây chiên',
+				unit: 'Phần',
+				price: 15000,
+				quantily: 1,
+				discount: 0,
+				amount: 15000,
+			},
+			{
+				id: 'sp2',
+				name: 'Khoai tây chiên',
+				unit: 'Phần',
+				price: 15000,
+				quantily: 1,
+				discount: 0,
+				amount: 15000,
+			},
+			{
+				id: 'sp3',
+				name: 'Khoai tây chiên',
+				unit: 'Phần',
+				price: 15000,
+				quantily: 1,
+				discount: 0,
+				amount: 15000,
+			},
 		]
 	}
 	
