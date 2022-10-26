@@ -3,7 +3,7 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Khách hàng';
 
 	$scope.insert = function () {
-		$scope.title = 'Thêm nhân viên quản trị mới';
+		$scope.title = 'Thêm khách hàng mới';
 		$scope.statusInput = true;
 	}
 	
