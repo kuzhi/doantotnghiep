@@ -33,6 +33,10 @@ public class Cart {
 	@ManyToOne
 	@JoinColumn(name = "Userid")
 	User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "Storeid")
+	Store store;
 
 	@ManyToOne
 	@JoinColumn(name = "Productid")

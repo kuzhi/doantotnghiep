@@ -45,6 +45,9 @@ public class User {
 	@Column(name = "Email")
 	private String Email;
 	
+	@Column(name = "Phone")
+	private String Phone;
+	
 	@Column(name = "Photo")
 	private String Photo;
 
@@ -54,8 +57,6 @@ public class User {
 	@Column(name = "Status")
 	private Boolean Status;
 
-	@Column(name = "Citizenidentitycard")
-	private String Citizenidentitycard;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;

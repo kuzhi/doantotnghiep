@@ -54,7 +54,5 @@ public class Product {
 	@Column(name = "Update_at")
 	private Date Update_at;
 	
-	@Column(name = "Status")
-	private Boolean Status;
 	
 }
