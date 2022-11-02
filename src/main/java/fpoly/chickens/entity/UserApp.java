@@ -15,9 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -47,8 +45,8 @@ public class UserApp implements Serializable {
 	@Column(name = "Birthday")
 	private Date Birthday;
 	
-	@Column(name = "Citizenidentitycard")
-	private String Citizenidentitycard;
+	@Column(name = "Phone")
+	private String Phone;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
@@ -59,4 +57,116 @@ public class UserApp implements Serializable {
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+
+	public Integer getId() {
+		return Id;
+	}
+
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+
+	public String getUsername() {
+		return Username;
+	}
+
+
+	public void setUsername(String username) {
+		Username = username;
+	}
+
+
+	public String getPassword() {
+		return Password;
+	}
+
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+
+	public String getFullname() {
+		return Fullname;
+	}
+
+
+	public void setFullname(String fullname) {
+		Fullname = fullname;
+	}
+
+
+	public Boolean getGender() {
+		return Gender;
+	}
+
+
+	public void setGender(Boolean gender) {
+		Gender = gender;
+	}
+
+
+	public String getEmail() {
+		return Email;
+	}
+
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+
+	public Date getBirthday() {
+		return Birthday;
+	}
+
+
+	public void setBirthday(Date birthday) {
+		Birthday = birthday;
+	}
+
+
+	public String getPhone() {
+		return Phone;
+	}
+
+
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+
+
+	public Date getCreate_at() {
+		return Create_at;
+	}
+
+
+	public void setCreate_at(Date create_at) {
+		Create_at = create_at;
+	}
+
+
+	public Date getUpdate_at() {
+		return Update_at;
+	}
+
+
+	public void setUpdate_at(Date update_at) {
+		Update_at = update_at;
+	}
+
+
+	public Boolean getDeleted() {
+		return Deleted;
+	}
+
+
+	public void setDeleted(Boolean deleted) {
+		Deleted = deleted;
+	}
+	
+	
 }

@@ -17,9 +17,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -58,5 +55,87 @@ public class Store {
 	
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public UserStore getUserstoreId() {
+		return UserstoreId;
+	}
+
+	public void setUserstoreId(UserStore userstoreId) {
+		UserstoreId = userstoreId;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+	public String getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+
+	public Date getEnddate() {
+		return Enddate;
+	}
+
+	public void setEnddate(Date enddate) {
+		Enddate = enddate;
+	}
+
+	public String getImage() {
+		return Image;
+	}
+
+	public void setImage(String image) {
+		Image = image;
+	}
+
+	public Date getCreate_at() {
+		return Create_at;
+	}
+
+	public void setCreate_at(Date create_at) {
+		Create_at = create_at;
+	}
+
+	public Date getUpdate_at() {
+		return Update_at;
+	}
+
+	public void setUpdate_at(Date update_at) {
+		Update_at = update_at;
+	}
+
+	public Boolean getDeleted() {
+		return Deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		Deleted = deleted;
+	}
+	
+	
 
 }

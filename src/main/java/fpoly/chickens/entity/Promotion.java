@@ -15,9 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -50,5 +47,71 @@ public class Promotion {
 
 	@Column(name = "Update_at")
 	private Date Update_at;
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public Store getStore() {
+		return store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	public Double getDiscount() {
+		return Discount;
+	}
+
+	public void setDiscount(Double discount) {
+		Discount = discount;
+	}
+
+	public Date getStartDate() {
+		return StartDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		StartDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return EndDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		EndDate = endDate;
+	}
+
+	public Date getCreate_at() {
+		return Create_at;
+	}
+
+	public void setCreate_at(Date create_at) {
+		Create_at = create_at;
+	}
+
+	public Date getUpdate_at() {
+		return Update_at;
+	}
+
+	public void setUpdate_at(Date update_at) {
+		Update_at = update_at;
+	}
+	
+	
 
 }

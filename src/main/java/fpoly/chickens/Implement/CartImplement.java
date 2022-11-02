@@ -31,9 +31,8 @@ public class CartImplement implements CartService{
 	
 	@Override
 	public List<Cart> getCart(Integer storeid, Integer userid){
-		Store store = storeDao.findById(storeid).get();
-		User user = userDao.findById(userid).get();
-		List<Cart> list = cartDao.getCart(store, user);
+		
+		List<Cart> list = cartDao.getCart(storeid, userid);
 		return list;
 	}
 }

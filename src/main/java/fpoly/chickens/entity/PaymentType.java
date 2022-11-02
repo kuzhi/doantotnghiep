@@ -15,9 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Data
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -36,5 +34,40 @@ public class PaymentType {
 	
 	@Column(name = "Update_at")
 	private Date Update_at;
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getPaymentName() {
+		return PaymentName;
+	}
+
+	public void setPaymentName(String paymentName) {
+		PaymentName = paymentName;
+	}
+
+	public Date getCreate_at() {
+		return Create_at;
+	}
+
+	public void setCreate_at(Date create_at) {
+		Create_at = create_at;
+	}
+
+	public Date getUpdate_at() {
+		return Update_at;
+	}
+
+	public void setUpdate_at(Date update_at) {
+		Update_at = update_at;
+	}
+	
+	
+	
 
 }
