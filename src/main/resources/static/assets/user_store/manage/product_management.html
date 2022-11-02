@@ -33,17 +33,6 @@
 						<i class="fas fa-plus-circle"></i>
 						Thêm món mới
 					</button>
-
-					<button 
-						ng-click="insertCate()"
-						class="btn btn-info"
-						data-bs-toggle="modal" 
-						data-bs-target="#addCateModal"
-						data-bs-whatever="addCate"
-					>
-						<i class="fas fa-plus-circle"></i>
-						Thêm loại mới
-					</button>
 				</form>
 			</div>
 			<div class="col-2 text-end">
@@ -99,27 +88,24 @@
 		</div>
 	</div>
 	
-	<div class="row mt-3 text-start px-5">
-		<div class="col-6 text-start">
-			<label> 1/5 </label>
-		</div>
-		<div class="col-6 text-end">
+	<div class="row my-3 text-start">
+		<div class="col-xl text-end">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-end">
 					<li class="page-item disabled">
-						<a class="page-link"> << </a>
+						<a class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#">1</a>
+						<a class="page-link text-dark" href="#"> <i class="fas fa-backward"></i> </a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#">2</a>
+						<span class="page-link bg-white">1</span>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#">3</a>
+						<a class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
 					</li>
 					<li class="page-item">
-							<a class="page-link" href="#"> >> </a>
+						<a class="page-link text-dark" href="#"> <i class="fas fa-step-forward"></i> </a>
 					</li>
 				</ul>
 			</nav>
@@ -242,14 +228,29 @@
                         <h6 
                             class="text-secondary"
                         >Loại </h6>
-                        <div>
-                        	<select class="form-select" aria-label="Default select example">
-							  <option selected>--Vui lòng chọn--</option>
-							  <option 
-							  	ng-repeat="(id,c) in list.cate"
-							  	value="{{c.id}}"
-							  >{{c.name}}</option>
-							</select>
+                        <div class="row">
+                        	<div class="col-xl-11">
+                        		<select class="form-select" aria-label="Default select example">
+								  <option selected>--Vui lòng chọn--</option>
+								  <option 
+								  	ng-repeat="(id,c) in list.cate"
+								  	value="{{c.id}}"
+								  >{{c.name}}</option>
+								</select>
+                        	</div>
+							
+							<div class="col-xl-1">
+								<a 
+									ng-click="insertCate()"
+									class="btn"
+									data-bs-toggle="modal" 
+									data-bs-target="#addCateModal"
+									data-bs-whatever="addCate"
+									 data-bs-dismiss="modal"
+								>
+									<i class="fas fa-plus-circle"></i>
+								</a>
+							</div>
                         </div>
                     </div>
                     <!-- Price -->

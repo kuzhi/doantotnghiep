@@ -1,10 +1,10 @@
 /********** Template CSS **********/
 :root {
-    --primary: #BCFEFE;
-    --secondary: #001C44;
-    --light: #F8DAD0;
-    --dark: #0C5776;
-    --body: #2D99AE;
+    --primary: #333;
+    --secondary: #fff;
+    --light: #333;
+    --dark: #3498db;
+    --body: #f5f5f5;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 
 .bg-table {
 	color: var(--secondary) !important;
-	background-color: var(--primary) !important;
+	background-color: var(--dark) !important;
 }
 
 button:focus {
@@ -99,7 +99,7 @@ select.form-select:focus {
 }  
 
 .color-text {
-    color: var(--primary);
+    color: var(--dark);
 }
 
 .color-bg-gray {
@@ -126,10 +126,6 @@ select.form-select:focus {
     .sidebar.open {
         margin-left: -250px;
     }
-    
-    .sidebar.close {
-        margin-left: 0;
-    }
 
     .content {
         width: calc(100% - 250px);
@@ -138,11 +134,6 @@ select.form-select:focus {
     .content.open {
         width: 100%;
         margin-left: 0;
-    }
-
-    .content.close {
-        width: calc(100% - 250px);
-        margin-left: 250px;
     }
 }
 
@@ -333,19 +324,9 @@ select.form-select:focus {
 }
 
 /*** Breadcrumb ***/
-
-li.breadcrumb-item {
-	color: #fff;
-}
-
-li.breadcrumb-item.active {
-	color: #fff;
-	font-weight: bold;
-}
-
 .breadcrumb-item+.breadcrumb-item::before {
     float: left;
     padding-right: 0.5rem;
-    color: #fff;
+    color: #333;
     content: var(--bs-breadcrumb-divider, ">") /* rtl: var(--bs-breadcrumb-divider, "/") */;
 }
