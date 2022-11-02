@@ -27,19 +27,22 @@ public class Pack {
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	
+
 	@Column(name = "Name")
 	private String Name;
 	
-	@Column(name = "Year")
-	private Integer Year;
+	@Column(name = "Image")
+	private String Image;
 	
-	@Column(name = "Total")
-	private Integer Total;
+	@Column(name = "Price")
+	private Integer Price;
 
-@Column(name = "Create_at")
+	@Column(name = "Date")
+	private Integer Date;
+
+	@Column(name = "Create_at")
 	private Date Create_at;
-	
+
 	@Column(name = "Update_at")
 	private Date Update_at;
 

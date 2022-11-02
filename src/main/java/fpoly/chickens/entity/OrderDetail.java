@@ -39,11 +39,11 @@ public class OrderDetail {
 	@JoinColumn(name="Orderid")
 	Order order;
 	
-	@Column(name = "Quanlity")
-	private Integer Quanlity;
+	@Column(name = "Amount")
+	private Integer Amount;
 	
-	@Column(name = "Total")
-	private Integer Total;
+	@Column(name = "Totalmoney")
+	private Integer TotalMoney;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;

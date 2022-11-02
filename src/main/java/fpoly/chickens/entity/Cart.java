@@ -38,6 +38,9 @@ public class Cart {
 	@JoinColumn(name = "Productid")
 	Product product;
 	
+	@Column(name = "Amount")
+	private Integer Amount;
+	
 	@Column(name = "Create_at")
 	private Date Create_at;
 	

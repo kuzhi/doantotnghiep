@@ -37,6 +37,9 @@ public class Category {
 	@JoinColumn(name="Storeid")
 	Store store;
 	
+	@Column(name = "Deleted")
+	private Boolean Deleted;
+	
 	@Column(name = "Create_at")
 	private Date Create_at;
 	

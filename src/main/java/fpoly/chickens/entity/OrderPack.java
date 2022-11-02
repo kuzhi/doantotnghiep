@@ -38,13 +38,13 @@ public class OrderPack {
 	@JoinColumn(name="Packid")
 	Pack pack;
 	
-	@Column(name = "Status")
-	private Boolean Status;
-	
 	@Column(name = "Create_at")
 	private Date Create_at;
 	
 	@Column(name = "Update_at")
 	private Date Update_at;
+	
+	@Column(name = "Status")
+	private Boolean Status;
 
 }
