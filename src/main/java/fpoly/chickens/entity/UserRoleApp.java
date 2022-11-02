@@ -39,6 +39,10 @@ public class UserRoleApp implements Serializable {
 	@JoinColumn(name = "Roleappid")
 	RoleApp roleapp;
 	
+	@Column(name = "Permission")
+	private String Permission;
+	
+	
 	@Column(name = "Create_at")
 	private Date Create_at;
 	

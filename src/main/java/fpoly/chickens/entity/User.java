@@ -23,16 +23,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Usersapp")
+@Table(name = "User")
 public class User {
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
-	
-	@ManyToOne
-	@JoinColumn(name="Storeid")
-	Store store;
 
 	@Column(name = "Username")
 	private String Username;

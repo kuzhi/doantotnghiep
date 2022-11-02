@@ -21,19 +21,46 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Role")
-public class Role {
+@Table(name = "Userstore")
+public class UserStore {
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
+
+	@Column(name = "Username")
+	private String Username;
+
+	@Column(name = "Password")
+	private String Password;
+
+	@Column(name = "Fullname")
+	private String Fullname;
+
+	@Column(name = "Gender")
+	private Boolean Gender;
+
+	@Column(name = "Email")
+	private String Email;
 	
-	@Column(name = "Rolename")
-	private String RoleName;
+	@Column(name = "Photo")
+	private String Photo;
+
+	@Column(name = "Birthday")
+	private Date Birthday;
+	
+	@Column(name = "Status")
+	private Boolean Status;
+
+	@Column(name = "Citizenidentitycard")
+	private String Citizenidentitycard;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
 	
 	@Column(name = "Update_at")
 	private Date Update_at;
+
+	@Column(name = "Deleted")
+	private Boolean Deleted;
 }

@@ -31,11 +31,12 @@ public class Store {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
-	@Column(name = "Storecode")
-	private String Storecode;
-	
 	@Column(name = "Name")	
 	private String Name;
+	
+	@ManyToOne
+	@JoinColumn(name = "Userstoreid")
+	UserStore UserstoreId;
 	
 	@Column(name = "Address")
 	private String Address;	
@@ -43,15 +44,11 @@ public class Store {
 	@Column(name = "Phone")
 	private String Phone;
 	
-	@Column(name = "Time")
-	private Date Time;	
+	@Column(name = "Enddate")
+	private Date Enddate;	
 	
 	@Column(name = "Image")
 	private String Image;
-	
-	@ManyToOne
-	@JoinColumn(name = "Promotionid")
-	Promotion promotion;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;

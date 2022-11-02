@@ -31,7 +31,6 @@ public class Order {
 	@Column(name = "Ordercode")
 	private String Ordercode;
 
-
 	@ManyToOne
 	@JoinColumn(name="Userid")
 	User user;
@@ -48,9 +47,6 @@ public class Order {
 	@Column(name = "Phone")
 	private String Phone;
 	
-	@Column(name = "Createdate")
-	private Date CreateDate;
-	
 	@Column(name = "Totalmoney")
 	private Integer TotalMoney;
 	
@@ -62,9 +58,6 @@ public class Order {
 	@JoinColumn(name="Shippingtypeid")
 	ShippingType shippingType;
 	
-	@ManyToOne
-	@JoinColumn(name="Promotionid")
-	Promotion promotion;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
