@@ -1,5 +1,6 @@
 :root {
-
+	--primary: #ff8008 !important;
+	--primary-bold: #ff512f !important;
 }
 
 body {
@@ -9,17 +10,31 @@ body {
 
 
 .text-primary {
-	color: #ff8008 !important;
+	color: var(--primary);
 }
 
 .btn-primary {
-	background: #ff8008 !important;
-	border: 1px solid #ff512f !important;
+	background: var(--primary);
+	border: 1px solid var(--primary);
 }
 
 .btn-primary:hover {
-	background: #ff512f !important;
-	border: 1px solid #ff512f !important;
+	background: #ff512f !important;;
+	border: 1px solid #ff512f !important;;
+}
+
+.nav-link {
+    color: #333;
+    font-weight: 700;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    background-color: var(--primary);
 }
 
 .fa-heart:hover {
@@ -27,13 +42,13 @@ body {
 }
 
 .btn-outline-primary {
-	border: 1px solid #ff512f !important;
-	color: #ff512f !important;
+	border: 1px solid #ff512f !important;;
+	color: #ff512f !important;;
 }
 
 .btn-outline-primary:hover {
-	border: 1px solid #ff512f !important;
-	background: #ff512f !important;
+	border: 1px solid #ff512f !important;;
+	background: #ff512f !important;;
 	color: #fff !important;
 }
 

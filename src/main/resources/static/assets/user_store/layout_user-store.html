@@ -69,7 +69,7 @@
 		<!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 
         	top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <div class="spinner-border text-ck" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
@@ -77,23 +77,14 @@
         
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-white navbar-dark">
+            <nav class="navbar navbar-dark">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <label class="color-text fs-3 fw-bold">Tên cửa hàng</label>
+                    <label class="color-text fs-3 fw-bold">Logo</label>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img 
-                        	class="rounded-circle" 
-                        	src="/assets/images/user.jpg" 
-                        	alt="" 
-                        	style="width: 40px; height: 40px;"
-                        >
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
                     <div class="ms-3">
-                        <h6 class="mb-0 text-dark">Tên tài khoản</h6>
-                        <span>Vai trò</span>
+                        <h6 class="mb-0 text-ck">Tên cửa hàng</h6>
+                        <span>Địa chỉ</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100" id="navbar-nav">
@@ -103,13 +94,26 @@
                     </a>
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-laptop me-2"></i>Báo cáo
+                            <i class="fa-solid fa-chart-column me-2"></i>
+                            Báo cáo
                         </a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="#!report-sale-all" class="dropdown-item">Doanh thu bán hàng</a>
-                            <a href="#!report-product-all" class="dropdown-item">Doanh thu sản phẩm</a>
-                            <a href="#!report-client-all" class="dropdown-item">Doanh thu khách hàng</a>
-                            <a href="#!feedback__product" class="dropdown-item">Đánh giá sản phẩm</a>
+                            <a href="#!report-sale-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-column me-1"></i>
+                            	Doanh thu bán hàng
+                            </a>
+                            <a href="#!report-product-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-bar me-1"></i>
+                            	Doanh thu sản phẩm
+                           	</a>
+                            <a href="#!report-client-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-bar me-1"></i>
+                            	Doanh thu khách hàng
+                            </a>
+                            <a href="#!feedback__product" class="dropdown-item">
+                            	<i class="fa-solid fa-comment me-1"></i>
+                            	Đánh giá sản phẩm
+                            </a>
                         </div>
                     </div>
                     <a 
@@ -127,7 +131,7 @@
                     <a 
                     	href="#!user__management" 
                     	class="nav-item nav-link">
-						<i class="fas fa-users me-2"></i>
+						<i class="fa-solid fa-users-between-lines me-2"></i>
 						Nhân viên
 					</a>
 					<div class="nav-item dropdown">
@@ -135,9 +139,18 @@
                             <i class="fa fa-laptop me-2"></i>Đơn hàng
                         </a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="#!order__management-all" class="dropdown-item">Tất cả</a>
-                            <a href="#!order__management-loading" class="dropdown-item">Chờ duyệt</a>
-                            <a href="#!order__management-success" class="dropdown-item">Đã giao</a>
+                            <a href="#!order__management-all" class="dropdown-item">
+                            	<i class="fa-solid fa-list-ul me-1"></i>
+                            	Tất cả
+                            </a>
+                            <a href="#!order__management-loading" class="dropdown-item">
+                            	<i class="fa-solid fa-bars-staggered me-1"></i>
+                            	Chờ duyệt
+                            </a>
+                            <a href="#!order__management-success" class="dropdown-item">
+                            	<i class="fa-solid fa-list-check me-1"></i>
+                            	Đã giao
+                            </a>
                         </div>
                     </div>
                     <a 
@@ -155,12 +168,12 @@
         <div class="content">
         
         	<!-- Navbar Start -->
-            <nav class="navbar navbar-expand bg-white sticky-top px-4 py-0">
-                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+            <nav class="navbar navbar-expand bg-second sticky-top px-4 py-0">
+                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
                     <label class="color-text mb-0 fs-3"><i class="fa fa-user-edit"></i></label>
                 </a>
                 <a href="#" class="sidebar-toggler flex-shrink-0">
-                    <i class="fa fa-bars color-text"></i>
+                    <i class="fa fa-bars text-white"></i>
                 </a>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
@@ -173,7 +186,7 @@
                             >
                             <span class="d-none d-lg-inline-flex">Tên tài khoản</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-white border-0 rounded-0 rounded-bottom m-0">
+                        <div class="dropdown-menu dropdown-menu-end bg-second border-0 rounded-0 rounded-bottom m-0">
                             <a href="#!myProfile" class="dropdown-item">Hồ sơ</a>
                             <a href="#" class="dropdown-item">Đổi mật khẩu</a>
                             <a href="#" class="dropdown-item">Đăng xuất</a>

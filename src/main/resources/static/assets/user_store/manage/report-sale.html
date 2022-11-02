@@ -8,9 +8,22 @@
 <!-- Sales Chart Start -->
      <div class="container-fluid pt-4 px-4 mb-3">
          <div class="row mx-1">
-             <div class="bg-white text-center rounded p-4">
+             <div class="bg-second text-center rounded p-4">
                  <div class="d-flex align-items-center justify-content-between mb-4">
-                     <h6 class="mb-0 text-dark">Thống kê doanh thu bán hàng</h6>
+                     <h6 class="mb-0 color-text">Thống kê doanh thu bán hàng</h6>
+                     
+                     <div class="d-flex align-items-center">
+                     	<span>Lọc:</span>
+                     	<div class="ms-2">
+                        	<select class="form-select px-4 py-0" aria-label="Default select example">
+							  <option selected>--Vui lòng chọn--</option>
+							  <option value="1">Năm</option>
+							  <option value="2">Tháng</option>
+							  <option value="3">Tuần</option>
+							  <option value="4">Ngày</option>
+							</select>
+                        </div>
+                     </div>
                  </div>
                  
 				<canvas id="saleChart"></canvas>

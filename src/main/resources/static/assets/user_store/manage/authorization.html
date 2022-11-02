@@ -6,62 +6,24 @@
 </nav>
 
 <div
-	class="row shadow-sm bg-white mx-3 py-3 rounded">
+	class="row shadow-sm bg-second mx-3 py-3 rounded">
 	<div class="col-xl-12 col-md-12 col-12 add__product-pc">
-		<label class="font__size-title">Phân quyền</label> <br> <br>
-		<div class="row">
-			<div class="col-xl-12 text-center mb-3">
-				<form action="">
-					<div class="mb-3 row">
-						<label for="" fullname"" class="col-sm-2 col-form-label">Họ
-							và tên</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" id="fullname">
-						</div>
-					</div>
-					<div class="mb-3 row">
-						<label for="" class="col-sm-2 col-form-label">Giới tính</label>
-						<div class="col-sm-8 text-start">
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="gender"
-									id="gender" value="true" checked> <label
-									class="form-check-label" for="gender">Nam</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="gender"
-									id="gender" value="true"> <label
-									class="form-check-label" for="gender">Nữ</label>
-							</div>
-						</div>
-					</div>
-					<div class="mb-3 row">
-						<label for="" class="col-sm-2 col-form-label">Chức vụ</label>
-						<div class="col-sm-8 text-start">
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" id="a">
-								<label class="form-check-label" for="a">A</label>
-							</div>
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" id="b">
-								<label class="form-check-label" for="b">B</label>
-							</div>
-							<div class="form-check form-switch form-check-inline">
-								<input class="form-check-input" type="checkbox" id="c">
-								<label class="form-check-label" for="c">C</label>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row px-5">
-						<button class="btn btn-primary">Lưu thay đổi</button>
-					</div>
-				</form>
-			</div>
-		</div>
-		
+
 		<div class="row">
 			<div class="col-10">
-				<label class="fs-4">Danh sách nhân viên</label> <br>
+				<form class="d-flex align-items-center">
+					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i>
+						<input class="form-control border-0" placeholder="Tìm theo mã">
+					</div>
+
+					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i>
+						<input class="form-control border-0" placeholder="Tìm theo tên">
+					</div>
+						
+					<button class="btn btn-info me-2 px-2">Tìm kiếm</button>
+				</form>
 			</div>
 			<div class="col-2 text-end">
 				<label type="submit" class="btn text-primary font__size-btn">
@@ -69,14 +31,14 @@
 				</label>
 			</div>
 		</div>
-		
-		<div class="row">
+
+		<div class="row mt-3">
 			<div class="table-responsive">
 				<table 
                  	class="table text-start align-middle table-bordered border-white table-hover mb-0"
                  >
-                     <thead class="text-center" style="background-color: #ff512f !important;">
-                     	<tr class="text-white">
+                     <thead class="text-center bg-table">
+                     	<tr>
 							<th>Ảnh</th>
 							<th>Tên</th>
 							<th>Email</th>
@@ -85,7 +47,7 @@
 							<th>Hoạt động</th>
 						</tr>
 					</thead>
-					<tbody class="table table-primary">
+					<tbody class="table table-info">
 						<tr
 							ng-repeat="u in list.user"
 						>
@@ -112,7 +74,10 @@
 							<td class="text-center align-middle">
 								<button 
 									ng-click="edit()" 
-									class="btn text-warning"
+									data-bs-toggle="modal" 
+									data-bs-target="#addModal"
+									data-bs-whatever="add"
+									class="border-0 text-warning"
 								>
 									<i class="fas fa-edit"></i>
 								</button>
@@ -123,18 +88,23 @@
 			</div>
 		</div>
 		<div class="row my-3 text-start">
-			<div class="col-6 text-start">
-				<label> 1/5 </label>
-			</div>
-			<div class="col-6 text-end">
+			<div class="col-xl text-end">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
-						<li class="page-item disabled"><a class="page-link"> << </a>
+						<li class="page-item disabled">
+							<a class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
 						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"> >> </a>
+						<li class="page-item">
+							<a class="page-link text-dark" href="#"> <i class="fas fa-backward"></i> </a>
+						</li>
+						<li class="page-item">
+							<span class="page-link bg-white">1</span>
+						</li>
+						<li class="page-item">
+							<a class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
+						</li>
+						<li class="page-item">
+							<a class="page-link text-dark" href="#"> <i class="fas fa-step-forward"></i> </a>
 						</li>
 					</ul>
 				</nav>
@@ -150,3 +120,155 @@
 	</div>
 </div>
 
+<!-- Full screen modal add product -->
+<div class="modal fade" id="addModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form name="userForm" action="" novalidate>
+				<div class="modal-body">
+					<h5 class="text-dark text-center">{{title}}</h5>
+					
+					<!-- Image -->
+					<div class="row">
+                        <h6 
+                            class="text-secondary"
+                        >Hình ảnh</h6>
+                        <div class="image-upload">
+                        	<label for="file-input" style="cursor:pointer;">
+	                          <img src="/assets/images/icon_user.png" alt="" class="img__food">
+                        	</label>
+                        	<input id="file-input" type="file" />
+                        </div>
+                    </div>
+                    <!-- Fullname -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Họ và tên
+                        	<small
+								ng-show="userForm.fullname.$valid"
+							> 
+								<i class="fas fa-check text-success"></i>
+							</small>
+                        </h6>
+                        <div>
+                          <input 
+                          	  ng-model="fullname"
+                              type="text" 
+                              id="fullname"
+                              name="fullname"
+                              class="w-full form-control"
+                              placeholder="--Vui lòng nhập--"
+                              required
+                          >
+                          <div
+							ng-show="userForm.fullname.$dirty && userForm.fullname.$invalid"
+						  >
+							<small 
+								class="text-danger fst-italic"
+								ng-show="userForm.fullname.$error.required"
+							>Vui lòng không để trống (*)</small>
+						  </div>
+                        </div>
+                    </div>
+                    <!-- Email -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Email
+                        	<small
+								ng-show="userForm.email.$valid"
+							> 
+								<i class="fas fa-check text-success"></i>
+							</small>
+                        </h6>
+                        <div>
+                          <input 
+                          	  ng-model="email"
+                              type="email" 
+                              id="email"
+                              name="email"
+                              class="w-full form-control"
+                              placeholder="--Vui lòng nhập--"
+                              required
+                          >
+                          <div
+							ng-show="userForm.email.$dirty 
+							&& userForm.email.$invalid 
+							&& userForm.email.$error.email"
+						  >
+							<small 
+								class="text-danger fst-italic"
+								ng-show="userForm.email.$error.required"
+							>Vui lòng không để trống (*)</small> 
+							<small 
+								class="text-danger fst-italic"
+								ng-show="userForm.email.$error.email"
+							>Email chưa đúng định dạng (*)</small>
+						  </div>
+                        </div>
+                    </div>
+                    <!-- Gender -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Giới tính </h6>
+                        <div class="d-flex">
+                        	<div class="form-check me-2">
+								<input 
+									class="form-check-input" 
+									type="radio"
+									name="gridRadios" 
+									id="gridRadios1" 
+									value="true" 
+									checked
+								>
+								<label 
+									class="form-check-label" 
+									for="gridRadios1"
+								> Nam </label>
+							 </div> 
+							 <div class="form-check">
+								<input 
+									class="form-check-input" 
+									type="radio"
+									name="gridRadios" 
+									id="gridRadios2" 
+									value="false"
+								> 
+								<label
+									class="form-check-label" 
+									for="gridRadios2"
+								> Nữ </label>
+							 </div>
+                        </div>
+                    </div>
+                    <!-- position -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Chức vụ </h6>
+                        <div>
+                        	<select class="form-select" aria-label="Default select example">
+							  <option selected>--Vui lòng chọn--</option>
+							  <option value="1">One</option>
+							  <option value="2">Two</option>
+							  <option value="3">Three</option>
+							</select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-2">
+						<div class="col-xl-6">
+							<button class="btn btn-outline-danger w-100" data-bs-dismiss="modal">Hủy</button>
+						</div>
+						<div class="col-xl-6">
+							<button ng-disabled="userForm.$invalid" class="btn btn-info w-100">Lưu</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

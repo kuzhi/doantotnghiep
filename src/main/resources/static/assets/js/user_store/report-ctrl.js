@@ -14,7 +14,8 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
                         150, 300, 550, 650, 60, 800, 950,
                         150, 300, 550, 650, 60, 800, 950
                     ],
-                    backgroundColor: "rgba(34, 230, 0, 90)"
+                    color: "#BCFEFE",
+                    backgroundColor: "rgba(34, 230, 0, 90)",
                 },
                 {
                     label: "Bị hủy",
@@ -22,7 +23,8 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
                         8, 35, 40, 60, 70, 55, 75,
                         8, 35, 40, 60, 70, 55, 75
                     ],
-                    backgroundColor: "rgba(255, 21, 48, 100)"
+                    color: "#BCFEFE",
+                    backgroundColor: "rgba(255, 21, 48, 100)",
                 }
             ]
             },
