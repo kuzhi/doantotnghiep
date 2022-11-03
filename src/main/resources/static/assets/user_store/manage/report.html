@@ -2,7 +2,7 @@
      <div class="container-fluid pt-4 px-4">
          <div class="row g-4">
              <div class="col-sm-6 col-xl-3">
-                 <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+                 <div class="bg-second rounded d-flex align-items-center justify-content-between p-4">
                      <i class="fa fa-chart-line fa-3x color-text "></i>
                      <div class="ms-3">
                          <p class="mb-2">Hôm nay</p>
@@ -11,7 +11,7 @@
                  </div>
              </div>
              <div class="col-sm-6 col-xl-3">
-                 <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+                 <div class="bg-second rounded d-flex align-items-center justify-content-between p-4">
                      <i class="fa fa-chart-bar fa-3x color-text  "></i>
                      <div class="ms-3">
                          <p class="mb-2">Tháng 10</p>
@@ -20,7 +20,7 @@
                  </div>
              </div>
              <div class="col-sm-6 col-xl-3">
-                 <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+                 <div class="bg-second rounded d-flex align-items-center justify-content-between p-4">
                      <i class="fa fa-chart-area fa-3x color-text "></i>
                      <div class="ms-3">
                          <p class="mb-2">Hôm nay</p>
@@ -29,7 +29,7 @@
                  </div>
              </div>
              <div class="col-sm-6 col-xl-3">
-                 <div class="bg-white rounded d-flex align-items-center justify-content-between p-4">
+                 <div class="bg-second rounded d-flex align-items-center justify-content-between p-4">
                      <i class="fa fa-chart-pie fa-3x color-text  "></i>
                      <div class="ms-3">
                          <p class="mb-2">Tháng 10</p>
@@ -45,17 +45,17 @@
      <div class="container-fluid pt-4 px-4">
          <div class="row g-4">
              <div class="col-sm-12 col-xl-6">
-                 <div class="bg-white text-center rounded p-4">
+                 <div class="bg-second text-center rounded p-4">
                      <div class="d-flex align-items-center justify-content-between mb-4">
-                         <h6 class="mb-0 text-dark">Thống kê hóa đơn trong năm</h6>
+                         <h6 class="mb-0 color-text">Thống kê hóa đơn trong năm</h6>
                      </div>
                      <canvas id="worldwide-sales"></canvas>
                  </div>
              </div>
              <div class="col-sm-12 col-xl-6">
-                 <div class="bg-white text-center rounded p-4">
+                 <div class="bg-second text-center rounded p-4">
                      <div class="d-flex align-items-center justify-content-between mb-4">
-                         <h6 class="mb-0 text-dark">Thống kê doanh thu trong năm</h6>
+                         <h6 class="mb-0 color-text">Thống kê doanh thu trong năm</h6>
                      </div>
                      <canvas id="salse-revenue"></canvas>
                  </div>
@@ -66,7 +66,7 @@
  
  <!-- Recent Sales Start -->
      <div class="container-fluid pt-4 px-4 mb-3">
-         <div class="bg-white text-center rounded p-4">
+         <div class="bg-second text-center rounded p-4">
              <div class="d-flex align-items-center justify-content-between mb-4">
                  <h6 class="mb-0 color-text">Top 5 món bán chạy nhất</h6>
              </div>
@@ -74,15 +74,15 @@
                  <table 
                  	class="table text-start align-middle table-bordered border-white table-hover mb-0"
                  >
-                     <thead class="text-center" style="background-color: #ff512f !important;">
-                         <tr class="text-white">
+                     <thead class="text-center bg-table">
+                         <tr>
                              <th scope="col">Ảnh</th>
                              <th scope="col">Tên món</th>
                              <th scope="col">Loại món</th>
                              <th scope="col">Giá</th>
                          </tr>
                      </thead>
-                     <tbody class="table table-primary">
+                     <tbody class="table table-body table-bordered border-white">
                          <tr
                          	ng-repeat="p in productArr.product"
                          >
@@ -94,9 +94,9 @@
                                  	style="width: 40px; height: 40px;"
                                  >
                              </td>
-                             <th scope="col">{{p.name}}</th>
-                             <th scope="col">{{p.cate}}</th>
-                             <th scope="col" class="text-end">{{p.price | currency:'':0}} đ</th>
+                             <td scope="col">{{p.name}}</td>
+                             <td scope="col">{{p.cate}}</td>
+                             <td scope="col" class="text-end">{{p.price | currency:'':0}} đ</td>
                          </tr>
                      </tbody>
                  </table>

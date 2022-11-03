@@ -1,4 +1,4 @@
-<div class="row shadow-sm bg-white rounded p-4 m-4">
+<div class="row shadow-sm bg-second rounded p-4 m-4">
 	<div class="col-xl">
 		<div class="row">
 			<h3 class="text-dark">Chỉnh sửa trang cá nhân</h3>
@@ -41,7 +41,7 @@
 				  	ng-model="fullname"
 				  	name="fullname" 
 				  	class="form-control" 
-				  	placeholder="Nhập họ và tên*"
+				  	placeholder="--Vui lòng nhập--"
 				  	required
 				  >
 				  <div
@@ -71,7 +71,7 @@
 					name="email" 
 					type="email"
 					class="w-100 form-control" 
-					placeholder="Nhập email*" 
+					placeholder="--Vui lòng nhập--" 
 					required
 				  >
 				  <div
@@ -143,7 +143,7 @@
 					</small>
 				  </label>
 				  
-				  <input class="w-100 form-control" type="date">
+				  <input class="w-100 form-control" type="text" placeholder="--Vui lòng chọn--" onfocus="(this.type = 'date')" >
 				</div>
 			</div>
 		</form>
@@ -152,7 +152,7 @@
 			<div class="col-xl-2">
 				<button 
 					ng-click="update()"
-					class="btn btn-primary w-100"
+					class="btn btn-info w-100"
 				>Lưu thay đổi</button>
 			</div>
 		</div>

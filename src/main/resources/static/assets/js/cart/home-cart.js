@@ -311,36 +311,6 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 	
 	// Profile
-	$scope.showI = true
-	$scope.showA = false
-	$scope.showO = false
-	$scope.showV = false
-	
-	$scope.showInfo = function() {
-		$scope.showI = true
-		$scope.showA = false
-		$scope.showO = false
-		$scope.showV = false
-	}
-	$scope.showAddress = function() {
-		$scope.showI = false
-		$scope.showA = true
-		$scope.showO = false
-		$scope.showV = false
-	}
-	$scope.showOrder = function() {
-		$scope.showI = false
-		$scope.showA = false
-		$scope.showO = true
-		$scope.showV = false
-	}
-	$scope.showVoucher = function() {
-		$scope.showI = false
-		$scope.showA = false
-		$scope.showO = false
-		$scope.showV = true
-	}
-	
 	//Info
 	$scope.updatePhone = function() {
 		Swal.fire({
@@ -530,31 +500,10 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$scope.showBtnSave = false
 	}
 
-	
+	$scope.order = [];
 	// Order manager
-	$scope.statusArr = {
-		statusOrder: [
-			{
-				id: 1,
-				name: 'Đang xử lý'
-			},
-			{
-				id: 2,
-				name: 'Đang giao'
-			},
-			{
-				id: 3,
-				name: 'Giao hàng thành công'
-			},
-			{
-				id: 4,
-				name: 'Đã hủy'
-			}
-		]
-	}
-	
-	$scope.order = {
-		myOrder: [
+	$scope.all = function() {
+		$scope.order = [
 			{
 				id: 'DH100001',
 				quantily: 1,
@@ -587,27 +536,63 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				status: 4,
 				ship: 0
 			},
-		],
-		
-		
+		]
 	}
-	$scope.arr = []
-	$scope.check = 1;
-	$scope.selected = function(key) {
-		if(key == 1){
-			console.log('Đang xử ý')
-		}else if(key == 2){
-			console.log('Đang giao')
-		}else if(key == 3) {
-			console.log('Giao hàng thành công')
-		}else {
-			console.log('Đã hủy')
-		}
-	}
-	$scope.all = function() {
-		$scope.arr = $scope.order.myOrder;
-	}
-	$scope.all();
 	
+	$scope.loading = function() {
+		$scope.order = [
+			{
+				id: 'DH100001',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 1,
+				ship: 0
+			},
+		]
+	}
+
+	$scope.shipping = function() {
+		$scope.order = [
+			{
+				id: 'DH100002',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 2,
+				ship: 0
+			},
+		]
+	}
+
+	$scope.completed = function() {
+		$scope.order = [
+			{
+				id: 'DH100003',
+				quantily: 1,
+				price: 150000000000000,
+				sales: 10,
+				status: 3,
+				ship: 30000
+			},
+		]
+	}
+
+	$scope.canceled = function() {
+		$scope.order = [
+			{
+				id: 'DH100004',
+				quantily: 1,
+				price: 15000000,
+				sales: 10,
+				status: 4,
+				ship: 0
+			},
+		]
+	}
+	
+	
+	
+	$scope.all();
 
 })
