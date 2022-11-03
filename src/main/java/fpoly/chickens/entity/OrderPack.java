@@ -12,10 +12,9 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -44,55 +43,6 @@ public class OrderPack {
 	@Column(name = "Status")
 	private Boolean Status;
 
-	public Integer getId() {
-		return Id;
-	}
-
-	public void setId(Integer id) {
-		Id = id;
-	}
-
-	public Store getStore() {
-		return store;
-	}
-
-	public void setStore(Store store) {
-		this.store = store;
-	}
-
-	public Pack getPack() {
-		return pack;
-	}
-
-	public void setPack(Pack pack) {
-		this.pack = pack;
-	}
-
-	public Date getCreate_at() {
-		return Create_at;
-	}
-
-	public void setCreate_at(Date create_at) {
-		Create_at = create_at;
-	}
-
-	public Date getUpdate_at() {
-		return Update_at;
-	}
-
-	public void setUpdate_at(Date update_at) {
-		Update_at = update_at;
-	}
-
-	public Boolean getStatus() {
-		return Status;
-	}
-
-	public void setStatus(Boolean status) {
-		Status = status;
-	}
-
-	
 	
 	
 }

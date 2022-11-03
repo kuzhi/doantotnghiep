@@ -17,7 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -47,55 +47,6 @@ public class UserRoleApp implements Serializable {
 	@Column(name = "Update_at")
 	private Date Update_at;
 
-	public Integer getId() {
-		return Id;
-	}
 
-	public void setId(Integer id) {
-		Id = id;
-	}
-
-	public UserApp getUserapp() {
-		return userapp;
-	}
-
-	public void setUserapp(UserApp userapp) {
-		this.userapp = userapp;
-	}
-
-	public RoleApp getRoleapp() {
-		return roleapp;
-	}
-
-	public void setRoleapp(RoleApp roleapp) {
-		this.roleapp = roleapp;
-	}
-
-	public String getPermission() {
-		return Permission;
-	}
-
-	public void setPermission(String permission) {
-		Permission = permission;
-	}
-
-	public Date getCreate_at() {
-		return Create_at;
-	}
-
-	public void setCreate_at(Date create_at) {
-		Create_at = create_at;
-	}
-
-	public Date getUpdate_at() {
-		return Update_at;
-	}
-
-	public void setUpdate_at(Date update_at) {
-		Update_at = update_at;
-	}
-	
-	
-	
 
 }

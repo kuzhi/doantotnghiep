@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -65,110 +66,6 @@ public class Order {
 	@Column(name = "Deleted")
 	private Boolean Deleted;
 
-	public String getId() {
-		return Id;
-	}
-
-	public void setId(String id) {
-		Id = id;
-	}
-
-	public String getOrdercode() {
-		return Ordercode;
-	}
-
-	public void setOrdercode(String ordercode) {
-		Ordercode = ordercode;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Integer getStatus() {
-		return Status;
-	}
-
-	public void setStatus(Integer status) {
-		Status = status;
-	}
-
-	public String getFullname() {
-		return Fullname;
-	}
-
-	public void setFullname(String fullname) {
-		Fullname = fullname;
-	}
-
-	public String getAddress() {
-		return Address;
-	}
-
-	public void setAddress(String address) {
-		Address = address;
-	}
-
-	public String getPhone() {
-		return Phone;
-	}
-
-	public void setPhone(String phone) {
-		Phone = phone;
-	}
-
-	public Integer getTotalMoney() {
-		return TotalMoney;
-	}
-
-	public void setTotalMoney(Integer totalMoney) {
-		TotalMoney = totalMoney;
-	}
-
-	public PaymentType getPaymentType() {
-		return paymentType;
-	}
-
-	public void setPaymentType(PaymentType paymentType) {
-		this.paymentType = paymentType;
-	}
-
-	public ShippingType getShippingType() {
-		return shippingType;
-	}
-
-	public void setShippingType(ShippingType shippingType) {
-		this.shippingType = shippingType;
-	}
-
-	public Date getCreate_at() {
-		return Create_at;
-	}
-
-	public void setCreate_at(Date create_at) {
-		Create_at = create_at;
-	}
-
-	public Date getUpdate_at() {
-		return Update_at;
-	}
-
-	public void setUpdate_at(Date update_at) {
-		Update_at = update_at;
-	}
-
-	public Boolean getDeleted() {
-		return Deleted;
-	}
-
-	public void setDeleted(Boolean deleted) {
-		Deleted = deleted;
-	}
-	
 	
 
 }
