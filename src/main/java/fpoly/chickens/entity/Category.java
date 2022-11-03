@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,5 +43,8 @@ public class Category {
 	
 	@Column(name = "Update_at")
 	private Date Update_at;
+
+	
+	
 
 }

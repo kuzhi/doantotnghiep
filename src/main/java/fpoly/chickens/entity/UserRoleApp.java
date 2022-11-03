@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -48,6 +46,7 @@ public class UserRoleApp implements Serializable {
 	
 	@Column(name = "Update_at")
 	private Date Update_at;
-	
+
+
 
 }

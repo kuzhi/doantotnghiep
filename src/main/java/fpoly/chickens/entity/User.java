@@ -7,19 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -45,6 +38,9 @@ public class User {
 	@Column(name = "Email")
 	private String Email;
 	
+	@Column(name = "Phone")
+	private String Phone;
+	
 	@Column(name = "Photo")
 	private String Photo;
 
@@ -54,8 +50,6 @@ public class User {
 	@Column(name = "Status")
 	private Boolean Status;
 
-	@Column(name = "Citizenidentitycard")
-	private String Citizenidentitycard;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
@@ -65,4 +59,7 @@ public class User {
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+
+	
 }

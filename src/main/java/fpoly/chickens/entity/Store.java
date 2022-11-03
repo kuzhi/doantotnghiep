@@ -18,8 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -58,5 +56,7 @@ public class Store {
 	
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+	
 
 }

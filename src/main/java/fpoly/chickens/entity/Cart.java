@@ -13,13 +13,10 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -35,15 +32,19 @@ public class Cart {
 	User user;
 
 	@ManyToOne
+	@JoinColumn(name = "Storeid")
+	Store store;
+
+	@ManyToOne
 	@JoinColumn(name = "Productid")
 	Product product;
-	
+
 	@Column(name = "Amount")
 	private Integer Amount;
-	
+
 	@Column(name = "Create_at")
-	private Date Create_at;
-	
+	private Date Create_at = new Date();
+
 	@Column(name = "Update_at")
 	private Date Update_at;
 

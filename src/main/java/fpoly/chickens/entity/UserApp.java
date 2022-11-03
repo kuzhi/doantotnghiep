@@ -11,13 +11,9 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -47,8 +43,8 @@ public class UserApp implements Serializable {
 	@Column(name = "Birthday")
 	private Date Birthday;
 	
-	@Column(name = "Citizenidentitycard")
-	private String Citizenidentitycard;
+	@Column(name = "Phone")
+	private String Phone;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
@@ -59,4 +55,7 @@ public class UserApp implements Serializable {
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+
+	
 }

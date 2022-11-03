@@ -16,8 +16,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -52,8 +50,8 @@ public class UserStore {
 	@Column(name = "Status")
 	private Boolean Status;
 
-	@Column(name = "Citizenidentitycard")
-	private String Citizenidentitycard;
+	@Column(name = "Phone")
+	private String Phone;
 	
 	@Column(name = "Create_at")
 	private Date Create_at;
@@ -63,4 +61,6 @@ public class UserStore {
 
 	@Column(name = "Deleted")
 	private Boolean Deleted;
+
+	
 }
