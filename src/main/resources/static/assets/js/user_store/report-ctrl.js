@@ -59,43 +59,24 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
     });
     
     //List top 5
-    $scope.productArr = {
-		product: [
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp3',
-				name: 'Hamberger',
-				img: 'sp4.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-		]
+    $scope.items=[];
+    $scope.report = function() {
+		$http.get("/api/report-overview-app").then(resp => {
+			$scope.items = resp.data
+			console.log('data: ', $scope.items)
+		});
 	}
+	
+	$scope.pager = {
+		page: 0,
+		size: 5,
+		get items() {
+			var start = this.page * this.size;
+			
+			return $scope.items.slice(start, start + this.size);
+			
+		}
+	}
+	
+	$scope.report();
 })
