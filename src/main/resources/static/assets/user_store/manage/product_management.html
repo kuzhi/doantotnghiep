@@ -26,9 +26,7 @@
 					<button 
 						ng-click="insert()"
 						class="btn btn-info me-2"
-						data-bs-toggle="modal" 
-						data-bs-target="#editModal"
-						data-bs-whatever="add"
+						data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="add"
 					>
 						<i class="fas fa-plus-circle"></i>
 						Thêm món mới
@@ -51,36 +49,34 @@
 			             <tr>
 			                 <th scope="col">Mã món</th>
 			                 <th scope="col">Tên món</th>
-			                 <th scope="col">Đơn vị</th>
 			                 <th scope="col">Loại món</th>
 			                 <th scope="col">Giá</th>
+			                 <th scope="col">Trạng thái</th>
 			                 <th scope="col"></th>
 			             </tr>
 			         </thead>
 			         <tbody class="table table-info">
 			             <tr
-			             	ng-repeat="p in list.product"
+			             	ng-repeat="product in pager.products"
 			             >
 			                 <td scope="col">
-			                     {{p.id}}
+			                     SP{{product.id}}
 			                 </td>
-			                 <td scope="col">{{p.name}}</td>
-			                 <td scope="col">{{p.donVi}}</td>                             
-			                 <td scope="col">{{p.cate}}</td>
-			                 <td scope="col" class="text-end">{{p.price | currency:'':0}} đ</td>
+			                 <td scope="col">{{product.name}}</td>
+			                 <td scope="col">{{product.category.name}}</td>
+			                 <td scope="col" class="text-end">{{product.price | currency:'':0}} đ</td>
+			                 <td scope="col">{{product.status == true ? 'Đang bán' : 'Hết hàng'}}</td>                             
 			                 <td class="text-center align-middle">
-				<button 
-					ng-click="edit()" 
-					class="text-warning border-0"
-					data-bs-toggle="modal"
-					data-bs-target="#editModal" 
-					data-bs-whatever="edit"
-				> <i class="fas fa-edit"></i> </button>
-				<button 
-					ng-click="deleteP()"
-					class="text-danger border-0"
-				> <i class="fas fa-ban"></i> </button>
-			</td>
+								<button 
+									ng-click="edit(product)" 
+									class="text-warning border-0"
+									data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="edit"
+								> <i class="fas fa-edit"></i> </button>
+								<button 
+									ng-click="deleteP()"
+									class="text-danger border-0"
+								> <i class="fas fa-ban"></i> </button>
+							</td>
 			             </tr>
 			         </tbody>
 			     </table>
@@ -92,20 +88,32 @@
 		<div class="col-xl text-end">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-end">
-					<li class="page-item disabled">
-						<a class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
+					<li class="page-item">
+						<a 
+							ng-click="pager.first()" 
+							class="page-link text-dark"
+						> <i class="fas fa-step-backward"></i> </a>
 					</li>
 					<li class="page-item">
-						<a class="page-link text-dark" href="#"> <i class="fas fa-backward"></i> </a>
+						<a 
+							ng-click="pager.prev()" 
+							class="page-link text-dark"
+						> <i class="fas fa-backward"></i> </a>
 					</li>
 					<li class="page-item">
-						<span class="page-link bg-white">1</span>
+						<span class="page-link bg-white">{{pager.page + 1}}</span>
 					</li>
 					<li class="page-item">
-						<a class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
+						<a 
+							ng-click="pager.next()" 
+							class="page-link text-dark"
+						> <i class="fas fa-forward"></i> </a>
 					</li>
 					<li class="page-item">
-						<a class="page-link text-dark" href="#"> <i class="fas fa-step-forward"></i> </a>
+						<a 
+							ng-click="pager.last()" 
+							class="page-link text-dark"
+						> <i class="fas fa-step-forward"></i> </a>
 					</li>
 				</ul>
 			</nav>
@@ -142,31 +150,24 @@
                         >Hình ảnh</h6>
                         <div class="image-upload">
                         	<label for="file-input" style="cursor:pointer;">
-	                          <img src="/assets/images/icon_food.png" alt="" class="img__food">
+	                          <img 
+	                          	ng-src="{{'/assets/images/Products/' + formProduct.image}}" 
+	                          	alt="{{formProduct.image}}" class="img__food"
+	                          >
                         	</label>
-                        	<input id="file-input" type="file" />
+                        	<input id="file-input" type="file" 
+                        		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
                         </div>
                     </div>
                     <!-- Id -->
 					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Mã món
-                        	<small
-								ng-show="productForm.id.$valid"
-							> 
-								<i class="fas fa-check text-success"></i>
-							</small>
-                        </h6>
+                        <h6 class="text-secondary" >Mã món</h6>
                         <div>
                           <input 
-                          	  ng-model="id"
-                              type="text" 
-                              id="id"
-                              name="id"
+                          	  ng-model="formProduct.id"
+                              type="text" id="id" name="id"
                               class="w-full form-control"
-                              placeholder="--Vui lòng nhập--"
-                              required
+                              placeholder="--Vui lòng nhập--" required
                           >
                           <div
 							ng-show="productForm.id.$dirty && productForm.id.$invalid"
@@ -180,24 +181,13 @@
                     </div>
                     <!-- Name -->
 					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Tên món
-                        	<small
-								ng-show="productForm.name.$valid"
-							> 
-								<i class="fas fa-check text-success"></i>
-							</small>
-                        </h6>
+                        <h6 class="text-secondary" >Tên món</h6>
                         <div>
                           <input 
-                          	  ng-model="name"
-                              type="text" 
-                              id="name"
-                              name="name"
+                          	  ng-model="formProduct.name"
+                              type="text" id="name" name="name"
                               class="w-full form-control"
-                              placeholder="--Vui lòng nhập--"
-                              required
+                              placeholder="--Vui lòng nhập--" required
                           >
                           <div
 							ng-show="productForm.name.$dirty && productForm.name.$invalid"
@@ -211,16 +201,29 @@
                     </div>
                     <!-- Unit -->
 					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Đơn vị </h6>
-                        <div>
-                        	<select class="form-select" aria-label="Default select example">
-							  <option selected>--Vui lòng chọn--</option>
-							  <option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
-							</select>
+                        <h6 class="text-secondary">Trạng thái </h6>
+                        <div class="d-flex">
+                        	<div class="form-check me-2">
+								<input 
+									class="form-check-input" 
+									type="radio" name="gridRadios" id="gridRadios1" 
+									ng-model="formProduct.status" ng-value="true"
+								>
+								<label class="form-check-label" for="gridRadios1"
+								> Đang bán </label>
+							 </div> 
+							 <div class="form-check">
+								<input 
+									class="form-check-input" 
+									type="radio" name="gridRadios" 
+									id="gridRadios2" 
+									ng-model="formProduct.status" ng-value="false"
+								> 
+								<label
+									class="form-check-label" 
+									for="gridRadios2"
+								> Hết hàng </label>
+							 </div>
                         </div>
                     </div>
                     <!-- Cate -->
@@ -233,48 +236,34 @@
                         		<select class="form-select" aria-label="Default select example">
 								  <option selected>--Vui lòng chọn--</option>
 								  <option 
-								  	ng-repeat="(id,c) in list.cate"
-								  	value="{{c.id}}"
-								  >{{c.name}}</option>
+								  	ng-repeat="(key, value) in categorys"
+								  	ng-model="formProduct.category"
+								  	ng-selected="value.id == formProduct.category.id"
+								  	ng-value="{{value.Id}}"
+								  >{{value.name}}</option>
 								</select>
                         	</div>
 							
 							<div class="col-xl-1">
 								<a 
-									ng-click="insertCate()"
 									class="btn"
-									data-bs-toggle="modal" 
-									data-bs-target="#addCateModal"
-									data-bs-whatever="addCate"
-									 data-bs-dismiss="modal"
-								>
-									<i class="fas fa-plus-circle"></i>
-								</a>
+									ng-click="insertCate()"
+									data-bs-toggle="modal" data-bs-target="#addCateModal"
+									data-bs-whatever="addCate" data-bs-dismiss="modal"
+								> <i class="fas fa-plus-circle"></i> </a>
 							</div>
                         </div>
                     </div>
                     <!-- Price -->
 					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Giá (VND)
-                        	<small
-								ng-show="productForm.price.$valid"
-							> 
-								<i class="fas fa-check text-success"></i>
-							</small>
-                        </h6>
+                        <h6 class="text-secondary" >Giá (VND)</h6>
                         <div>
                           <input 
-                          	  ng-model="price"
-                              type="number" 
-                              id="price"
-                              name="price"
-                              min="1" 
-                              max="9999999999"
+                          	  ng-model="formProduct.price"
+                              type="number" id="price" name="price"
+                              min="1" max="9999999999"
                               class="w-full form-control"
-                              placeholder="--Vui lòng nhập--"
-                              required
+                              placeholder="--Vui lòng nhập--" required
                           >
                           <div
 							ng-show="productForm.price.$dirty && productForm.price.$invalid"
@@ -290,79 +279,47 @@
 						  </div>
                         </div>
                     </div>
-                    <!-- Discount -->
+                    <!-- describe -->
 					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Giảm giá (%)
-                        	<small
-								ng-show="productForm.discount.$valid"
-							> 
-								<i class="fas fa-check text-success"></i>
-							</small>
-                        </h6>
+                        <h6 class="text-secondary" >Mô tả</h6>
                         <div>
-                          <input 
-                          	  ng-model="discount"
-                              type="number" 
-                              id="discount"
-                              name="discount"
-                              min="0" 
-                              max="100"
+                          <textarea 
+                          	  ng-model="formProduct.description"
+                              id="description" name="description" rows="4"
                               class="w-full form-control"
-                              placeholder="--Vui lòng nhập--"
-                              required
-                          >
+                              placeholder="--Vui lòng nhập--" required></textarea>
                           <div
-							ng-show="productForm.discount.$dirty && productForm.discount.$invalid"
+							ng-show="productForm.description.$dirty && productForm.description.$invalid"
 						  >
 							<small 
 								class="text-danger fst-italic"
-								ng-show="productForm.discount.$error.required"
+								ng-show="productForm.description.$error.required"
 							>Vui lòng không để trống (*)</small>
-							<small
-								class="text-danger fst-italic error"
-								ng-show="productForm.discount.$invalid"
-							>Phần trăm giảm giá không phù hợp (*)</small>
 						  </div>
                         </div>
                     </div>
-                    <!-- describe -->
-					<div class="row mt-1">
-                        <h6 
-                            class="text-secondary"
-                        >Mô tả
-                        	<small
-								ng-show="productForm.describe.$valid"
-							> 
-								<i class="fas fa-check text-success"></i>
-							</small>
-                        </h6>
-                        <div>
-                          <textarea 
-                          	  ng-model="describe"
-                              id="describe"
-                              name="describe"
-                              rows="4"
-                              class="w-full form-control"
-                              placeholder="--Vui lòng nhập--"
-                              required
-                          ></textarea>
-                          <div
-							ng-show="productForm.describe.$dirty && productForm.describe.$invalid"
-						  >
-							<small 
-								class="text-danger fst-italic"
-								ng-show="productForm.describe.$error.required"
-							>Vui lòng không để trống (*)</small>
-						  </div>
-                        </div>
+                    <!-- Create_at -->
+                    <div class="row mt-1">
+                        <label	
+                        	ng-if="formProduct.create_at != null"
+                        	class="text-secondary">
+                        	<b>Ngày tạo:</b> {{formProduct.create_at | date: 'dd-MM-yyyy'}}
+                        </label>
+                        <label 
+                        	ng-if="formProduct.update_at != null"
+                        	class="text-secondary">
+                        	<b>Thay đổi gần nhất:</b> {{formProduct.update_at | date: 'dd-MM-yyyy'}}
+                        </label>
                     </div>
 				</form>
 				
-				<div class="row mt-2">
+				<div class="row mt-3">
 					<div class="col-xl-6">
-						<button class="btn btn-outline-danger w-100" data-bs-dismiss="modal">Hủy</button>
+						<button 
+							ng-click="reset()"
+							class="btn btn-outline-danger w-100" 
+							data-bs-dismiss="modal"
+						>Hủy</button>
 					</div>
 					<div class="col-xl-6">
 						<button ng-disabled="productForm.$invalid" class="btn btn-info w-100">Lưu</button>

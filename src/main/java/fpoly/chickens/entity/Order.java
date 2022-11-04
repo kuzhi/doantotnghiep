@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,9 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Data
@@ -26,10 +26,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "Order")
+
 public class Order implements Serializable{
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String Id;
 	
 	@Column(name = "Ordercode")
@@ -38,6 +45,10 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="Userid")
 	User user;
+	
+	@ManyToOne
+	@JoinColumn(name="Storeid")
+	Store store;
 	
 	@Column(name = "Status")
 	private Integer Status;
@@ -76,5 +87,4 @@ public class Order implements Serializable{
 	@ToString.Exclude
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetail;
-	
 }

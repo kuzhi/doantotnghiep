@@ -59,6 +59,9 @@ public class Product implements Serializable {
 	@Column(name = "Update_at")
 	private Date Update_at;
 
+	@Column(name = "Status")
+	private Boolean Status = true;
+
 	@JsonIgnore
 	@ToString.Exclude
 	@OneToMany(mappedBy = "product")
