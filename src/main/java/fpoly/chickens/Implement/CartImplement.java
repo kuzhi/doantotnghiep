@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,40 @@ public class CartImplement implements CartService {
 		Cart cart = mapper.convertValue(cartData, Cart.class);
 		Cart cartExist = cartDao.checkProductInCart(cart.getUser(), cart.getProduct());
 		if (cartExist != null) {
-			cartExist.setAmount(cartExist.getAmount()+1);
+			cartExist.setAmount(cartExist.getAmount() + 1);
 			cartDao.saveAndFlush(cartExist);
 		} else {
 			cartDao.saveAndFlush(cart);
 		}
+	}
+
+	@Override
+	public void update(JsonNode cartData) {
+		ObjectMapper mapper = new ObjectMapper();
+		Cart cart = mapper.convertValue(cartData, Cart.class);
+
+		if (cartDao.existsById(cart.getId())) {
+			Cart cartUpdate = cartDao.findById(cart.getId()).get();
+			cartUpdate.setAmount(cart.getAmount());
+			cartUpdate.setUpdate_at(new Date());
+			cartDao.saveAndFlush(cartUpdate);
+		}
+	}
+
+	@Override
+	public void delete(Integer id) {
+		if (cartDao.existsById(id)) {
+			Cart cart = cartDao.findById(id).get();
+			cartDao.delete(cart);
+		}
+	}
+
+	@Override
+	public void deleteAll(Integer storeid, Integer userid) {
+		Store store = storeDao.findById(storeid).get();
+		User user = userDao.findById(userid).get();
+		cartDao.DeleteAll(store, user);
 
 	}
+
 }

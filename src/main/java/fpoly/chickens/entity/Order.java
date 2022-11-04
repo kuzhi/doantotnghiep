@@ -1,13 +1,19 @@
 package fpoly.chickens.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +27,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "Order")
 public class Order {
-
+	
 	@Id
 	@Column(name = "Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String Id;
 	
 	@Column(name = "Ordercode")
@@ -32,6 +39,10 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name="Userid")
 	User user;
+	
+	@ManyToOne
+	@JoinColumn(name="Storeid")
+	Store store;
 	
 	@Column(name = "Status")
 	private Integer Status;
@@ -66,6 +77,8 @@ public class Order {
 	@Column(name = "Deleted")
 	private Boolean Deleted;
 
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "order")
+	List<OrderDetail> orderDetail;
 
 }
