@@ -16,32 +16,8 @@
 		</div>
 		<div class="row px-2">
 			<div class="col-xl-8">
-				<div class="row rounded p-3">
-				  <div class="col-xl-4 col-12">
-					<h6 class="mb-0">Thông tin nhận hàng</h6>
-					<span> <b>Nguyễn Văn A</b> - 0942.xxx.xxx</span>
-				  </div>
-				  
-				  <div class="col-xl-8 col-12 text-end mt-2">
-				  	<a
-				  		th:href="@{/home/client/my-profile}"
-				  		class="text-secondary text-decoration-none"
-				  	>
-				  		<small> <i class="fas fa-edit"></i> </small>
-				  	</a>
-				  	<div class="vr"></div>
-				  	<a 
-				  		th:href="@{/home/client}"
-				  		class="text-secondary text-decoration-none"
-				  	>
-				  		<small>Lựa chọn khác</small>
-				  	</a>
-				  	
-				  	<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
-				  		305e, đường Nguyễn Văn Linh, phường An Khánh, quận Ninh Kiều, Cần Thơ
-				  	</p>
-				  </div>
-
+				<div class="row">
+					<h5 class="m-0 p-0">Thông tin đơn hàng</h5>
 				</div>
 				
 				<div 
@@ -141,25 +117,18 @@
 						</div>
 					</div>
 					<hr>
-					<div class="text-start mb-1">
-						<i class="fa-solid fa-money-bill-wave text-warning"></i>
-						<small>Mã giảm giá</small>
+					
+					<div class="row">
+						<h6 class="text-start"> Thông tin nhận hàng </h6>
+						<div class="mb-3 text-start">
+						  <small class="form-label">Tên người nhận:</small>
+						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
+						  <small class="form-label">Số điện thoại:</small>
+						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
+						  <small class="form-label">Địa chỉ nhận hàng:</small>
+						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
+						</div>
 					</div>
-					<div class="input-group input-group-sm mb-3">
-					  <button class="input-group-text" 
-					  	id="inputGroup-sizing-sm"
-					  	style="background: linear-gradient(90deg, #EB3349 0%, #F45C43 100%);
-					  		color: #fff"
-					  >
-					  	Áp dụng
-					  </button>
-					  <input type="text" class="form-control" 
-					    aria-label="Sizing example input" 
-					    aria-describedby="inputGroup-sizing-sm"
-					  	placeholder="Nhập mã giảm giá"
-					  >
-					</div>
-					<hr>
 					<div class="row">
 					    <h6 class="d-flex justify-content-between"
 					    	data-bs-toggle="collapse" 
@@ -192,6 +161,7 @@
 						  </div>
 						</div>
 					</div>	
+					
 					<hr>
 					<button
 					 ng-click="pay()"
