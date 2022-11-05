@@ -169,15 +169,16 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
     //Upload image
     $scope.ImageChanged = function(files){
         var data = new FormData();
-        data.append('file', files[0]);
-        $http.post('/rest/upload/images/Products', data, {
+        data.append('file', files[0]); 
+        $http.post('/api/upload/Products', data, { 
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(resp => {
-            $scope.formProduct.image = resp.data.name;
+			// console.log('data: ', resp.data)
+            $scope.formProduct.image = resp.data.name; 
         }).catch(error => {
             alert("Lỗi tải hình ảnh")
-            console.log('error: ',error)
+            // console.log('error: ', error)
         })
     }
 })
