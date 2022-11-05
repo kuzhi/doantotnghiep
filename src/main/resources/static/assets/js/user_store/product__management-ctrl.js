@@ -94,40 +94,90 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 		})
 	}
 	
-	$scope.list = {
-		product: [
-			{
-				id: '1',
-				name: 'Khoai chiên',
-				price: 15000,
-				donVi: 'Phần',
-				cate: 'KFC'
-			},
-			{
-				id: '2',
-				name: 'Hamberger',
-				price: 15000
-			},
-			{
-				id: '3',
-				name: 'Nước ngọt',
-				price: 15000
-			},
-		],
-		cate: [
-			{
-				id: 1,
-				name: 'KFC'
-			},
-			{
-				id: 2,
-				name: 'Bánh mì'
-			},
-			{
-				id: 3,
-				name: 'Nước ngọt'
-			},
-		]
+	// Load list products
+	$scope.products = [];
+	$scope.categorys = [];
+	$scope.init = function() {
+		$http.get("/api/product/view").then(resp => { 
+            $scope.products = resp.data;
+            
+            $scope.products.forEach(product => { 
+                product.create_at = new Date(product.create_at)
+                product.update_at = new Date(product.update_at)
+            })
+            $scope.formProduct.id = ($scope.products.length+1);
+        });
+        
+        $http.get("/api/category/view").then(resp => { 
+            $scope.categorys = resp.data;
+        });
 	}
 	
+	// Phân trang và điều hướng
+    $scope.pager = {
+        page: 0,
+        size: 10,
+        get products(){
+            var start = this.page * this.size;
+            return $scope.products.slice(start, start + this.size);
+        },
+        get count(){
+            return Math.ceil(1.0 * $scope.products.length / this.size);
+        },
+        first(){
+            this.page = 0;
+        },
+        prev(){
+            this.page--;
+            if(this.page < 0){
+                this.last();
+            }
+        },
+        next(){
+            this.page++;
+            if(this.page >= this.count){
+                this.first();
+            }
+        },
+        last(){
+            this.page = this.count - 1;
+        },
+    }
+	
+	$scope.init();
+	
+	// Edit product
+	$scope.formProduct = {};
+	$scope.edit = function(product){
+        $scope.formProduct = angular.copy(product);
+        // console.log('data: ', $scope.formProduct)
+    }
+    
+    // Reset form product
+    $scope.reset = function(){
+        $scope.formProduct = {
+            create_at: null,
+            update_at: null,
+            image: 'icon_food.png',
+            category: {
+	            id: 1
+	        },
+        };
+    }
+    $scope.reset();
+    
+    //Upload image
+    $scope.ImageChanged = function(files){
+        var data = new FormData();
+        data.append('file', files[0]);
+        $http.post('/rest/upload/images/Products', data, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(resp => {
+            $scope.formProduct.image = resp.data.name;
+        }).catch(error => {
+            alert("Lỗi tải hình ảnh")
+            console.log('error: ',error)
+        })
+    }
 })

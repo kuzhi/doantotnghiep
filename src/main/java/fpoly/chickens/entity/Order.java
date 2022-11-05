@@ -1,5 +1,6 @@
 package fpoly.chickens.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,17 +18,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "Order")
-public class Order {
-	
+
+
+public class Order implements Serializable{
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,7 +85,7 @@ public class Order {
 	private Boolean Deleted;
 
 	@JsonIgnore
+	@ToString.Exclude
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetail;
-
 }
