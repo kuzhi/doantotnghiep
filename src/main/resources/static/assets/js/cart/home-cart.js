@@ -12,85 +12,47 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.titleStore = 'Chickens gang'
 	$scope.favorite = false;
 
-	$scope.arr1 = {
-
-		products: [
-			{
-				id: '01',
-				name: 'Sản phẩm 1',
-
-				price: 100000000000000000000,
-
-				discount: 20,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp1.jpg'
-			},
-			{
-				id: '02',
-				name: 'Sản phẩm 2',
-				price: 50000,
-				discount: 17.5,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp3.jpeg'
-			},
-			{
-				id: '03',
-				name: 'Sản phẩm 3',
-				price: 199000,
-				discount: 27,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp4.jpeg'
-			},
-			{
-				id: '01',
-				name: 'Sản phẩm 1',
-				price: 100000,
-				discount: 20,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp1.jpg'
-			},
-			{
-				id: '02',
-				name: 'Sản phẩm 2',
-				price: 50000,
-				discount: 17.5,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp3.jpeg'
-			},
-			{
-				id: '03',
-				name: 'Sản phẩm 3',
-				price: 199000,
-				discount: 27,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp4.jpeg'
-			},
-			{
-				id: '01',
-				name: 'Sản phẩm 1',
-				price: 100000,
-				discount: 20,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp1.jpg'
-			},
-			{
-				id: '02',
-				name: 'Sản phẩm 2',
-				price: 50000,
-				discount: 17.5,
-				description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
-				amount: 100,
-				image: 'sp3.jpeg'
-			}
-		]
+	// Load list products
+	$scope.url = "/api/product";
+	$scope.products=[];
+	$scope.listProducts = function() {
+		$http.get($scope.url).then(resp => { 
+            $scope.products = resp.data;
+        });
 	}
+	
+	// Phân trang và điều hướng
+    $scope.pager = {
+        page: 0,
+        size: 8,
+        get products(){
+            var start = this.page * this.size;
+            return $scope.products.slice(start, start + this.size);
+        },
+        get count(){
+            return Math.ceil(1.0 * $scope.products.length / this.size);
+        },
+        first(){
+            this.page = 0;
+        },
+        prev(){
+            this.page--;
+            if(this.page < 0){
+                this.last();
+            }
+        },
+        next(){
+            this.page++;
+            if(this.page >= this.count){
+                this.first();
+            }
+        },
+        last(){
+            this.page = this.count - 1;
+        },
+    }
+	
+	$scope.listProducts();
 
 	$scope.cateArr = {
 		cates: [
