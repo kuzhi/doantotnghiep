@@ -45,8 +45,8 @@
 										class="input-group-text bg-white">
 										<i class="fa-solid fa-minus"></i>
 									</button>
-									<input ng-model="p.amount" type="number" class="form-control text-center"
-										ng-change="update(p)">
+									<input ng-model="p.amount" type="number"
+										class="form-control text-center" ng-change="update(p)">
 									<button ng-click="p.amount = p.amount + 1"
 										class="input-group-text bg-white">
 										<i class="fa-solid fa-plus"></i>
@@ -54,8 +54,9 @@
 								</div>
 							</div>
 							<div class="col-xl-9 col-8 text-end">
-								<span ng-click="delete(p.id)" class="text-danger" style="cursor: pointer;">
-									<i class="fa-solid fa-trash-can"></i>
+								<span ng-click="delete(p.id)" class="text-danger"
+									style="cursor: pointer;"> <i
+									class="fa-solid fa-trash-can"></i>
 								</span>
 							</div>
 						</div>
@@ -71,12 +72,15 @@
 						<h6 class="text-start">Thông tin nhận hàng</h6>
 						<div class="mb-3 text-start">
 							<small class="form-label">Tên người nhận:</small> <input
-								type="text" class="form-control form-control-sm"
-								placeholder="--Vui lòng nhập--"> <small
-								class="form-label">Số điện thoại:</small> <input type="text"
+								ng-model="order.fullname" type="text"
 								class="form-control form-control-sm"
 								placeholder="--Vui lòng nhập--"> <small
-								class="form-label">Địa chỉ nhận hàng:</small> <input type="text"
+								class="form-label">Số điện thoại:</small> <input
+								ng-model="order.phone" type="text"
+								class="form-control form-control-sm"
+								placeholder="--Vui lòng nhập--"> <small
+								class="form-label">Địa chỉ nhận hàng:</small> <input
+								ng-model="order.address" type="text"
 								class="form-control form-control-sm"
 								placeholder="--Vui lòng nhập--">
 						</div>
@@ -89,11 +93,12 @@
 							Phương thức thanh toán <i class="fa-solid fa-sort-down"></i>
 						</h6>
 						<div class="collapse show" id="collapsePayment">
-						
+
 							<div ng-repeat="pay in payment" class="form-check text-start">
-								<input class="form-check-input" type="radio" value="pa.id"
-									name="payment" id="payment" checked> <label
-									class="form-check-label" for="payment"> {{pay.paymentName}} </label>
+								<input class="form-check-input" type="radio"
+									ng-model="order.paymentType" ng-value="pay" name="payment"
+									id="payment" checked> <label class="form-check-label"
+									for="payment"> {{pay.paymentName}} </label>
 							</div>
 						</div>
 					</div>
@@ -106,11 +111,12 @@
 							Hình thức nhận hàng <i class="fa-solid fa-sort-down"></i>
 						</h6>
 						<div class="collapse show" id="collapseShip">
-						
-							<div ng-repeat= "s in ship" class="form-check text-start">
-								<input class="form-check-input" type="radio" value="s.id"
-									name="shipping" id="s.id" checked> <label
-									class="form-check-label" for="ship"> {{s.shippingName}} </label>
+
+							<div ng-repeat="s in ship" class="form-check text-start">
+								<input class="form-check-input" type="radio"
+									ng-model="order.shippingType" ng-value="s" name="shipping"
+									id="s.id" checked> <label class="form-check-label"
+									for="ship"> {{s.shippingName}} </label>
 							</div>
 						</div>
 					</div>
@@ -127,51 +133,8 @@
 					</div>
 
 					<hr>
-					
-					<div class="row">
-						<h6 class="text-start"> Thông tin nhận hàng </h6>
-						<div class="mb-3 text-start">
-						  <small class="form-label">Tên người nhận:</small>
-						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
-						  <small class="form-label">Số điện thoại:</small>
-						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
-						  <small class="form-label">Địa chỉ nhận hàng:</small>
-						  <input type="text" class="form-control form-control-sm" placeholder="--Vui lòng nhập--">
-						</div>
-					</div>
-					<div class="row">
-					    <h6 class="d-flex justify-content-between"
-					    	data-bs-toggle="collapse" 
-					    	data-bs-target="#collapseBussiness" 
-					    	aria-expanded="false" 
-					    	aria-controls="collapseExample"
-					    	style="cursor: pointer;"
-					    >
-					      Phương thức thanh toán
-					      <i class="fa-solid fa-sort-down"></i>
-					    </h6>
-						<div class="collapse show" id="collapseBussiness">
 
-						  <div class="form-check text-start" >
-							  <input class="form-check-input" 
-								  type="radio" value="true" 
-								  name="bussiness" id="bussiness" checked>
-							  <label class="form-check-label" for="bussiness">
-							    Thanh toán bằng tiền mặt
-							  </label>
-						  </div>
-						  
-						  <div class="form-check text-start" >
-							  <input class="form-check-input" 
-								  type="radio" value="false" 
-								  name="bussiness" id="bussiness">
-							  <label class="form-check-label" for="bussiness">
-							    Thanh toán bằng thẻ ngân hàng
-							  </label>
-						  </div>
-						</div>
-					</div>	
-					<hr>
+
 					<button ng-click="pay()" class="btn btn-primary w-100 fw-bold">
 						Đặt ngay</button>
 				</div>
