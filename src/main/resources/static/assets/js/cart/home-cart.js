@@ -14,44 +14,44 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	// Load list products
 	$scope.url = "/api/product";
-	$scope.products=[];
+	$scope.products = [];
 	$scope.listProducts = function() {
-		$http.get($scope.url).then(resp => { 
-            $scope.products = resp.data;
-        });
+		$http.get($scope.url).then(resp => {
+			$scope.products = resp.data;
+		});
 	}
-	
+
 	// Phân trang và điều hướng
-    $scope.pager = {
-        page: 0,
-        size: 8,
-        get products(){
-            var start = this.page * this.size;
-            return $scope.products.slice(start, start + this.size);
-        },
-        get count(){
-            return Math.ceil(1.0 * $scope.products.length / this.size);
-        },
-        first(){
-            this.page = 0;
-        },
-        prev(){
-            this.page--;
-            if(this.page < 0){
-                this.last();
-            }
-        },
-        next(){
-            this.page++;
-            if(this.page >= this.count){
-                this.first();
-            }
-        },
-        last(){
-            this.page = this.count - 1;
-        },
-    }
-	
+	$scope.pager = {
+		page: 0,
+		size: 8,
+		get products() {
+			var start = this.page * this.size;
+			return $scope.products.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.products.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		},
+	}
+
 	$scope.listProducts();
 
 	$scope.cateArr = {
@@ -177,8 +177,15 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			.reduce((total, item) => total += item, 0);
 	}
 
-	$scope.add = function(cart) {
+	$scope.add = function(pd) {
+		var cart = {
+			user: { id: $scope.userid },
+			store: { id: $scope.storeid },
+			product: pd,
+			amount: 1
+		}
 		$http.post("/api/cart/add", cart).then(resp => {
+			location.href("/home/cart/view");
 			$scope.loadCart($scope.storeid, $scope.userid)
 		});
 	}
@@ -191,6 +198,12 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			$scope.delete(cart.id)
 		}
 
+	}
+
+	$scope.deleteall = function() {
+		$http.delete("/api/cart/deleteall/" + $scope.storeid + "/" + $scope.userid).then(resp => {
+
+		})
 	}
 
 	$scope.delete = function(id) {
@@ -254,6 +267,28 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.loadPayment()
 	//OrderControl
 
+	$scope.order = {
+		user: { id: $scope.userid },
+		store: { id: $scope.storeid },
+		status: 1,
+		fullname: "",
+		address: "",
+		phone: "",
+		paymentType: {},
+		shippingType: {},
+		create_at: new Date(),
+		update_at: null,
+		deleted: false,
+		get orderDetail() {
+			return $scope.items.map(item => {//lệnh này thì lấy cái đống dữ liệu trong mảng item để mình tạo ra cái list chi tiết đơn hàng
+				return {
+					product: item.product,
+					amount: item.amount
+				}
+			})
+		}
+	}
+
 	$scope.pay = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
@@ -272,39 +307,29 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			reverseButtons: true
 		}).then((result) => {
 			if (result.isConfirmed) {
-				$scope.order = {
-					user: { id: $scope.userid },
-					store: { id: $scope.storeid },
-					status: 1,
-					fullname: "",
-					address: "",
-					phone: "",
-					paymentType: {},
-					shippingType: {},
-					create_at: new Date(),
-					update_at: null,
-					deleted: false,
-					get orderdetail() {
-						return $scope.items.map(item => {
-							return {
-								sp: { id: item.sp.id, soLuong: item.sp.soLuong },
-								soLuong: item.soLuong
-							}
-						})
-					}
+				if ($scope.order.fullname === "") {
+					alert("Vui lòng nhập người nhận")
+				} else if ($scope.order.phone === "") {
+					alert("Vui lòng nhập số điện thoại")
+				} else if ($scope.order.address === "") {
+					alert("Vui lòng nhập địa chỉ")
+				} else {
+					$http.post("/api/order/add", $scope.order).then(resp => {
+					})
+					swalWithBootstrapButtons.fire(
+						'Thành công',
+						'Đơn hàng của bạn đang được xử lý',
+						'success'
+					)
+					$scope.deleteall();
 				}
-				swalWithBootstrapButtons.fire(
-					'Thành công',
-					'Đơn hàng của bạn đang được xử lý',
-					'success'
-				)
+
 			} else if (
 				/* Read more about handling dismissals below */
 				result.dismiss === Swal.DismissReason.cancel
 			) { }
 		})
 	}
-
 
 	// Profile
 	//Info
@@ -496,10 +521,10 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$scope.showBtnSave = false
 	}
 
-	$scope.order = [];
+	$scope.orders = [];
 	// Order manager
 	$scope.all = function() {
-		$scope.order = [
+		$scope.orders = [
 			{
 				id: 'DH100001',
 				quantily: 1,
@@ -536,7 +561,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.loading = function() {
-		$scope.order = [
+		$scope.orders = [
 			{
 				id: 'DH100001',
 				quantily: 1,
@@ -549,7 +574,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.shipping = function() {
-		$scope.order = [
+		$scope.orders = [
 			{
 				id: 'DH100002',
 				quantily: 1,
@@ -562,7 +587,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.completed = function() {
-		$scope.order = [
+		$scope.orders = [
 			{
 				id: 'DH100003',
 				quantily: 1,
@@ -575,7 +600,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.canceled = function() {
-		$scope.order = [
+		$scope.orders = [
 			{
 				id: 'DH100004',
 				quantily: 1,

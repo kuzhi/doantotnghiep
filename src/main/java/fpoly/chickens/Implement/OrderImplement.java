@@ -54,6 +54,9 @@ public class OrderImplement implements OrderService {
 
 		List<OrderDetail> list = mapper.convertValue(orderData.get("orderDetail"), type).stream()
 				.peek(d -> d.setOrder(order)).collect(Collectors.toList());
+		for (OrderDetail orderDetail : list) {
+			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice()*orderDetail.getAmount());
+		}
 		order.setTotalMoney(list.stream().mapToInt(item -> item.getProduct().getPrice() * item.getAmount()).sum());
 		orderDao.saveAndFlush(order);
 		orderDetailDao.saveAllAndFlush(list);
