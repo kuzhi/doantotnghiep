@@ -36,4 +36,16 @@ public class ProductImplement implements ProductService {
 		return productDAO.save(product);
 	}
 
+	@Override
+	public Product update(Product product) {
+		// TODO Auto-generated method stub
+		return productDAO.saveAndFlush(product);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		productDAO.deleteById(id);
+	}
+
 }

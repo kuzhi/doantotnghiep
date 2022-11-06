@@ -1,16 +1,14 @@
 app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Thực đơn';
 	$scope.titleBread = 'Món ăn';
-	$scope.url = "/api/product";
+	$scope.showBtn = true;
+	$scope.url = "/api/product/";
 	
 	$scope.insert = function(){
+		$scope.showBtn = true;
 		$scope.titleTable = 'Thêm món mới';
 	}
 	
-	$scope.edit = function(){
-		$scope.titleTable = 'Cập nhật món';
-	}
-
 	$scope.insertCate = function(){
 		$scope.titleTable = 'Thêm loại mới';
 		
@@ -19,43 +17,6 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.editCate = function(){
 		$scope.titleTable = 'Cập nhật';
 		
-	}
-	
-	$scope.deleteP = function() {
-		const swalWithBootstrapButtons = Swal.mixin({
-			customClass: {
-				confirmButton: 'btn btn-danger ms-2',
-				cancelButton: 'btn btn-success'
-			},
-			buttonsStyling: false
-		})
-		
-		swalWithBootstrapButtons.fire({
-			title: 'Thông báo',
-			icon: 'warning',
-			text: "Bạn có chắc muốn thực hiện xóa?",
-			showCancelButton: true,
-			confirmButtonText: 'OK',
-			cancelButtonText: 'Quay lại',
-			reverseButtons: true,
-			showClass: {
-				popup: 'animate__animated animate__fadeInDownBig'
-			},
-			hideClass: {
-				popup: 'animate__animated animate__fadeOutUpBig'				
-			}
-		}).then((result) => {
-			if (result.isConfirmed) {
-				swalWithBootstrapButtons.fire(
-					'Đã xóa',
-					'Đã xóa thành công!',
-					'success'
-				)
-			} else if (
-				/* Read more about handling dismissals below */
-				result.dismiss === Swal.DismissReason.cancel
-			){}
-		})
 	}
 
 	$scope.deleteC = function() {
@@ -150,6 +111,9 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	// Edit product
 	$scope.formProduct = {};
 	$scope.edit = function(product){
+		$scope.titleTable = 'Cập nhật món';
+		$scope.showBtn = false;
+		
         $scope.formProduct = angular.copy(product);
         // console.log('data: ', $scope.formProduct)
     }
@@ -201,7 +165,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
             $scope.products.push(resp.data); 
         	// console.log('data: ', $scope.products);            
             $scope.reset(); 
-            
+            $scope.init();
 			Swal.fire({
 				icon: 'success',
 				title: 'Thêm thành công!'
@@ -215,5 +179,128 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
             console.log("Error: ", error);
         });
     }
+    
+    // Update product
+    $scope.update = function() {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-danger ms-2',
+				cancelButton: 'btn btn-success'
+			},
+			buttonsStyling: false
+		})
+		
+		swalWithBootstrapButtons.fire({
+			title: 'Thông báo',
+			icon: 'warning',
+			text: "Bạn có chắc muốn thực hiện?",
+			showCancelButton: true,
+			confirmButtonText: 'OK',
+			cancelButtonText: 'Quay lại',
+			reverseButtons: true,
+			showClass: {
+				popup: 'animate__animated animate__fadeInDownBig'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUpBig'				
+			}
+		}).then((result) => {
+			if (result.isConfirmed) {
+				
+				//====================================== Bắt đầu xử lý
+				var category = document.querySelector("#selectCbbL").value;
+        		$scope.formProduct.category.id = JSON.parse(category);
+        		
+				var product = angular.copy($scope.formProduct);
+				console.log("data: ", product.category.id);
+		
+				$http.put($scope.url + product.id, product).then(resp => {
+		            var index = $scope.products.findIndex(p => p.id == product.id);
+		            
+		            $scope.products[index] = product;
+		            // console.log("Sp: ", $scope.products[index]);
+		            $scope.reset(); 
+            		$scope.init();
+		            
+		            // Thông báo
+					swalWithBootstrapButtons.fire(
+						'Thành công',
+						'Cập nhật thành công!',
+						'success'
+					)
+
+		        }).catch(error => {
+		            // Thông báo
+					Swal.fire({
+						icon: 'error',
+						title: 'Cập nhật thất bại!'
+					});
+		            console.log("Error", error);
+		        });	
+				//====================================== Kết thúc xử lý
+			} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			){}
+		})
+	}
+	
+	// Delete product
+	$scope.delete = function(product) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-danger ms-2',
+				cancelButton: 'btn btn-success'
+			},
+			buttonsStyling: false
+		})
+		
+		swalWithBootstrapButtons.fire({
+			title: 'Thông báo',
+			icon: 'warning',
+			text: "Bạn có chắc muốn thực hiện xóa?",
+			showCancelButton: true,
+			confirmButtonText: 'OK',
+			cancelButtonText: 'Quay lại',
+			reverseButtons: true,
+			showClass: {
+				popup: 'animate__animated animate__fadeInDownBig'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUpBig'				
+			}
+		}).then((result) => {
+			if (result.isConfirmed) {
+				
+				//====================================== Bắt đầu xử lý
+				$http.delete(`/api/product/${product.id}`)
+				.then(resp => {
+					var index = $scope.products.findIndex(p => p.id == product.id);
+		            $scope.products.splice(index, 1);
+		            
+		            $scope.reset();
+		            $scope.init();
+		            // Thông báo
+					swalWithBootstrapButtons.fire(
+						'Đã xóa',
+						'Đã xóa thành công!',
+						'success'
+					)
+				})
+				.catch(error => {
+		            // Thông báo
+					Swal.fire({
+						icon: 'error',
+						title: 'Xóa thất bại!'
+					});
+		            console.log("Error", error);
+		        });
+		        //====================================== Kết thúc xử lý
+			} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			){}
+		})
+	}
     
 })

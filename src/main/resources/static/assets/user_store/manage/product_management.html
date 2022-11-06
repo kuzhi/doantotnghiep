@@ -71,7 +71,7 @@
 									data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="edit"
 								> <i class="fas fa-edit"></i> </button>
 								<button 
-									ng-click="deleteP()"
+									ng-click="delete(product)"
 									class="text-danger border-0"
 								> <i class="fas fa-ban"></i> </button>
 							</td>
@@ -155,26 +155,6 @@
                         	</label>
                         	<input id="file-input" type="file" name="image"
                         		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
-                        </div>
-                    </div>
-                    <!-- Id -->
-					<div class="row mt-1">
-                        <h6 class="text-secondary" >Mã món</h6>
-                        <div>
-                          <input 
-                          	  ng-model="formProduct.id"
-                              type="text" id="id" name="id"
-                              class="w-full form-control"
-                              placeholder="--Vui lòng nhập--" required
-                          >
-                          <div
-							ng-show="productForm.id.$dirty && productForm.id.$invalid"
-						  >
-							<small 
-								class="text-danger fst-italic"
-								ng-show="productForm.id.$error.required"
-							>Vui lòng không để trống (*)</small>
-						  </div>
                         </div>
                     </div>
                     <!-- Name -->
@@ -321,10 +301,17 @@
 					</div>
 					<div class="col-xl-6">
 						<button 
+							ng-if="showBtn == true"
 							ng-click="create()"
 							ng-disabled="productForm.$invalid" 
 							class="btn btn-info w-100"
 						>Lưu</button>
+						<button 
+							ng-if="showBtn == false"
+							ng-click="update()"
+							ng-disabled="productForm.$invalid" 
+							class="btn btn-info w-100"
+						>Lưu thay đổi</button>
 					</div>
 				</div>
 			</div>
