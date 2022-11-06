@@ -30,4 +30,10 @@ public class ProductImplement implements ProductService {
 		return productDAO.findAll(pageable);
 	}
 
+	@Override
+	public Product create(Product product) {
+		// TODO Auto-generated method stub
+		return productDAO.save(product);
+	}
+
 }

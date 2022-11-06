@@ -11,4 +11,6 @@ public interface ProductService {
 	List<Product> findAll();
 	
 	Page<Product> findAllPage(Pageable pageable);
+	
+	Product create(Product product);
 }

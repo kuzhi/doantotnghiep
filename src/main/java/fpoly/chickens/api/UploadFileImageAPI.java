@@ -1,13 +1,11 @@
 package fpoly.chickens.api;
 
 import java.io.File;
-import java.util.List;
 
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,16 +22,15 @@ import fpoly.chickens.service.UploadService;
 public class UploadFileImageAPI {
 	@Autowired UploadService uploadService;
 	
-	@GetMapping("/api/files/{folder}/{file}")
-	public byte[] download(@PathVariable("folder")String folder,
-			@PathVariable("file") String file) {
-		return uploadService.read(folder, file);
-	}
-	
-	@PostMapping("/api/files/images/{folder}")
-	public List<String> upload(@PathVariable("folder") String folder,
-			@PathParam("file") MultipartFile[] files) {
+	@PostMapping("/api/upload/{folder}")
+	public JsonNode upload(@PathParam("file") MultipartFile file,
+			@PathVariable("folder") String folder) {
+		File saveFile = uploadService.save(file, folder);
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectNode node = mapper.createObjectNode();
+		node.put("name", saveFile.getName());
+		node.put("size", saveFile.length());
 		
-		return uploadService.save(folder, files);
+		return node;
 	}
 }

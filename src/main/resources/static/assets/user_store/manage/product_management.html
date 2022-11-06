@@ -59,9 +59,7 @@
 			             <tr
 			             	ng-repeat="product in pager.products"
 			             >
-			                 <td scope="col">
-			                     SP{{product.id}}
-			                 </td>
+			                 <td scope="col">SP{{product.id}}</td>
 			                 <td scope="col">{{product.name}}</td>
 			                 <td scope="col">{{product.category.name}}</td>
 			                 <td scope="col" class="text-end">{{product.price | currency:'':0}} đ</td>
@@ -155,7 +153,7 @@
 	                          	alt="{{formProduct.image}}" class="img__food"
 	                          >
                         	</label>
-                        	<input id="file-input" type="file" 
+                        	<input id="file-input" type="file" name="image"
                         		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
                         </div>
                     </div>
@@ -233,14 +231,14 @@
                         >Loại </h6>
                         <div class="row">
                         	<div class="col-xl-11">
-                        		<select class="form-select" aria-label="Default select example">
+                        		<select id="selectCbbL" class="form-select" aria-label="Default select example">
 								  <option selected>--Vui lòng chọn--</option>
 								  <option 
-								  	ng-repeat="(key, value) in categorys"
 								  	ng-model="formProduct.category"
-								  	ng-selected="value.id == formProduct.category.id"
-								  	ng-value="{{value.Id}}"
-								  >{{value.name}}</option>
+								  	ng-repeat="category in categorys"
+								  	ng-selected="category.id == formProduct.category.id"
+								  	value="{{category.id}}"
+								  >{{category.name}}</option>
 								</select>
                         	</div>
 							
@@ -322,7 +320,11 @@
 						>Hủy</button>
 					</div>
 					<div class="col-xl-6">
-						<button ng-disabled="productForm.$invalid" class="btn btn-info w-100">Lưu</button>
+						<button 
+							ng-click="create()"
+							ng-disabled="productForm.$invalid" 
+							class="btn btn-info w-100"
+						>Lưu</button>
 					</div>
 				</div>
 			</div>

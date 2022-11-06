@@ -1,6 +1,7 @@
 app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Thực đơn';
 	$scope.titleBread = 'Món ăn';
+	$scope.url = "/api/product";
 	
 	$scope.insert = function(){
 		$scope.titleTable = 'Thêm món mới';
@@ -98,7 +99,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.products = [];
 	$scope.categorys = [];
 	$scope.init = function() {
-		$http.get("/api/product/view").then(resp => { 
+		$http.get($scope.url).then(resp => { 
             $scope.products = resp.data;
             
             $scope.products.forEach(product => { 
@@ -166,18 +167,53 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
     }
     $scope.reset();
     
-    //Upload image
+    //Change image
     $scope.ImageChanged = function(files){
         var data = new FormData();
-        data.append('file', files[0]);
-        $http.post('/rest/upload/images/Products', data, {
+        data.append('file', files[0]); 
+        $http.post('/api/upload/Products', data, { 
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(resp => {
-            $scope.formProduct.image = resp.data.name;
+			// console.log('data: ', resp.data)
+            $scope.formProduct.image = resp.data.name; 
         }).catch(error => {
             alert("Lỗi tải hình ảnh")
-            console.log('error: ',error)
+            // console.log('error: ', error)
         })
     }
+    
+    // Create product
+    $scope.create = function(){
+        var category = document.querySelector("#selectCbbL").value;
+        $scope.formProduct.category.id = JSON.parse(category);
+        var product = angular.copy($scope.formProduct);
+        
+        product.create_at = new Date();
+        product.update_at = new Date();
+        
+        // console.log('data: ', product);
+        
+        $http.post($scope.url, product).then(resp => {
+            resp.data.create_at = new Date(resp.data.create_at)  
+            resp.data.update_at = new Date(resp.data.update_at)  
+             
+            $scope.products.push(resp.data); 
+        	// console.log('data: ', $scope.products);            
+            $scope.reset(); 
+            
+			Swal.fire({
+				icon: 'success',
+				title: 'Thêm thành công!'
+			});
+        }).catch(error => {
+
+			Swal.fire({
+				icon: 'error',
+				title: 'Thêm thất bại!'
+			});
+            console.log("Error: ", error);
+        });
+    }
+    
 })
