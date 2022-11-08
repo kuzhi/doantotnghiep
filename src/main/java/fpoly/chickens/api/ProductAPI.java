@@ -60,4 +60,13 @@ public class ProductAPI {
 	public void delete(@PathVariable("id") Integer id) {
 		productService.delete(id);
 	}
+	
+	// Find by name
+	@GetMapping("/{name}")
+	public ResponseEntity<Product> findByName(@RequestBody Product product,
+			@PathVariable("name") String name) {
+		productService.findProductByName(name);
+		
+		return ResponseEntity.ok().build();
+	}
 }

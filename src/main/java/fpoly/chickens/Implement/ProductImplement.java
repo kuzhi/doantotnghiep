@@ -48,4 +48,10 @@ public class ProductImplement implements ProductService {
 		productDAO.deleteById(id);
 	}
 
+	@Override
+	public List<Product> findProductByName(String name) {
+		// TODO Auto-generated method stub
+		return productDAO.findByName(name);
+	}
+
 }

@@ -18,4 +18,7 @@ public interface ProductService {
 	Product update(Product product);
 	// Delete
 	void delete(Integer id);
+	
+	// Find product by name
+	List<Product> findProductByName(String name);
 }

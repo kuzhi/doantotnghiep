@@ -18,10 +18,12 @@
 
 					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
 						<i class="fas fa-search mx-2"></i>
-						<input class="form-control border-0" placeholder="Tìm theo tên">
+						<input ng-model="name" name="name" class="form-control border-0" placeholder="Tìm theo tên">
 					</div>
 						
-					<button class="btn btn-info me-2 px-2">Tìm kiếm</button>
+					<button
+						ng-click="findByName(name)"
+						class="btn btn-info me-2 px-2">Tìm kiếm</button>
 					
 					<button 
 						ng-click="insert()"

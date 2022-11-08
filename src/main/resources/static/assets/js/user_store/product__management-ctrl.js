@@ -8,54 +8,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 		$scope.showBtn = true;
 		$scope.titleTable = 'Thêm món mới';
 	}
-	
-	$scope.insertCate = function(){
-		$scope.titleTable = 'Thêm loại mới';
-		
-	}
-	
-	$scope.editCate = function(){
-		$scope.titleTable = 'Cập nhật';
-		
-	}
 
-	$scope.deleteC = function() {
-		const swalWithBootstrapButtons = Swal.mixin({
-			customClass: {
-				confirmButton: 'btn btn-danger ms-2',
-				cancelButton: 'btn btn-success'
-			},
-			buttonsStyling: false
-		})
-		
-		swalWithBootstrapButtons.fire({
-			title: 'Thông báo',
-			icon: 'warning',
-			text: "Bạn có chắc muốn thực hiện xóa?",
-			showCancelButton: true,
-			confirmButtonText: 'OK',
-			cancelButtonText: 'Quay lại',
-			reverseButtons: true,
-			showClass: {
-				popup: 'animate__animated animate__fadeInDownBig'
-			},
-			hideClass: {
-				popup: 'animate__animated animate__fadeOutUpBig'				
-			}
-		}).then((result) => {
-			if (result.isConfirmed) {
-				swalWithBootstrapButtons.fire(
-					'Đã xóa',
-					'Đã xóa thành công!',
-					'success'
-				)
-			} else if (
-				/* Read more about handling dismissals below */
-				result.dismiss === Swal.DismissReason.cancel
-			){}
-		})
-	}
-	
 	// Load list products
 	$scope.products = [];
 	$scope.categorys = [];
@@ -212,7 +165,9 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
         		$scope.formProduct.category.id = JSON.parse(category);
         		
 				var product = angular.copy($scope.formProduct);
-				console.log("data: ", product.category.id);
+        		product.update_at = new Date();
+        		
+				// console.log("data: ", product);
 		
 				$http.put($scope.url + product.id, product).then(resp => {
 		            var index = $scope.products.findIndex(p => p.id == product.id);
@@ -300,6 +255,15 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				/* Read more about handling dismissals below */
 				result.dismiss === Swal.DismissReason.cancel
 			){}
+		})
+	}
+    
+    // Find by name product
+    $scope.findByName = function(name) {
+		$http.get($scope.url + name)
+		.then(resp => {
+			console.log("data: ", resp.data);
+			$scope.products = resp.data;
 		})
 	}
     
