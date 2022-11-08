@@ -23,16 +23,22 @@ import fpoly.chickens.service.OrderService;
 public class OrderAPI {
 	@Autowired
 	OrderService orderService;
-	
+
 	@GetMapping("/api/order/{storeid}")
 	public ResponseEntity<List<Order>> getOrderStore4(@PathVariable("storeid") Optional<Integer> storeid) {
 		return ResponseEntity.ok(orderService.getOrderStore(storeid.get()));
 	}
 
 	@GetMapping("/api/order/{storeid}/{userid}")
-	public ResponseEntity<List<Order>> getOrder(@PathVariable("storeid") Optional<Integer> storeid,
+	public ResponseEntity<List<Order>> getAllOrders(@PathVariable("storeid") Optional<Integer> storeid,
 			@PathVariable("userid") Optional<Integer> userid) {
-		return ResponseEntity.ok(orderService.getOrder(storeid.get(), userid.get()));
+		return ResponseEntity.ok(orderService.getAllOrders(storeid.get(), userid.get()));
+	}
+
+	@GetMapping("/api/order/{storeid}/{userid}/{status}")
+	public ResponseEntity<List<Order>> getLoadOrders(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("userid") Optional<Integer> userid, @PathVariable("status") Optional<Integer> status) {
+		return ResponseEntity.ok(orderService.getOrdersbyStatus(storeid.get(), userid.get(), status.get()));
 	}
 
 	@PostMapping("/api/order/add")
@@ -41,19 +47,19 @@ public class OrderAPI {
 		return ResponseEntity.ok().build();
 
 	}
-	
-	@PutMapping("/api/order/confirm")
+
+	@PutMapping("/api/order/update")
 	public ResponseEntity<Void> confirmOrder(@RequestBody JsonNode orderData) {
-		orderService.confirmOrder(orderData);
+		orderService.updateOrder(orderData);
 		return ResponseEntity.ok().build();
 
 	}
-	
+
 	@PutMapping("/api/order/cancel")
 	public ResponseEntity<Void> cancelOrder(@RequestBody JsonNode orderData) {
 		orderService.cancelOrder(orderData);
 		return ResponseEntity.ok().build();
 
 	}
-	
+
 }
