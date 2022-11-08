@@ -37,7 +37,7 @@ public class OrderImplement implements OrderService {
 	UserDAO userDao;
 
 	@Override
-	public List<Order> getOrder(Integer storeid, Integer userid) {
+	public List<Order> getAllOrders(Integer storeid, Integer userid) {
 		Store store = storeDao.findById(storeid).get();
 		User user = userDao.findById(userid).get();
 		return orderDao.getOrder(store, user);
@@ -55,7 +55,7 @@ public class OrderImplement implements OrderService {
 		List<OrderDetail> list = mapper.convertValue(orderData.get("orderDetail"), type).stream()
 				.peek(d -> d.setOrder(order)).collect(Collectors.toList());
 		for (OrderDetail orderDetail : list) {
-			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice()*orderDetail.getAmount());
+			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice() * orderDetail.getAmount());
 		}
 		order.setTotalMoney(list.stream().mapToInt(item -> item.getProduct().getPrice() * item.getAmount()).sum());
 		orderDao.saveAndFlush(order);
@@ -63,12 +63,13 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public void confirmOrder(JsonNode orderData) {
+	public void updateOrder(JsonNode orderData) {
 		ObjectMapper mapper = new ObjectMapper();
 		Order order = mapper.convertValue(orderData, Order.class);
-		order.setStatus(2);
-		orderDao.saveAndFlush(order);
-		
+		Order orderUpdate = orderDao.findById(order.getId()).get();
+		orderUpdate.setStatus(order.getStatus());
+		orderDao.saveAndFlush(orderUpdate);
+
 	}
 
 	@Override
@@ -84,9 +85,18 @@ public class OrderImplement implements OrderService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
 
+	@Override
+	public List<Order> getOrdersbyStatus(Integer storeid, Integer userid, Integer status) {
+		Store store = storeDao.findById(storeid).get();
+		User user = userDao.findById(userid).get();
+		List<Order> list = orderDao.getOrdersStatus(store, user, status);
+		return list;
+	}
+
+	@Override
+	public Order findOrderById(Integer id) {
+		Order order = orderDao.findById(id).get();
+		return order;
+	}
 }
