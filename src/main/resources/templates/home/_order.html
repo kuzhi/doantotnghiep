@@ -1,59 +1,56 @@
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" 
-    	ng-click="all()"
-    	id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" 
-    	type="button" role="tab" aria-controls="pills-all" aria-selected="true"
-    >Tất cả</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" 
-    	ng-click="loading()"
-    	id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" 
-    	type="button" role="tab" aria-controls="pills-all" aria-selected="false"
-    >Đang xử lý</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" 
-    	ng-click="shipping()"
-    	id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" 
-    	type="button" role="tab" aria-controls="pills-all" aria-selected="false"
-    >Đang giao</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" 
-    	ng-click="completed()"
-    	id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" 
-    	type="button" role="tab" aria-controls="pills-all" aria-selected="false"
-    >Giao thành công</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" 
-    	ng-click="canceled()"
-    	id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" 
-    	type="button" role="tab" aria-controls="pills-all" aria-selected="false"
-    >Đã hủy</button>
-  </li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link active" ng-click="all()" id="pills-all-tab"
+			data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+			role="tab" aria-controls="pills-all" aria-selected="true">Tất
+			cả</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" ng-click="loading()" id="pills-all-tab"
+			data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+			role="tab" aria-controls="pills-all" aria-selected="false">Đang
+			xử lý</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" ng-click="shipping()" id="pills-all-tab"
+			data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+			role="tab" aria-controls="pills-all" aria-selected="false">Đang
+			giao</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" ng-click="completed()" id="pills-all-tab"
+			data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+			role="tab" aria-controls="pills-all" aria-selected="false">Giao
+			thành công</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" ng-click="canceled()" id="pills-all-tab"
+			data-bs-toggle="pill" data-bs-target="#pills-all" type="button"
+			role="tab" aria-controls="pills-all" aria-selected="false">Đã
+			hủy</button>
+	</li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
-	<div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab" tabindex="0">
-	  	<div 
-		ng-repeat="o in order"
-		class="row shadow-sm px-2 py-3 rounded mb-3 mx-1"
-	>	
-		<div class="col-xl-6 col-6">
-			<h5>
-				<a th:href="@{/home/client/_order-detail}" class="text-decoration-none">{{o.id}}</a>
-			</h5>
-			<small>Số lượng: {{o.quantily}}</small>
+	<div class="tab-pane fade show active" id="pills-all" role="tabpanel"
+		aria-labelledby="pills-all-tab" tabindex="0">
+		<div ng-repeat="o in orders"
+			class="row shadow-sm px-2 py-3 rounded mb-3 mx-1">
+			<div class="col-xl-1 col-1">
+				<h5>{{o.ordercode}}</h5>
+			</div>
+			<div class="col-xl-3 col-3">
+				<h5>{{o.fullname}}</h5>
+			</div>
+			<div class="col-xl-3 col-3">
+				<h5>{{o.store.name}}</h5>
+			</div>
+			<div class="col-xl-2 col-2">
+				<h5 class="text-truncate">{{o.totalMoney}} đ</h5>
+			</div>
+			<div class="col-xl-3 col-3 text-end">
+				<a th:href="@{/home/client/_order-detail/{{o.id}}}"
+					class="btn btn-primary">Xem chi tiết</a>
+			</div>
 		</div>
-		<div class="col-xl-6 col-6 text-end">
-			<h5 class="text-truncate">{{ o.price - (o.price * o.sales / 100) | currency: '' :0}} đ</h5>
-			<small class="text-hide">
-				Phí vận chuyển: 
-				{{o.ship == 0 ? 'Miễn phí' : ( o.ship | currency : '' : 0 )}} đ
-			</small>
-		</div>
-	</div> 
-  </div>
+	</div>
 </div>

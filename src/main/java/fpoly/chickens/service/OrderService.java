@@ -8,14 +8,18 @@ import fpoly.chickens.entity.Order;
 
 public interface OrderService {
 
-	List<Order> getOrder(Integer storeid, Integer userid);
+	List<Order> getAllOrders(Integer storeid, Integer userid);
 
 	void addOrder(JsonNode orderData);
-
-	void confirmOrder(JsonNode orderData);
 
 	void cancelOrder(JsonNode orderData);
 
 	List<Order> getOrderStore(Integer integer);
+
+	List<Order> getOrdersbyStatus(Integer storeid, Integer userid, Integer status);
+
+	Order findOrderById(Integer id);
+
+	void updateOrder(JsonNode orderData);
 
 }
