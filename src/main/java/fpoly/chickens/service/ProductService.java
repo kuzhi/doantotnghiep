@@ -21,4 +21,12 @@ public interface ProductService {
 	
 	// Find product by name
 	List<Product> findProductByName(String name);
+	// Sort AZ
+	List<Product> sortAZ();
+	// Sort ZA
+	List<Product> sortZA();
+	// Sort 09
+	List<Product> sort09();
+	// Sort 90
+	List<Product> sort90();
 }

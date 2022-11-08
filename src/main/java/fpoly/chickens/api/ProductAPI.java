@@ -62,11 +62,33 @@ public class ProductAPI {
 	}
 	
 	// Find by name
-	@GetMapping("/{name}")
-	public ResponseEntity<Product> findByName(@RequestBody Product product,
-			@PathVariable("name") String name) {
-		productService.findProductByName(name);
-		
-		return ResponseEntity.ok().build();
+	@GetMapping("/{nameProduct}")
+	public ResponseEntity<List<Product>> findByName(
+			@PathVariable("nameProduct") Optional<String> nameProduct) {
+		return ResponseEntity.ok(productService.findProductByName("%"+nameProduct.get()+"%"));
+	}
+	
+	// Sort A-Z
+	@GetMapping("/sort/a-z")
+	public List<Product> sortAZ() {
+		return productService.sortAZ();
+	}
+	
+	// Sort A-Z
+	@GetMapping("/sort/z-a")
+	public List<Product> sortZA() {
+		return productService.sortZA();
+	}
+	
+	// Sort A-Z
+	@GetMapping("/sort/0-9")
+	public List<Product> sort09() {
+		return productService.sort09();
+	}
+	
+	// Sort A-Z
+	@GetMapping("/sort/9-0")
+	public List<Product> sort90() {
+		return productService.sort90();
 	}
 }

@@ -20,7 +20,6 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
                 product.create_at = new Date(product.create_at)
                 product.update_at = new Date(product.update_at)
             })
-            $scope.formProduct.id = ($scope.products.length+1);
         });
         
         $http.get("/api/category/view").then(resp => { 
@@ -257,14 +256,92 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			){}
 		})
 	}
-    
-    // Find by name product
-    $scope.findByName = function(name) {
-		$http.get($scope.url + name)
+  
+  	// Find by name product
+  	$scope.nameProduct = "";
+  	$scope.findByName = function() {
+		$http.get($scope.url + $scope.nameProduct)
 		.then(resp => {
-			console.log("data: ", resp.data);
 			$scope.products = resp.data;
-		})
+            
+            $scope.products.forEach(product => { 
+                product.create_at = new Date(product.create_at)
+                product.update_at = new Date(product.update_at)
+            })
+			
+            // console.log("Sp: ", resp.data);
+        }).catch(error => {
+            console.log("Error", error);
+        });	
+	}  
+	
+	// Load list product by filter
+	$scope.listFilter = [
+		{
+			id: 1,
+			name: "A-Z"
+		},
+		{
+			id: 2,
+			name: "Z-A"
+		},
+		{
+			id: 3,
+			name: "0-9"
+		},
+		{
+			id: 4,
+			name: "9-0"
+		},
+	]
+	$scope.getProductsbyFilter = function() {
+		// ======= A-Z
+		if($scope.list == 1) {
+			$http.get($scope.url+"sort/a-z")
+			.then(resp => { 
+	            $scope.products = resp.data;
+	            
+	            $scope.products.forEach(product => { 
+	                product.create_at = new Date(product.create_at)
+	                product.update_at = new Date(product.update_at)
+	            })
+	        });
+		} 
+		// ======= Z-A
+		else if($scope.list == 2) {
+			$http.get($scope.url+"sort/z-a")
+			.then(resp => { 
+	            $scope.products = resp.data;
+	            
+	            $scope.products.forEach(product => { 
+	                product.create_at = new Date(product.create_at)
+	                product.update_at = new Date(product.update_at)
+	            })
+	        });
+		} 
+		// ======= 0-9
+		else if($scope.list == 3) {
+			$http.get($scope.url+"sort/0-9")
+			.then(resp => { 
+	            $scope.products = resp.data;
+	            
+	            $scope.products.forEach(product => { 
+	                product.create_at = new Date(product.create_at)
+	                product.update_at = new Date(product.update_at)
+	            })
+	        });
+		} 
+		// ======= 9-0
+		else if($scope.list == 4) {
+			$http.get($scope.url+"sort/9-0")
+			.then(resp => { 
+	            $scope.products = resp.data;
+	            
+	            $scope.products.forEach(product => { 
+	                product.create_at = new Date(product.create_at)
+	                product.update_at = new Date(product.update_at)
+	            })
+	        });	
+		}
 	}
-    
 })

@@ -54,4 +54,28 @@ public class ProductImplement implements ProductService {
 		return productDAO.findByName(name);
 	}
 
+	@Override
+	public List<Product> sortAZ() {
+		// TODO Auto-generated method stub
+		return productDAO.sortAZ();
+	}
+
+	@Override
+	public List<Product> sortZA() {
+		// TODO Auto-generated method stub
+		return productDAO.sortZA();
+	}
+
+	@Override
+	public List<Product> sort09() {
+		// TODO Auto-generated method stub
+		return productDAO.sort09();
+	}
+
+	@Override
+	public List<Product> sort90() {
+		// TODO Auto-generated method stub
+		return productDAO.sort90();
+	}
+
 }
