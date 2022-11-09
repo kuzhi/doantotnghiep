@@ -6,112 +6,87 @@
 <title>Chi tiết đơn hàng</title>
 </head>
 <body>
-	<section class="container my-3">
-		<div class="row">
-			<h2 class="text-start my-2">[[${detail.ordercode}]]</h2>
-		</div>
-		<div class="row">
-			<div class="col-xl-8">
-				<div class="row bg-white rounded p-3">
-					<div class="col-xl-4 mb-2">
-						<h6 class="mb-0">Thông tin nhận hàng</h6>
-						<span> <b>[[${detail.fullname}]]</b> -[[${detail.phone}]]
-						</span>
-					</div>
-					<div class="col-xl-8 text-end">
-						<p class="text-truncate mb-0 fst-italic" style="font-size: 14px;">
-							There are many variations of passages of Lorem Ipsum available,
-							but the majority have suffered alteration in some form, by
-							injected humour, or randomised words which don't look even
-							slightly believable. If you are going to use a passage of Lorem
-							Ipsum, you need to be sure there isn't anything embarrassing
-							hidden in the middle of text. All the Lorem Ipsum generators on
-							the Internet tend to repeat predefined chunks as necessary,
-							making this the first true generator on the Internet. It uses a
-							dictionary of over 200 Latin words, combined with a handful of
-							model sentence structures, to generate Lorem Ipsum which looks
-							reasonable. The generated Lorem Ipsum is therefore always free
-							from repetition, injected humour, or non-characteristic words
-							etc.</p>
-					</div>
-				</div>
-
-				<div th:each="p : ${detail.orderDetail}"
-					class="row bg-white rounded my-3 py-2 mx-1">
-					<div class="col-xl-2 mb-2 text-end text-end-mb">
-						<img th:src="@{/assets/images/Products/${p.product.image}}"
+	
+	<section class="h-100">
+	  <div class="container py-5 h-100">
+	    <div class="row d-flex justify-content-center align-items-center h-100">
+	      <div class="col-lg-10 col-xl-8">
+	        <div class="card" style="border-radius: 10px;">
+	          <div class="card-header px-4 py-3">
+	            <h5 class="text-muted mb-0">Đơn hàng của bạn, <span style="color: #a8729a;">[[${detail.ordercode}]]</span>!</h5>
+	          </div>
+	          <div class="card-body p-4">
+	            <div class="d-flex justify-content-between align-items-center mb-4">
+	              <p class="lead fw-normal mb-0" style="color: #a8729a;">Sản phẩm</p>
+	            </div>
+	            <div 
+	            	th:each="p : ${detail.orderDetail}"
+	            	class="card shadow-0 border mb-4"
+	            >
+	              <div class="card-body">
+	                <div class="row">
+	                  <div class="col-md-2">
+	                    <img th:src="'/assets/images/products/'+${p.product.image}"
 							style="width: 50px; height: 50px; bdetail-radius: 10px;">
-					</div>
-					<div class="col-xl-10">
-						<div class="row">
-							<div class="col-xl-9 col-8">
-								<span class="text-truncate"> <b>[[${p.product.name}]]</b>
-								</span>
-							</div>
-							<div class="col-xl-3 col-4 d-flex justify-content-end">
-								<p class="text-secondary text-truncate">[[${p.product.price}]]</p>
-								<span class="mx-1">đ</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xl-3">Số lượng: [[${p.amount}]]</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xl-4 col-sm-12 text-center">
-				<div class="bg-white p-4 rounded">
-					<h5 class="fw-bold">Thông tin vận chuyển</h5>
-					<hr>
-					<div class="row mb-3">
-						<div class="col-xl-6 text-start">
-							<small class="fw-bold">Trạng thái đơn hàng: </small>
-						</div>
-						<div class="col-xl-6 text-end">
-							<small th:if="${detail.status == 1}"
-								class="fst-italic text-warning">Đang xử lý</small> <small
-								th:if="${detail.status == 2}" class="fst-italic text-warning">Đang
-								giao</small> <small th:if="${detail.status == 3}"
-								class="fst-italic text-warning">Đã nhận</small> <small
-								th:if="${detail.status == 4}" class="fst-italic text-warning">Đã
-								hủy</small>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xl-6 text-start">
-							<h6>Tổng tiền thanh toán:</h6>
-						</div>
-						<div class="col-xl-6 text-end">
-							<span> <b>[[${detail.totalMoney}]] đ</b>
-							</span>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-xl-6 text-start">
-							<small class="fw-bold">Phương thức thanh toán: </small>
-						</div>
-						<div class="col-xl-6 text-end text-end-mb">
-							<small>[[${detail.paymentType.paymentName}]]</small>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xl-6 text-start">
-							<small class="fw-bold">Hình thức nhận hàng: </small>
-						</div>
-						<div class="col-xl-6 text-end text-end-mb">
-							<small>[[${detail.shippingType.shippingName}]]</small>
-						</div>
-					</div>
-					<hr>
-					<button th:attr="ng-click='completeOrder('+${detail.id}+')'"
-						class="btn btn-primary w-100 fw-bold mb-3">Đã nhận được
-						hàng</button>
-					<button th:attr="ng-click='cancelOrder('+${detail.id}+')'"
-						class="btn btn-outline-danger w-100 fw-bold mb-3">Hủy đơn</button>
-				</div>
-			</div>
-		</div>
+	                  </div>
+	                  <div class="col-md-6 text-start d-flex justify-content-start align-items-center">
+	                    <span class="text-truncate"> 
+	                    	<b>[[${p.product.name}]]</b>
+						</span>
+	                  </div>
+	                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+	                    <p class="text-muted mb-0 small">
+							Số lượng: [[${p.amount}]]
+						</p>
+	                  </div>
+	                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+	                    <p class="text-muted mb-0 small">
+							[[${p.product.price}]] đ
+						</p>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	
+	            <div class="d-flex justify-content-between pt-2">
+	              <p class="fw-bold mb-0">Chi tiết hóa đơn</p>
+	              <p class="text-muted mb-0">
+	              	<span class="fw-bold me-4">Tổng thanh toán</span> 
+	              	[[${detail.totalMoney}]] đ
+				  </p>
+	            </div>
+	
+	            <div class="d-flex justify-content-between pt-2">
+	              <p class="text-muted mb-0">Phương thức thanh toán:</p>
+	              <p class="text-muted mb-0">[[${detail.paymentType.paymentName}]]</p>
+	            </div>
+	
+	            <div class="d-flex justify-content-between">
+	              <p class="text-muted mb-0">Hình thức nhận hàng:</p>
+	              <p class="text-muted mb-0">[[${detail.shippingType.shippingName}]]</p>
+	            </div>
+
+	            <div class="d-flex justify-content-between">
+	              <p class="text-muted mb-0">Ngày tạo:</p>
+	              <p class="text-muted mb-0">[[${detail.create_at}]]</p>
+	            </div>
+	
+	          </div>
+	          <div class="card-footer border-0 px-4 py-5 bg-success"
+	            style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+	            <button 
+	            	th:attr="ng-click='completeOrder('+${detail.id}+')'"
+					class="btn btn-primary w-100 fw-bold mb-3"
+				>Đã nhận được hàng</button>
+				<button 
+					th:attr="ng-click='cancelOrder('+${detail.id}+')'"
+					class="btn btn-outline-danger w-100 fw-bold mb-3"
+				>Hủy đơn</button>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
 	</section>
 </body>
 </html>
