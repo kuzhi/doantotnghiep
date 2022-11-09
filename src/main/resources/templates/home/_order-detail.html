@@ -39,7 +39,7 @@
 				<div th:each="p : ${detail.orderDetail}"
 					class="row bg-white rounded my-3 py-2 mx-1">
 					<div class="col-xl-2 mb-2 text-end text-end-mb">
-						<img th:src="@{/assets/images/Products/${p.product.image}}"
+						<img th:src="'/assets/images/products/'+${p.product.image}"
 							style="width: 50px; height: 50px; bdetail-radius: 10px;">
 					</div>
 					<div class="col-xl-10">

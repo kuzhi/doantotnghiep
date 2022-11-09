@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,23 @@ import fpoly.chickens.service.OrderService;
 public class OrderAPI {
 	@Autowired
 	OrderService orderService;
+	
+	@GetMapping("/api/order/get/{id}")
+	public ResponseEntity<Order> getOrderStore(@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(orderService.getOrderbyId(id.get()));
+	}
 
-	@GetMapping("/api/order/{storeid}")
-	public ResponseEntity<List<Order>> getOrderStore4(@PathVariable("storeid") Optional<Integer> storeid) {
-		return ResponseEntity.ok(orderService.getOrderStore(storeid.get()));
+	@GetMapping("/api/order/store/{storeid}/{page}")
+	public ResponseEntity<Page<Order>> getOrderStore(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("page") Optional<Integer> page) {
+		return ResponseEntity.ok(orderService.getOrderStore(storeid.get(), page.orElse(0)));
+	}
+	
+
+	@GetMapping("/api/order/store/{storeid}/{status}/{page}")
+	public ResponseEntity<Page<Order>> getOrderStorebyStatus(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("status") Optional<Integer> status, @PathVariable("page") Optional<Integer> page) {
+		return ResponseEntity.ok(orderService.getOrderStoreByStatus(storeid.get(),status.get(),page.orElse(0)));
 	}
 
 	@GetMapping("/api/order/{storeid}/{userid}")
