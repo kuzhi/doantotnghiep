@@ -6,18 +6,55 @@
 <title>Chi tiết đơn hàng</title>
 </head>
 <body>
-	
+
 	<section class="h-100">
-	  <div class="container py-5 h-100">
+	  <div class="container py-3 h-100">
 	    <div class="row d-flex justify-content-center align-items-center h-100">
 	      <div class="col-lg-10 col-xl-8">
 	        <div class="card" style="border-radius: 10px;">
 	          <div class="card-header px-4 py-3">
-	            <h5 class="text-muted mb-0">Đơn hàng của bạn, <span style="color: #a8729a;">[[${detail.ordercode}]]</span>!</h5>
+	            <h5 class="text-muted mb-0">
+	            	<a th:href="@{/home/client/my-profile}" class="text-decoration-none text-secondary">
+	            		<i class="fa-solid fa-arrow-left me-2"></i>
+	            	</a>
+	            	Đơn hàng của bạn, 
+	            	<span style="color: #a8729a;">[[${detail.ordercode}]]</span>!
+	            </h5>
 	          </div>
 	          <div class="card-body p-4">
 	            <div class="d-flex justify-content-between align-items-center mb-4">
 	              <p class="lead fw-normal mb-0" style="color: #a8729a;">Sản phẩm</p>
+	              <div th:if="${detail.status} == 1" class="d-flex align-items-center">
+	              	<div class="fade-loading bg-secondary me-2"></div>
+	              	<p 
+	              	class="small text-secondary mb-0 fst-italic"
+	              	>  Đang xử lý </p>
+	              </div>
+	              <div th:if="${detail.status} == 2" class="d-flex align-items-center">
+	              	<div class="fade-loading bg-warning me-2"></div>
+	              	<p 
+		              	class="small text-warning mb-0 fst-italic"
+		             > Đã duyệt </p>
+	              </div>
+	              <div th:if="${detail.status} == 3" class="d-flex align-items-center">
+	              	<div class="fade-loading bg-success me-2"></div>
+	              	<p 
+		              	class="small text-success mb-0 fst-italic"
+	                > Giao hàng thành công </p>
+	              </div>
+	              <div th:if="${detail.status} == 4" class="d-flex align-items-center">
+	              	<div class="fade-loading bg-danger me-2"></div>
+	              	<p 
+		              	class="small text-danger mb-0 fst-italic"
+		              > Bị hủy bởi <b>bạn</b> </p>
+	              </div>
+	              <div th:if="${detail.status} == 5" class="d-flex align-items-center">
+	              	<div class="fade-loading bg-danger me-2"></div>
+	              	<p 
+		              	class="small text-danger mb-0 fst-italic"
+		              > Bị hủy bởi <b>cửa hàng</b> </p>
+	              </div>
+	              
 	            </div>
 	            <div 
 	            	th:each="p : ${detail.orderDetail}"
@@ -72,13 +109,15 @@
 	            </div>
 	
 	          </div>
-	          <div class="card-footer border-0 px-4 py-5 bg-success"
+	          <div class="card-footer border-0 px-4 py-3"
 	            style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
 	            <button 
+	            	th:if="${detail.status} == 2"
 	            	th:attr="ng-click='completeOrder('+${detail.id}+')'"
 					class="btn btn-primary w-100 fw-bold mb-3"
 				>Đã nhận được hàng</button>
 				<button 
+					th:if="${detail.status} == 1"
 					th:attr="ng-click='cancelOrder('+${detail.id}+')'"
 					class="btn btn-outline-danger w-100 fw-bold mb-3"
 				>Hủy đơn</button>

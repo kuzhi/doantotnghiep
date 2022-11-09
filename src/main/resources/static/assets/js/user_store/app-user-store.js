@@ -26,9 +26,21 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/manage/order_management.html",
 			controller: "order__management-loading-ctrl"
 		})
+		.when("/order__management-confirmed", {
+			templateUrl: "/assets/user_store/manage/order_management.html",
+			controller: "order__management-confirmed-ctrl"
+		})
 		.when("/order__management-success", {
 			templateUrl: "/assets/user_store/manage/order_management.html",
 			controller: "order__management-success-ctrl"
+		})
+		.when("/order__management-canceled", {
+			templateUrl: "/assets/user_store/manage/order_management.html",
+			controller: "order__management-canceled-ctrl"
+		})
+		.when("/order__management-becanceled", {
+			templateUrl: "/assets/user_store/manage/order_management.html",
+			controller: "order__management-becanceled-ctrl"
 		})
 		// Nhân viên
 		.when("/user__management", {

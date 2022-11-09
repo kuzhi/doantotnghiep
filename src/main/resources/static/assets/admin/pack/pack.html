@@ -31,19 +31,113 @@
 		aria-labelledby="pills-all-tab" tabindex="0">
 		<div ng-repeat="p in list.pack"
 			class="row shadow-sm px-2 py-3 rounded mb-3 mx-1">
-			<div class="col-xl-4 col-1">
-				<h5>{{p.name}}</h5>
+			<div class="row">
+				<div class="col-xl-8">
+					<img alt="{{p.image}}" src="">
+				</div>
+				<div class="col-xl-4 text-end">
+					<h5>{{p.date}} ngày</h5>
+				</div>
 			</div>
-			<div class="col-xl-3 col-3">
-				<h5>{{p.date}}</h5>
-			</div>
-			<div class="col-xl-2 col-2">
-				<h5 class="text-truncate">{{p.price | currency:'':0}} đ</h5>
-			</div>
-			<div class="col-xl-3 col-3 text-end">
-				<a th:href="@{/home/client/_order-detail/{{o.id}}}"
-					class="btn btn-primary">Xem chi tiết</a>
+			<div class="row">
+				<div class="col-xl-4">
+					<h5 class="text-truncate">{{p.price | currency:'':0}} đ</h5>
+				</div>
+				<div class="col-xl-8 text-end">
+					<a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">Xem chi tiết</a>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <div ng-if="status == 1" class="d-flex align-items-center">
+        	<div class="fade-loading bg-secondary me-2"></div>
+        	<p 
+        		class="small text-secondary mb-0 fst-italic"
+        	>  Đang xử lý </p>
+        </div>
+        <div ng-if="status == 2" class="d-flex align-items-center">
+        	<div class="fade-loading bg-warning me-2"></div>
+        	<p 
+	         	class="small text-warning mb-0 fst-italic"
+	        > Đã duyệt </p>
+        </div>
+        <div ng-if="status == 3" class="d-flex align-items-center">
+        	<div class="fade-loading bg-danger me-2"></div>
+        	<p 
+	         	class="small text-danger mb-0 fst-italic"
+	         > Bị hủy bởi <b>khách hàng</b> </p>
+        </div>
+        <div ng-if="status == 4" class="d-flex align-items-center">
+        	<div class="fade-loading bg-danger me-2"></div>
+        	<p 
+	         	class="small text-danger mb-0 fst-italic"
+	         > Bị hủy bởi <b>bạn</b> </p>
+        </div>
+        <!-- Hình ảnh -->
+       	<div class="mb-3 row">
+			<div class="image-upload">
+	           	<label for="file-input" style="cursor:pointer;">
+	              <img 
+	              	ng-src="{{'/assets/images/Products/' + formProduct.image}}" 
+	              	alt="{{formProduct.image}}" style="width: 100px; height: 100px;"
+	              >
+	           	</label>
+	           	<input id="file-input" type="file" name="image"
+	           		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
+	        </div>
+		</div>
+        <!-- Tên -->
+       	<div class="mb-3 row">
+		    <label for="name" class="col-sm-2 col-form-label">Tên gói:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="name">
+		    </div>
+		</div>
+        <!-- Giá -->
+       	<div class="mb-3 row">
+		    <label for="price" class="col-sm-2 col-form-label">Giá:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="price">
+		    </div>
+		</div>
+        <!-- Số ngày -->
+       	<div class="mb-3 row">
+		    <label for="date" class="col-sm-3 col-form-label">Hiệu lực:</label>
+		    <div class="col-sm-9">
+		      <input type="number" class="form-control" id="date">
+		    </div>
+		</div>		
+        <!-- Ngày tạo -->
+        <div>
+        	<label	
+        	class="text-secondary">
+        	<b>Ngày tạo:</b> 9-11-2022
+        </label> <br>
+        <label 
+        	class="text-secondary">
+        	<b>Thay đổi gần nhất:</b> 9-11-2022
+        </label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button ng-if="status == 1" type="button" class="btn btn-primary">Duyệt</button>
+        <button ng-if="status == 2" type="button" class="btn btn-primary">Hủy gói</button>
+      </div>
+    </div>
+  </div>
 </div>
