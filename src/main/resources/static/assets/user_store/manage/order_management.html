@@ -1,31 +1,35 @@
 <nav class="mt-3 mx-3" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
-    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+	</ol>
 </nav>
 
-<div
-	class="row shadow-sm bg-second mx-3 py-3 rounded">
+<div class="row shadow-sm bg-second mx-3 py-3 rounded">
 	<div class="col-xl-12 col-md-12 col-12 add__product-pc">
 		<div class="row mb-3 text-start">
 			<div class="col-10">
 				<form class="d-flex align-items-center">
-					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input class="form-control border-0" placeholder="Tìm theo mã">
+					<div
+						class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i> <input
+							class="form-control border-0" placeholder="Tìm theo mã">
 					</div>
-	
-					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input class="form-control border-0" placeholder="Tìm theo tên khách hàng">
+
+					<div
+						class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i> <input
+							class="form-control border-0"
+							placeholder="Tìm theo tên khách hàng">
 					</div>
-	
-					<div class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input class="form-control border-0" placeholder="Tìm theo số điện thoại">
+
+					<div
+						class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i> <input
+							class="form-control border-0"
+							placeholder="Tìm theo số điện thoại">
 					</div>
-	
+
 					<button class="btn btn-info">
 						<i class="fas fa-filter"></i> Lọc
 					</button>
@@ -37,87 +41,76 @@
 				</label>
 			</div>
 		</div>
-		
+
 		<div class="row mt-3">
 			<div class="table-responsive">
-				<table 
-                 	class="table text-start align-middle table-bordered border-white table-hover mb-0"
-                 >
-                     <thead class="text-center bg-table">
-                     	<tr>
+				<table
+					class="table text-start align-middle table-bordered border-white table-hover mb-0">
+					<thead class="text-center bg-table">
+						<tr>
 							<th>Mã hóa đơn</th>
 							<th>Ngày tạo</th>
-							<th>Nhân viên</th>
+							<th>Người nhận</th>
 							<th>Trạng thái</th>
 							<th ng-if="statusShowAction == true">Hoạt động</th>
 						</tr>
 					</thead>
 					<tbody class="table table-info">
-						<tr
-							ng-repeat="o in list.order"
-						>
-							<td class="align-middle">
-								{{o.id}}
-							</td>
-							<td class="align-middle">
-								{{o.createDate}}
-							</td>
-							<td class="align-middle">
-								{{o.staff}}
-							</td>
-							<td class="align-middle">
-								<span ng-if="o.status === 1" class="text-light fw-bold">Đang chờ</span>
-								<span ng-if="o.status === 2" class="text-success fw-bold">Đã giao</span>
-								<span ng-if="o.status === 3" class="text-primary fw-bold">Bị hủy</span>
-								<span ng-if="o.status === 4" class="text-dark fw-bold">Đã hủy</span>
-							</td>
-							<td 
-								class="text-center align-middle"
-								ng-if="statusShowAction == true"
-							>
-								<button 
-									class="border-0 text-warning" 
-									data-bs-toggle="modal"
-									data-bs-target="#editModal" 
-									data-bs-whatever="edit"
-								> <i class="fas fa-edit"></i> </button>
-								<button 
-									ng-click="delete()"
-									class="border-0 text-danger"
-								> <i class="fas fa-ban"></i> </button>
+						<tr ng-repeat="o in page.content">
+							<td class="align-middle">{{o.ordercode}}</td>
+							<td class="align-middle">{{o.create_at}}</td>
+							<td class="align-middle">{{o.fullname}}</td>
+							<td class="align-middle"><span ng-if="o.status === 1"
+								class="text-light fw-bold">Đang chờ</span> <span
+								ng-if="o.status === 2" class="text-success fw-bold">Đã
+									duyệt</span> <span ng-if="o.status === 3" class="text-primary fw-bold">Thành
+									công</span> <span ng-if="o.status === 4" class="text-dark fw-bold">Đã
+									hủy</span> <span ng-if="o.status === 5" class="text-dark fw-bold">Bị
+									hủy</span></td>
+							<td class="text-center align-middle"
+								ng-if="statusShowAction == true">
+								<button ng-click="edit({{o.id}})" class="border-0 text-warning"
+									data-bs-toggle="modal" data-bs-target="#editModal"
+									data-bs-whatever="edit">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button ng-click="delete()" class="border-0 text-danger">
+									<i class="fas fa-ban"></i>
+								</button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
+
 		<div class="row my-3 text-start">
 			<div class="col-xl text-end">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
-						<li class="page-item disabled">
-							<a class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
+						<li class="page-item"><a ng-click="loadData(0)"
+							class="page-link text-dark"> <i class="fas fa-step-backward"></i>
+						</a></li>
+						<li class="page-item"><a ng-click="loadData(page.number-1)"
+							class="page-link text-dark"> <i class="fas fa-backward"></i>
+						</a></li>
+						<li class="page-item"><span class="page-link bg-white">{{page.number+1}}</span>
 						</li>
-						<li class="page-item">
-							<a class="page-link text-dark" href="#"> <i class="fas fa-backward"></i> </a>
-						</li>
-						<li class="page-item">
-							<span class="page-link bg-white">1</span>
-						</li>
-						<li class="page-item">
-							<a class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
-						</li>
-						<li class="page-item">
-							<a class="page-link text-dark" href="#"> <i class="fas fa-step-forward"></i> </a>
-						</li>
+						<li class="page-item"><a ng-click="loadData(page.number+1)"
+							class="page-link text-dark"> <i class="fas fa-forward"></i>
+						</a></li>
+						<li class="page-item"><a
+							ng-click="loadData(page.totalPages-1)"
+							class="page-link text-dark"> <i class="fas fa-step-forward"></i>
+						</a></li>
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 	<div class="add__product-mobile text-center text-white fw-bold p-5">
-		<i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 80px;"></i>
+		<i class="fa-solid fa-circle-exclamation text-danger"
+			style="font-size: 80px;"></i>
 		<p class="content__mobile text-dark">
 			Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
 			tính
@@ -134,31 +127,26 @@
 				<h5 class="modal-title text-dark" id="exModalLabel">Hóa đơn:</h5>
 			</div>
 			<div class="modal-body">
-			
+
 				<div class="row">
 					<div class="col-xl-12">
 						<h6 class="text-dark">Thông tin nhận hàng</h6>
 						<div class="row">
 							<div class="col">
-							    <label for="fullname" class="form-label">Khách hàng</label>
-							    <input type="text" class="form-control" id="fullname">
+								<label for="fullname" class="form-label">Khách hàng</label> <input
+									type="text" class="form-control" ng-value="order.fullname"
+									id="fullname">
 							</div>
 							<div class="col">
-							    <label for="id" class="form-label">Mã khách hàng</label>
-							    <input type="text" class="form-control" id="id">
-							</div>
-							<div class="col">
-							    <label for="phone" class="form-label">Số điện thoại</label>
-							    <input type="text" class="form-control" id="phone">
-							</div>
-							<div class="col">
-							    <label for="email" class="form-label">Email</label>
-							    <input type="email" class="form-control" id="email">
+								<label for="phone" class="form-label">Số điện thoại</label> <input
+									type="text" class="form-control" ng-value="order.phone"
+									id="phone">
 							</div>
 						</div>
 						<div class="row mx-1">
-						    <label for="address" class="form-label">Địa chỉ</label>
-						    <input type="text" class="form-control" id="address">
+							<label for="address" class="form-label">Địa chỉ</label> <input
+								type="text" class="form-control" ng-value="order.address"
+								id="address">
 						</div>
 					</div>
 				</div>
@@ -168,16 +156,29 @@
 						<h6 class="text-dark">Thông tin đơn hàng</h6>
 						<div class="row">
 							<div class="col">
-							    <label for="id" class="form-label">Mã đơn hàng</label>
-							    <input type="text" class="form-control" id="id">
+								<label for="id" class="form-label">Mã đơn hàng</label> <input
+									type="text" class="form-control" id="id"
+									ng-value="order.ordercode">
 							</div>
 							<div class="col">
-							    <label for="date" class="form-label">Ngày đơn hàng</label>
-							    <input type="text" class="form-control" id="date">
+								<label for="date" class="form-label">Ngày đặt hàng</label> <input
+									type="text" class="form-control" id="date"
+									ng-value="order.create_at">
 							</div>
 							<div class="col">
-							    <label for="status" class="form-label">Trạng thái đơn hàng</label>
-							    <input type="text" class="form-control" id="status">
+								<label for="date" class="form-label">Phương thức thanh
+									toán</label> <input type="text" class="form-control" id="date"
+									ng-value="order.paymentType.name">
+							</div>
+							<div class="col">
+								<label for="date" class="form-label">Hình thức nhận hàng</label>
+								<input type="text" class="form-control" id="date"
+									ng-value="order.shippingType.name">
+							</div>
+							<div class="col">
+								<label for="status" class="form-label">Tổng tiền</label> <input
+									type="text" class="form-control" ng-value="order.totalMoney"
+									id="status">
 							</div>
 						</div>
 					</div>
@@ -187,23 +188,22 @@
 					<div class="col-xl-12">
 						<h6 class="text-dark">Cập nhập trạng thái đơn hàng</h6>
 						<div>
-                        	<select class="form-select" aria-label="Default select example">
-							  <option selected>--Vui lòng chọn--</option>
-							  <option value="1">One</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
+							<select class="form-select" aria-label="Default select example">
+								<option selected>--Vui lòng chọn--</option>
+								<option value="1">One</option>
+								<option value="2">Two</option>
+								<option value="3">Three</option>
 							</select>
-                        </div>
+						</div>
 					</div>
 				</div>
-				
+
 				<div class="row mt-3">
 					<div class="table-responsive">
-						<table 
-		                 	class="table text-start align-middle table-bordered border-white table-hover mb-0"
-		                 >
-		                     <thead class="text-center bg-table">
-		                     	<tr>
+						<table
+							class="table text-start align-middle table-bordered border-white table-hover mb-0">
+							<thead class="text-center bg-table">
+								<tr>
 									<th>Mã món</th>
 									<th>Tên món</th>
 									<th>Đơn vị</th>
@@ -214,40 +214,26 @@
 								</tr>
 							</thead>
 							<tbody class="table table-info">
-								<tr
-									ng-repeat="d in list.detailOrder"
-								>
-									<td class="align-middle">
-										{{d.id}}
-									</td>
-									<td class="align-middle">
-										{{d.name}}
-									</td>
-									<td class="align-middle">
-										{{d.unit}}
-									</td>
-									<td class="align-middle">
-										{{d.price | currency:'':0}}đ
-									</td>
-									<td class="align-middle">
-										{{d.quantily}}
-									</td>
-									<td class="align-middle">
-										{{d.discount}}%
-									</td>
-									<td class="align-middle">
-										{{d.amount | currency:'':0}}đ
-									</td>
+								<tr ng-repeat="d in order.orderDetail">
+									<td class="align-middle">{{d.id}}</td>
+									<td class="align-middle">{{d.product.name}}</td>
+									<td class="align-middle">{d.product.price |
+										currency:'':0}}đ</td>
+									<td class="align-middle">{{d.amount}}</td>
+									<td class="align-middle">{{d.discount}}%</td>
+									<td class="align-middle">{{d.amount | currency:'':0}}đ</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-			
+
 				<div class="row mt-2">
 					<div class="col-xl-12 text-end">
-						<button class="btn btn-outline-danger px-5 py-1" data-bs-dismiss="modal">Hủy</button>
-						<button ng-disabled="userForm.$invalid" class="btn btn-info ms-2 px-5 py-1">Lưu thay đổi</button>
+						<button class="btn btn-outline-danger px-5 py-1"
+							data-bs-dismiss="modal">Hủy</button>
+						<button ng-disabled="userForm.$invalid"
+							class="btn btn-info ms-2 px-5 py-1">Lưu thay đổi</button>
 					</div>
 				</div>
 			</div>

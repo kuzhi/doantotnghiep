@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import fpoly.chickens.dao.OrderDAO;
 import fpoly.chickens.dao.OrderDetailDAO;
 import fpoly.chickens.dao.StoreDAO;
@@ -81,9 +83,19 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public List<Order> getOrderStore(Integer integer) {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<Order> getOrderStore(Integer storeid, Integer pageNumber) {
+		Store store = storeDao.findById(storeid).get();
+		if (pageNumber < 0) {
+			pageNumber = 0;
+		}
+		Pageable pageable = PageRequest.of(pageNumber, 1);
+		Page<Order> page = orderDao.findAllByStore(store, pageable);
+		if (pageNumber >= page.getTotalPages() - 1) {
+			pageNumber = page.getTotalPages() - 1;
+			pageable = PageRequest.of(pageNumber, 1);
+			page = orderDao.findAllByStore(store, pageable);
+		}
+		return page;
 	}
 
 	@Override
@@ -98,5 +110,26 @@ public class OrderImplement implements OrderService {
 	public Order findOrderById(Integer id) {
 		Order order = orderDao.findById(id).get();
 		return order;
+	}
+
+	@Override
+	public Page<Order> getOrderStoreByStatus(Integer storeid, Integer status, Integer pageNumber) {
+		Store store = storeDao.findById(storeid).get();
+		if (pageNumber < 0) {
+			pageNumber = 0;
+		}
+		Pageable pageable = PageRequest.of(pageNumber, 1);
+		Page<Order> page = orderDao.findAllByStoreAndStatus(store, status, pageable);
+		if (pageNumber >= page.getTotalPages() - 1) {
+			pageNumber = page.getTotalPages() - 1;
+			pageable = PageRequest.of(pageNumber, 1);
+			page = orderDao.findAllByStoreAndStatus(store, status, pageable);
+		}
+		return page;
+	}
+
+	@Override
+	public Order getOrderbyId(Integer id) {
+		return orderDao.findById(id).get();
 	}
 }
