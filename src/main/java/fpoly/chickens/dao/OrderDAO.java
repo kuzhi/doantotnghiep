@@ -21,6 +21,7 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 
 	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1")
 	Integer countOrderInStore(Store store);
+	
 
 	@Query("SELECT o FROM Order o WHERE o.store = ?1 ")
 	Page<Order> findAllByStore(Store store, Pageable pageable);
