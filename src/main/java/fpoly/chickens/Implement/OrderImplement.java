@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,5 +132,10 @@ public class OrderImplement implements OrderService {
 	@Override
 	public Order getOrderbyId(Integer id) {
 		return orderDao.findById(id).get();
+	}
+
+	@Override
+	public Integer getOrderInDate(Integer storeid, Date date) {
+		return orderDao.countOrderInDate(storeid, date);
 	}
 }

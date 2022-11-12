@@ -58,12 +58,26 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
         }
     });
     
+    // Hóa đơn trong ngày
+    $scope.storeid = 2;
+    $scope.date = new Date();
+    $scope.getOrderInDate = function(storeid, date) {
+		$http.get("/api/count/order/" + storeid + "/" + date)
+		.then(resp => {
+			$scope.orderInDate = resp.data;
+			console.log('data: ', $scope.orderInDate);
+		})
+		.catch(error => {
+            console.log('error: ', error)
+        })
+	}
+	$scope.getOrderInDate($scope.storeid, $scope.date);
+    
     //List top 5
     $scope.items=[];
     $scope.report = function() {
 		$http.get("/api/report-overview-app").then(resp => {
 			$scope.items = resp.data
-			console.log('data: ', $scope.items)
 		});
 	}
 	

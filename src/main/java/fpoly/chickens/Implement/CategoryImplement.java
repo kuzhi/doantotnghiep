@@ -39,4 +39,10 @@ public class CategoryImplement implements CategoryService {
 		// TODO Auto-generated method stub
 		categoryDAO.deleteById(id);
 	}
+
+	@Override
+	public List<Category> findAllByStore(Integer storeid) {
+		// TODO Auto-generated method stub
+		return categoryDAO.findAllByStore(storeid);
+	}
 }

@@ -1,5 +1,6 @@
 package fpoly.chickens.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -27,5 +28,6 @@ public interface OrderService {
 	Page<Order> getOrderStoreByStatus(Integer storeid, Integer status, Integer pageNumber);
 
 	Order getOrderbyId(Integer id);
-
+	
+	Integer getOrderInDate(Integer storeid, Date date);
 }

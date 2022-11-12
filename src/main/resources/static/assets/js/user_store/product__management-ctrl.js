@@ -161,7 +161,6 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
             resp.data.update_at = new Date(resp.data.update_at)  
              
             $scope.products.push(resp.data); 
-        	// console.log('data: ', $scope.products);            
             $scope.reset(); 
             $scope.init();
 			Swal.fire({

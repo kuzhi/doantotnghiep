@@ -7,6 +7,9 @@ import fpoly.chickens.entity.Category;
 public interface CategoryService {
 	List<Category> findAll();
 	
+	// Find all category by storeid
+	List<Category> findAllByStore(Integer storeid);
+	
 	// Create
 	Category create(Category category);
 	// Update

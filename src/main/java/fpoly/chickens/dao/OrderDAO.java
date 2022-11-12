@@ -1,5 +1,6 @@
 package fpoly.chickens.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -28,4 +29,6 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	@Query("SELECT o FROM Order o WHERE o.store = ?1 and o.Status = ?2")
 	Page<Order> findAllByStoreAndStatus(Store store, Integer status, Pageable pageable);
 
+	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at = ?2")
+	Integer countOrderInDate(Integer store, Date date);
 }

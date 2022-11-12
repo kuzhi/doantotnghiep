@@ -1,5 +1,6 @@
 package fpoly.chickens.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,4 +77,9 @@ public class OrderAPI {
 
 	}
 
+	@GetMapping("/api/count/order/{storeid}/{date}")
+	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("date") Optional<Date> date) {
+		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), date.get()));
+	}
 }
