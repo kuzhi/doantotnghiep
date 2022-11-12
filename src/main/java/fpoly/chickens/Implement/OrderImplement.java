@@ -74,13 +74,6 @@ public class OrderImplement implements OrderService {
 
 	}
 
-	@Override
-	public void cancelOrder(JsonNode orderData) {
-		ObjectMapper mapper = new ObjectMapper();
-		Order order = mapper.convertValue(orderData, Order.class);
-		order.setStatus(3);
-		orderDao.saveAndFlush(order);
-	}
 
 	@Override
 	public Page<Order> getOrderStore(Integer storeid, Integer pageNumber) {
@@ -128,8 +121,4 @@ public class OrderImplement implements OrderService {
 		return page;
 	}
 
-	@Override
-	public Order getOrderbyId(Integer id) {
-		return orderDao.findById(id).get();
-	}
 }

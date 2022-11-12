@@ -24,11 +24,6 @@ import fpoly.chickens.service.OrderService;
 public class OrderAPI {
 	@Autowired
 	OrderService orderService;
-	
-	@GetMapping("/api/order/get/{id}")
-	public ResponseEntity<Order> getOrderStore(@PathVariable("id") Optional<Integer> id) {
-		return ResponseEntity.ok(orderService.getOrderbyId(id.get()));
-	}
 
 	@GetMapping("/api/order/store/{storeid}/{page}")
 	public ResponseEntity<Page<Order>> getOrderStore(@PathVariable("storeid") Optional<Integer> storeid,
@@ -69,11 +64,5 @@ public class OrderAPI {
 
 	}
 
-	@PutMapping("/api/order/cancel")
-	public ResponseEntity<Void> cancelOrder(@RequestBody JsonNode orderData) {
-		orderService.cancelOrder(orderData);
-		return ResponseEntity.ok().build();
-
-	}
 
 }
