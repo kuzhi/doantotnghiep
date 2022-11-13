@@ -14,8 +14,6 @@ public interface OrderService {
 
 	void addOrder(JsonNode orderData);
 
-	void cancelOrder(JsonNode orderData);
-
 	Page<Order> getOrderStore(Integer storeid, Integer pageNumber);
 
 	List<Order> getOrdersbyStatus(Integer storeid, Integer userid, Integer status);
@@ -26,6 +24,6 @@ public interface OrderService {
 
 	Page<Order> getOrderStoreByStatus(Integer storeid, Integer status, Integer pageNumber);
 
-	Order getOrderbyId(Integer id);
+
 
 }

@@ -41,13 +41,13 @@
 							<div class="col-xl-3 col-4">
 
 								<div class="input-group input-group-sm mb-3">
-									<button ng-click="p.amount = p.amount - 1"
+									<button ng-click="p.amount = p.amount - 1; update(p);"
 										class="input-group-text bg-white">
 										<i class="fa-solid fa-minus"></i>
 									</button>
 									<input ng-model="p.amount" type="number"
 										class="form-control text-center" ng-change="update(p)">
-									<button ng-click="p.amount = p.amount + 1"
+									<button ng-click="p.amount = p.amount + 1; update(p);" 
 										class="input-group-text bg-white">
 										<i class="fa-solid fa-plus"></i>
 									</button>

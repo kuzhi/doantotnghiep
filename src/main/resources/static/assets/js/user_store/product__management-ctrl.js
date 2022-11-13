@@ -513,7 +513,6 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			$http.get($scope.url+"sort/a-z")
 			.then(resp => { 
 	            $scope.products = resp.data;
-	            
 	            $scope.products.forEach(product => { 
 	                product.create_at = new Date(product.create_at)
 	                product.update_at = new Date(product.update_at)

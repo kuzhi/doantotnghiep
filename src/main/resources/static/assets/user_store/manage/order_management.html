@@ -74,7 +74,8 @@
 									data-bs-whatever="edit">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button ng-click="delete()" class="border-0 text-danger">
+								<button ng-if="o.status === 1" ng-click="cancel(o.id)"
+									class="border-0 text-danger">
 									<i class="fas fa-ban"></i>
 								</button>
 							</td>
@@ -134,19 +135,19 @@
 						<div class="row">
 							<div class="col">
 								<label for="fullname" class="form-label">Khách hàng</label> <input
-									type="text" class="form-control" ng-value="order.fullname"
-									id="fullname">
+									type="text" class="form-control"
+									ng-value="orderDetail[0].order.fullname" id="fullname">
 							</div>
 							<div class="col">
 								<label for="phone" class="form-label">Số điện thoại</label> <input
-									type="text" class="form-control" ng-value="order.phone"
-									id="phone">
+									type="text" class="form-control"
+									ng-value="orderDetail[0].order.phone" id="phone">
 							</div>
 						</div>
 						<div class="row mx-1">
 							<label for="address" class="form-label">Địa chỉ</label> <input
-								type="text" class="form-control" ng-value="order.address"
-								id="address">
+								type="text" class="form-control"
+								ng-value="orderDetail[0].order.address" id="address">
 						</div>
 					</div>
 				</div>
@@ -158,27 +159,27 @@
 							<div class="col">
 								<label for="id" class="form-label">Mã đơn hàng</label> <input
 									type="text" class="form-control" id="id"
-									ng-value="order.ordercode">
+									ng-value="orderDetail[0].order.ordercode">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Ngày đặt hàng</label> <input
 									type="text" class="form-control" id="date"
-									ng-value="order.create_at">
+									ng-value="orderDetail[0].order.create_at">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Phương thức thanh
 									toán</label> <input type="text" class="form-control" id="date"
-									ng-value="order.paymentType.name">
+									ng-value="orderDetail[0].order.paymentType.paymentName">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Hình thức nhận hàng</label>
-								<input type="text" class="form-control" id="date"
-									ng-value="order.shippingType.name">
+								<input type="text" class="form-control"
+									ng-value="orderDetail[0].order.shippingType.shippingName">
 							</div>
 							<div class="col">
 								<label for="status" class="form-label">Tổng tiền</label> <input
-									type="text" class="form-control" ng-value="order.totalMoney"
-									id="status">
+									type="text" class="form-control"
+									ng-value="orderDetail[0].order.totalMoney">
 							</div>
 						</div>
 					</div>
@@ -186,14 +187,38 @@
 
 				<div class="row mt-2">
 					<div class="col-xl-12">
-						<h6 class="text-dark">Cập nhập trạng thái đơn hàng</h6>
+						<h6 class="text-dark">Trạng thái đơn hàng</h6>
 						<div>
-							<select class="form-select" aria-label="Default select example">
-								<option selected>--Vui lòng chọn--</option>
-								<option value="1">One</option>
-								<option value="2">Two</option>
-								<option value="3">Three</option>
-							</select>
+							<div ng-if="orderDetail[0].order.status == 1"
+								class="d-flex align-items-center">
+								<div class="fade-loading bg-secondary me-2"></div>
+								<p class="small text-secondary mb-0 fst-italic">Đang xử lý</p>
+							</div>
+							<div ng-if="orderDetail[0].order.status == 2"
+								class="d-flex align-items-center">
+								<div class="fade-loading bg-warning me-2"></div>
+								<p class="small text-warning mb-0 fst-italic">Đã duyệt</p>
+							</div>
+							<div ng-if="orderDetail[0].order.status == 3"
+								class="d-flex align-items-center">
+								<div class="fade-loading bg-success me-2"></div>
+								<p class="small text-success mb-0 fst-italic">Giao hàng
+									thành công</p>
+							</div>
+							<div ng-if="orderDetail[0].order.status == 4"
+								class="d-flex align-items-center">
+								<div class="fade-loading bg-danger me-2"></div>
+								<p class="small text-danger mb-0 fst-italic">
+									Bị hủy bởi <b>bạn</b>
+								</p>
+							</div>
+							<div ng-if="orderDetail[0].order.status == 5"
+								class="d-flex align-items-center">
+								<div class="fade-loading bg-danger me-2"></div>
+								<p class="small text-danger mb-0 fst-italic">
+									Bị hủy bởi <b>cửa hàng</b>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -206,22 +231,18 @@
 								<tr>
 									<th>Mã món</th>
 									<th>Tên món</th>
-									<th>Đơn vị</th>
 									<th>Giá</th>
 									<th>Số lượng</th>
-									<th>Giảm giá</th>
 									<th>Thành tiền</th>
 								</tr>
 							</thead>
 							<tbody class="table table-info">
-								<tr ng-repeat="d in order.orderDetail">
+								<tr ng-repeat="d in orderDetail">
 									<td class="align-middle">{{d.id}}</td>
 									<td class="align-middle">{{d.product.name}}</td>
-									<td class="align-middle">{d.product.price |
-										currency:'':0}}đ</td>
+									<td class="align-middle">{{d.product.price }}đ</td>
 									<td class="align-middle">{{d.amount}}</td>
-									<td class="align-middle">{{d.discount}}%</td>
-									<td class="align-middle">{{d.amount | currency:'':0}}đ</td>
+									<td class="align-middle">{{d.amount * d.product.price }}đ</td>
 								</tr>
 							</tbody>
 						</table>
@@ -232,8 +253,8 @@
 					<div class="col-xl-12 text-end">
 						<button class="btn btn-outline-danger px-5 py-1"
 							data-bs-dismiss="modal">Hủy</button>
-						<button ng-disabled="userForm.$invalid"
-							class="btn btn-info ms-2 px-5 py-1">Lưu thay đổi</button>
+						<button ng-if="orderDetail[0].order.status === 1" ng-click="confirm(orderDetail[0].order.id)" class="btn btn-info ms-2 px-5 py-1">Xác
+							nhận duyệt đơn hàng</button>
 					</div>
 				</div>
 			</div>
