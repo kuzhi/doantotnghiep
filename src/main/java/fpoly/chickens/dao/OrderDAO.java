@@ -30,5 +30,5 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	Page<Order> findAllByStoreAndStatus(Store store, Integer status, Pageable pageable);
 
 	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at = ?2")
-	Integer countOrderInDate(Integer store, Date date);
+	Integer countOrderInDate(Store store, Date date);
 }

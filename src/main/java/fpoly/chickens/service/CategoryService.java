@@ -11,9 +11,10 @@ public interface CategoryService {
 	List<Category> findAllByStore(Integer storeid);
 	
 	// Create
-	Category create(Category category);
+	Category create(Category category, Integer storeid);
 	// Update
 	Category update(Category category);
 	// Delete
 	void delete(Integer id);
+
 }

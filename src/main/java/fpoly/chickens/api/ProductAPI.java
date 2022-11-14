@@ -35,6 +35,19 @@ public class ProductAPI {
 	public List<Product> findAll() {
 		return productService.findAll();
 	}
+
+	// Load
+	@GetMapping("store/{storeid}")
+	public List<Product> findAllByStore(@PathVariable("storeid") Optional<Integer> storeid) {
+		return productService.findAllProductByStore(storeid.get());
+	}
+
+	// Load status == true
+	@GetMapping("store/{storeid}/{status}")
+	public List<Product> findAllByStoreWithStatus(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("status") Optional<Boolean> status) {
+		return productService.findAllProductByStoreWithStatus(storeid.get(), status.get());
+	}
 	
 	// Create
 	@PostMapping

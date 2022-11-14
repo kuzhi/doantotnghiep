@@ -60,18 +60,16 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
     
     // Hóa đơn trong ngày
     $scope.storeid = 2;
-    $scope.date = new Date();
-    $scope.getOrderInDate = function(storeid, date) {
-		$http.get("/api/count/order/" + storeid + "/" + date)
+    $scope.getOrderInDate = function(storeid) {
+		$http.get("/api/count/order/" + storeid)
 		.then(resp => {
 			$scope.orderInDate = resp.data;
-			console.log('data: ', $scope.orderInDate);
 		})
 		.catch(error => {
             console.log('error: ', error)
         })
 	}
-	$scope.getOrderInDate($scope.storeid, $scope.date);
+	$scope.getOrderInDate($scope.storeid);
     
     //List top 5
     $scope.items=[];

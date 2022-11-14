@@ -136,6 +136,8 @@ public class OrderImplement implements OrderService {
 
 	@Override
 	public Integer getOrderInDate(Integer storeid, Date date) {
-		return orderDao.countOrderInDate(storeid, date);
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDate(store, date);
 	}
 }

@@ -77,9 +77,8 @@ public class OrderAPI {
 
 	}
 
-	@GetMapping("/api/count/order/{storeid}/{date}")
-	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
-			@PathVariable("date") Optional<Date> date) {
-		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), date.get()));
+	@GetMapping("/api/count/order/{storeid}")
+	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid) {
+		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), new Date()));
 	}
 }
