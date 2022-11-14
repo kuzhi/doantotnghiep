@@ -75,13 +75,6 @@ public class OrderImplement implements OrderService {
 
 	}
 
-	@Override
-	public void cancelOrder(JsonNode orderData) {
-		ObjectMapper mapper = new ObjectMapper();
-		Order order = mapper.convertValue(orderData, Order.class);
-		order.setStatus(3);
-		orderDao.saveAndFlush(order);
-	}
 
 	@Override
 	public Page<Order> getOrderStore(Integer storeid, Integer pageNumber) {
@@ -135,9 +128,23 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public Integer getOrderInDate(Integer storeid, Date date) {
+	public Integer getOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
 		Store store = storeDao.findById(storeid).get();
 		
-		return orderDao.countOrderInDate(store, date);
+		return orderDao.countOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.getOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDateWithStatus(store, dateStar, dateEnd, Status);
 	}
 }

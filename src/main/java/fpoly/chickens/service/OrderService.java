@@ -8,14 +8,13 @@ import org.springframework.data.domain.Page;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import fpoly.chickens.entity.Order;
+import fpoly.chickens.entity.Store;
 
 public interface OrderService {
 
 	List<Order> getAllOrders(Integer storeid, Integer userid);
 
 	void addOrder(JsonNode orderData);
-
-	void cancelOrder(JsonNode orderData);
 
 	Page<Order> getOrderStore(Integer storeid, Integer pageNumber);
 
@@ -29,5 +28,8 @@ public interface OrderService {
 
 	Order getOrderbyId(Integer id);
 	
-	Integer getOrderInDate(Integer storeid, Date date);
+	// Count order
+	Integer getOrderInDate(Integer storeid, Date dateStar, Date dateEnd);
+	Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd);
+	Integer countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status);
 }

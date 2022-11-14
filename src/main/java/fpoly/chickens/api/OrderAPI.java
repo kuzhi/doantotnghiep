@@ -1,5 +1,7 @@
 package fpoly.chickens.api;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -25,11 +27,6 @@ import fpoly.chickens.service.OrderService;
 public class OrderAPI {
 	@Autowired
 	OrderService orderService;
-	
-	@GetMapping("/api/order/get/{id}")
-	public ResponseEntity<Order> getOrderStore(@PathVariable("id") Optional<Integer> id) {
-		return ResponseEntity.ok(orderService.getOrderbyId(id.get()));
-	}
 
 	@GetMapping("/api/order/store/{storeid}/{page}")
 	public ResponseEntity<Page<Order>> getOrderStore(@PathVariable("storeid") Optional<Integer> storeid,
@@ -70,15 +67,19 @@ public class OrderAPI {
 
 	}
 
-	@PutMapping("/api/order/cancel")
-	public ResponseEntity<Void> cancelOrder(@RequestBody JsonNode orderData) {
-		orderService.cancelOrder(orderData);
-		return ResponseEntity.ok().build();
-
+	// Count order
+	@GetMapping("/api/count/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
 	}
-
-	@GetMapping("/api/count/order/{storeid}")
-	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid) {
-		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), new Date()));
+	
+	// Get doanh thu
+	@GetMapping("/api/sale/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getSaleOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getSaleOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
 	}
 }
