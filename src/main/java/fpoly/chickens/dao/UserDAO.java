@@ -16,6 +16,12 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	@Query(value = "SELECT o FROM User o WHERE o.Fullname LIKE ?1")
 	List<User> findByName(String name);
 	
+	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1")
+	List<User> findUserByUserName(String name);
+	
+	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1 AND o.Fullname LIKE ?1")
+	List<User> findUserByUserNameAndFullName(String username, String fullname);
+	
 	// Sort A-Z
 		@Query(value = "SELECT o FROM User o ORDER BY o.Fullname ASC")
 		List<User> sortAZ();

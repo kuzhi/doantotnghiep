@@ -20,8 +20,13 @@ public interface UserAdminService {
 	// Delete
 	void delete(Integer id);
 	
-	// Find product by name
+	// Find by name
 	List<User> findUserByName(String name);
+	// Find by user
+	List<User> findUserByUserName(String name);
+	// Find by name
+	List<User> findUserByUserNameAndFullName(String username, String fullname);
+	
 	// Sort AZ
 	List<User> sortAZ();
 	// Sort ZA
