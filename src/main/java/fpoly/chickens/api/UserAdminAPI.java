@@ -29,69 +29,82 @@ public class UserAdminAPI {
 	UserAdminService userAdminService;
 	@Autowired
 	UploadService uploadService;
-	
+
 	// Load
 	@GetMapping
 	public List<User> findAll() {
 		return userAdminService.findAll();
 	}
-	
+
 	// Load
-		@GetMapping("deleted/{deleted}")
-		public List<User> loadUserWithDeleted(@PathVariable("deleted") Optional<Boolean> deleted) {
-			return userAdminService.loadUserWithDeleted(deleted.get());
-		}
-	
+	@GetMapping("deleted/{deleted}")
+	public List<User> loadUserWithDeleted(@PathVariable("deleted") Optional<Boolean> deleted) {
+		return userAdminService.loadUserWithDeleted(deleted.get());
+	}
+
 	// Create
 	@PostMapping
 	public ResponseEntity<User> create(@RequestBody Optional<User> user) {
-		if(user.isPresent()) {
+		if (user.isPresent()) {
 			userAdminService.create(user.get());
 		}
-			
-		return  ResponseEntity.ok().build();
-	}
-	
-	// Update
-	@PutMapping("{id}")
-	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id,
-			@RequestBody User user) {
-		userAdminService.update(user);
-		
+
 		return ResponseEntity.ok().build();
 	}
-	
+
+	// Update
+	@PutMapping("{id}")
+	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id, @RequestBody User user) {
+		userAdminService.update(user);
+
+		return ResponseEntity.ok().build();
+	}
+
 	// Delete
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		userAdminService.delete(id);
 	}
-	
+
 	// Find by name
 	@GetMapping("/{nameUser}")
-	public ResponseEntity<List<User>> findByName(
-			@PathVariable("nameUser") Optional<String> nameUser) {
-		return ResponseEntity.ok(userAdminService.findUserByName("%"+nameUser.get()+"%"));
+	public ResponseEntity<List<User>> findByName(@PathVariable("nameUser") Optional<String> nameUser) {
+		return ResponseEntity.ok(userAdminService.findUserByName("%" + nameUser.get() + "%"));
 	}
-	
+
+	// Find by user name
+	@GetMapping("id/{nameUserName}")
+	public ResponseEntity<List<User>> findByUserName(@PathVariable("nameUserName") Optional<String> nameUser) {
+		return ResponseEntity.ok(userAdminService.findUserByUserName("%" + nameUser.get() + "%"));
+	}
+
+	// Find by user name
+	@GetMapping("id/name/{nameUserName}/{nameUser}")
+	public ResponseEntity<List<User>> findByUserNameAndFullName(
+			@PathVariable("nameUserName") Optional<String> nameUserName,
+			@PathVariable("nameUser") Optional<String> nameUser) {
+		return ResponseEntity.ok(userAdminService.findUserByUserNameAndFullName("%" + nameUserName.get() + "%",
+				"%" + nameUser.get() + "%"));
+	}
+
 	// Sort A-Z
 	@GetMapping("/sort/a-z")
 	public List<User> sortAZ() {
 		return userAdminService.sortAZ();
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/z-a")
 	public List<User> sortZA() {
 		return userAdminService.sortZA();
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/0-9")
 	public List<User> sort09() {
 		return userAdminService.hoatDong();
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/9-0")
 	public List<User> sort90() {

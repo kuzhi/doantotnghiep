@@ -53,6 +53,12 @@ public class UserAdminImplement implements UserAdminService {
 		// TODO Auto-generated method stub
 		return userDAO.findByName(name);
 	}
+	
+	@Override
+	public List<User> findUserByUserName(String name) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByUserName(name);
+	}
 
 	@Override
 	public List<User> sortAZ() {
@@ -82,6 +88,12 @@ public class UserAdminImplement implements UserAdminService {
 	public List<User> loadUserWithDeleted(Boolean deleted) {
 		// TODO Auto-generated method stub
 		return userDAO.loadUserWithDeleted(deleted);
+	}
+
+	@Override
+	public List<User> findUserByUserNameAndFullName(String username, String fullname) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByUserNameAndFullName(username, fullname);
 	}
 
 	
