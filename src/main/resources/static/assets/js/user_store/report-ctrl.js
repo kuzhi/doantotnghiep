@@ -12,7 +12,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		
 		for(let i=0; i<month.length; i++){
 			dateStart.setTime(exampleDate.getTime()); dateStart.setDate(1); dateStart.setMonth(i);
-			// console.log('dateS: ', dateStart);			
+
 			dateEnd.setTime(exampleDate.getTime() + end); 
 			if(i==1){
 				dateEnd.setDate(28); 
@@ -62,6 +62,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	}; loadOrder11();
 	
 	var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+
     var myChart1 = new Chart(ctx1, {
         type: "bar",
         data: {
