@@ -12,7 +12,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		
 		for(let i=0; i<month.length; i++){
 			dateStart.setTime(exampleDate.getTime()); dateStart.setDate(1); dateStart.setMonth(i);
-			console.log('dateS: ', dateStart);			
+
 			dateEnd.setTime(exampleDate.getTime() + end); 
 			if(i==1){
 				dateEnd.setDate(28); 
@@ -24,43 +24,45 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 				dateEnd.setDate(30); 								
 			}
 			dateEnd.setMonth(i);				
-			console.log('dateE: ', dateEnd);			
+			// console.log('dateE: ', dateEnd);		
+				
+			$http.get("/api/count/order/" + $scope.storeid + "/"  + dateStart + "/" +  dateEnd)
+			.then(resp => {
+				$scope.countMonth = resp.data;
+				console.log('data:', $scope.countMonth)
+				
+				$scope.data = {
+					labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+					datasets: [
+						{
+							label: "Thành công",
+							data: [
+			                    $scope.countMonth
+			                ],
+			                color: "#BCFEFE",
+			                backgroundColor: "rgba(34, 230, 0, 90)"
+						},
+						{
+							label: "Bị hủy",
+			                data: [
+			                    8, 35, 40, 60, 70, 55, 75,
+			                    8, 35, 40, 60, 70, 55, 75
+			                ],
+			                color: "#BCFEFE",
+			                backgroundColor: "rgba(255, 21, 48, 100)"
+						}
+					]
+				}
+			})
+			.catch(error => {
+	            console.log('error: ', error)
+	        })
 		}
 		
-		$http.get("/api/count/order/" + $scope.storeid + "/"  + dateStart + "/" +  dateEnd)
-		.then(resp => {
-			$scope.countMonth = resp.data;
-			console.log('data:', $scope.countMonth)
-		})
-		.catch(error => {
-            console.log('error: ', error)
-        })
 	}; loadOrder11();
 	
-	$scope.data = {
-		labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-		datasets: [
-			{
-				label: "Thành công",
-				data: [
-                    1 , 2, 3, 4, 5, 6, 7,
-                    8, 9, 10, $scope.count11, 12
-                ],
-                color: "#BCFEFE",
-                backgroundColor: "rgba(34, 230, 0, 90)"
-			},
-			{
-				label: "Bị hủy",
-                data: [
-                    8, 35, 40, 60, 70, 55, 75,
-                    8, 35, 40, 60, 70, 55, 75
-                ],
-                color: "#BCFEFE",
-                backgroundColor: "rgba(255, 21, 48, 100)"
-			}
-		]
-	}
-    var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+	var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+
     var myChart1 = new Chart(ctx1, {
         type: "bar",
         data: {
@@ -71,8 +73,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
             responsive: true
         }
     });
-
-
+	
     // Salse & Revenue Chart
     var ctx2 = $("#salse-revenue").get(0).getContext("2d");
     var myChart2 = new Chart(ctx2, {

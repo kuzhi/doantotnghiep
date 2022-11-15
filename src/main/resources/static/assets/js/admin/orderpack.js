@@ -1,6 +1,6 @@
-app.controller("pack-ctrl", function($scope, $http, $location) {
+app.controller("order-pack-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Gói dịch vụ';
-	$scope.titleBread = 'Duyệt gói dịch vụ trong hệ thống';
+	$scope.titleBread = 'Quản lý gói dịch vụ';
 	
 	$scope.status = 1;
 	$scope.showBtn = true;
@@ -12,21 +12,21 @@ app.controller("pack-ctrl", function($scope, $http, $location) {
 				price: 200000,
 				date: 365,
 				image: 'goi1nam.png',
-				status: 2
+				date: "15-11-2022"
 			},
 			{
 				name: 'gói 1 năm',
 				price: 200000,
 				date: 365,
 				image: 'goi1nam.png',
-				status: 1
+				date: "15-11-2022"
 			},
 			{
 				name: 'gói 1 năm',
 				price: 200000,
 				date: 365,
 				image: 'goi1nam.png',
-				status: 1
+				date: "15-11-2022"
 			},
 		]
 	}
