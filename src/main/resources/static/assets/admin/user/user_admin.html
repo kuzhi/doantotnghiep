@@ -14,13 +14,13 @@
 						<button class="btn btn-outline-success rounded-4" ng-click="findByName()" type="submit">
 							<i class="fas fa-search"></i>
 						</button>
-							<input class="form-control mx-2" type="search" ng-model="nameUser"
-								placeholder="Nhập tên nhân viên" aria-label="Search">
+						<input class="form-control mx-2" type="search" ng-model="nameUser" 
+							placeholder="Nhập tên nhân viên" aria-label="Search">
 					</form>
 				</div>
 				<div class="col-xl-2 text-star mb-3">
 					<button class="btn btn-primary rounded-circle" data-bs-toggle="modal"
-						data-bs-target="#exampleModal"><i class="fas fa-plus"></i></button>
+						data-bs-target="#exampleModal"><i class="fas fa-plus"></i></button> 
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -48,7 +48,6 @@
 								<th>Số Điện Thoại</th>
 								<th>Ngày sinh</th>
 								<th>Giới tính</th>
-								<th>Hoạt động</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -71,9 +70,6 @@
 								</td>
 								<td class="align-middle">
 									{{u.gender ? 'Nam' : 'Nữ'}}
-								</td>
-								<td class="align-middle">
-									{{u.status ? 'Hoạt động' : 'Ngừng hoạt động'}}
 								</td>
 								<td class="text-center align-middle">
 									<button ng-click="edit(u)" class="btn text-warning" data-bs-toggle="modal"
@@ -243,34 +239,16 @@
 						</div>
 					</div>
 
-					<!-- Status -->
-					<div class="row mt-1">
-						<h6 class="text-secondary">Trạng thái </h6>
-						<div class="d-flex">
-							<div class="form-check me-2">
-								<input id="true" ng-value="true" type="radio" name="status" class="form-check-input"
-									ng-model="formUser.status">
-								<label class="form-check-label" for="true"> Hoạt động </label>
-							</div>
-							<div class="form-check">
-								<input id="false" type="radio" ng-value="false" name="status" class="form-check-input"
-									ng-model="formUser.status">
-								<label class="form-check-label" for="false"> Ngừng hoạt động </label>
-							</div>
+					<div class="row mt-4 ">
+						<div class="col-xl-6">
+							<button type="button" class="btn btn-outline-danger w-100" ng-click="reset()"
+								data-bs-dismiss="modal">Hủy</button>
 						</div>
-
-
-						<div class="row mt-2">
-							<div class="col-xl-6">
-								<button type="button" class="btn btn-outline-danger w-100"
-									data-bs-dismiss="modal">Hủy</button>
-							</div>
-							<div class="col-xl-6">
-								<button type="button" ng-if="showBtn == true" ng-click="create()"
-									ng-disabled="userForm.$invalid" class="btn btn-primary w-100">Lưu</button>
-								<button type="button" ng-if="showBtn == false" ng-click="update()"
-									ng-disabled="userForm.$invalid" class="btn btn-primary w-100">Lưu thay đổi</button>
-							</div>
+						<div class="col-xl-6">
+							<button type="button" ng-if="showBtn == true" ng-click="create()"
+								ng-disabled="userForm.$invalid" class="btn btn-primary w-100">Lưu</button>
+							<button type="button" ng-if="showBtn == false" ng-click="update()"
+								ng-disabled="userForm.$invalid" class="btn btn-primary w-100">Lưu thay đổi</button>
 						</div>
 					</div>
 			</form>
