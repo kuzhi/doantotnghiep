@@ -2,7 +2,7 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Người dùng';
 	$scope.titleBread = 'Nhân viên';
 	$scope.showBtn = true;
-	$scope.url = "/api/user/";
+	$scope.url = "/api/userApp/";
 
 	$scope.insert = function() {
 		$scope.title = 'Thêm nhân viên quản trị mới';
@@ -80,7 +80,7 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 	$scope.formUser = {};
 	$scope.edit = function(user) {
 		$scope.showBtn = false;
-		
+		$scope.reset();
 		user.birthday = new Date(user.birthday);
 		$scope.formUser = angular.copy(user);
 
@@ -239,23 +239,80 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 		})
 	}
 	
-	// Find by name product
-  	$scope.nameUser = "";
-  	$scope.findByName = function() {
-		$http.get($scope.url + $scope.nameUser)
-		.then(resp => {
-			$scope.users = resp.data;
-            
-            $scope.users.forEach(user => { 
-                user.create_at = new Date(user.create_at)
-                user.update_at = new Date(user.update_at)
-            })
-			
-            // console.log("Sp: ", resp.data);
-        }).catch(error => {
-            console.log("Error", error);
-        });	
-	}  
+	// Find by name userApp
+	$scope.nameUser = "";
+	$scope.nameUserName = "";
+	$scope.findByName = function() {
+		if ($scope.nameUser != "") {
+			$http.get($scope.url + $scope.nameUser)
+				.then(resp => {
+					$scope.users = resp.data;
+					if($scope.users != ""){
+						$scope.users.forEach(user => {
+							user.create_at = new Date(user.create_at)
+							user.update_at = new Date(user.update_at)
+						})
+					}
+					else{
+						Swal.fire({
+							icon: 'error',
+							title: 'Không có kết quả phù hợp!'
+						});
+						$scope.init();
+					}
+				}).catch(error => {
+					console.log("Error", error);
+				});
+		}
+		else if ($scope.nameUserName != "") {
+			console.log('tìm theo mã', $scope.nameUserName)
+			$http.get($scope.url + "id/" + $scope.nameUserName)
+				.then(resp => {
+					$scope.users = resp.data;
+					if($scope.users != ""){
+						$scope.users.forEach(user => {
+							user.create_at = new Date(user.create_at)
+							user.update_at = new Date(user.update_at)
+						})
+					}
+					else{
+						Swal.fire({
+							icon: 'error',
+							title: 'Không có kết quả phù hợp!'
+						});
+						$scope.init();
+					}
+
+				}).catch(error => {
+					console.log("Error", error);
+				});
+		}
+		else if($scope.nameUser != "" && $scope.nameUserName != ""){
+			console.log('tìm theo')
+			$http.get($scope.url + "id/name/" + $scope.nameUserName + "/" +  $scope.nameUser)
+				.then(resp => {
+					$scope.users = resp.data;
+					if($scope.users != ""){
+						$scope.users.forEach(user => {
+							user.create_at = new Date(user.create_at)
+							user.update_at = new Date(user.update_at)
+						})
+					}
+					else{
+						Swal.fire({
+							icon: 'error',
+							title: 'Không có kết quả phù hợp!'
+						});
+						$scope.init();
+					}
+				}).catch(error => {
+					console.log("Error", error);
+				});
+		}
+		else{
+			$scope.init();
+		}
+	}
 
 // Load list user by filter
 	$scope.listFilter = [
@@ -269,11 +326,11 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 		},
 		{
 			id: 3,
-			name: "Hoạt động"
+			name: "Giới tính Nam"
 		},
 		{
 			id: 4,
-			name: "Ngừng hoạt động"
+			name: "Giới tính Nữ"
 		},
 	]
 	$scope.getUsersbyFilter = function() {
