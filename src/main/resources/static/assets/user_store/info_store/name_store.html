@@ -139,10 +139,10 @@
 	
 	<div class="container mt-2">
 		<div class="row">
-			<div ng-repeat="p in list.pack" class="col-xl-3">
+			<div ng-repeat="p in packs" class="col-xl-3">
 				<div class="card" style="width: 18rem;">
 				  <img 
-	              	ng-src="/assets/images/sp1.jpg" 
+	              	ng-src="/assets/images/{{p.image}}" 
 	              	alt="{{p.image}}" class="card-img-top">
 				  <div class="card-body">
 				    <h5 class="card-title color-text">{{p.name}}</h5>
