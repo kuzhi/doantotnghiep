@@ -1,5 +1,8 @@
 package fpoly.chickens.api;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,5 +74,19 @@ public class OrderAPI {
 
 	}
 
-
+	// Count order
+	@GetMapping("/api/count/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
+	}
+	
+	// Get doanh thu
+	@GetMapping("/api/sale/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getSaleOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getSaleOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
+	}
 }

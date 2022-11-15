@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -136,11 +137,34 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
+	public Order getOrderbyId(Integer id) {
+		return orderDao.findById(id).get();
+	}
+
+	@Override
+	public Integer getOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.getOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDateWithStatus(store, dateStar, dateEnd, Status);
+	}
 	public Page<Order> getOrderStoreByKeyword(Integer storeid, String keyword) {
 		Store store = storeDao.findById(storeid).get();
 		Pageable pageable = PageRequest.of(0, 1);
 		Page<Order> page = orderDao.findAllByStoreAndOrdercode(store, keyword, pageable);
 		return page;
 	}
-
 }

@@ -12,6 +12,10 @@ public interface ProductService {
 	List<Product> findAll();
 	Page<Product> findAllPage(Pageable pageable);
 	
+	// Load product by store
+	List<Product> findAllProductByStore(Integer storeid);
+	List<Product> findAllProductByStoreWithStatus(Integer storeid, Boolean status);
+	
 	// Create
 	Product create(Product product);
 	// Update

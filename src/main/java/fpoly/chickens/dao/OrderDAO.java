@@ -1,5 +1,6 @@
 package fpoly.chickens.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -32,4 +33,18 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	@Query("SELECT o FROM Order o WHERE o.store = ?1 and o.Ordercode LIKE ?2")
 	Page<Order> findAllByStoreAndOrdercode(Store store, String ordercode, Pageable pageable);
 
+	// Get order in day || month
+	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3")
+	Integer countOrderInDate(Store store, Date dateStar, Date dateEnd);
+	
+	// Get order in month status 
+	// == 2 Thành công
+	// == 5 Bị hủy
+	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Status = ?4 AND o.Create_at BETWEEN ?2 AND ?3")
+	Integer countOrderInDateWithStatus(Store store, Date dateStar, Date dateEnd, Integer Status);
+	
+	// Get doanh thu in day || month ((=
+	@Query("SELECT SUM(o.TotalMoney) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3")
+	Integer getOrderInDate(Store store, Date dateStar, Date dateEnd);
+	
 }
