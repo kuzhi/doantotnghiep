@@ -4,6 +4,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.showBtn = true;
 	$scope.url = "/api/product/";
 	$scope.urlCate = "/api/category/";
+	$scope.storeid = 2;
 	
 	$scope.insert = function(){
 		$scope.showBtn = true;
@@ -14,7 +15,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	$scope.products = [];
 	$scope.categorys = [];
 	$scope.init = function() {
-		$http.get($scope.url).then(resp => { 
+		$http.get($scope.url + "store/" + $scope.storeid).then(resp => { 
             $scope.products = resp.data;
             
             $scope.products.forEach(product => { 
@@ -23,7 +24,7 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
             })
         });
         
-        $http.get($scope.urlCate).then(resp => {
+        $http.get($scope.urlCate + "store/" + $scope.storeid).then(resp => {
 			$scope.showBtnCate = true; 
             $scope.categorys = resp.data;
             
@@ -161,7 +162,6 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
             resp.data.update_at = new Date(resp.data.update_at)  
              
             $scope.products.push(resp.data); 
-        	// console.log('data: ', $scope.products);            
             $scope.reset(); 
             $scope.init();
 			Swal.fire({
@@ -253,12 +253,12 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			cate.create_at = new Date();
         	cate.update_at = new Date();
 			
-			$http.post($scope.urlCate, cate).then(resp => {
+			$http.post($scope.urlCate + "store/" + $scope.storeid, cate).then(resp => {
 	            resp.data.create_at = new Date(resp.data.create_at)  
 	            resp.data.update_at = new Date(resp.data.update_at)  
 	             
 	            $scope.categorys.push(resp.data); 
-	        	console.log('data: ', $scope.categorys);    
+	        	// console.log('data: ', $scope.categorys);    
 	        	        
 	        	$scope.formCate = {
 		            create_at: null,

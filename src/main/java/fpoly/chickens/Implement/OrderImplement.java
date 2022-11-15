@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -74,14 +77,19 @@ public class OrderImplement implements OrderService {
 
 	}
 
-
 	@Override
-	public Page<Order> getOrderStore(Integer storeid, Integer pageNumber) {
+	public Page<Order> getOrderStore(Integer storeid, Integer pageNumber, String field, Integer checkSort) {
 		Store store = storeDao.findById(storeid).get();
 		if (pageNumber < 0) {
 			pageNumber = 0;
 		}
-		Pageable pageable = PageRequest.of(pageNumber, 1);
+		Sort sort;
+		if (checkSort % 2 == 0) {
+			sort = Sort.by(Direction.DESC, field);
+		} else {
+			sort = Sort.by(Direction.ASC, field);
+		}
+		Pageable pageable = PageRequest.of(pageNumber, 1, sort);
 		Page<Order> page = orderDao.findAllByStore(store, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
@@ -106,12 +114,19 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public Page<Order> getOrderStoreByStatus(Integer storeid, Integer status, Integer pageNumber) {
+	public Page<Order> getOrderStoreByStatus(Integer storeid, Integer status, Integer pageNumber, String field,
+			Integer checkSort) {
 		Store store = storeDao.findById(storeid).get();
 		if (pageNumber < 0) {
 			pageNumber = 0;
 		}
-		Pageable pageable = PageRequest.of(pageNumber, 1);
+		Sort sort;
+		if (checkSort % 2 == 0) {
+			sort = Sort.by(Direction.DESC, field);
+		} else {
+			sort = Sort.by(Direction.ASC, field);
+		}
+		Pageable pageable = PageRequest.of(pageNumber, 1, sort);
 		Page<Order> page = orderDao.findAllByStoreAndStatus(store, status, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
@@ -121,4 +136,35 @@ public class OrderImplement implements OrderService {
 		return page;
 	}
 
+	@Override
+	public Order getOrderbyId(Integer id) {
+		return orderDao.findById(id).get();
+	}
+
+	@Override
+	public Integer getOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.getOrderInDate(store, dateStar, dateEnd);
+	}
+
+	@Override
+	public Integer countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDateWithStatus(store, dateStar, dateEnd, Status);
+	}
+	public Page<Order> getOrderStoreByKeyword(Integer storeid, String keyword) {
+		Store store = storeDao.findById(storeid).get();
+		Pageable pageable = PageRequest.of(0, 1);
+		Page<Order> page = orderDao.findAllByStoreAndOrdercode(store, keyword, pageable);
+		return page;
+	}
 }

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.ProductDAO;
+import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.entity.Product;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.service.ProductService;
 
 @SessionScope
@@ -17,6 +19,7 @@ import fpoly.chickens.service.ProductService;
 public class ProductImplement implements ProductService {
 
 	@Autowired ProductDAO productDAO;
+	@Autowired StoreDAO storeDAO;
 	
 	@Override
 	public List<Product> findAll() {
@@ -76,6 +79,22 @@ public class ProductImplement implements ProductService {
 	public List<Product> sort90() {
 		// TODO Auto-generated method stub
 		return productDAO.sort90();
+	}
+
+	@Override
+	public List<Product> findAllProductByStore(Integer storeid) {
+		// TODO Auto-generated method stub
+		Store store = storeDAO.findById(storeid).get();
+		
+		return productDAO.findByStore(store);
+	}
+
+	@Override
+	public List<Product> findAllProductByStoreWithStatus(Integer storeid, Boolean status) {
+		// TODO Auto-generated method stub
+		Store store = storeDAO.findById(storeid).get();
+		
+		return productDAO.findByStoreWithStatus(store, status);
 	}
 
 }

@@ -33,4 +33,37 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 			){}
 		})
 	}
+	$scope.status = 1;
+	$scope.list = {
+		pack: [
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 2
+			},
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 1
+			},
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 1
+			},
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 1
+			},
+		]
+	}
 })

@@ -41,7 +41,7 @@ public class OrderPack {
 	private Date Update_at;
 	
 	@Column(name = "Status")
-	private Boolean Status;
+	private Integer Status;
 
 	
 	

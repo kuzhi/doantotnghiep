@@ -1,5 +1,8 @@
 package fpoly.chickens.api;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,20 +25,27 @@ import fpoly.chickens.service.OrderService;
 @CrossOrigin("*")
 @RestController
 public class OrderAPI {
+	
 	@Autowired
 	OrderService orderService;
 
-	@GetMapping("/api/order/store/{storeid}/{page}")
+	@GetMapping("/api/order/store/{storeid}/{page}/{field}/{sort}")
 	public ResponseEntity<Page<Order>> getOrderStore(@PathVariable("storeid") Optional<Integer> storeid,
-			@PathVariable("page") Optional<Integer> page) {
-		return ResponseEntity.ok(orderService.getOrderStore(storeid.get(), page.orElse(0)));
+			@PathVariable("page") Optional<Integer> page,@PathVariable("field") Optional<String> field,@PathVariable("sort") Optional<Integer> sort) {
+		return ResponseEntity.ok(orderService.getOrderStore(storeid.get(), page.orElse(0),field.orElse("Ordercode"),sort.orElse(0)));
 	}
 	
 
-	@GetMapping("/api/order/store/{storeid}/{status}/{page}")
+	@GetMapping("/api/orders/store/{storeid}/{status}/{page}/{field}/{sort}")
 	public ResponseEntity<Page<Order>> getOrderStorebyStatus(@PathVariable("storeid") Optional<Integer> storeid,
-			@PathVariable("status") Optional<Integer> status, @PathVariable("page") Optional<Integer> page) {
-		return ResponseEntity.ok(orderService.getOrderStoreByStatus(storeid.get(),status.get(),page.orElse(0)));
+			@PathVariable("status") Optional<Integer> status, @PathVariable("page") Optional<Integer> page,@PathVariable("field") Optional<String> field,@PathVariable("sort") Optional<Integer> sort) {
+		return ResponseEntity.ok(orderService.getOrderStoreByStatus(storeid.get(),status.get(),page.orElse(0),field.orElse("Ordercode"),sort.orElse(0)));
+	}
+	
+	@GetMapping("/api/findorders/storeandkeyword/{storeid}/{keyword}")
+	public ResponseEntity<Page<Order>> getOrderStorebyKeyword(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("keyword") Optional<String> keyword) {
+		return ResponseEntity.ok(orderService.getOrderStoreByKeyword(storeid.get(),keyword.get()));
 	}
 
 	@GetMapping("/api/order/{storeid}/{userid}")
@@ -64,5 +74,19 @@ public class OrderAPI {
 
 	}
 
-
+	// Count order
+	@GetMapping("/api/count/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
+	}
+	
+	// Get doanh thu
+	@GetMapping("/api/sale/order/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<Integer> getSaleOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.getSaleOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
+	}
 }
