@@ -1,94 +1,70 @@
 <nav class="mt-3 mx-3" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
-    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
-  </ol>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+	</ol>
 </nav>
 
-<form 
-	name="nameStoreForm" 
-	class="row shadow-sm bg-second mx-3 py-3 rounded" 
-	novalidate
->
+<form name="nameStoreForm"
+	class="row shadow-sm bg-second mx-3 py-3 rounded" novalidate>
 	<div class="col-xl-5 col-12">
 		<label class="font__size-title color-text mb-2">Tên và liên hệ</label>
 		<div class="mb-3">
 			<div class="form-floating mb-3">
-				<input 
-					ng-model="name" 
-					type="text"
-					name="name" 
-					id="nameStore"
-					class="form-control form-control-sm" 
+				<input ng-model="name" type="text" name="name" id="nameStore"
+					class="form-control form-control-sm"
 					placeholder="--Vui lòng nhập--" required>
 				<div
 					ng-show="nameStoreForm.name.$dirty && nameStoreForm.name.$invalid">
-					<small 
-						class="text-danger fst-italic"
-						ng-show="nameStoreForm.name.$error.required"
-					>Vui lòng không để trống (*)</small>
+					<small class="text-danger fst-italic"
+						ng-show="nameStoreForm.name.$error.required">Vui lòng
+						không để trống (*)</small>
 				</div>
-				<label for="nameStore" class="form-label"> 
-					Tên nhà hàng 
-					<span class="text-danger">*</span>
-					<small ng-show="nameStoreForm.name.$valid"> 
-						<i class="fas fa-check text-success"></i>
-					</small>
+				<label for="nameStore" class="form-label"> Tên nhà hàng <span
+					class="text-danger">*</span> <small
+					ng-show="nameStoreForm.name.$valid"> <i
+						class="fas fa-check text-success"></i>
+				</small>
 				</label>
 			</div>
 		</div>
 		<div class="mb-3">
 			<div class="form-floating mb-3">
-				<input 
-					ng-model="phone" 
-					ng-pattern="regexPhone"
-					type="number" 
-					id="phoneStore"
-					name="phone" 
-					class="form-control form-control-sm" 
+				<input ng-model="phone" ng-pattern="regexPhone" type="number"
+					id="phoneStore" name="phone" class="form-control form-control-sm"
 					placeholder="--Vui lòng nhập--" required>
 				<div
 					ng-show="nameStoreForm.phone.$dirty && nameStoreForm.phone.$invalid || nameStoreForm.phone.$error.pattern">
-					<small 
-						class="text-danger fst-italic"
-						ng-show="nameStoreForm.phone.$error.pattern && nameStoreForm.phone.$invalid"
-					>Số điện thoại chưa phù hợp*</small> 
-					<small 
-						class="text-danger fst-italic"
-						ng-show="nameStoreForm.phone.$error.required"
-					>Vui lòng không để trống (*)</small>
+					<small class="text-danger fst-italic"
+						ng-show="nameStoreForm.phone.$error.pattern && nameStoreForm.phone.$invalid">Số
+						điện thoại chưa phù hợp*</small> <small class="text-danger fst-italic"
+						ng-show="nameStoreForm.phone.$error.required">Vui lòng
+						không để trống (*)</small>
 				</div>
-				<label for="phoneStore" class="form-label"> 
-					Số điện thoại cửa hàng 
-					<span class="text-danger">*</span> 
-					<small ng-show="nameStoreForm.phone.$valid"> 
-						<i class="fas fa-check text-success"></i>
-					</small>
+				<label for="phoneStore" class="form-label"> Số điện thoại
+					cửa hàng <span class="text-danger">*</span> <small
+					ng-show="nameStoreForm.phone.$valid"> <i
+						class="fas fa-check text-success"></i>
+				</small>
 				</label>
 			</div>
 		</div>
 		<div class="mb-3">
 			<div class="form-floating mb-3">
-				<input 
-					ng-model="address" 
-					type="text"
-					id="addressStore"
-					name="address" 
-					class="form-control form-control-sm" 
+				<input ng-model="address" type="text" id="addressStore"
+					name="address" class="form-control form-control-sm"
 					placeholder="Nhập địa chỉ của bạn" required>
 				<div
 					ng-show="nameStoreForm.address.$dirty && nameStoreForm.address.$invalid">
-					<small 
-						class="text-danger fst-italic"
-						ng-show="nameStoreForm.address.$error.required"
-					>Vui lòng không để trống (*)</small>
+					<small class="text-danger fst-italic"
+						ng-show="nameStoreForm.address.$error.required">Vui lòng
+						không để trống (*)</small>
 				</div>
-				<label for="addressStore" class="form-label"> 
-					Địa chỉ cửa hàng 
-					<span class="text-danger">*</span> 
-					<small ng-show="nameStoreForm.address.$valid"> 
-						<i class="fas fa-check text-success"></i>
-					</small>
+				<label for="addressStore" class="form-label"> Địa chỉ cửa
+					hàng <span class="text-danger">*</span> <small
+					ng-show="nameStoreForm.address.$valid"> <i
+						class="fas fa-check text-success"></i>
+				</small>
 				</label>
 			</div>
 		</div>
@@ -96,34 +72,23 @@
 	<div class="col-xl-5 col-12 d-flex align-items-center">
 		<div class="card mb-4 mt-xl-5">
 			<div class="card-body text-center image-upload">
-				<label for="file-input">
-					<img 
-						class="img__store rounded-circle mb-2"
-						src="/assets/images/default__image.png" 
-						alt="Ảnh logo cửa hàng"
-					>
+				<label for="file-input"> <img
+					class="img__store rounded-circle mb-2"
+					src="/assets/images/default__image.png" alt="Ảnh logo cửa hàng">
 				</label>
-				<div class="small font-italic text-muted mb-4">
-					Ảnh có kích thước nhỏ hơn 10MB
-				</div>
-			    <input id="file-input" type="file" />
+				<div class="small font-italic text-muted mb-4">Ảnh có kích
+					thước nhỏ hơn 10MB</div>
+				<input id="file-input" type="file" />
 			</div>
 		</div>
 	</div>
 	<div class="col-xl-2 col-12">
 		<div class="text-end mt-xl-5">
-			<button 
-				ng-disabled="nameStoreForm.$invalid" 
-				ng-click="update()"
-				type="submit"
-				class="btn btn-info btn-lg btn__t-m"
-			>Cập nhật</button>
-			<button 
-				ng-disabled="nameStoreForm.$invalid"
-				ng-click="update()" 
-				type="submit"
-				class="btn btn-info btn-lg btn__pc w-100"
-			>Cập nhật</button>
+			<button ng-disabled="nameStoreForm.$invalid" ng-click="update()"
+				type="submit" class="btn btn-info btn-lg btn__t-m">Cập nhật</button>
+			<button ng-disabled="nameStoreForm.$invalid" ng-click="update()"
+				type="submit" class="btn btn-info btn-lg btn__pc w-100">Cập
+				nhật</button>
 		</div>
 	</div>
 </form>
@@ -131,24 +96,27 @@
 <div class="row shadow-sm bg-second mx-3 my-2 py-3 rounded">
 	<div class="d-flex justify-content-between">
 		<h5 class="text-secondary">Gói dịch vụ</h5>
-		
-		<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-			Lịch sử <i class="fas fa-laptop-medical"></i> 
+
+		<button ng-click="loadOrderPack()" type="button"
+			class="btn btn-secondary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal">
+			Lịch sử <i class="fas fa-laptop-medical"></i>
 		</button>
 	</div>
-	
+
 	<div class="container mt-2">
 		<div class="row">
 			<div ng-repeat="p in packs" class="col-xl-3">
 				<div class="card" style="width: 18rem;">
-				  <img 
-	              	ng-src="/assets/images/{{p.image}}" 
-	              	alt="{{p.image}}" class="card-img-top">
-				  <div class="card-body">
-				    <h5 class="card-title color-text">{{p.name}}</h5>
-				    <span>Giá: {{p.price | currency:'':0}} đ</span> <br>
-				    <a href="#" class="btn btn-info w-100 mt-1 text-white fw-bold">Đăng ký ngay</a>
-				  </div>
+					<img ng-src="/assets/images/sp1.jpg" alt="{{p.image}}"
+						class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title color-text">{{p.name}}</h5>
+						<span>Giá: {{p.price | currency:'':0}} đ</span> <br> <a
+							href="#" class="btn btn-info w-100 mt-1 text-white fw-bold">Đăng
+							ký ngay</a>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -156,127 +124,131 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 color-text" id="exampleModalLabel">Các gói đã sử dụng</h1>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-      </div>
-      <div class="modal-body">
-        
-        <div class="row mt-3">
-			<div class="table-responsive">
-			     <table 
-			     	class="table text-start align-middle table-bordered border-white table-hover mb-0"
-			     >
-			         <thead class="text-center bg-table">
-			             <tr>
-			                 <th scope="col">Tên gói</th>
-			                 <th scope="col">Giá</th>
-			                 <th scope="col">Trạng thái</th>
-			                 <th scope="col"></th>
-			             </tr>
-			         </thead>
-			         <tbody class="table table-info">
-			             <tr
-			             	ng-repeat="p in list.pack"
-			             >
-			                 <td scope="col">{{p.name}}</td>
-			                 <td scope="col" class="text-end">{{p.price | currency:'':0}} đ</td>
-			                 <td scope="col">
-								<div ng-if="p.status == 1" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-secondary me-2"></div>
-						        	<p 
-						        		class="small text-secondary mb-0 fst-italic"
-						        	>  Đang xử lý </p>
-						        </div>
-						        <div ng-if="p.status == 2" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-warning me-2"></div>
-						        	<p 
-							         	class="small text-warning mb-0 fst-italic"
-							        > Đã duyệt </p>
-						        </div>
-						        <div ng-if="p.status == 3" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-danger me-2"></div>
-						        	<p 
-							         	class="small text-danger mb-0 fst-italic"
-							         > Bị hủy bởi <b>khách hàng</b> </p>
-						        </div>
-						        <div ng-if="p.status == 4" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-danger me-2"></div>
-						        	<p 
-							         	class="small text-danger mb-0 fst-italic"
-							         > Bị hủy bởi <b>bạn</b> </p>
-						        </div>
-						     </td>                             
-			                 <td class="text-center align-middle">
-								<button 
-									class="text-dark border-0"
-									data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="edit"
-								> Xem thêm </button>
-							</td>
-			             </tr>
-			         </tbody>
-			     </table>
-			 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5 color-text" id="exampleModalLabel">Các
+					gói đã sử dụng</h1>
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+			</div>
+			<div class="modal-body">
+
+				<div class="row mt-3">
+					<div class="table-responsive">
+						<table
+							class="table text-start align-middle table-bordered border-white table-hover mb-0">
+							<thead class="text-center bg-table">
+								<tr>
+									<th scope="col">Mã đăng kí gói</th>
+									<th scope="col">Tên gói</th>
+									<th scope="col">Giá</th>
+									<th scope="col">Trạng thái</th>
+									<th scope="col">Hành động</th>
+								</tr>
+							</thead>
+							<tbody class="table table-info">
+								<tr ng-repeat="p in listOrderPack">
+									<td scope="col">{{p.orderpackcode}}</td>
+									<td scope="col">{{p.pack.name}}</td>
+									<td scope="col" class="text-end">{{p.pack.price |
+										currency:'':0}} đ</td>
+									<td scope="col">
+										<div ng-if="p.status == 1" class="d-flex align-items-center">
+											<div class="fade-loading bg-secondary me-2"></div>
+											<p class="small text-secondary mb-0 fst-italic">Đang xử
+												lý</p>
+										</div>
+										<div ng-if="p.status == 2" class="d-flex align-items-center">
+											<div class="fade-loading bg-warning me-2"></div>
+											<p class="small text-warning mb-0 fst-italic">Đã duyệt</p>
+										</div>
+										<div ng-if="p.status == 3" class="d-flex align-items-center">
+											<div class="fade-loading bg-danger me-2"></div>
+											<p class="small text-danger mb-0 fst-italic">
+												Bị hủy bởi <b>khách hàng</b>
+											</p>
+										</div>
+										<div ng-if="p.status == 4" class="d-flex align-items-center">
+											<div class="fade-loading bg-danger me-2"></div>
+											<p class="small text-danger mb-0 fst-italic">
+												Bị hủy bởi <b>bạn</b>
+											</p>
+										</div>
+									</td>
+									<td class="text-center align-middle">
+										<button ng-click="seemore(p.id)" class="text-dark border-0"
+											data-bs-toggle="modal" data-bs-target="#editModal"
+											data-bs-whatever="edit">Xem thêm</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 color-text" id="editModal">Chi tiết gói</h1>
-      </div>
-      <div class="modal-body">
-        <form action="">
-        	<!-- Tên -->
-	       	<div class="mb-3 row">
-			    <label class="col-sm-3 col-form-label fw-bold">Tên gói:</label>
-			    <div class="col-sm-9 col-form-label">
-			      <label>Gói 1 năm</label>
-			    </div>
+<div class="modal fade" id="editModal" tabindex="-1"
+	aria-labelledby="editModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5 color-text" id="editModal">Chi tiết
+					gói</h1>
 			</div>
-	        <!-- Giá -->
-	       	<div class="mb-3 row">
-			    <label for="price" class="col-sm-3 col-form-label fw-bold">Giá:</label>
-			    <div class="col-sm-9 col-form-label">
-			      <label>200,000 đ</label>
-			    </div>
+			<div class="modal-body">
+				<form action="">
+					<div class="mb-3 row">
+						<label class="col-sm-3 col-form-label fw-bold">Mã đăng kí
+							gói:</label>
+						<div class="col-sm-9 col-form-label">
+							<label>{{orderPackSee.orderpackcode}}</label>
+						</div>
+					</div>
+					<!-- Tên -->
+					<div class="mb-3 row">
+						<label class="col-sm-3 col-form-label fw-bold">Tên gói:</label>
+						<div class="col-sm-9 col-form-label">
+							<label>{{orderPackSee.pack.name}}</label>
+						</div>
+					</div>
+					<!-- Giá -->
+					<div class="mb-3 row">
+						<label for="price" class="col-sm-3 col-form-label fw-bold">Giá:</label>
+						<div class="col-sm-9 col-form-label">
+							<label>{{orderPackSee.pack.price}}</label>
+						</div>
+					</div>
+					<!-- Số ngày -->
+					<div class="mb-3 row">
+						<label for="date" class="col-sm-3 col-form-label fw-bold">Hiệu
+							lực:</label>
+						<div class="col-sm-9 col-form-label">
+							<label>{{orderPackSee.pack.date}}</label>
+						</div>
+					</div>
+					<!-- Ngày đăng ký -->
+					<div class="mb-3 row">
+						<label for="date" class="col-sm-5 col-form-label fw-bold">Ngày
+							đăng ký:</label>
+						<div class="col-sm-7 col-form-label">
+							<label>{{orderPackSee.create_at}}</label>
+						</div>
+					</div>
+				</form>
 			</div>
-	        <!-- Số ngày -->
-	       	<div class="mb-3 row">
-			    <label for="date" class="col-sm-3 col-form-label fw-bold">Hiệu lực:</label>
-			    <div class="col-sm-9 col-form-label">
-			      <label>365 ngày</label>
-			    </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Đóng</button>
+				<button ng-click="cancelOrderPack(orderPackSee.id)"
+					ng-if="status == 1" type="button" class="btn btn-danger">Hủy
+					gói</button>
 			</div>
-	        <!-- Ngày đăng ký -->
-	       	<div class="mb-3 row">
-			    <label for="date" class="col-sm-5 col-form-label fw-bold">Ngày đăng ký:</label>
-			    <div class="col-sm-7 col-form-label">
-			      <label>1-1-2022 00:00:00</label>
-			    </div>
-			</div>
-	        <!-- Ngày hết hạn dự kiến -->
-	       	<div class="mb-3 row">
-			    <label for="date" class="col-sm-5 col-form-label fw-bold"> Dự kiến ngày hết hạn:</label>
-			    <div class="col-sm-7 col-form-label">
-			      <label>31-12-2022 23:59:59</label>
-			    </div>
-			</div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button ng-if="status == 1" type="button" class="btn btn-danger">Hủy gói</button>
-        <button ng-if="status == 2" type="button" class="btn btn-success">Xác nhận</button>
-      </div>
-    </div>
-  </div>
+		</div>
+	</div>
 </div>
