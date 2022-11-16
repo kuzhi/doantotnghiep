@@ -6,7 +6,7 @@ app.config(function($routeProvider) {
 		// Thông tin cửa hàng
 		.when("/name__store", {
 			templateUrl: "/assets/user_store/info_store/name_store.html",
-			controller: "name__store-ctrl"
+			controller: "name__store-ctrl",
 		})
 		.when("/myProfile", {
 			templateUrl: "/assets/user_store/info_store/my-profile.html",
@@ -47,10 +47,6 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/manage/user_management.html",
 			controller: "user__management-ctrl"
 		})
-		.when("/authorization", {
-			templateUrl: "/assets/user_store/manage/authorization.html",
-			controller: "authorization-ctrl"
-		})
 		// Báo cáo
 		.when("/report-all", {
 			templateUrl: "/assets/user_store/manage/report.html",
@@ -67,10 +63,6 @@ app.config(function($routeProvider) {
 		.when("/report-client-all", {
 			templateUrl: "/assets/user_store/manage/report-client.html",
 			controller: "report-client-ctrl"
-		})
-		.when("/feedback__product", {
-			templateUrl: "/assets/user_store/manage/feedback_product.html",
-			controller: "feedback__product-ctrl"
 		})
 		.otherwise({
 			templateUrl: "/assets/user_store/manage/report.html",
