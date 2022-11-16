@@ -5,6 +5,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 
 	$scope.storeid = 2;
 
+
 	$scope.update = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
@@ -167,6 +168,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 
 	$scope.registerOrderPack(2)
 	
+
 
 
 })

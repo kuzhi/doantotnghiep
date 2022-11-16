@@ -156,11 +156,12 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public Integer countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+	public List<Order> countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
 		Store store = storeDao.findById(storeid).get();
 		
 		return orderDao.countOrderInDateWithStatus(store, dateStar, dateEnd, Status);
 	}
+	
 	public Page<Order> getOrderStoreByKeyword(Integer storeid, String keyword) {
 		Store store = storeDao.findById(storeid).get();
 		Pageable pageable = PageRequest.of(0, 1);

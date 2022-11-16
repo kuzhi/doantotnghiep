@@ -387,6 +387,7 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 		$scope.formUser = {
 			create_at: null,
 			update_at: null,
+			photo: "",
 		};
 	}
 	$scope.reset();

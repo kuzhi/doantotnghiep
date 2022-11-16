@@ -61,6 +61,11 @@ a:hover {
   color: #009dff;
 }
 
+.px-5plus {
+	padding-right: 3.7rem !important;
+    padding-left: 3.7rem !important;
+}
+
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
