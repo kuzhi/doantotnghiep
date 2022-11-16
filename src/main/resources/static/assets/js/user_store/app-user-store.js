@@ -6,7 +6,7 @@ app.config(function($routeProvider) {
 		// Thông tin cửa hàng
 		.when("/name__store", {
 			templateUrl: "/assets/user_store/info_store/name_store.html",
-			controller: "name__store-ctrl"
+			controller: "name__store-ctrl",
 		})
 		.when("/myProfile", {
 			templateUrl: "/assets/user_store/info_store/my-profile.html",
