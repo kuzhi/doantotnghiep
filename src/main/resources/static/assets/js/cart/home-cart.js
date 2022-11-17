@@ -1,7 +1,7 @@
 app = angular.module("home-cart", []);
 app.controller("cart-ctrl", function($scope, $http, $location) {
 	//Header
-	$scope.auth = true;
+	$scope.auth = false;
 	$scope.amountItems = 34;
 	$scope.phone = '0942.xxx.xxx'
 	$scope.email = 'anv123@mail.com'
