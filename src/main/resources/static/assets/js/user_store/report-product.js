@@ -2,82 +2,6 @@ app.controller("report-product-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Báo cáo';
 	$scope.titleBread = 'Doanh thu sản phẩm';
 	
-	//List top 10
-    $scope.productArr = {
-		product: [
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp3',
-				name: 'Hamberger',
-				img: 'sp4.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp3',
-				name: 'Hamberger',
-				img: 'sp4.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp1',
-				name: 'Gà rán',
-				img: 'sp1.jpg',
-				cate: 'KFC',
-				price: 100000000
-			},
-			{
-				id: 'sp2',
-				name: 'Khoai tây chiên',
-				img: 'sp3.jpeg',
-				cate: 'KFC',
-				price: 100000000
-			},
-		]
-	}
-	
 	// Biểu đồ doanh thu sản phẩm
     var ctx1 = $("#productChart").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
@@ -106,4 +30,24 @@ app.controller("report-product-ctrl", function($scope, $http, $location) {
         }
     });
 	
+	//List top 10
+	$scope.items=[];
+    $scope.report = function() {
+		$http.get("/api/report-overview-app").then(resp => {
+			$scope.items = resp.data
+		});
+	}
+	
+	$scope.pager = {
+		page: 0,
+		size: 10,
+		get items() {
+			var start = this.page * this.size;
+			
+			return $scope.items.slice(start, start + this.size);
+			
+		}
+	}
+	
+	$scope.report();
 })

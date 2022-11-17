@@ -250,7 +250,17 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 																												]
 																												},
 																											options: {
-																												responsive: true
+																												responsive: true,
+																												scales: {
+																									              x: {
+																									                grid: {
+																									                  drawOnChartArea: false
+																									                }
+																									              },
+																									              y: {
+																									                beginAtZero: true
+																									              }
+																									            }
 																											}
 																										});
 																									// Tháng 1
@@ -506,7 +516,17 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 																	}]
 																},
 															options: {
-																responsive: true
+																responsive: true,
+																scales: {
+													              x: {
+													                grid: {
+													                  drawOnChartArea: false
+													                }
+													              },
+													              y: {
+													                beginAtZero: true
+													              }
+													            }
 															}
 														});
 														// Tháng 12
