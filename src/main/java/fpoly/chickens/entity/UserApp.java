@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Usersapp")
+@Table(name = "Userapp")
 public class UserApp implements Serializable {
 
 	/**
