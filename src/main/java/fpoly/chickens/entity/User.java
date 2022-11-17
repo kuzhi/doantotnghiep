@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,9 +56,11 @@ public class User {
 
 	
 	@Column(name = "Create_at")
+	@CreationTimestamp
 	private Date Create_at;
 	
 	@Column(name = "Update_at")
+	@UpdateTimestamp
 	private Date Update_at;
 
 	@Column(name = "Deleted")
