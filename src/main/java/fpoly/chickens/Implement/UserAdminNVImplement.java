@@ -12,8 +12,6 @@ import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.service.UserAdminNVService;
 
-
-
 @SessionScope
 @Service
 public class UserAdminNVImplement implements UserAdminNVService {

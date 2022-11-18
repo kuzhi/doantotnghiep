@@ -17,10 +17,18 @@
 							class="form-control border-0" ng-model="keyword" placeholder="Tìm theo mã">
 					</div>
 
-					<button ng-click ="" class="btn btn-info">
-						<i class="fas fa-filter"></i> Lọc
+					<button ng-click ="" class="btn btn-info text-white fw-bold">
+						Tìm kiếm
 					</button>
 				</form>
+			</div>
+			
+			<div class="col text-end">
+				<select 
+					class="form-select"
+				>
+				  <option value="" class="fw-bold bg-info text-white">Lọc</option>
+				</select>
 			</div>
 		</div>
 
@@ -33,7 +41,7 @@
 							<th>Ảnh</th>
 							<th>Tên gói</th>
 							<th>Giá</th>
-							<th>Trạng thái</th>
+							<th>Ngày tạo</th>
 							<th>Hoạt động</th>
 						</tr>
 					</thead>
@@ -45,36 +53,17 @@
 							<td class="align-middle">{{p.name}}</td>
 							<td class="align-middle text-end">{{p.price}}</td>
 							<td class="align-middle">
-								<div ng-if="p.status == 1" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-secondary me-2"></div>
-						        	<p 
-						        		class="small text-secondary mb-0 fst-italic"
-						        	>  Đang xử lý </p>
-						        </div>
-						        <div ng-if="p.status == 2" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-warning me-2"></div>
-						        	<p 
-							         	class="small text-warning mb-0 fst-italic"
-							        > Đã duyệt </p>
-						        </div>
-						        <div ng-if="p.status == 3" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-danger me-2"></div>
-						        	<p 
-							         	class="small text-danger mb-0 fst-italic"
-							         > Bị hủy bởi <b>khách hàng</b> </p>
-						        </div>
-						        <div ng-if="p.status == 4" class="d-flex align-items-center">
-						        	<div class="fade-loading bg-danger me-2"></div>
-						        	<p 
-							         	class="small text-danger mb-0 fst-italic"
-							         > Bị hủy bởi <b>bạn</b> </p>
-						        </div>
+								{{p.date}}
 							</td>
 							<td class="text-center align-middle">
 								<button type="button" ng-click="edit()" class="border-0 text-warning"
 									data-bs-toggle="modal" data-bs-target="#exampleModal">
 									<i class="fas fa-edit"></i>
 								</button>
+								<button 
+									ng-click="delete(product)"
+									class="text-danger border-0"
+								> <i class="fas fa-ban"></i> </button>
 							</td>
 						</tr>
 					</tbody>
@@ -129,30 +118,6 @@
       </div>
       <div class="modal-body">
         
-        <div ng-if="status == 1" class="d-flex align-items-center">
-        	<div class="fade-loading bg-secondary me-2"></div>
-        	<p 
-        		class="small text-secondary mb-0 fst-italic"
-        	>  Đang xử lý </p>
-        </div>
-        <div ng-if="status == 2" class="d-flex align-items-center">
-        	<div class="fade-loading bg-warning me-2"></div>
-        	<p 
-	         	class="small text-warning mb-0 fst-italic"
-	        > Đã duyệt </p>
-        </div>
-        <div ng-if="status == 3" class="d-flex align-items-center">
-        	<div class="fade-loading bg-danger me-2"></div>
-        	<p 
-	         	class="small text-danger mb-0 fst-italic"
-	         > Bị hủy bởi <b>khách hàng</b> </p>
-        </div>
-        <div ng-if="status == 4" class="d-flex align-items-center">
-        	<div class="fade-loading bg-danger me-2"></div>
-        	<p 
-	         	class="small text-danger mb-0 fst-italic"
-	         > Bị hủy bởi <b>bạn</b> </p>
-        </div>
         <!-- Hình ảnh -->
        	<div class="mb-3 row">
 			<div class="image-upload">
@@ -202,8 +167,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-        <button ng-if="status == 1" type="button" class="btn btn-primary">Duyệt</button>
-        <button ng-if="status == 2" type="button" class="btn btn-primary">Hủy gói</button>
+        <button ng-if="showBtn == true" type="button" class="btn btn-primary">Lưu</button>
+        <button ng-if="showBtn == false" type="button" class="btn btn-primary">Lưu thay đổi</button>
       </div>
     </div>
   </div>
