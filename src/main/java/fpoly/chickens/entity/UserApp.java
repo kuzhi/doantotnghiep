@@ -8,6 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +23,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "Userapp")
 public class UserApp implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9192840928446378933L;
 
 	@Id
 	@Column(name = "Id")
@@ -47,9 +56,11 @@ public class UserApp implements Serializable {
 	private String Phone;
 	
 	@Column(name = "Create_at")
+	@CreationTimestamp
 	private Date Create_at;
 	
 	@Column(name = "Update_at")
+	@UpdateTimestamp
 	private Date Update_at;
 
 
