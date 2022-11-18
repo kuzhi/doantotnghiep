@@ -74,6 +74,10 @@ header {
 	display: none;
 }
 
+#chart {
+  height: 440px;
+}
+
 /* Mobile */
 @media ( max-width : 47.9375em) {
 	.account__user {

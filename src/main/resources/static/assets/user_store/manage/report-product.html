@@ -13,17 +13,20 @@
                      <h6 class="mb-0 color-text">Thống kê doanh thu từ sản phẩm</h6>
                      
                      <div class="d-flex align-items-center">
-                     	<span>Lọc:</span>
-                     	<div class="ms-2">
-                        	<select class="form-select px-4 py-0" aria-label="Default select example">
-							  <option selected>--Vui lòng chọn--</option>
-							  <option value="1">Năm</option>
-							  <option value="2">Tháng</option>
-							  <option value="3">Tuần</option>
-							  <option value="4">Ngày</option>
-							</select>
-                        </div>
-                     </div>
+                 		<label for="datestart">Từ:</label>
+                 		<input type="date" id="datestart" 
+                 			ng-model="dateStart"
+                 			class="form-control form-control-sm mx-2 border-0 border-bottom rounded-0">
+                 		<label for="dateend">Đến:</label>
+                 		<input type="date" id="dateend" 
+                 			ng-model="dateEnd"
+                 			class="form-control form-control-sm mx-2 border-0 border-bottom rounded-0">
+                 			
+                 		<button type="button" 
+                 			ng-click="loadDataMonth()"
+                 			class="text-white btn btn-info btn-sm px-3 fw-bold d-flex align-items-center"
+                 		> Lọc <i class="fa-solid fa-filter"></i> </button>
+                 	</div>   
                  </div>
                  
 				<canvas id="productChart"></canvas>
@@ -44,25 +47,33 @@
                          <tr>
                              <th scope="col">Ảnh</th>
                              <th scope="col">Tên món</th>
-                             <th scope="col">Loại món</th>
                              <th scope="col">Giá</th>
+                             <th scope="col">Số lượng bán</th>
                          </tr>
                      </thead>
                      <tbody class="table table-body table-bordered border-white">
                          <tr
-                         	ng-repeat="p in productArr.product"
+                         	ng-repeat="item in pager.items  "
                          >
                              <td scope="col" class="text-center">
                                  <img 
+                                 	ng-if="item.productImage != null"
                                  	class="rounded-circle" 
-                                 	src="/assets/images/{{p.img}}" 
-                                 	alt="ảnh món" 
+                                 	ng-src="/assets/images/Products/{{item.productImage}}" 
+                                 	alt="{{item.productImage}}" 
+                                 	style="width: 40px; height: 40px;"
+                                 >
+                                 <img 
+                                 	ng-if="item.productImage == null"
+                                 	class="rounded-circle" 
+                                 	src="/assets/images/Products/icon_food.png" 
+                                 	alt="{{item.productImage}}" 
                                  	style="width: 40px; height: 40px;"
                                  >
                              </td>
-                             <th scope="col">{{p.name}}</th>
-                             <th scope="col">{{p.cate}}</th>
-                             <th scope="col" class="text-end">{{p.price | currency:'':0}} đ</th>
+                             <td scope="col">{{item.productName}}</td>
+                             <td scope="col" class="text-end">{{item.productPrice | currency:'':0}} đ</td>
+                             <td scope="col" class="text-end">{{item.amount}} lượt</td>
                          </tr>
                      </tbody>
                  </table>
