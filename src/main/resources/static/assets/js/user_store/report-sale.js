@@ -534,7 +534,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 																																						data: [$scope.data1, $scope.data2, $scope.data3, $scope.data4, $scope.data5, $scope.data6, $scope.data7, $scope.data8, $scope.data9, $scope.data10
 																																				, $scope.data11, $scope.data12, $scope.data13, $scope.data14, $scope.data15, $scope.data16, $scope.data17, $scope.data18, $scope.data19, $scope.data20
 																																				, $scope.data21, $scope.data22, $scope.data23, $scope.data24, $scope.data25, $scope.data26, $scope.data27, $scope.data28, $scope.data29, $scope.data30, $scope.data31
-	],
+																																						],
 																																						backgroundColor: "rgba(0, 84, 230, 90)"
 																																					}
 																																				]
