@@ -28,7 +28,19 @@ public class ReportOverViewAppAPI {
 	
 	@RequestMapping("/api/report-overview-app")
 	public List<ReportOverViewApp> getReportOverView() {
-		return reportOverView.showTop5Product();
+		Integer status = 3;
+		
+		return reportOverView.showTop5Product(status);
+	}
+
+	@RequestMapping("/api/report-product-app/{storeid}/{dateStart}/{dateEnd}")
+	public ResponseEntity<List<ReportProductApp>> getReportProduct(
+			@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart,
+			@PathVariable("dateEnd") Optional<Date> dateEnd) {
+		Integer status = 3;
+		
+		return ResponseEntity.ok(reportOverView.showTop10Product(dateStart.get(), dateEnd.get(), storeid.get(), status));
 	}
 
 	@RequestMapping("/api/report-product-app/{storeid}/{dateStart}/{dateEnd}")

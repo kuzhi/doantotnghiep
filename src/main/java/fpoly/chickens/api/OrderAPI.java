@@ -95,6 +95,8 @@ public class OrderAPI {
 	public ResponseEntity<Integer> getSaleOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
 			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd) throws ParseException {
 		
-		return ResponseEntity.ok(orderService.getSaleOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
+		Integer Status = 3;
+		
+		return ResponseEntity.ok(orderService.getSaleOrderInDate(storeid.get(), dateStart.get(), dateEnd.get(), Status));
 	}
 }

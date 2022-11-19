@@ -36,18 +36,4 @@ public class OrderDetailImplement implements OrderDetailService{
 		return orderDetailDAO.findOrderDetailByOrder(order);
 	}
 
-	@Override
-	public ArrayList<String> getIdforReport(Integer storeid, Date dateStar, Date dateEnd) {
-		// TODO Auto-generated method stub
-		Store store = storeDao.findById(storeid).get();
-		return orderDetailDAO.getIdforReport(store, dateStar, dateEnd);
-	}
-
-	@Override
-	public Integer getTotalReport(Integer storeid, Date dateStar, Date dateEnd, Integer productId) {
-		// TODO Auto-generated method stub
-		Store store = storeDao.findById(storeid).get();
-		return orderDetailDAO.getTotalReport(store, dateStar, dateEnd, productId);
-	}
-
 }

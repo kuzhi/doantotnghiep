@@ -37,6 +37,11 @@ select.form-select:focus {
 	box-shadow: none !important; 
 }
 
+/*** Chart ***/
+#productChart {
+	height: 600px !important;
+}
+
 /*** Spinner ***/
 #spinner {
     opacity: 0;

@@ -32,6 +32,6 @@ public interface OrderService {
 	
 	// Count order
 	Integer getOrderInDate(Integer storeid, Date dateStar, Date dateEnd);
-	Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd);
+	Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd, Integer Status);
 	List<Order> countOrderInDateWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status);
 }

@@ -2,7 +2,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	$scope.storeid = 2;
 	
 	//================ Biểu đồ hóa đơn
-	$scope.status = 1;
+	$scope.status = 3;
 	$scope.statusF = 5;
 	$scope.loadDataOrder = function(storeid) {
 		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));

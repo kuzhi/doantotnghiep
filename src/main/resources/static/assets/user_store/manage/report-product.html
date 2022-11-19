@@ -11,7 +11,7 @@
              <div class="bg-second text-center rounded p-4">
                  <div class="d-flex align-items-center justify-content-between mb-4">
                      <h6 class="mb-0 color-text">Thống kê doanh thu từ sản phẩm</h6>
-                     
+
                      <div class="d-flex align-items-center">
 				        <select 
 				        	ng-change="getReportByMonth()"
@@ -23,7 +23,6 @@
 						</select>
                  	</div>   
                  </div>
-                 
 				<canvas id="productChart"></canvas>
              </div>
          </div>
@@ -44,6 +43,7 @@
                              <th scope="col">Tên món</th>
                              <th scope="col">Giá</th>
                              <th scope="col">Số lượng bán</th>
+                             <th scope="col">Doanh thu</th>
                          </tr>
                      </thead>
                      <tbody class="table table-body table-bordered border-white">
@@ -69,6 +69,7 @@
                              <td scope="col">{{item.productName}}</td>
                              <td scope="col" class="text-end">{{item.productPrice | currency:'':0}} đ</td>
                              <td scope="col" class="text-end">{{item.amount}} lượt</td>
+                             <td scope="col" class="text-end">{{item.productPrice*item.amount | currency:'':0}} đ</td>
                          </tr>
                      </tbody>
                  </table>
