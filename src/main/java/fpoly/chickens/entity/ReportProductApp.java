@@ -15,4 +15,5 @@ public class ReportProductApp {
 	@Id
 	private String name;
 	private Long total;
+
 }

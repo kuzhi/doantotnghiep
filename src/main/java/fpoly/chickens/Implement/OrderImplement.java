@@ -63,6 +63,7 @@ public class OrderImplement implements OrderService {
 			orderDetail.setCreate_at(new Date());
 			// Lưu giá bán ra
 			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice());
+
 		}
 		order.setTotalMoney(list.stream().mapToInt(item -> item.getProduct().getPrice() * item.getAmount()).sum());
 		orderDao.saveAndFlush(order);

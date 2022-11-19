@@ -35,3 +35,4 @@ public class ReportOverViewAppImplement implements ReportOverViewAppService {
 		// TODO Auto-generated method stub
 		return orderDetailDAO.top10Product(dateStart, dateEnd, store, status);
 	}}
+

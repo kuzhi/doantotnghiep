@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 
+
 public interface UserAppDAO extends JpaRepository<UserApp, Integer> {
 	@Query(value = "SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
 	public UserApp findByUsername(String uname);
