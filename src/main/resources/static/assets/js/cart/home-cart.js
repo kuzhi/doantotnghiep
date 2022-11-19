@@ -13,10 +13,11 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.favorite = false;
 
 	// Load list products
-	$scope.url = "/api/product";
+	$scope.url = "/api/product/";
 	$scope.products = [];
+	$scope.status = true;
 	$scope.listProducts = function() {
-		$http.get($scope.url).then(resp => {
+		$http.get($scope.url + "store/" + $scope.storeid + "/" + $scope.status).then(resp => {
 			$scope.products = resp.data;
 		});
 	}

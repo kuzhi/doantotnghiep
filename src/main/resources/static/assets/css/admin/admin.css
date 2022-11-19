@@ -2,7 +2,6 @@
   width: 10px;
   height: 10px;
   border-radius: 100rem;
-  margin: 10px auto;
   position: relative;
 }
 
@@ -23,4 +22,9 @@
     transform: scale(2);
     opacity: 0;
   }
+}
+
+.bg-table {
+	color: #fff !important;
+	background-color: #3498db !important;
 }

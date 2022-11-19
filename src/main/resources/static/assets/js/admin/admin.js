@@ -31,10 +31,14 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/admin/user/my-profile.html",
 			controller: "myprofile-ctrl"
 		})
-		// Người dùng
+		// Gói dịch vụ
 		.when("/pack", {
 			templateUrl: "/assets/admin/pack/pack.html",
 			controller: "pack-ctrl"
+		})
+		.when("/orderpack", {
+			templateUrl: "/assets/admin/pack/order-pack.html",
+			controller: "order-pack-ctrl"
 		})
 		// Báo cáo
 		.when("/report", {

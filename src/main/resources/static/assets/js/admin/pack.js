@@ -1,72 +1,44 @@
 app.controller("pack-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Gói dịch vụ';
-	$scope.titleBread = 'Gói dịch vụ';
+	$scope.titleBread = 'Duyệt gói dịch vụ trong hệ thống';
 	
-	$scope.status = 4;
+	$scope.status = 1;
+	$scope.showBtn = true;
 	
-	$scope.all = function() {
-		$scope.list = {
-			pack: [
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 0
-				},
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 1
-				},
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 1
-				},
-			]
-		}
+	$scope.list = {
+		pack: [
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 2
+			},
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 1
+			},
+			{
+				name: 'gói 1 năm',
+				price: 200000,
+				date: 365,
+				image: 'goi1nam.png',
+				status: 1
+			},
+		]
 	}
 	
-	$scope.loading = function() {
-		$scope.list = {
-			pack: [
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 0
-				},
-			]
-		}
+	$scope.insert = function() {
+		$scope.showBtn = true;
+		console.log($scope.showBtn)
 	}
 	
-	$scope.completed = function() {
-		$scope.list = {
-			pack: [
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 1
-				},
-				{
-					name: 'gói 1 năm',
-					price: 200000,
-					date: 365,
-					image: 'goi1nam.png',
-					status: 1
-				},
-			]
-		}
+	$scope.edit = function() {
+		$scope.showBtn = false;
+		console.log($scope.showBtn)
 	}
-	
-	$scope.all();
 	
 })
