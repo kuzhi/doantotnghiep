@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReportProductApp {
 	@Id
-	private Integer productId;
-	private Integer total;
+	private String name;
+	private Long total;
 }

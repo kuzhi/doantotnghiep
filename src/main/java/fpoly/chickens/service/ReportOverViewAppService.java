@@ -9,8 +9,8 @@ import fpoly.chickens.entity.ReportOverViewApp;
 import fpoly.chickens.entity.ReportProductApp;
 
 public interface ReportOverViewAppService {
-	List<ReportOverViewApp> showTop5Product();
+	List<ReportOverViewApp> showTop5Product(Integer status);
+
+	List<ReportProductApp> showTop10Product(Date dateStart, Date dateEnd, Integer storeid, Integer status);
 	
-	ArrayList<String> loadListProductByDate(Integer storeid, Date dateStar, Date dateEnd);
-	List<ReportProductApp> loadDataListProductByDate(Integer storeid, Date dateStar, Date dateEnd);
 }

@@ -24,24 +24,14 @@ public class ReportOverViewAppImplement implements ReportOverViewAppService {
 	@Autowired StoreDAO storeDAO;
 
 	@Override
-	public List<ReportOverViewApp> showTop5Product() {
+	public List<ReportOverViewApp> showTop5Product(Integer status) {
 		// TODO Auto-generated method stub
-		return orderDetailDAO.top5Product();
+		return orderDetailDAO.top5Product(status);
 	}
 
 	@Override
-	public ArrayList<String> loadListProductByDate(Integer storeid, Date dateStar, Date dateEnd) {
-		// TODO Auto-generated method stub
+	public List<ReportProductApp> showTop10Product(Date dateStart, Date dateEnd, Integer storeid, Integer status) {
 		Store store = storeDAO.findById(storeid).get();
-		
-		return orderDetailDAO.loadOrderDetailByDate(store, dateStar, dateEnd);
-	}
-
-	@Override
-	public List<ReportProductApp> loadDataListProductByDate(Integer storeid, Date dateStar, Date dateEnd) {
 		// TODO Auto-generated method stub
-		Store store = storeDAO.findById(storeid).get();
-		
-		return orderDetailDAO.loadDataOrderDetailByDate(store, dateStar, dateEnd);
-	}
-}
+		return orderDetailDAO.top10Product(dateStart, dateEnd, store, status);
+	}}
