@@ -1,0 +1,282 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+	</ol>
+</nav>
+
+<div
+	class="container shadow-sm p-3 mb-3 bg-body rounded">
+
+	<div class="col-xl-12 col-md-12 col-12  add__product-pc">
+		<div class="row">
+			<div class="col-10">
+				<form class="d-flex align-items-center">
+					<div class="d-flex align-items-center w-25 px-2 me-2 border-2 border-bottom rounded">
+						<i class="fas fa-search mx-2"></i>
+						<input class="form-control border-0" placeholder="Tìm theo mã">
+					</div>
+
+					<div class="d-flex align-items-center w-25 px-2 me-2 border-2 border-bottom rounded">
+						<i class="fas fa-search mx-2"></i>
+						<input class="form-control border-0" placeholder="Tìm theo tên">
+					</div>
+						
+					<button class="btn btn-primary me-2 px-2">Tìm kiếm</button>
+				</form>
+			</div>
+			<div class="col-2 text-end">
+				<label type="submit" class="btn text-primary font__size-btn">
+					<i class="fas fa-sort-amount-down-alt"></i> Sắp xếp
+				</label>
+			</div>
+		</div>
+		<div class="row my-3">
+			<div class="table-responsive">
+			     <table 
+			     	class="table text-start align-middle table-bordered border-white table-hover mb-0"
+			     >
+			         <thead class="text-center" style="background-color: #ff512f !important;">
+	                     	<tr class="text-white">
+			                 <th scope="col">Mã kênh</th>
+			                 <th scope="col">Tên kênh</th>
+			                 <th scope="col">Chủ kênh</th>
+			                 <th scope="col">Nhân viên</th>
+			                 <th scope="col">Trạng thái</th>
+			                 <th scope="col"></th>
+			             </tr>
+			         </thead>
+			         <tbody class="table table-light">
+			             <tr
+			             	ng-repeat="p in list.suporter"
+			             >
+			                 <td scope="col">
+			                     {{p.id}}
+			                 </td>
+			                 <td scope="col">{{p.name}}</td>
+			                 <td scope="col">{{p.username}}</td>                             
+			                 <td scope="col">{{p.staff}}</td>
+			                 <td scope="col">{{p.status ? 'Đang hoạt động':'Ngưng hoạt động'}}</td>
+			                 <td class="text-center align-middle">
+								<button 
+									ng-click="edit()" 
+									class="text-warning border-0"
+									data-bs-toggle="modal"
+									data-bs-target="#editModal" 
+									data-bs-whatever="edit"
+								> <i class="fas fa-edit"></i> </button>
+								<button 
+									ng-click="delete()"
+									class="text-danger border-0"
+								> <i class="fas fa-ban"></i> </button>
+							</td>
+			             </tr>
+			         </tbody>
+			     </table>
+			 </div>
+		</div>
+
+	</div>
+
+	<div class="row text-start px-5">
+		<div class="col-6 text-start">
+			<label> 1/5 </label>
+		</div>
+		<div class="col-6 text-end">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-end">
+					<li class="page-item disabled">
+						<a class="page-link"> << </a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+							<a class="page-link" href="#"> >> </a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="add__product-mobile text-center text-white fw-bold p-5">
+		<i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 80px;"></i>
+		<p class="content__mobile text-dark">
+			Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
+			tính
+		</p>
+	</div>
+</div>
+
+<!-- Full screen modal add category -->
+<div class="modal fade" id="editModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h5 class="text-dark text-center">{{titleTable}}</h5>
+
+				<form action="" name="chanelForm" novalidate>
+					<!-- Id -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Mã kênh
+                        	<small
+								ng-show="chanelForm.id.$valid"
+							> 
+								<i class="fas fa-check text-success"></i>
+							</small>
+                        </h6>
+                        <div>
+                          <input 
+                          	  ng-model="id"
+                              type="text" 
+                              id="id"
+                              name="id"
+                              class="w-full form-control"
+                              placeholder="--Vui lòng nhập--"
+                              required
+                          >
+                          <div
+							ng-show="chanelForm.id.$dirty && chanelForm.id.$invalid"
+						  >
+							<small 
+								class="text-danger fst-italic"
+								ng-show="chanelForm.id.$error.required"
+							>Vui lòng không để trống (*)</small>
+						  </div>
+                        </div>
+                    </div>
+                    <!-- Name -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Tên kênh
+                        	<small
+								ng-show="chanelForm.name.$valid"
+							> 
+								<i class="fas fa-check text-success"></i>
+							</small>
+                        </h6>
+                        <div>
+                          <input 
+                          	  ng-model="name"
+                              type="text" 
+                              id="name"
+                              name="name"
+                              class="w-full form-control"
+                              placeholder="--Vui lòng nhập--"
+                              required
+                          >
+                          <div
+							ng-show="chanelForm.name.$dirty && chanelForm.name.$invalid"
+						  >
+							<small 
+								class="text-danger fst-italic"
+								ng-show="chanelForm.name.$error.required"
+							>Vui lòng không để trống (*)</small>
+						  </div>
+                        </div>
+                    </div>
+                    <!-- Chủ kênh -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Chủ kênh
+                        	<small
+								ng-show="chanelForm.user.$valid"
+							> 
+								<i class="fas fa-check text-success"></i>
+							</small>
+                        </h6>
+                        <div>
+                          <input 
+                          	  ng-model="user"
+                              type="text" 
+                              id="user"
+                              name="user"
+                              class="w-full form-control"
+                              placeholder="--Vui lòng nhập--"
+                              required
+                          >
+                          <div
+							ng-show="chanelForm.user.$dirty && chanelForm.user.$invalid"
+						  >
+							<small 
+								class="text-danger fst-italic"
+								ng-show="chanelForm.user.$error.required"
+							>Vui lòng không để trống (*)</small>
+						  </div>
+                        </div>
+                    </div>
+                    <!-- Nhân viên -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Nhân viên </h6>
+                        <div>
+                        	<select class="form-select" aria-label="Default select example">
+							  <option selected>--Vui lòng chọn--</option>
+							  <option 
+							  	ng-repeat="(id,c) in list.user"
+							  	value="{{c.id}}"
+							  >{{c.name}}</option>
+							</select>
+                        </div>
+                    </div>
+                    <!-- Status -->
+					<div class="row mt-1">
+                        <h6 
+                            class="text-secondary"
+                        >Trạng thái </h6>
+                        <div class="d-flex">
+                        	<div class="form-check me-2">
+								<input 
+									class="form-check-input" 
+									type="radio"
+									name="gridRadios" 
+									id="gridRadios1" 
+									value="true" 
+									checked
+								>
+								<label 
+									class="form-check-label" 
+									for="gridRadios1"
+								> Đang hoạt động </label>
+							 </div> 
+							 <div class="form-check">
+								<input 
+									class="form-check-input" 
+									type="radio"
+									name="gridRadios" 
+									id="gridRadios2" 
+									value="false"
+								> 
+								<label
+									class="form-check-label" 
+									for="gridRadios2"
+								> Ngừng hoạt động </label>
+							 </div>
+                        </div>
+                    </div>
+				</form>
+				
+				<div class="row mt-2">
+					<div class="col-xl-6">
+						<button class="btn btn-outline-danger w-100" data-bs-dismiss="modal">Hủy</button>
+					</div>
+					<div class="col-xl-6">
+						<button ng-disabled="chanelForm.$invalid" class="btn btn-primary w-100">Lưu</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

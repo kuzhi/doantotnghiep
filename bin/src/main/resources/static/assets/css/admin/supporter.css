@@ -1,0 +1,30 @@
+.btn__add-product {
+	height: 6.25em;
+	border: 1px solid blue;
+	background-color: #f5f5f5;
+}
+
+.btn__add-cate {
+	width: 100%;
+	height: 5em;
+	border: 1px solid blue;
+	background-color: #f5f5f5;
+}
+
+.btn__add-cate:hover {
+	width: 100%;
+	height: 5em;
+	border: 1px solid blue;
+	background-color: #9ec5fe;
+}
+
+.btn__add-product:hover {
+	border: 1px solid blue;
+	background-color: #9ec5fe;
+	height: 6.25em;
+}
+
+.img__food {
+	width: 64px;
+	height: 64px;
+}
