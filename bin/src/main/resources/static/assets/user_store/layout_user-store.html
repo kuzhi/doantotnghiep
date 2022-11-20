@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chickens | Quản lý kênh bán hàng của bạn</title>
+	<meta content="" name="keywords">
+    <meta content="" name="description">
+    
+	<!--===============================================================================================-->
+	<!-- Icon tab web -->
+	<link rel="shortcut icon" href="https://img.icons8.com/cute-clipart/344/shortcuts.png" />
+		
+    <!--===============================================================================================-->
+	<!-- ======= Font krub ======= -->		
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link 
+		href="https://fonts.googleapis.com/css2?family=Blinker:wght@200;300;700&family=Krub:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" 
+		rel="stylesheet">
+    
+	<!--===============================================================================================-->
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+		
+	<!--===============================================================================================-->
+	<!-- Angular JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	
+	<!--===============================================================================================-->
+	<!-- Angular Route -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	
+	<!--===============================================================================================-->
+	<!-- Icons -->
+	<link 
+		rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+	
+	<!--===============================================================================================-->
+	<!-- Alert -->
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	<!--===============================================================================================-->
+	<!-- Libraries Stylesheet -->
+    <link href="/assets/suport/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/suport/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+	
+	<!--===============================================================================================-->
+	<!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/css/user_store/bootstrap.min.css" rel="stylesheet">
+	
+	<!--===============================================================================================-->
+	<!-- Css -->
+	<link rel="stylesheet" href="/assets/css/user_store/style.css">
+	<link rel="stylesheet" href="/assets/css/user_store/layout_user_store.css">
+	<link rel="stylesheet" href="/assets/css/user_store/name_store.css">
+	<link rel="stylesheet" href="/assets/css/user_store/sales_time.css">
+	<link rel="stylesheet" href="/assets/css/user_store/business_form.css">
+	<link rel="stylesheet" href="/assets/css/user_store/product_management.css">
+</head>
+
+<body ng-app="app-user-store">
+
+	<div class="container-fluid position-relative d-flex p-0">
+		
+		<!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 
+        	top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-ck" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+        
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar navbar-dark">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <label class="color-text fs-3 fw-bold">Logo</label>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="ms-3">
+                        <h6 class="mb-0 text-ck">Tên cửa hàng</h6>
+                        <span>Địa chỉ</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100" id="navbar-nav">
+                    <a href="#!report-all" class="nav-item nav-link active">
+                    	<i class="fa fa-tachometer-alt me-2"></i>
+                    	Tổng quan
+                    </a>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-chart-column me-2"></i>
+                            Báo cáo
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="#!report-sale-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-column me-1"></i>
+                            	Doanh thu bán hàng
+                            </a>
+                            <a href="#!report-product-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-bar me-1"></i>
+                            	Doanh thu sản phẩm
+                           	</a>
+                            <a href="#!report-client-all" class="dropdown-item">
+                            	<i class="fa-solid fa-chart-bar me-1"></i>
+                            	Doanh thu khách hàng
+                            </a>
+                        </div>
+                    </div>
+                    <a 
+                    	href="#!name__store" 
+                    	class="nav-item nav-link">
+						<i class="fas fa-store me-2"></i>
+						Cửa hàng
+					</a>
+                    <a 
+                    	href="#!product__management" 
+                    	class="nav-item nav-link">
+						<i class="fas fa-utensils me-2"></i>
+						Thực đơn
+					</a>
+                    <a 
+                    	href="#!user__management" 
+                    	class="nav-item nav-link">
+						<i class="fa-solid fa-users-between-lines me-2"></i>
+						Khách hàng
+					</a>
+					<div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa fa-laptop me-2"></i>Đơn hàng
+                        </a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="#!order__management-all" class="dropdown-item">
+                            	<i class="fa-solid fa-list-ul me-1"></i>
+                            	Tất cả
+                            </a>
+                            <a href="#!order__management-loading" class="dropdown-item">
+                            	<i class="fa-solid fa-bars-staggered me-1"></i>
+                            	Chờ xử lý
+                            </a>
+                             <a href="#!order__management-confirmed" class="dropdown-item">
+                            	<i class="fa-solid fa-bars-staggered me-1"></i>
+                            	Đã duyệt
+                            </a>
+                            <a href="#!order__management-success" class="dropdown-item">
+                            	<i class="fa-solid fa-list-check me-1"></i>
+                            	Đã giao thành công
+                            </a>
+                             <a href="#!order__management-canceled" class="dropdown-item">
+                            	<i class="fa-solid fa-bars-staggered me-1"></i>
+                            	Đã hủy
+                            </a>
+                             <a href="#!order__management-becanceled" class="dropdown-item">
+                            	<i class="fa-solid fa-bars-staggered me-1"></i>
+                            	Bị hủy
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+        
+        <!-- Content Start -->
+        <div class="content">
+        
+        	<!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-second sticky-top px-4 py-0">
+                <a href="#" class="navbar-brand d-flex d-lg-none me-4">
+                    <label class="color-text mb-0 fs-3"><i class="fa fa-user-edit"></i></label>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars text-white"></i>
+                </a>
+                <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img 
+                            	class="rounded-circle me-lg-2" 
+                            	src="/assets/images/user.jpg" 
+                            	alt="" 
+                            	style="width: 40px; height: 40px;"
+                            >
+                            <span class="d-none d-lg-inline-flex">Tên tài khoản</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-second border-0 rounded-0 rounded-bottom m-0">
+                            <a href="#!myProfile" class="dropdown-item">Hồ sơ</a>
+                            <a href="#" class="dropdown-item">Đổi mật khẩu</a>
+                            <a href="#" class="dropdown-item">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+            
+            <!-- View -->
+            <div class="ng-view"></div>
+            
+            
+        </div>
+        
+	</div>
+
+	<script>
+		var header = document.getElementById("navbar-nav");
+		var btns = header.getElementsByClassName("nav-link");
+		for (var i = 0; i < btns.length; i++) {
+		  btns[i].addEventListener("click", function() {
+		  var current = document.getElementsByClassName("active");
+		  current[0].className = current[0].className.replace(" active", "");
+		  this.className += " active";
+		  });
+		}
+	</script>
+
+	<!--===============================================================================================-->
+	<!-- ======= JS ======= -->	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/suport/lib/chart/chart.min.js"></script>
+    <script src="/assets/suport/lib/easing/easing.min.js"></script>
+    <script src="/assets/suport/lib/waypoints/waypoints.min.js"></script>
+    <script src="/assets/suport/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/suport/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/assets/suport/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/assets/suport/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+	<!--===============================================================================================-->
+	<!-- ======= JS =======  -->	
+	<script src="/assets/js/user_store/main.js"></script>
+	<script src="/assets/js/user_store/app-user-store.js"></script>
+	<script src="/assets/js/user_store/report-ctrl.js"></script>
+	<script src="/assets/js/user_store/report-sale.js"></script>
+	<script src="/assets/js/user_store/report-product.js"></script>
+	<script src="/assets/js/user_store/report-client.js"></script>
+	<script src="/assets/js/user_store/name__store-ctrl.js"></script>
+	<script src="/assets/js/user_store/myprofile.js"></script>
+	<script src="/assets/js/user_store/product__management-ctrl.js"></script>
+	<script src="/assets/js/user_store/order_management-ctrl.js"></script>
+	<script src="/assets/js/user_store/user__management-ctrl.js"></script>
+
+</body>
+
+</html>

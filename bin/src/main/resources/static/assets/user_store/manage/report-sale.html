@@ -1,0 +1,31 @@
+<nav class="mt-3 mx-3" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+  </ol>
+</nav>
+
+<!-- Sales Chart Start -->
+     <div class="container-fluid pt-4 px-4 mb-3">
+         <div class="row mx-1">
+             <div class="bg-second text-center rounded p-4">
+                 <div class="d-flex align-items-center justify-content-between mb-4">
+                     <h6 class="mb-0 color-text">Thống kê doanh thu bán hàng</h6>
+                 
+                 	<div class="d-flex align-items-center">
+				        <select 
+				        	ng-change="getReportByMonth()"
+							ng-model="list"
+							ng-options="month.id as month.name for month in months"
+				        	class="form-select form-select-sm border-0 border-bottom rounded-0" 
+				        >
+						  <option value="" class="fw-bold bg-info text-white">--Vui lòng chọn--</option>
+						</select>
+                 	</div>    
+                 </div>
+                 
+				<canvas id="saleChart"></canvas>
+             </div>
+         </div>
+     </div>
+<!-- Sales Chart End -->
