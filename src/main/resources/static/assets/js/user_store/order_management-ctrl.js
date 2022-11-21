@@ -1,7 +1,7 @@
 app.controller("order__management-all-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = true;
-	$scope.titleTable = 'Tất cả hóa đơn';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Tất cả Đơn hàng';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Tất cả';
 	$scope.storeid = 2;
 	$scope.keyword
@@ -93,8 +93,8 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 
 app.controller("order__management-loading-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = true;
-	$scope.titleTable = 'Hóa đơn đang chờ duyệt';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Đơn hàng đang chờ duyệt';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Chờ duyệt';
 	$scope.storeid = 2;
 	$scope.pageNumber = 0;
@@ -169,8 +169,8 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 
 app.controller("order__management-confirmed-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = true;
-	$scope.titleTable = 'Hóa đơn đã duyệt';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Đơn hàng đã duyệt';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Đã duyệt';
 	$scope.storeid = 2;
 	$scope.pageNumber = 0;
@@ -213,8 +213,8 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 
 app.controller("order__management-success-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = false;
-	$scope.titleTable = 'Hóa đơn thành công';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Đơn hàng thành công';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Thành công';
 	$scope.storeid = 2;
 	$scope.pageNumber = 0;
@@ -244,8 +244,8 @@ app.controller("order__management-success-ctrl", function($scope, $http, $locati
 })
 app.controller("order__management-canceled-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = false;
-	$scope.titleTable = 'Hóa đơn khách đã hủy';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Đơn hàng đã hủy bởi Khách hàng';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Đã hủy';
 	$scope.storeid = 2;
 	$scope.pageNumber = 0;
@@ -275,8 +275,8 @@ app.controller("order__management-canceled-ctrl", function($scope, $http, $locat
 })
 app.controller("order__management-becanceled-ctrl", function($scope, $http, $location) {
 	$scope.statusShowAction = false;
-	$scope.titleTable = 'Hóa đơn cửa hàng đã hủy';
-	$scope.titleBreadcrumb = 'Hóa đơn';
+	$scope.titleTable = 'Đơn hàng bị hủy do Cửa hàng';
+	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Đã bị hủy';
 	$scope.storeid = 2;
 	$scope.pageNumber = 0;

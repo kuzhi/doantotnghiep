@@ -2,11 +2,13 @@
      <div class="container-fluid pt-4 px-4">
          <div class="row g-4">
              <div class="col-sm-6 col-xl-3">
-                 <div class="bg-second rounded d-flex align-items-center justify-content-between p-4">
-                     <i class="fa fa-chart-line fa-3x color-text "></i>
-                     <div class="ms-3">
-                         <p class="mb-2">Hôm nay</p>
-                         <h6 class="mb-0 text-light">{{orderInDate}} đơn</h6>
+                 <div class="bg-second rounded p-4">
+                     <div class="d-flex align-items-center justify-content-between">
+                     	<i class="fa fa-chart-line fa-3x color-text "></i>
+	                     <div class="ms-3">
+	                         <p class="mb-2">Hôm nay</p>
+	                         <h6 class="mb-0 text-light">{{orderInDate}} đơn</h6>
+	                     </div>
                      </div>
                  </div>
              </div>
@@ -41,9 +43,39 @@
      </div>
 	<!-- Sale & Revenue End -->
 	
+	<div class="container-fluid pt-4 px-4">
+         <div class="bg-second rounded p-2">
+			<h6 class="color-text">Chi tiết tháng {{month}}</h6>
+			<div class="row py-4">
+				<div class="col-xl-3 text-center">
+	                <small class="order-loading text-start py-1 px-5 rounded-pill">
+					  Đang xử lý: <b>0</b> đơn
+					</small>
+	            </div>
+	            <div class="col-xl-3 text-center mt-2">
+	              	<small class="order-success text-start py-1 px-5 rounded-pill">
+					  Thành công: <b>0</b> đơn
+					</small>
+	            </div>
+	            <div class="col-xl-3 text-center mt-2">
+	               	<small class="order-canceled text-start py-1 px-5 rounded-pill">
+					  Bị hủy bởi KH: <b>0</b> đơn
+					</small>
+	        	</div>
+	            <div class="col-xl-3 text-center mt-2">
+	               	<small class="order-canceled text-start py-1 px-5 rounded-pill">
+					  Bị hủy do CH: <b>0</b> đơn
+					</small>
+	            </div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- Sales Chart Start -->
      <div class="container-fluid pt-4 px-4">
          <div class="row g-4">
+         
+         	<!-- Biểu đồ hóa đơn -->
              <div class="col-sm-12 col-xl-6">
                  <div class="bg-second text-center rounded p-4">
                      <div class="d-flex align-items-center justify-content-between mb-4">
@@ -52,6 +84,8 @@
                      <canvas id="worldwide-sales"></canvas>
                  </div>
              </div>
+             
+             <!-- Biểu đồ doanh thu -->
              <div class="col-sm-12 col-xl-6">
                  <div class="bg-second text-center rounded p-4">
                      <div class="d-flex align-items-center justify-content-between mb-4">
@@ -71,25 +105,21 @@
                  <h6 class="mb-0 color-text">Top 5 món bán chạy nhất</h6>
              </div>
              <div class="table-responsive">
-                 <table 
-                 	class="table text-start align-middle table-bordered border-white table-hover mb-0"
-                 >
+                 <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
                  	 <colgroup>
 				    	<col width="80" span="1">
 				     </colgroup>
-                     <thead class="text-center bg-table">
+                     <thead class="table_primary">
                          <tr>
-                             <th scope="col">Ảnh</th>
-                             <th scope="col">Tên món</th>
-                             <th scope="col">Giá</th>
-                             <th scope="col">Số lượng bán</th>
+                             <th>Ảnh</th>
+                             <th>Tên món</th>
+                             <th>Giá</th>
+                             <th>Số lượng bán</th>
                          </tr>
                      </thead>
-                     <tbody class="table table-body table-bordered border-white">
-                         <tr
-                         	ng-repeat="item in pager.items  "
-                         >
-                             <td scope="col" class="text-center">
+                     <tbody>
+                         <tr ng-repeat="item in pager.items  " >
+                             <td class="text-center">
                                  <img 
                                  	ng-if="item.productImage != null"
                                  	class="rounded-circle" 
@@ -105,9 +135,9 @@
                                  	style="width: 40px; height: 40px;"
                                  >
                              </td>
-                             <td scope="col">{{item.productName}}</td>
-                             <td scope="col" class="text-end">{{item.productPrice | currency:'':0}} đ</td>
-                             <td scope="col" class="text-end">{{item.amount}} lượt</td>
+                             <td class="text-start">{{item.productName}}</td>
+                             <td class="text-end">{{item.productPrice | currency:'':0}} đ</td>
+                             <td class="text-end">{{item.amount}} lượt</td>
                          </tr>
                      </tbody>
                  </table>

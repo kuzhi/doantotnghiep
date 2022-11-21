@@ -1,6 +1,6 @@
 app.controller("user__management-ctrl", function($scope, $http, $location) {
-	$scope.titleBreadcrumb = 'Nhân viên';
-	$scope.titleBread = 'Tất cả';
+	$scope.titleBreadcrumb = 'Khách hàng';
+	$scope.titleBread = 'Thông tin khách hàng';
 	$scope.showBtn = true;
 	$scope.url = "/api/user/";
 
