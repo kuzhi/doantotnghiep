@@ -1,6 +1,6 @@
 app.controller("report-product-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Báo cáo';
-	$scope.titleBread = 'Doanh thu sản phẩm';
+	$scope.titleBread = 'Sản phẩm';
 	$scope.storeid = 2;
 
 	const now = new Date();

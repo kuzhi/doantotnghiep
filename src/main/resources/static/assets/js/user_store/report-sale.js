@@ -1,6 +1,6 @@
 app.controller("report-sale-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Báo cáo';
-	$scope.titleBread = 'Doanh thu bán hàng';
+	$scope.titleBread = 'Bán hàng';
 	$scope.storeid = 2;
 
 	// Biểu đồ bán hàng

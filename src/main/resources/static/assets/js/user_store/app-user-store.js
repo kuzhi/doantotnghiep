@@ -68,4 +68,9 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/manage/report.html",
 			controller: "report-all-ctrl"
 		})
-})
+});
+
+app.controller("app-ctrl", function($scope, $http, $location) {
+	$scope.nameStore = "Pika Tea";
+	$scope.addressStore = "Sóc Trăng";
+});

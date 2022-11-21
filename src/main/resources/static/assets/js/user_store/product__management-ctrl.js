@@ -1,6 +1,6 @@
 app.controller("product__management-ctrl", function($scope, $http, $location) {
-	$scope.titleBreadcrumb = 'Thực đơn';
-	$scope.titleBread = 'Món ăn';
+	$scope.titleBreadcrumb = 'Sản phẩm';
+	$scope.titleBread = 'Danh sách sản phẩm';
 	$scope.showBtn = true;
 	$scope.url = "/api/product/";
 	$scope.urlCate = "/api/category/";
@@ -490,22 +490,10 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 	
 	// Load list product by filter
 	$scope.listFilter = [
-		{
-			id: 1,
-			name: "A-Z"
-		},
-		{
-			id: 2,
-			name: "Z-A"
-		},
-		{
-			id: 3,
-			name: "0-9"
-		},
-		{
-			id: 4,
-			name: "9-0"
-		},
+		{ id: 1, name: "Sắp xếp theo tên A-Z" },
+		{ id: 2, name: "Sắp xếp theo tên Z-A" },
+		{ id: 3, name: "Sắp xếp theo giá 0-9" },
+		{ id: 4, name: "Sắp xếp theo giá 9-0" },
 	]
 	$scope.getProductsbyFilter = function() {
 		// ======= A-Z

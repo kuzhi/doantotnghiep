@@ -36,21 +36,19 @@
                  <h6 class="mb-0 color-text">Top 10 món bán chạy nhất</h6>
              </div>
              <div class="table-responsive">
-                 <table class="table text-start align-middle table-bordered border-white table-hover mb-0">
-                     <thead class="text-center bg-table">
+                 <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                     <thead class="table_primary">
                          <tr>
-                             <th scope="col">Ảnh</th>
-                             <th scope="col">Tên món</th>
-                             <th scope="col">Giá</th>
-                             <th scope="col">Số lượng bán</th>
-                             <th scope="col">Doanh thu</th>
+                             <th>Ảnh</th>
+                             <th>Tên món</th>
+                             <th>Giá</th>
+                             <th>Số lượng bán</th>
+                             <th>Doanh thu</th>
                          </tr>
                      </thead>
-                     <tbody class="table table-body table-bordered border-white">
-                         <tr
-                         	ng-repeat="item in pager.items  "
-                         >
-                             <td scope="col" class="text-center">
+                     <tbody>
+                         <tr ng-repeat="item in pager.items">
+                             <td class="text-center">
                                  <img 
                                  	ng-if="item.productImage != null"
                                  	class="rounded-circle" 
@@ -66,10 +64,10 @@
                                  	style="width: 40px; height: 40px;"
                                  >
                              </td>
-                             <td scope="col">{{item.productName}}</td>
-                             <td scope="col" class="text-end">{{item.productPrice | currency:'':0}} đ</td>
-                             <td scope="col" class="text-end">{{item.amount}} lượt</td>
-                             <td scope="col" class="text-end">{{item.productPrice*item.amount | currency:'':0}} đ</td>
+                             <td class="text-start">{{item.productName}}</td>
+                             <td class="text-end">{{item.productPrice | currency:'':0}} đ</td>
+                             <td class="text-end">{{item.amount}} lượt</td>
+                             <td class="text-end">{{item.productPrice*item.amount | currency:'':0}} đ</td>
                          </tr>
                      </tbody>
                  </table>
