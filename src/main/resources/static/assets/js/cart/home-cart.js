@@ -2,12 +2,18 @@ app = angular.module("home-cart", []);
 app.controller("cart-ctrl", function($scope, $http, $location) {
 	//Header
 	$scope.auth = false;
-	$scope.amountItems = 34;
+	$scope.amountItems = 0;
 	$scope.phone = '0942.xxx.xxx'
 	$scope.email = 'anv123@mail.com'
 	$scope.storeid = 2;// Chỉ cần lấy id của store trến session gắn dô đây là ok
 	$scope.userid = 2;//Chỉ cần lấy id của user trến session gắn dô đây là ok
 
+	$scope.countAmount = function() {
+		$http.get("/api/countcart/" + $scope.storeid + "/" + $scope.userid).then(resp => {
+			$scope.amountItems = resp.data
+		})
+	}
+	$scope.countAmount()
 	// list product
 	$scope.titleStore = 'Chickens gang'
 	$scope.favorite = false;
