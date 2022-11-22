@@ -61,7 +61,9 @@ public class OrderImplement implements OrderService {
 				.peek(d -> d.setOrder(order)).collect(Collectors.toList());
 		for (OrderDetail orderDetail : list) {
 			orderDetail.setCreate_at(new Date());
-			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice() * orderDetail.getAmount());
+			// Lưu giá bán ra
+			orderDetail.setTotalMoney(orderDetail.getProduct().getPrice());
+
 		}
 		order.setTotalMoney(list.stream().mapToInt(item -> item.getProduct().getPrice() * item.getAmount()).sum());
 		orderDao.saveAndFlush(order);
@@ -150,10 +152,10 @@ public class OrderImplement implements OrderService {
 	}
 
 	@Override
-	public Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd) {
+	public Integer getSaleOrderInDate(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
 		Store store = storeDao.findById(storeid).get();
 		
-		return orderDao.getOrderInDate(store, dateStar, dateEnd);
+		return orderDao.getOrderInDate(store, dateStar, dateEnd, Status);
 	}
 
 	@Override
@@ -168,5 +170,12 @@ public class OrderImplement implements OrderService {
 		Pageable pageable = PageRequest.of(0, 1);
 		Page<Order> page = orderDao.findAllByStoreAndOrdercode(store, keyword, pageable);
 		return page;
+	}
+
+	@Override
+	public Integer countOrderWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDateWithStatus2(store, dateStar, dateEnd, Status);
 	}
 }

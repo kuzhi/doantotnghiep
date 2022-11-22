@@ -1,0 +1,165 @@
+:root {
+	--primary: #ff8008 !important;
+	--primary-bold: #ff512f !important;
+}
+
+body {
+	font-family: 'Krub', sans-serif;
+	background-color: #f8f9fa;
+}
+
+
+.text-primary {
+	color: var(--primary);
+}
+
+.btn-primary {
+	background: var(--primary);
+	border: 1px solid var(--primary);
+}
+
+.btn-primary:hover {
+	background: #ff512f !important;;
+	border: 1px solid #ff512f !important;;
+}
+
+.nav-link {
+    color: #333;
+    font-weight: 700;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    background-color: var(--primary);
+}
+
+.fa-heart:hover {
+	color: red !important;
+}
+
+.btn-outline-primary {
+	border: 1px solid #ff512f !important;;
+	color: #ff512f !important;;
+}
+
+.btn-outline-primary:hover {
+	border: 1px solid #ff512f !important;;
+	background: #ff512f !important;;
+	color: #fff !important;
+}
+
+
+.animate--shake {
+	animation: shake 10s ease infinite;
+}
+ 
+@keyframes shake {
+	0%, 100% {transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
+
+.animate__animated.animate__tada {
+  --animate__tada: 2s;
+}
+
+
+.active {
+	font-weight: 700 !important;
+}
+
+.shadow {
+	box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+.comment {
+	border: 2px solid green;
+}
+
+.image-upload>input {
+  display: none;
+}
+
+.list--item {
+	cursor: pointer;	
+}
+
+
+.text-edit {
+	text-align: right !important;
+}
+
+.home-show {
+	display: none;
+}
+
+.fade-loading {
+  width: 10px;
+  height: 10px;
+  border-radius: 100rem;
+  margin: 10px auto;
+  position: relative;
+}
+
+.fade-loading:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: inherit;
+  animation: fade 1s forwards infinite linear;
+}
+
+@keyframes fade {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+
+/* Mobile */
+@media ( max-width : 47.9375em) {
+	.img__logo {
+		display: none !important;
+	}
+
+	
+	.header {
+		padding-right: 5px !important;
+		padding-left: 12px !important;
+	}
+	
+	.collapse-header {
+		display: flex;
+	}
+	
+	.text-edit {
+		text-align: left !important;
+	}
+	
+	.text-hide {
+		display: none;
+	}
+	
+	.text-end-mb {
+		text-align: left !important;
+	}
+
+	.text-center-mb {
+		text-align: left !important;
+	}
+	
+	.home-show {
+		display: block;
+	}
+
+}
