@@ -21,4 +21,52 @@ public class PackImplement implements PackService {
 		return packDAO.findAll();
 	}
 
+	@Override
+	public Pack create(Pack product) {
+		// TODO Auto-generated method stub
+		return packDAO.save(product);
+	}
+
+	@Override
+	public Pack update(Pack product) {
+		// TODO Auto-generated method stub
+		return packDAO.saveAndFlush(product);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		// TODO Auto-generated method stub
+		packDAO.deleteById(id);
+	}
+
+	@Override
+	public List<Pack> findProductByName(String name) {
+		// TODO Auto-generated method stub
+		return packDAO.findByName(name);
+	}
+
+	@Override
+	public List<Pack> sortAZ() {
+		// TODO Auto-generated method stub
+		return packDAO.sortAZ();
+	}
+
+	@Override
+	public List<Pack> sortZA() {
+		// TODO Auto-generated method stub
+		return packDAO.sortZA();
+	}
+
+	@Override
+	public List<Pack> sort09() {
+		// TODO Auto-generated method stub
+		return packDAO.sort09();
+	}
+
+	@Override
+	public List<Pack> sort90() {
+		// TODO Auto-generated method stub
+		return packDAO.sort90();
+	}
+
 }

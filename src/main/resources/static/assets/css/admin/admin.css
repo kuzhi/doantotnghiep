@@ -43,3 +43,16 @@
 	color: #e82646 !important;
 	background-color: rgba(255, 56, 43, 0.1) !important;
 }
+
+.table_primary {
+	background-color: #3498db !important;
+	color: #fff;
+}
+
+.table_primary>tr>th {
+	font-weight: 600 !important;	
+}
+
+.text-red {
+    color: #c21a1a !important;
+}
