@@ -1,5 +1,92 @@
 app.controller("report-all-ctrl", function($scope, $http, $location) {
 	$scope.storeid = 2;
+	const now = new Date();
+	
+	//================ Hóa đơn đang xử lý
+	$scope.loadOrderLoading = function(storeid, year, month) {
+		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+		const end =  24 * 60 * 60 * 1000 - 1;
+		
+		$scope.status = 1;
+		$scope.dateStart = new Date(year, month);
+		$scope.dateEnd = new Date(year, month);
+		
+		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+		
+		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
+		.then(resp => {
+			$scope.orderLoading = resp.data;
+            console.log($scope.orderLoading);
+		})
+		.catch(error => {
+            console.log('error: ', error)
+        })
+	}; $scope.loadOrderLoading($scope.storeid, now.getFullYear(), now.getMonth());
+	
+	//================ Hóa đơn thành công
+	$scope.loadOrderSuccess = function(storeid, year, month) {
+		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+		const end =  24 * 60 * 60 * 1000 - 1;
+		
+		$scope.status = 3;
+		$scope.dateStart = new Date(year, month);
+		$scope.dateEnd = new Date(year, month);
+		
+		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+		
+		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
+		.then(resp => {
+			$scope.orderSuccess = resp.data;
+            console.log($scope.orderLoading);
+		})
+		.catch(error => {
+            console.log('error: ', error)
+        })
+	}; $scope.loadOrderSuccess($scope.storeid, now.getFullYear(), now.getMonth());
+	//================ Hóa đơn bị hủy
+	$scope.loadOrderCancel = function(storeid, year, month) {
+		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+		const end =  24 * 60 * 60 * 1000 - 1;
+		
+		$scope.status = 4;
+		$scope.dateStart = new Date(year, month);
+		$scope.dateEnd = new Date(year, month);
+		
+		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+		
+		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
+		.then(resp => {
+			$scope.orderCancel = resp.data;
+            console.log($scope.orderLoading);
+		})
+		.catch(error => {
+            console.log('error: ', error)
+        })
+	}; $scope.loadOrderCancel($scope.storeid, now.getFullYear(), now.getMonth());
+	//================ Hóa đơn đã hủy
+	$scope.loadOrderCanceled = function(storeid, year, month) {
+		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+		const end =  24 * 60 * 60 * 1000 - 1;
+		
+		$scope.status = 5;
+		$scope.dateStart = new Date(year, month);
+		$scope.dateEnd = new Date(year, month);
+		
+		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+		
+		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
+		.then(resp => {
+			$scope.orderCanceled = resp.data;
+            console.log($scope.orderLoading);
+		})
+		.catch(error => {
+            console.log('error: ', error)
+        })
+	}; $scope.loadOrderCanceled($scope.storeid, now.getFullYear(), now.getMonth());
 	
 	//================ Biểu đồ hóa đơn
 	$scope.status = 3;

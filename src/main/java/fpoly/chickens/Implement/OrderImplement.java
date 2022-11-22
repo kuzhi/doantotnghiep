@@ -171,4 +171,11 @@ public class OrderImplement implements OrderService {
 		Page<Order> page = orderDao.findAllByStoreAndOrdercode(store, keyword, pageable);
 		return page;
 	}
+
+	@Override
+	public Integer countOrderWithStatus(Integer storeid, Date dateStar, Date dateEnd, Integer Status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrderInDateWithStatus2(store, dateStar, dateEnd, Status);
+	}
 }

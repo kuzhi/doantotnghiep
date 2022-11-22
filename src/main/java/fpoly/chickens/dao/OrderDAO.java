@@ -36,6 +36,9 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	// Get order in day || month
 	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3")
 	Integer countOrderInDate(Store store, Date dateStar, Date dateEnd);
+
+	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3 AND o.Status = ?4")
+	Integer countOrderInDateWithStatus2(Store store, Date dateStar, Date dateEnd, Integer status);
 	
 	// Get order in month status 
 	// == 3 Thành công
