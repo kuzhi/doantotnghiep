@@ -1,5 +1,6 @@
 package fpoly.chickens.api;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import fpoly.chickens.entity.OrderPack;
+import fpoly.chickens.entity.ReportPack;
 import fpoly.chickens.service.OrderPackService;
 
 @CrossOrigin("*")
@@ -61,4 +63,23 @@ public class OrderPackAPI {
 
 	}
 
+	@GetMapping("/api/report-orderpack/{dateStart}/{dateEnd}/{status}")
+	public ResponseEntity<Integer> countOrderPackByDate(
+			@PathVariable("dateStart") Optional<Date> dateStart,
+			@PathVariable("dateEnd") Optional<Date> dateEnd,
+			@PathVariable("status") Optional<Integer> status
+			) {
+		
+		return ResponseEntity.ok(orderPackService.countOrderPackByDate(dateStart.get(), dateEnd.get(), status.get()));
+	}
+
+	@GetMapping("/api/report-orderpack-sale/{dateStart}/{dateEnd}/{status}")
+	public ResponseEntity<List<ReportPack>> getSale(
+			@PathVariable("dateStart") Optional<Date> dateStart,
+			@PathVariable("dateEnd") Optional<Date> dateEnd,
+			@PathVariable("status") Optional<Integer> status
+			) {
+		
+		return ResponseEntity.ok(orderPackService.getSale(dateStart.get(), dateEnd.get(), status.get()));
+	}
 }

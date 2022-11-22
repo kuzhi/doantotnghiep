@@ -28,3 +28,18 @@
 	color: #fff !important;
 	background-color: #3498db !important;
 }
+
+.order-success {
+	color: #09ad95 !important;
+	background-color: rgba(0, 230, 130, 0.1) !important;
+}
+
+.order-loading {
+	color: #f7b731 !important;
+	background-color: rgba(255, 162, 43, 0.1) !important;
+}
+
+.order-canceled {
+	color: #e82646 !important;
+	background-color: rgba(255, 56, 43, 0.1) !important;
+}
