@@ -82,6 +82,14 @@ public class OrderAPI {
 		return ResponseEntity.ok(orderService.getOrderInDate(storeid.get(), dateStart.get(), dateEnd.get()));
 	}
 
+	@GetMapping("/api/count-number/order/{storeid}/{dateStart}/{dateEnd}/{status}")
+	public ResponseEntity<Integer> countOrderInDate(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd,
+			@PathVariable("status") Optional<Integer> status) throws ParseException {
+		
+		return ResponseEntity.ok(orderService.countOrderWithStatus(storeid.get(), dateStart.get(), dateEnd.get(), status.get()));
+	}
+
 	@GetMapping("/api/count/order/{storeid}/{dateStart}/{dateEnd}/{status}")
 	public ResponseEntity<List<Order>> getOrderInDateWithStatus(@PathVariable("storeid") Optional<Integer> storeid,
 			@PathVariable("dateStart") Optional<Date> dateStart, @PathVariable("dateEnd") Optional<Date> dateEnd,
