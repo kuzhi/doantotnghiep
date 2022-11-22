@@ -1,10 +1,12 @@
-package fpoly.chickens.service;
+ package fpoly.chickens.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 
 import fpoly.chickens.entity.OrderPack;
+import fpoly.chickens.entity.ReportPack;
 
 public interface OrderPackService {
 
@@ -20,4 +22,7 @@ public interface OrderPackService {
 
 	Page<OrderPack> getOrderPackKeyword(String keyword);
 
+	Integer countOrderPackByDate(Date dateStart, Date dateEnd, Integer status);
+	
+	List<ReportPack> getSale(Date dateStart, Date dateEnd, Integer status);
 }

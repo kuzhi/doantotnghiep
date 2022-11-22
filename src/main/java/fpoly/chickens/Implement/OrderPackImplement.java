@@ -17,6 +17,7 @@ import fpoly.chickens.dao.OrderPackDAO;
 import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.entity.OrderPack;
 import fpoly.chickens.entity.Pack;
+import fpoly.chickens.entity.ReportPack;
 import fpoly.chickens.entity.Store;
 import fpoly.chickens.service.OrderPackService;
 
@@ -93,6 +94,18 @@ public class OrderPackImplement implements OrderPackService {
 		Pageable pageable = PageRequest.of(0, 10);
 		Page<OrderPack> page = orderPackDao.findOrderpackbyKey(keyword, pageable);
 		return page;
+	}
+
+	@Override
+	public Integer countOrderPackByDate(Date dateStart, Date dateEnd, Integer status) {
+		// TODO Auto-generated method stub
+		return orderPackDao.countOrderPackByDate(dateStart, dateEnd, status);
+	}
+
+	@Override
+	public List<ReportPack> getSale(Date dateStart, Date dateEnd, Integer status) {
+		// TODO Auto-generated method stub
+		return orderPackDao.getSale(dateStart, dateEnd, status);
 	}
 
 }

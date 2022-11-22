@@ -5,73 +5,93 @@
   </ol>
 </nav>
 
-<div class="container">
-	<div class="row">
-		<div class="col-xl-2 col-md-5 col-12 bg-body rounded-4 p-3 me-5 mb-3">
-			<h1>0</h1>
-			<label>Kênh dùng thử</label>
-		</div>
-		<div class="col-xl-2 col-md-5 col-12 bg-body rounded-4 p-3 me-5 mb-3">
-			<h1>0</h1>
-			<label>Kênh thuê 6 tháng</label>
-		</div>
-		<div class="col-xl-2 col-md-5 col-12 bg-body rounded-4 p-3 me-5 mb-3">
-			<h1>0</h1>
-			<label>Kênh thuê 1 năm</label>
-		</div>
-		<div class="col-xl-2 col-md-5 col-12 bg-body rounded-4 p-3 me-5 mb-3">
-			<h1>0</h1>
-			<label>Tổng kênh thuê</label>
-		</div>
+<div class="row">
+	<label class="fw-bold mb-2 fs-4">Báo cáo gói dịch vụ</label>
+</div>
+
+<div class="row g-2">
+	<div class="col-xl-4 col-md-4 col-12">
+		<div class="bg-primary rounded p-4">
+            <div class="d-flex align-items-center justify-content-between">
+            	<i class="fa fa-chart-line fa-3x text-white"></i>
+             <div class="ms-3">
+                 <p class="mb-2">Hôm nay</p>
+                 <h6 class="mb-0 text-light">{{packForDay}} gói</h6>
+             </div>
+            </div>
+        </div>
 	</div>
-	<div class="row mb-3">
-		<div class="col-6 text-start">
-			<label class="font__size-title">Báo cáo doanh thu</label>
-		</div>
+	<div class="col-xl-4 col-md-4 col-12">
+		<div class="bg-primary rounded d-flex align-items-center justify-content-between p-4">
+            <i class="fa fa-chart-bar fa-3x text-white"></i>
+            <div class="ms-3">
+                <p class="mb-2">Tháng {{monthNow}}</p>
+                <h6 class="mb-0 text-light">{{packForMonth}} gói</h6>
+            </div>
+        </div>
+	</div>
+	<div class="col-xl-4 col-md-4 col-12">
+		<div class="bg-primary rounded d-flex align-items-center justify-content-between p-4">
+            <i class="fa fa-chart-area fa-3x text-white"></i>
+            <div class="ms-3">
+                <p class="mb-2">Năm {{yearNow}}</p>
+                <h6 class="mb-0 text-light">{{packForYear}} gói</h6>
+            </div>
+        </div>
+	</div>
+	<div class="col-xl-12 col-md-12 col-12 mb-2">
+		<div class="bg-white rounded d-flex align-items-center p-4">
+            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+            <div class="ms-5">
+				<small class="order-loading text-start py-1 px-5 mx-2 mt-2 rounded-pill">
+				  Đang xử lý: <b>{{packLoading}}</b> 
+				</small>
+				<small class="order-success text-start py-1 px-5 mx-2 mt-2 rounded-pill">
+				  Thành công: <b>{{packSuccess}}</b> 
+				</small>
+				<small class="order-canceled text-start py-1 px-5 mx-2 mt-2 rounded-pill">
+				  Bị hủy bởi KH: <b>{{packCancel}}</b> 
+				</small>
+				<small class="order-canceled text-start py-1 px-5 mx-2 mt-2 rounded-pill">
+				  Bị hủy do CH: <b>{{packCanceled}}</b>
+				</small>
+            </div>
+        </div>
 	</div>
 </div>
 
-<div class="container shadow-sm p-3 mb-3 bg-body rounded">
-	<div class="row">
-		<div class="col-xl-12 col-md-12 col-12">
-			<div class="row px-5">
-				<div
-					class="col-xl-5 col-md-12 col-12 bg-info text-white rounded-4 p-3 mb-3 me-5 shadow-sm">
-					<h1>0</h1>
-					<label>Doanh thu hôm nay</label>
-				</div>
-				<div
-					class="col-xl-5 col-md-12 col-12 bg-primary text-white rounded-4 p-3 mb-3 me-5 shadow-sm">
-					<h1>0</h1>
-					<label>Doanh thu tháng này</label>
-				</div>
-			</div>
-			<div class="row px-5">
-				<label for="time" class="form-label">Thời gian</label> <br>
-				<div class="col-6">
-					<div class="row">
-						<label for="time1" class="col-sm-2 col-form-label">Từ: </label>
-						<div class="col-sm-10 mb-2">
-							<input type="date" class="form-control" id="time1">
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="row">
-						<label for="time2" class="col-sm-2 col-form-label">Đến: </label>
-						<div class="col-sm-10">
-							<input type="date" class="form-control" id="time2">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row px-5 mt-2">
-				<div
-					class="col-xl-12 col-md-12 col-12 bg-warning text-white rounded-4 p-3 shadow-sm">
-					<h1>0</h1>
-					<label>Doanh thu</label>
-				</div>
-			</div>
-		</div>
+<div class="row">
+	<label class="fw-bold mb-2 fs-4">Báo cáo doanh thu</label>
+</div>
+
+<div class="row g-2 mb-2">
+	<div class="col-xl-6 col-md-6 col-12">
+		<div class="bg-white rounded p-4">
+            <h6>Báo cáo nhanh</h6>
+            <hr class="bg-primary" style="height: 2px;">
+            <div class="row">
+            	<span>Doanh thu hôm nay: <b>{{DTForDay == '' ? 0 : DTForDay | currency:'':0}}</b> đ</span>
+            	<span>Doanh thu tháng {{monthNow}}: <b>{{DTForMonth == '' ? 0 : DTForMonth | currency:'':0}}</b> đ</span>
+            </div>
+        </div>
+	</div>
+	<div class="col-xl-6 col-md-6 col-12">
+		<div class="bg-white rounded p-4">
+            <h6>Báo cáo doanh thu theo tháng</h6>
+            <hr class="bg-primary" style="height: 2px;">
+            <div class="row">
+            	<div class="d-flex align-items-center justify-content-end">
+			        <select 
+			        	ng-change="getReportByMonth()"
+						ng-model="list"
+						ng-options="month.id as month.name for month in months"
+			        	class="form-select form-select-sm w-50 border-0 border-bottom rounded-0" 
+			        >
+					  <option value="" class="fw-bold bg-info text-white">--Vui lòng chọn--</option>
+					</select>
+               	</div>  
+            	<span>Doanh thu tháng {{month}}: <b>{{DTForMonthNow == '' ? 0 : DTForMonthNow | currency:'':0}}</b> đ</span>
+            </div>
+        </div>
 	</div>
 </div>
