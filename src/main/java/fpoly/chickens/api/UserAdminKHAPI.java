@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import fpoly.chickens.entity.User;
+import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UploadService;
 import fpoly.chickens.service.UserAdminKHService;
@@ -76,17 +77,20 @@ public class UserAdminKHAPI {
 
 	// Find by user name
 	@GetMapping("id/{nameUserName}")
-	public ResponseEntity<List<UserStore>> findByUserName(@PathVariable("nameUserName") Optional<String> nameUserStore) {
-		return ResponseEntity.ok(userAdminKHService.findUserByUserName("%" + nameUserStore.get() + "%"));
+	public ResponseEntity<List<UserStore>> findByUserName(@PathVariable("nameUserName") Optional<String> nameUser) {
+		return ResponseEntity.ok(userAdminKHService.findUserByUserName(nameUser.get()));
 	}
-
-	// Find by user name
-	@GetMapping("id/name/{nameUserName}/{nameUser}")
-	public ResponseEntity<List<UserStore>> findByUserNameAndFullName(
-			@PathVariable("nameUserName") Optional<String> nameUserStoreName,
-			@PathVariable("nameUser") Optional<String> nameUserStore) {
-		return ResponseEntity.ok(userAdminKHService.findUserByUserNameAndFullName("%" + nameUserStoreName.get() + "%",
-				"%" + nameUserStore.get() + "%"));
+		
+	// Find by Email
+	@GetMapping("email/{nameEmail}")
+	public ResponseEntity<List<UserStore>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail) {
+		return ResponseEntity.ok(userAdminKHService.findUserByEmail(nameEmail.get()));
+	}
+		
+	// Find by Email
+	@GetMapping("phone/{phone}")
+	public ResponseEntity<List<UserStore>> findByPhone(@PathVariable("phone") Optional<String> phone) {
+		return ResponseEntity.ok(userAdminKHService.findUserByPhone(phone.get()));
 	}
 
 	// Sort A-Z

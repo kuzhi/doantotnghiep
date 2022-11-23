@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.service.UploadService;
@@ -75,16 +73,19 @@ public class UserAdminNVAPI {
 	// Find by user name
 	@GetMapping("id/{nameUserName}")
 	public ResponseEntity<List<UserApp>> findByUserName(@PathVariable("nameUserName") Optional<String> nameUser) {
-		return ResponseEntity.ok(userAdminNVService.findUserByUserName("%" + nameUser.get() + "%"));
+		return ResponseEntity.ok(userAdminNVService.findUserByUserName(nameUser.get()));
 	}
-
-	// Find by user name
-	@GetMapping("id/name/{nameUserName}/{nameUser}")
-	public ResponseEntity<List<UserApp>> findByUserNameAndFullName(
-			@PathVariable("nameUserName") Optional<String> nameUserName,
-			@PathVariable("nameUser") Optional<String> nameUser) {
-		return ResponseEntity.ok(userAdminNVService.findUserByUserNameAndFullName("%" + nameUserName.get() + "%",
-				"%" + nameUser.get() + "%"));
+	
+	// Find by Email
+	@GetMapping("email/{nameEmail}")
+	public ResponseEntity<List<UserApp>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail) {
+		return ResponseEntity.ok(userAdminNVService.findUserByEmail(nameEmail.get()));
+	}
+	
+	// Find by Email
+	@GetMapping("phone/{phone}")
+	public ResponseEntity<List<UserApp>> findByPhone(@PathVariable("phone") Optional<String> phone) {
+		return ResponseEntity.ok(userAdminNVService.findUserByPhone(phone.get()));
 	}
 
 	// Sort A-Z
