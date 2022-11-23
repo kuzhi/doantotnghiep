@@ -54,4 +54,11 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location) {
 			},
 		]
 	}
+	
+	$scope.listFilter = [
+		{ id: 1, name: "Fullname giảm dần A-Z" },
+		{ id: 2, name: "Fullname tăng dần Z-A" },
+		{ id: 3, name: "Giới tính nam" },
+		{ id: 4, name: "Giới tính nữ" },
+	]
 })
