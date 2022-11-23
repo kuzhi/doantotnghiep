@@ -10,6 +10,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.entity.User;
+import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UserAdminService;
 
 
@@ -94,6 +95,24 @@ public class UserAdminImplement implements UserAdminService {
 	public List<User> findUserByUserNameAndFullName(String username, String fullname) {
 		// TODO Auto-generated method stub
 		return userDAO.findUserByUserNameAndFullName(username, fullname);
+	}
+
+	@Override
+	public List<User> findUserByUsername(String name) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByUsername(name);
+	}
+
+	@Override
+	public List<User> findUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByEmail(email);
+	}
+
+	@Override
+	public List<User> findUserByPhone(String phone) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByPhone(phone);
 	}
 
 	

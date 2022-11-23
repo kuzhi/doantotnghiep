@@ -14,13 +14,13 @@
 						<button class="btn btn-outline-success rounded-4" ng-click="findByName()" type="submit">
 							<i class="fas fa-search"></i>
 						</button>
-						<input class="form-control mx-2" type="search" ng-model="nameUser" 
+						<input class="form-control mx-2" type="search" ng-model="nameUser"
 							placeholder="Nhập tên nhân viên" aria-label="Search">
 					</form>
 				</div>
 				<div class="col-xl-2 text-star mb-3">
 					<button class="btn btn-primary rounded-circle" data-bs-toggle="modal"
-						data-bs-target="#exampleModal"><i class="fas fa-plus"></i></button> 
+						data-bs-target="#exampleModal"><i class="fas fa-plus"></i></button>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -147,10 +147,10 @@
 					<div class="row mt-1">
 						<h6 class="text-secondary">Tên đăng nhập</h6>
 						<div>
-							<input type="text" id="username" class="w-full form-control" ng-model="formUser.username"
+							<input type="text" id="username" name="username" class="w-full form-control" ng-model="formUser.username"
 								placeholder="--Vui lòng nhập--" required>
-							<div ng-show="userForm.id.$dirty && userForm.id.$invalid">
-								<small class="text-danger fst-italic" ng-show="userForm.id.$error.required">Vui lòng
+							<div ng-show="userForm.username.$dirty && userForm.username.$invalid">
+								<small class="text-danger fst-italic" ng-show="userForm.username.$error.required">Vui lòng
 									không để trống (*)</small>
 							</div>
 						</div>
@@ -161,10 +161,13 @@
 						<h6 class="text-secondary">Mật khẩu</h6>
 						<div>
 							<input id="password" type="password" name="password" class="w-full form-control"
-								ng-model="formUser.password" placeholder="--Vui lòng nhập--" required>
+							 		minlength="5" maxlength="15" ng-model="formUser.password" 
+							 		placeholder="--Vui lòng nhập--" required>
 							<div ng-show="userForm.password.$dirty && userForm.password.$invalid">
 								<small class="text-danger fst-italic" ng-show="userForm.password.$error.required">Vui
 									lòng không để trống (*)</small>
+								<small ng-show="userForm.password.$invalid" id="passwordhelpId" class="form-text fst-italic text-danger">
+									Mật khẩu ít nhất 5 ký tự và tối đa 15 ký tự*</small>	
 							</div>
 						</div>
 					</div>
@@ -190,12 +193,12 @@
 							<input id="email" type="email" name="email" ng-model="formUser.email"
 								class="w-full form-control" placeholder="--Vui lòng nhập--" required>
 							<div ng-show="userForm.email.$dirty 
-				&& userForm.email.$invalid 
-				&& userForm.email.$error.email">
-								<small class="text-danger fst-italic" ng-show="userForm.email.$error.required">Vui lòng
-									không để trống (*)</small>
-								<small class="text-danger fst-italic" ng-show="userForm.email.$error.email">Email chưa
-									đúng định dạng (*)</small>
+											&& userForm.email.$invalid 
+											|| userForm.email.$error.email">
+								<small class="text-danger fst-italic" ng-show="userForm.email.$error.email">
+								Email chưa đúng định dạng (*)</small>
+								<small class="text-danger fst-italic" ng-show="userForm.email.$error.required">
+								Vui lòng không để trống (*)</small>
 							</div>
 						</div>
 					</div>
@@ -222,9 +225,11 @@
 						<h6 class="text-secondary">Số điện thoại
 						</h6>
 						<div>
-							<input id="phone" type="text" name="phone" ng-model="formUser.phone"
+							<input id="phone" type="text" name="phone" ng-model="formUser.phone" 
 								class="w-full form-control" placeholder="--Vui lòng nhập--" required>
-							<div ng-show="userForm.phone.$dirty && userForm.phone.$invalid">
+							<div
+								ng-show="userForm.phone.$dirty && userForm.phone.$invalid ">
+								
 								<small class="text-danger fst-italic" ng-show="userForm.phone.$error.required">Vui lòng
 									không để trống (*)</small>
 							</div>

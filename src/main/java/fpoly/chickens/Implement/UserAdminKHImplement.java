@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UserAdminKHService;
 
@@ -90,11 +91,16 @@ public class UserAdminKHImplement implements UserAdminKHService {
 	}
 
 	@Override
-	public List<UserStore> findUserByUserNameAndFullName(String username, String fullname) {
+	public List<UserStore> findUserByEmail(String email) {
 		// TODO Auto-generated method stub
-		return userStoreDAO.findUserByUserNameAndFullName(username, fullname);
+		return userStoreDAO.findUserByEmail(email);
 	}
 
-	
+	@Override
+	public List<UserStore> findUserByPhone(String phone) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.findUserByPhone(phone);
+	}
+
 
 }

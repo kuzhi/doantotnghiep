@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import fpoly.chickens.entity.User;
+import fpoly.chickens.entity.UserStore;
 
 public interface UserAdminService {
 	// Load all product	
@@ -26,6 +27,12 @@ public interface UserAdminService {
 	List<User> findUserByUserName(String name);
 	// Find by name
 	List<User> findUserByUserNameAndFullName(String username, String fullname);
+	// Find by user
+	List<User> findUserByUsername(String name);
+	// Find by email
+	List<User> findUserByEmail(String email);
+	// Find by phone
+	List<User> findUserByPhone(String phone);
 	
 	// Sort AZ
 	List<User> sortAZ();
