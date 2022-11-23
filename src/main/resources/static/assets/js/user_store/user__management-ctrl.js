@@ -88,7 +88,7 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 		var user = angular.copy($scope.formUser);
 		
 		if ($scope.formUser.username != "") {
-			$http.get($scope.url + "id/user" + $scope.formUser.username)
+			$http.get($scope.url + "id/user/" + $scope.formUser.username)
 				.then(resp => {
 					$scope.users = resp.data;
 					if($scope.users != ""){
