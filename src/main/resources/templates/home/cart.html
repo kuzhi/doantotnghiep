@@ -19,6 +19,13 @@
 					<h5 class="m-0 p-0">Thông tin đơn hàng</h5>
 				</div>
 
+				<div ng-if="items == ''" class="row shadow rounded my-3 py-3 text-center">
+					<label>Chưa có sản phẩm</label>
+					<div class="d-flex justify-content-center mt-2">
+						<a th:href="@{/home/client}" class="btn btn-primary w-25">Thêm sản phẩm</a>
+					</div>
+				</div>
+				
 				<div ng-repeat="p in items" class="row shadow rounded my-3 py-3">
 					<div class="col-xl-2 text-end text-end-mb">
 

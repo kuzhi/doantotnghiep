@@ -22,4 +22,6 @@ public interface CartService {
 
 	void deleteAll(Integer storeid, Integer userid);
 
+	Integer countCart(Integer storeid, Integer userid);
+
 }
