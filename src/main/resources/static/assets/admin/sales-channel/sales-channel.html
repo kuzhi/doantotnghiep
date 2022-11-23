@@ -5,103 +5,87 @@
 	</ol>
 </nav>
 
-<div
-	class="container shadow-sm p-3 mb-3 bg-body rounded">
+<div class="container shadow-sm p-3 mb-3 bg-body rounded">
 	<div class="row">
-		<div class="col-xl-12 col-md-12 col-12 add__product-pc">
+		<div class="col-xl-12 col-md-12 col-12">
 		
-			<label class="font__size-title mb-3">Kênh bán hàng trong hệ thống</label>
-			
 			<div class="row">
-				<div class="col-xl-4 text-center mb-3">
-					<form class="d-flex" role="search">
-						<button class="btn btn-outline-success rounded-4 mx-2" type="submit">
-							<i class="fas fa-search"></i>
-						</button>
-						<input 
-							type="search"
-							class="form-control me-2" 
-							placeholder="Nhập tên kênh bạn cần?" 
-							aria-label="Search"
-						>
-					</form>
+			<div class="col-8 d-flex mt-2">
+				<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
+					<i class="fas fa-search mx-2"></i>
+					<input type="search" ng-model="namePack" 
+					class="form-control form-control-sm border-0" placeholder="Nhập tên kênh...">
 				</div>
-				<div class="col-xl-8 text-end">
-					<a class="btn text-primary font__size-btn">
-						<i class="fas fa-sort-amount-down-alt"></i> Sắp xếp
-					</a>
-				</div>
+				
+				<!-- Tìm kiếm -->	
+				<button ng-click="findByName()" type="submit" 
+				class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
+				
 			</div>
-			
-			<div class="row">
-				<div class="table-responsive">
-					<table class="table text-start align-middle table-bordered border-white table-hover mb-0">
-                     <thead class="text-center" style="background-color: #ff512f !important;">
-                         <tr class="text-white">
-								<th>Mã kênh</th>
-								<th>Tên kênh</th>
-								<th>Địa chỉ</th>
-								<th>Số điện thoại</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody class="table table-light">
-							<tr 
-								ng-repeat="c in list.chanel"
-							>
-								<td class="align-middle">
-									{{c.id}}
-								</td>
-								<td class="align-middle">
-									{{c.name}}
-								</td>
-								<td class="align-middle">
-									{{c.address}}
-								</td>
-								<td class="align-middle">
-									{{c.phone}}
-								</td>
-								<td class="text-center align-middle">
-									<button 
-										ng-click="edit()"
-										class="btn border border-0 text-primary"
-										data-bs-toggle="modal" 
-										data-bs-target="#addModal"
-										data-bs-whatever="add"
-									>Xem chi tiết >></button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-			<div class="row my-3 text-start">
-				<div class="col-6 text-start">
-					<label> 1/5 </label>
-				</div>
-				<div class="col-6 text-end">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-end">
-							<li class="page-item disabled"><a class="page-link"> << </a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"> >> </a>
-							</li>
-						</ul>
-					</nav>
+			<div class="col-4 mt-2 d-flex justify-content-end">
+
+				<!-- Select -->
+				<div class="text-end">
+					<select ng-change="getProductsbyFilter()" ng-model="list"
+					ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
+					  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
+					</select>
 				</div>
 			</div>
 		</div>
-		
-		<div class="add__product-mobile text-center text-white fw-bold p-5">
-			<i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 80px;"></i>
-			<p class="content__mobile text-dark">
-				Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
-				tính
-			</p>
+			
+		<div class="row mt-3">
+			<div class="table-responsive">
+				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+					<thead class="table_primary">
+                        <tr>
+							<th>Mã kênh</th>
+							<th>Tên kênh</th>
+							<th>Địa chỉ</th>
+							<th>Số điện thoại</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="c in list.chanel" >
+							<td class="align-middle"> {{c.id}} </td>
+							<td class="align-middle"> {{c.name}} </td>
+							<td class="align-middle"> {{c.address}} </td>
+							<td class="align-middle"> {{c.phone}} </td>
+							<td class="text-center align-middle">
+								<!-- Edit -->
+								<button type="button" ng-click="edit()" class="btn btn-info btn-sm text-white"
+								data-bs-toggle="modal" data-bs-target="#addModal"> <i class="fa-regular fa-pen-to-square"></i> </button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+			
+		<div class="row my-3 text-start">
+		<div class="col-xl text-end">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-end">
+					<li class="page-item">
+						<a ng-click="pager.fisrt()" class="page-link text-dark"> <i class="fas fa-step-backward"></i>
+					</a></li>
+					<li class="page-item">
+						<a ng-click="pager.prev()" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
+					</li>
+					<li class="page-item">
+						<span class="page-link bg-white text-dark">{{pager.page+1}}</span>
+					</li>
+					<li class="page-item">
+						<a ng-click="pager.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
+					</li>
+					<li class="page-item">
+						<a ng-click="pager.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 		</div>
 	</div>
 </div>
@@ -113,8 +97,7 @@
 		<div class="modal-content">
 			<form name="userForm" action="" novalidate>
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Thông tin chi
-						tiết</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Thông tin chi tiết</h5>
 				</div>
 				<div class="modal-body">
 					<div class="table-responsive">
@@ -122,21 +105,26 @@
 							<tbody>
 								<tr>
 									<td class="fw-bold">Tên chủ kênh</td>
-									<td><input type="text" class="w-100 form-control" disabled readonly></td>
+									<td>
+										<input type="text" class="w-100 form-control" disabled readonly>
+									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Số điện thoại</td>
-									<td><input type="text" class="w-100 form-control" disabled readonly>
+									<td>
+										<input type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Tên kênh</td>
-									<td><input type="text" class="w-100 form-control" disabled readonly>
+									<td>
+										<input type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Địa chỉ</td>
-									<td><input type="text" class="w-100 form-control" disabled readonly>
+									<td>
+										<input type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
@@ -158,7 +146,9 @@
 								</tr>
 								<tr>
 									<td class="fw-bold">Tên quản trị</td>
-									<td><input class="w-100 form-control" type="text" disabled readonly></td>
+									<td>
+										<input class="w-100 form-control" type="text" disabled readonly>
+									</td>
 								</tr>
 							</tbody>
 						</table>

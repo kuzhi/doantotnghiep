@@ -1,4 +1,7 @@
 app.controller("myprofile-ctrl", function($scope, $http, $location) {
+	$scope.titleBreadcrumb = 'Cá nhân';
+	$scope.titleBread = 'Thông tin';
+	
 	$scope.update = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
