@@ -53,7 +53,8 @@ public class AuthenticationImplement implements Authentication{
 			
 			if(password.equals(userStore.getPassword().trim())){
 				if(!userStore.getDeleted()) {
-					userService.setTokenStore(userStore.getId(), store.get(0).getId());
+					String userStoreId = String.valueOf(userStore.getId());
+					userService.setTokenStore(userStoreId);
 						return true;
 				}
 			
@@ -87,7 +88,9 @@ public class AuthenticationImplement implements Authentication{
 			
 			if(password.equals(users.getPassword().trim())){
 				if(!users.getDeleted()) {
-					userService.setTokenUser(users.getId() );
+					String userId = String.valueOf(users.getId());
+
+					userService.setTokenUser(userId);
 					return true;
 						//return "redirect:/home/client";
 					

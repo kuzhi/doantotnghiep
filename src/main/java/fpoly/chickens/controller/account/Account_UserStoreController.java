@@ -48,7 +48,7 @@ public class Account_UserStoreController {
 		boolean Check = authen.loginStore(username, password, model);
 		//model.addAttribute("message", "dang nhap store thanh cong!");
 		if(Check) {
-			 return "redirect:/assets/admin/layout_admin.html";
+					 return "redirect:/assets/admin/layout_admin.html";
 		}
 		return "home/account/login";
 	}
@@ -60,11 +60,10 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password, model);
 		if(Check) {
-			String a = userService.getTokenStore();
-			String b = userService.getTokenUser();
-			System.out.println("a "+" : " +" b");
 
-			 return "redirect:/assets/admin/layout_admin.html";
+			return "redirect:/home/client";
+
+
 		}
 		model.addAttribute("message", "dang nhap user thất bại!");
 		return "home/account/login";
