@@ -54,7 +54,8 @@ public class UserServiceImplement implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 try {
 			
-			//UserApp userApp = userAppDao.findByUsername(username); 
+			//UserApp userApp = userAppDao.findByUsernames(username); 
+
 			UserStore userStore = userStoreDao.findByUsername(username);
 			
 			String passwordStore = userStore.getPassword();
@@ -88,7 +89,8 @@ try {
 		// TODO Auto-generated method stub
 		byte[] auth = (userStoreId + ":" + storeId).getBytes();
 		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("token", token);
+		session.setAttribute("tokenStore", token);
+
 	}
 	
 	
@@ -97,16 +99,21 @@ try {
 		// TODO Auto-generated method stub
 		byte[] auth = ("userId: " + userId).getBytes();
 		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("token", token);
+		session.setAttribute("tokenUser", token);
 	}
 	
 	@Override
-	public String getToken() {
+	public String getTokenStore() {
 		// TODO Auto-generated method stub
-		return (String) session.getAttribute("token");
+		return (String) session.getAttribute("tokenStore");
 
 	}
 
-	
+	@Override
+	public String getTokenUser() {
+		// TODO Auto-generated method stub
+		return (String) session.getAttribute("tokenUser");
+
+	}
 
 }

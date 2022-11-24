@@ -184,14 +184,14 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 			.defaultSuccessUrl("/home", false).failureUrl("/user-app/auth/login?error=Please login").usernameParameter("username")
 			.passwordParameter("password");
 
-<<<<<<< HEAD
 			// remember me
 			//http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
 
 			// Đăng xuất
 			//http.logout().logoutUrl("/auth/logoff")// dăng xuất
 					//.logoutSuccessUrl("/auth/logoff/success");
-=======
+
+
 
 
 //		http.authorizeRequests().antMatchers("/home/account/**").authenticated()
@@ -220,7 +220,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 				.defaultSuccessUrl("/home/index", true).failureUrl("/auth/login/?error=error").authorizationEndpoint()
 				.baseUri("/oauth2/authorization").authorizationRequestRepository(getRepository()).and().tokenEndpoint()
 				.accessTokenResponseClient(getToken());*/
->>>>>>> 3c48b3e0679de6bf33ef0e8a11ecf6fe55b5ffe8
+
 
 			
 	}

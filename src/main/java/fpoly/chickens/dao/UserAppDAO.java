@@ -12,6 +12,9 @@ import fpoly.chickens.entity.UserApp;
 	
 
 
+	
+
+
 public interface UserAppDAO extends JpaRepository<UserApp, Integer>{
 	
 	@Query(value="SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
@@ -23,7 +26,8 @@ public interface UserAppDAO extends JpaRepository<UserApp, Integer>{
 >>>>>>> 3c48b3e0679de6bf33ef0e8a11ecf6fe55b5ffe8
 	@Query("SELECT o FROM UserApp o WHERE o.Deleted = ?1")
 	List<UserApp> loadUserWithDeleted(Boolean deleted);
-	
+@Query(value="SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
+public UserApp findByUsernames(String uname);
 	@Query(value="SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
 	public UserApp findByUsername(String uname);
 
