@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import fpoly.chickens.entity.User;
+import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UploadService;
 import fpoly.chickens.service.UserAdminService;
 
@@ -85,6 +86,24 @@ public class UserAdminAPI {
 			@PathVariable("nameUser") Optional<String> nameUser) {
 		return ResponseEntity.ok(userAdminService.findUserByUserNameAndFullName("%" + nameUserName.get() + "%",
 				"%" + nameUser.get() + "%"));
+	}
+	
+	// Find by user name
+	@GetMapping("id/user/{nameUsername}")
+	public ResponseEntity<List<User>> findByUsername(@PathVariable("nameUsername") Optional<String> nameUser) {
+		return ResponseEntity.ok(userAdminService.findUserByUsername(nameUser.get()));
+	}
+		
+	// Find by Email
+	@GetMapping("email/{nameEmail}")
+	public ResponseEntity<List<User>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail) {
+		return ResponseEntity.ok(userAdminService.findUserByEmail(nameEmail.get()));
+	}
+		
+	// Find by Email
+	@GetMapping("phone/{phone}")
+	public ResponseEntity<List<User>> findByPhone(@PathVariable("phone") Optional<String> phone) {
+		return ResponseEntity.ok(userAdminService.findUserByPhone(phone.get()));
 	}
 
 	// Sort A-Z

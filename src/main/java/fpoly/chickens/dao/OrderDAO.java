@@ -36,15 +36,18 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	// Get order in day || month
 	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3")
 	Integer countOrderInDate(Store store, Date dateStar, Date dateEnd);
+
+	@Query("SELECT COUNT(o) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3 AND o.Status = ?4")
+	Integer countOrderInDateWithStatus2(Store store, Date dateStar, Date dateEnd, Integer status);
 	
 	// Get order in month status 
-	// == 2 Thành công
+	// == 3 Thành công
 	// == 5 Bị hủy
 	@Query("SELECT o FROM Order o WHERE o.store = ?1 AND o.Status = ?4 AND o.Create_at BETWEEN ?2 AND ?3")
 	List<Order> countOrderInDateWithStatus(Store store, Date dateStar, Date dateEnd, Integer Status);
 	
 	// Get doanh thu in day || month ((=
-	@Query("SELECT SUM(o.TotalMoney) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3")
-	Integer getOrderInDate(Store store, Date dateStar, Date dateEnd);
+	@Query("SELECT SUM(o.TotalMoney) FROM Order o WHERE o.store = ?1 AND o.Create_at BETWEEN ?2 AND ?3 AND o.Status = ?4 ")
+	Integer getOrderInDate(Store store, Date dateStar, Date dateEnd, Integer Status);
 	
 }

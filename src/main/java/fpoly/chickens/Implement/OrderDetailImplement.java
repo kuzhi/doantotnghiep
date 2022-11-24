@@ -1,5 +1,7 @@
 package fpoly.chickens.Implement;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.OrderDAO;
 import fpoly.chickens.dao.OrderDetailDAO;
+import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.entity.Order;
 import fpoly.chickens.entity.OrderDetail;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.service.OrderDetailService;
 
 
@@ -21,6 +25,9 @@ public class OrderDetailImplement implements OrderDetailService{
 	OrderDAO orderDAO;
 
 	@Autowired
+	StoreDAO storeDao;
+
+	@Autowired
 	OrderDetailDAO orderDetailDAO;
 	
 	@Override
@@ -28,10 +35,5 @@ public class OrderDetailImplement implements OrderDetailService{
 		Order order = orderDAO.findById(orderid).get();
 		return orderDetailDAO.findOrderDetailByOrder(order);
 	}
-
-	
-
-	
-
 
 }
