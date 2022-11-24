@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fpoly.chickens.service.Authentication;
+
 import fpoly.chickens.service.UserService;
+
 
 @Controller
 @RequestMapping("/home/auth")
 public class Account_UserStoreController {
 	@Autowired
 	UserService userService;
+
 	
 	@Autowired
 	HttpServletRequest req;
@@ -57,7 +60,15 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password, model);
 		if(Check) {
+<<<<<<< HEAD
 			return "redirect:/home/client";
+=======
+			String a = userService.getTokenStore();
+			String b = userService.getTokenUser();
+			System.out.println("a "+" : " +" b");
+
+			 return "redirect:/assets/admin/layout_admin.html";
+>>>>>>> 6e56a26e177a80f403fd4fe488d277b1abc72a0b
 		}
 		model.addAttribute("message", "dang nhap user thất bại!");
 		return "home/account/login";

@@ -9,6 +9,14 @@ import fpoly.chickens.entity.UserStore;
 
 
 public interface UserStoreDAO extends JpaRepository<UserStore, Integer> {
+<<<<<<< HEAD
+=======
+	
+	@Query(value="SELECT * FROM UserStore WHERE username = ?1", nativeQuery = true)
+	public UserStore findByUsername(String uname);
+	
+
+>>>>>>> 6e56a26e177a80f403fd4fe488d277b1abc72a0b
 	@Query("SELECT o FROM UserStore o WHERE o.Deleted = ?1")
 	List<UserStore> loadUserWithDeleted(Boolean deleted);
 	

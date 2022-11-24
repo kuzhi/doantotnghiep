@@ -55,6 +55,7 @@ public class UserServiceImplement implements UserService {
 try {
 			
 			//UserApp userApp = userAppDao.findByUsernames(username); 
+
 			UserStore userStore = userStoreDao.findByUsername(username);
 			
 			String passwordStore = userStore.getPassword();
@@ -86,9 +87,16 @@ try {
 	@Override
 	public void setTokenStore(String userStoreId) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		//byte[] auth = (userStoreId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
+=======
+		byte[] auth = (userStoreId + ":" + storeId).getBytes();
+		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenStore", token);
+
+>>>>>>> 6e56a26e177a80f403fd4fe488d277b1abc72a0b
 	}
 	
 	
