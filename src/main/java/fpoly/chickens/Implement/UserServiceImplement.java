@@ -13,13 +13,17 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserAppDAO;
+import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
+import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -27,9 +31,19 @@ import fpoly.chickens.service.UserService;
 public class UserServiceImplement implements UserService {
 	@Autowired
 	HttpSession session;
-	
+	@Autowired
+	StoreDAO StoreDao;
 	@Autowired
 	UserAppDAO userAppDao;
+	
+	@Autowired
+	UserDAO userDao;
+	
+	
+	@Autowired
+	UserStoreDAO userStoreDao;
+	
+	
 	
 	@Autowired
 	UserRoleAppDAO userRoleDao;
@@ -40,42 +54,52 @@ public class UserServiceImplement implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 try {
 			
-			UserApp userApp = userAppDao.findByUsername(username); 
+			//UserApp userApp = userAppDao.findByUsername(username); 
+			UserStore userStore = userStoreDao.findByUsername(username);
 			
-			
-			
-			String password = userApp.getPassword();
-			
-			String[] role = userRoleDao.findUserRoleIDByUsername(username).toArray(new String[0]);
+			String passwordStore = userStore.getPassword();
+			System.out.println(userStore);
+			List<Store> store = StoreDao.findByUserStore(userStore.getId());
+			String adminStore = "ADMINSTORE";
+			if(store.size() == 0) {
+				 adminStore = null;
+				
+			}
+			System.out.println(store.size());
+			//this.setToken(username, passwordStore);
 			return User.withUsername(username)
-					.password(pe.encode(password))
-					.roles(role).build();// luôn phải mã hóa mật khẩu 
+					.password(pe.encode(passwordStore)).build();
+					//.roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu 
 		} catch (Exception e) {
 			// TODO: handle exception
+//			fpoly.chickens.entity.User users = userDao.findByUsername(username);
+//			String passwordUser = users.getPassword();
+//			return User.withUsername(username)
+//					.password(pe.encode(passwordUser))
+//					.build();
 			throw new UsernameNotFoundException(username + " not found");
-		}
+		} 
 	}
 
-	@Override
-	public void loginFromOAuth2(OAuth2AuthenticationToken oauth2) {
-		// TODO Auto-generated method stub
-		String email = oauth2.getPrincipal().getAttribute("email");
-		String password = Long.toHexString(System.currentTimeMillis()); 
-		
-		UserDetails user = User.withUsername(email).password(pe.encode(password)).roles("ADMIN").build();
-		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(auth);
-		this.setToken(email, password);
-	}
+	
 
 	@Override
-	public void setToken(String username, String password) {
+	public void setTokenStore(int userStoreId, int storeId) {
 		// TODO Auto-generated method stub
-		byte[] auth = (username + ":" + password).getBytes();
+		byte[] auth = (userStoreId + ":" + storeId).getBytes();
 		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("token", token);
 	}
-
+	
+	
+	@Override
+	public void setTokenUser(int userId) {
+		// TODO Auto-generated method stub
+		byte[] auth = ("userId: " + userId).getBytes();
+		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("token", token);
+	}
+	
 	@Override
 	public String getToken() {
 		// TODO Auto-generated method stub

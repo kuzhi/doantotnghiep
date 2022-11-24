@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import fpoly.chickens.entity.Product;
 import fpoly.chickens.entity.User;
+import fpoly.chickens.entity.UserApp;
 
 
 public interface UserDAO extends JpaRepository<User, Integer>{
@@ -18,6 +19,10 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	
 	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1")
 	List<User> findUserByUserName(String name);
+	
+	@Query(value="SELECT o FROM User o WHERE o.Username LIKE ?1")
+	 User findByUsername(String uname);
+	
 	
 	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1 AND o.Fullname LIKE ?1")
 	List<User> findUserByUserNameAndFullName(String username, String fullname);

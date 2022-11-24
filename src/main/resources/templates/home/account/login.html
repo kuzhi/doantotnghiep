@@ -19,22 +19,22 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/assets/suport/bootstrap/css/bootstrap.min.css">
+	th:href="@{/assets/suport/bootstrap/css/bootstrap.min.css}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/assets/suport/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	th:href="@{/assets/suport/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/assets/suport/animate/animate.css">
+	th:href="@{/assets/suport/animate/animate.css}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/assets/suport/css-hamburgers/hamburgers.min.css">
+	th:href="@{/assets/suport/css-hamburgers/hamburgers.min.css}">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
-	href="/assets/suport/select2/select2.min.css">
+	th:href="@{/assets/suport/select2/select2.min.css}">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css" href="/assets/css/home/util.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/home/main.css">
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/home/util.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/home/main.css}">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -46,7 +46,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					<img src="/assets/images/img-01.png" alt="IMG">
 				</div>
 
-				<div class="login100-form validate-form">
+				<div class="login100-form ">
 					<span class="login100-form-title"> ĐĂNG NHẬP </span>
 
 					<ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
@@ -63,9 +63,9 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					</ul>		
 					<div class="tab-content" id="myTabContent">
 						<!-- Store -->
-					  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" 
+					  <div class="tab-pane fade show active validate-form" id="home-tab-pane" role="tabpanel" 
 					  	aria-labelledby="home-tab" tabindex="0">
-					  		<form action="/home/auth/login/store" method="post" class="mt-3">
+					  		<form th:action="@{/home/auth/login/store}" method="post" class="mt-3">
 					  			<div class="wrap-input100 validate-input"
 									data-validate="Vui lòng không để trống">
 									<input class="input100" type="text" name="username"
@@ -112,10 +112,10 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 								</th:block>
 					  		</form>
 					  	</div>
-					  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" 
-					  	aria-labelledby="profile-tab" tabindex="0">
-					  		<form action="/home/auth/login/user" method="post" class="mt-3">
-					  			<div class="wrap-input100 validate-input"
+					  <div class="tab-pane fade validate-form2" id="profile-tab-pane" role="tabpanel" 
+					  	aria-labelledby="profile-tab" tabindex="2">
+					  		<form th:action="@{/home/auth/login/user}" method="post" class="mt-3">
+					  			<div class="wrap-input100 validate-input2"
 									data-validate="Vui lòng không để trống">
 									<input class="input100" type="text" name="username"
 										placeholder="--Vui lòng nhập"> <span
@@ -124,7 +124,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 									</span>
 								</div>
 			
-								<div class="wrap-input100 validate-input"
+								<div class="wrap-input100 validate-input2"
 									data-validate="Vui lòng không để trống">
 									<input class="input100" type="password" name="password"
 										placeholder="--Vui lòng nhập--"> <span
