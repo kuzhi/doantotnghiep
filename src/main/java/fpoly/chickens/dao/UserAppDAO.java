@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+
 import fpoly.chickens.entity.UserApp;
 
 
@@ -39,7 +40,8 @@ public interface UserAppDAO extends JpaRepository<UserApp, Integer>{
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = true")
 	List<UserApp> hoatDong();
 
-	// Sort A-Z
+	
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false")
 	List<UserApp> ngungHoatDong();
+
 }

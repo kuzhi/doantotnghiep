@@ -105,6 +105,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 		/* http.authorizeRequests().anyRequest().permitAll(); */
 		
 
+
 //		http.authorizeRequests().antMatchers("/home/account/**").authenticated()
 //				.antMatchers("/admin/report","/rest/authorities").hasRole("ADMIN")
 //				.antMatchers("/admin/**").hasAnyRole("ADMIN", "STAFF")
@@ -118,12 +119,13 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 //				.defaultSuccessUrl("/home/index", false).failureUrl("/auth/login?error=Please login").usernameParameter("username")
 //				.passwordParameter("password");
 
+
 		// remember me
-		http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
+		//http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
 
 		// Đăng xuất
-		http.logout().logoutUrl("/auth/logoff")// dăng xuất
-				.logoutSuccessUrl("/auth/logoff/success");
+		//http.logout().logoutUrl("/auth/logoff")// dăng xuất
+				//.logoutSuccessUrl("/auth/logoff/success");
 
 		// dang nhap tu facebook va google
 		/*http.oauth2Login().loginPage("/auth/login/form").loginProcessingUrl("/auth/login")
