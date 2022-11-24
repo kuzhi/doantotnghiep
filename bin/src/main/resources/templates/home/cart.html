@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
+<head>
+<title>Giỏ hàng</title>
+
+</head>
+<body ng-app="home-cart" ng-controller="cart-ctrl">
+	<section class="container my-3">
+		<div class="row">
+			<h2 class="text-start my-2">
+				<i class="fa-solid fa-basket-shopping"></i> GIỎ HÀNG
+			</h2>
+		</div>
+		<div class="row px-2">
+			<div class="col-xl-8">
+				<div class="row">
+					<h5 class="m-0 p-0">Thông tin đơn hàng</h5>
+				</div>
+
+				<div ng-repeat="p in items" class="row shadow rounded my-3 py-3">
+					<div class="col-xl-2 text-end text-end-mb">
+
+						<img th:src="@{/assets/images/products/{{p.product.image}}}"
+							style="width: 50px; height: 50px; border-radius: 10px;">
+					</div>
+					<div class="col-xl-10">
+						<div class="row">
+							<div class="col-xl-9 col-8">
+								<span class="text-truncate"> <b>{{p.product.name}}</b>
+								</span>
+							</div>
+							<div class="col-xl-3 col-4 d-flex justify-content-end">
+								<p class="text-secondary text-truncate">{{p.product.price |
+									currency : '' : 0}}</p>
+								<span class="mx-1">đ</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xl-3 col-4">
+
+								<div class="input-group input-group-sm mb-3">
+									<button ng-click="p.amount = p.amount - 1; update(p);"
+										class="input-group-text bg-white">
+										<i class="fa-solid fa-minus"></i>
+									</button>
+									<input ng-model="p.amount" type="number"
+										class="form-control text-center" ng-change="update(p)">
+									<button ng-click="p.amount = p.amount + 1; update(p);" 
+										class="input-group-text bg-white">
+										<i class="fa-solid fa-plus"></i>
+									</button>
+								</div>
+							</div>
+							<div class="col-xl-9 col-8 text-end">
+								<span ng-click="delete(p.id)" class="text-danger"
+									style="cursor: pointer;"> <i
+									class="fa-solid fa-trash-can"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-4 col-sm-12 text-center">
+				<div class="bg-white p-4 rounded">
+					<h5 class="fw-bold">Thông tin vận chuyển</h5>
+					<hr>
+
+					<div class="row">
+						<h6 class="text-start">Thông tin nhận hàng</h6>
+						<div class="mb-3 text-start">
+							<small class="form-label">Tên người nhận:</small> <input
+								ng-model="order.fullname" type="text"
+								class="form-control form-control-sm"
+								placeholder="--Vui lòng nhập--"> <small
+								class="form-label">Số điện thoại:</small> <input
+								ng-model="order.phone" type="text"
+								class="form-control form-control-sm"
+								placeholder="--Vui lòng nhập--"> <small
+								class="form-label">Địa chỉ nhận hàng:</small> <input
+								ng-model="order.address" type="text"
+								class="form-control form-control-sm"
+								placeholder="--Vui lòng nhập--">
+						</div>
+					</div>
+					<div class="row">
+						<h6 class="d-flex justify-content-between"
+							data-bs-toggle="collapse" data-bs-target="#collapsePayment"
+							aria-expanded="false" aria-controls="collapseExample"
+							style="cursor: pointer;">
+							Phương thức thanh toán <i class="fa-solid fa-sort-down"></i>
+						</h6>
+						<div class="collapse show" id="collapsePayment">
+
+							<div ng-repeat="pay in payment" class="form-check text-start">
+								<input class="form-check-input" type="radio"
+									ng-model="order.paymentType" ng-value="pay" name="payment"
+									id="payment" checked> <label class="form-check-label"
+									for="payment"> {{pay.paymentName}} </label>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<h6 class="d-flex justify-content-between"
+							data-bs-toggle="collapse" data-bs-target="#collapseShip"
+							aria-expanded="false" aria-controls="collapseExample"
+							style="cursor: pointer;">
+							Hình thức nhận hàng <i class="fa-solid fa-sort-down"></i>
+						</h6>
+						<div class="collapse show" id="collapseShip">
+
+							<div ng-repeat="s in ship" class="form-check text-start">
+								<input class="form-check-input" type="radio"
+									ng-model="order.shippingType" ng-value="s" name="shipping"
+									id="s.id" checked> <label class="form-check-label"
+									for="ship"> {{s.shippingName}} </label>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xl-6 col-8 text-start">
+							<h6>Tổng tiền thanh toán:</h6>
+						</div>
+						<div class="col-xl-6 col-4 d-flex justify-content-end">
+							<p class="text-secondary text-truncate mb-0">${{totalMoney()}}</p>
+							<span class="mx-1">đ</span>
+
+						</div>
+					</div>
+
+					<hr>
+
+
+					<button ng-click="pay()" class="btn btn-primary w-100 fw-bold">
+						Đặt ngay</button>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

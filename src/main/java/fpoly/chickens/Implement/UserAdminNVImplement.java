@@ -12,8 +12,6 @@ import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.service.UserAdminNVService;
 
-
-
 @SessionScope
 @Service
 public class UserAdminNVImplement implements UserAdminNVService {
@@ -92,9 +90,15 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	}
 
 	@Override
-	public List<UserApp> findUserByUserNameAndFullName(String username, String fullname) {
+	public List<UserApp> findUserByEmail(String email) {
 		// TODO Auto-generated method stub
-		return userAppDAO.findUserByUserNameAndFullName(username, fullname);
+		return userAppDAO.findUserByEmail(email);
+	}
+
+	@Override
+	public List<UserApp> findUserByPhone(String phone) {
+		// TODO Auto-generated method stub
+		return userAppDAO.findUserByPhone(phone);
 	}
 
 	

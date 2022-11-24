@@ -31,6 +31,12 @@ public class CartAPI {
 			@PathVariable("userid") Optional<Integer> userid) {
 		return ResponseEntity.ok(cartservice.getCart(storeid.get(), userid.get()));
 	}
+	
+	@GetMapping("/api/countcart/{storeid}/{userid}")
+	public ResponseEntity<Integer> countCart(@PathVariable("storeid") Optional<Integer> storeid,
+			@PathVariable("userid") Optional<Integer> userid) {
+		return ResponseEntity.ok(cartservice.countCart(storeid.get(), userid.get()));
+	}
 
 	@PostMapping("/api/cart/add")
 	public ResponseEntity<Void> add(@RequestBody JsonNode cartData) {

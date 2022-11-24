@@ -105,19 +105,20 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 		/* http.authorizeRequests().anyRequest().permitAll(); */
 		
 
-		//http.authorizeRequests().antMatchers("/home/account/**").authenticated()
-				//.antMatchers("/admin/report","/rest/authorities").hasRole("ADMIN")
-				//.antMatchers("/admin/**").hasAnyRole("ADMIN", "STAFF")
-				//.anyRequest().permitAll();
 
-		// Điều khiển lỗi truy cập không đúng vai trò
-		//http.exceptionHandling().accessDeniedPage("/home/access/denied");
+//		http.authorizeRequests().antMatchers("/home/account/**").authenticated()
+//				.antMatchers("/admin/report","/rest/authorities").hasRole("ADMIN")
+//				.antMatchers("/admin/**").hasAnyRole("ADMIN", "STAFF")
+//				.anyRequest().permitAll();
+//
+//		// Điều khiển lỗi truy cập không đúng vai trò
+//		http.exceptionHandling().accessDeniedPage("/home/access/denied");
+//
+//		// Giao diện đăng nhập
+//		http.formLogin().loginPage("/auth/login/form").loginProcessingUrl("/auth/login")
+//				.defaultSuccessUrl("/home/index", false).failureUrl("/auth/login?error=Please login").usernameParameter("username")
+//				.passwordParameter("password");
 
-		// Giao diện đăng nhập
-		
-		//http.formLogin().loginPage("/auth/login/form").loginProcessingUrl("/auth/login")
-				.defaultSuccessUrl("/home/index", false).failureUrl("/auth/login?error=Please login").usernameParameter("username")
-				.passwordParameter("password");
 
 		// remember me
 		//http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);

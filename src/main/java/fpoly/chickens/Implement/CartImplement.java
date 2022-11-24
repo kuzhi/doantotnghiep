@@ -81,4 +81,11 @@ public class CartImplement implements CartService {
 
 	}
 
+	@Override
+	public Integer countCart(Integer storeid, Integer userid) {
+		Store store = storeDao.findById(storeid).get();
+		User user = userDao.findById(userid).get();
+		return cartDao.countCart(store, user);
+	}
+
 }

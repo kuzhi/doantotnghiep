@@ -1,0 +1,154 @@
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+	</ol>
+</nav>
+
+<div class="row shadow-sm bg-second mx-3 py-3 rounded">
+	<div class="col-xl-12 col-md-12 col-12 add__product-pc">
+		<div class="row mb-3 text-start">
+			<div class="col-10">
+				<form class="d-flex align-items-center">
+					<div
+						class="d-flex align-items-center bg-white w-25 px-2 me-2 border border-light rounded">
+						<i class="fas fa-search mx-2"></i> <input
+							class="form-control border-0" ng-model="keyword"
+							placeholder="Tìm theo mã">
+					</div>
+
+					<button ng-click="find()" class="btn btn-info text-white fw-bold">
+						Tìm kiếm</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="table-responsive">
+				<table
+					class="table text-start align-middle table-bordered border-white table-hover mb-0">
+					<thead class="text-center bg-table">
+						<tr>
+							<th ng-click="load(0,'Orderpackcode',pageSort+1)">Mã đăng kí</th>
+							<th ng-click="load(0,'Create_at',pageSort+1)">Ngày tạo</th>
+							<th ng-click="load(0,'Update_at',pageSort+1)">Ngày cập nhật gần
+								nhất</th>
+							<th ng-click="load(0,'Status',pageSort+1)">Trạng thái</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody class="table table-info">
+						<tr ng-repeat="p in page.content">
+							<td class="align-middle">{{p.orderpackcode}}</td>
+							<td class="align-middle">{{p.create_at}}</td>
+							<td class="align-middle">{{p.update_at}}</td>
+							<td ng-if="p.status==1" class="align-middle">Đang xử lý</td>
+							<td ng-if="p.status==2" class="align-middle">Thành công</td>
+							<td ng-if="p.status==3" class="align-middle">Đã hủy</td>
+							<td ng-if="p.status==4" class="align-middle">Bị hủy</td>
+							<td class="text-center align-middle">
+								<button type="button" ng-click="edit(p.id)"
+									class="border-0 text-warning" data-bs-toggle="modal"
+									data-bs-target="#exampleModal">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button ng-if="p.status==1" ng-click="becancel(p.id)"
+									class="text-danger border-0">
+									<i class="fas fa-ban"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row my-3 text-start">
+			<div class="col-xl text-end">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-end">
+						<li class="page-item"><a ng-click="load(0,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-step-backward"></i>
+						</a></li>
+						<li class="page-item"><a ng-click="load(page.number-1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-backward"></i>
+						</a></li>
+						<li class="page-item"><span class="page-link bg-white">{{page.number+1}}</span>
+						</li>
+						<li class="page-item"><a ng-click="load(page.number+1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-forward"></i>
+						</a></li>
+						<li class="page-item"><a ng-click="load(page.totalPages-1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-step-forward"></i>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<div class="add__product-mobile text-center text-white fw-bold p-5">
+		<i class="fa-solid fa-circle-exclamation text-danger"
+			style="font-size: 80px;"></i>
+		<p class="content__mobile text-dark">
+			Để thực hiện chức năng <br> Vui lòng sử dụng trình duyệt máy
+			tính
+		</p>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Chi tiết
+					gói</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<!-- Tên -->
+				<div class="mb-3 row">
+					<label for="name" class="col-sm-2 col-form-label">Tên gói:</label>
+					<div class="col-sm-10">
+						<input ng-value="orderPack.pack.name" type="text"
+							disabled="disabled" class="form-control" id="name">
+					</div>
+				</div>
+				<!-- Giá -->
+				<div class="mb-3 row">
+					<label for="price" class="col-sm-2 col-form-label">Giá:</label>
+					<div class="col-sm-10">
+						<input type="text" ng-value="orderPack.pack.price"
+							disabled="disabled" class="form-control" id="price">
+					</div>
+				</div>
+				<!-- Số ngày -->
+				<div class="mb-3 row">
+					<label for="date" class="col-sm-3 col-form-label">Hiệu lực:</label>
+					<div class="col-sm-9">
+						<input type="number" ng-value="orderPack.pack.date"
+							disabled="disabled" class="form-control" id="date">
+					</div>
+				</div>
+				<!-- Ngày tạo -->
+				<div class="mb-3 row">
+					<label class="col-sm-3 col-form-label">Ngày tạo:</label>
+					<div class="col-sm-9">
+						<input type="text" ng-value="orderPack.create_at"
+							class="form-control">
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Hủy</button>
+				<button ng-if="orderPack.status==1" ng-click="confirm(orderPack.id)"
+					type="button" class="btn btn-primary">Duyệt</button>
+			</div>
+		</div>
+	</div>
+</div>
