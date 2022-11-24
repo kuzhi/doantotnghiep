@@ -84,33 +84,43 @@ try {
 	
 
 	@Override
-	public void setTokenStore(int userStoreId, int storeId) {
+	public void setTokenStore(String userStoreId) {
 		// TODO Auto-generated method stub
-		byte[] auth = (userStoreId + ":" + storeId).getBytes();
-		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenStore", token);
+		//byte[] auth = (userStoreId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenStore", userStoreId);
 	}
 	
 	
 	@Override
-	public void setTokenUser(int userId) {
+	public void setTokenUser(String userId) {
 		// TODO Auto-generated method stub
-		byte[] auth = ("userId: " + userId).getBytes();
-		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUser", token);
+		//byte[] auth = (userId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenUser", userId);
 	}
 	
 	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
-		return (String) session.getAttribute("tokenStore");
+		String token = (String) session.getAttribute("tokenStore");
+		String getSubstring = token.substring(6);
+		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
+		String decodedString = new String(decodedBytes);
+		return decodedString;
 
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-		return (String) session.getAttribute("tokenUser");
+		
+		String token = (String) session.getAttribute("tokenUser");
+		String getSubstring = token.substring(6);
+		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
+		String decodedString = new String(decodedBytes);
+		return decodedString;
+		 
 
 	}
 
