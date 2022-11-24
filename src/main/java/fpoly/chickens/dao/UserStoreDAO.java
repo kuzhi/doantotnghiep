@@ -13,7 +13,7 @@ public interface UserStoreDAO extends JpaRepository<UserStore, Integer> {
 	@Query(value="SELECT * FROM UserStore WHERE username = ?1", nativeQuery = true)
 	public UserStore findByUsername(String uname);
 	
-	
+
 	@Query("SELECT o FROM UserStore o WHERE o.Deleted = ?1")
 	List<UserStore> loadUserWithDeleted(Boolean deleted);
 	

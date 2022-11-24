@@ -192,6 +192,36 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 					//.logoutSuccessUrl("/auth/logoff/success");
 
 
+
+
+//		http.authorizeRequests().antMatchers("/home/account/**").authenticated()
+//				.antMatchers("/admin/report","/rest/authorities").hasRole("ADMIN")
+//				.antMatchers("/admin/**").hasAnyRole("ADMIN", "STAFF")
+//				.anyRequest().permitAll();
+//
+//		// Điều khiển lỗi truy cập không đúng vai trò
+//		http.exceptionHandling().accessDeniedPage("/home/access/denied");
+//
+//		// Giao diện đăng nhập
+//		http.formLogin().loginPage("/auth/login/form").loginProcessingUrl("/auth/login")
+//				.defaultSuccessUrl("/home/index", false).failureUrl("/auth/login?error=Please login").usernameParameter("username")
+//				.passwordParameter("password");
+
+
+		// remember me
+		//http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
+
+		// Đăng xuất
+		//http.logout().logoutUrl("/auth/logoff")// dăng xuất
+				//.logoutSuccessUrl("/auth/logoff/success");
+
+		// dang nhap tu facebook va google
+		/*http.oauth2Login().loginPage("/auth/login/form").loginProcessingUrl("/auth/login")
+				.defaultSuccessUrl("/home/index", true).failureUrl("/auth/login/?error=error").authorizationEndpoint()
+				.baseUri("/oauth2/authorization").authorizationRequestRepository(getRepository()).and().tokenEndpoint()
+				.accessTokenResponseClient(getToken());*/
+
+
 			
 	}
 

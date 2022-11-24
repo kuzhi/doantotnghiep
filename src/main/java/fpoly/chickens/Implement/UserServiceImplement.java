@@ -55,6 +55,7 @@ public class UserServiceImplement implements UserService {
 try {
 			
 			//UserApp userApp = userAppDao.findByUsernames(username); 
+
 			UserStore userStore = userStoreDao.findByUsername(username);
 			
 			String passwordStore = userStore.getPassword();
@@ -89,6 +90,7 @@ try {
 		byte[] auth = (userStoreId + ":" + storeId).getBytes();
 		String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", token);
+
 	}
 	
 	
