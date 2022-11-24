@@ -48,7 +48,7 @@ public class Account_UserStoreController {
 		boolean Check = authen.loginStore(username, password, model);
 		//model.addAttribute("message", "dang nhap store thanh cong!");
 		if(Check) {
-					 return "redirect:/assets/admin/layout_admin.html";
+					 return "redirect:/app";
 		}
 		return "home/account/login";
 	}
