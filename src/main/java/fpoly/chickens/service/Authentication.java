@@ -1,9 +1,9 @@
 package fpoly.chickens.service;
 
-public class Authentication {
+import org.springframework.ui.Model;
 
-	public Authentication() {
-		// TODO Auto-generated constructor stub
-	}
-
+public interface Authentication {
+	Boolean loginStore(String username, String password, Model model );
+	
+	Boolean loginUser(String username, String password, Model model );
 }
