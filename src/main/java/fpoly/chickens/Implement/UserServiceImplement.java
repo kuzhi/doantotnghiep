@@ -91,6 +91,7 @@ try {
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
 
+
 	}
 	
 	
@@ -100,6 +101,7 @@ try {
 		//byte[] auth = (userId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenUser", userId);
+
 	}
 	
 	@Override
@@ -111,11 +113,13 @@ try {
 		String decodedString = new String(decodedBytes);
 		return decodedString;
 
+
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
+
 		
 		String token = (String) session.getAttribute("tokenUser");
 		String getSubstring = token.substring(6);
@@ -123,6 +127,7 @@ try {
 		String decodedString = new String(decodedBytes);
 		return decodedString;
 		 
+
 
 	}
 

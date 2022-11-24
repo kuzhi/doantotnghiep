@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import fpoly.chickens.entity.UserApp;
 
 
+	
+
+
 public interface UserAppDAO extends JpaRepository<UserApp, Integer>{
 	
 

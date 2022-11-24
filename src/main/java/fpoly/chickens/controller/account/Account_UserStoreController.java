@@ -60,7 +60,9 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password, model);
 		if(Check) {
+
 			return "redirect:/home/client";
+
 
 		}
 		model.addAttribute("message", "dang nhap user thất bại!");
