@@ -71,6 +71,20 @@ app.config(function($routeProvider) {
 });
 
 app.controller("app-ctrl", function($scope, $http, $location) {
-	$scope.nameStore = "Pika Tea";
-	$scope.addressStore = "Sóc Trăng";
+	// Láy userid
+	$scope.userid=0;
+	$scope.stores=[];
+	$scope.getEmpleadoInfo = function () {
+		// Lấy userid
+        $http.get("/api/get")
+	    .then(resp => {
+	        $scope.userid = resp.data;
+	        // Lấy storeid
+	        $http.get("/api/store/list/"+$scope.userid)
+			.then(resp => {
+				$scope.stores = resp.data[0];
+			})
+	    })
+    }; $scope.getEmpleadoInfo();
+    
 });

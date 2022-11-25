@@ -8,4 +8,5 @@ public interface StoreService {
 	List<Store> findAll();
 	
 	List<Store> findStoreById(Integer userid);
+	Store findByUserid(Integer userid);
 }

@@ -24,6 +24,7 @@ import fpoly.chickens.dao.UserStoreDAO;
 import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
+import fpoly.chickens.service.SessionService;
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -90,7 +91,6 @@ try {
 		//byte[] auth = (userStoreId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
-
 
 	}
 	
