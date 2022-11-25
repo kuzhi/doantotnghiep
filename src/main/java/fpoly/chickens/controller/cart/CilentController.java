@@ -22,7 +22,7 @@ public class CilentController {
 	
 	@RequestMapping()
 	public String view_Cart() {
-		return "home/index";
+		return "home/list_store";
 	}
 
 	@RequestMapping("/my-profile")
