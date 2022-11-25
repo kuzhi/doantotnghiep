@@ -1,6 +1,7 @@
 package fpoly.chickens.Implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.UserDAO;
+import fpoly.chickens.dao.UserStoreDAO;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UserAdminService;
@@ -18,6 +20,7 @@ import fpoly.chickens.service.UserAdminService;
 @Service
 public class UserAdminImplement implements UserAdminService {
 	@Autowired UserDAO userDAO;
+	@Autowired UserStoreDAO userStoreDAO;
 
 	@Override
 	public List<User> findAll() {
@@ -113,6 +116,12 @@ public class UserAdminImplement implements UserAdminService {
 	public List<User> findUserByPhone(String phone) {
 		// TODO Auto-generated method stub
 		return userDAO.findUserByPhone(phone);
+	}
+
+	@Override
+	public Optional<UserStore> findUserByID(Integer id) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.findById(id);
 	}
 
 	
