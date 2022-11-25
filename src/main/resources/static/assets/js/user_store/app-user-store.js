@@ -73,4 +73,12 @@ app.config(function($routeProvider) {
 app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.nameStore = "Pika Tea";
 	$scope.addressStore = "Sóc Trăng";
+	
+	$scope.userid="";
+	$scope.getEmpleadoInfo = function () {
+        $http.get("/api/get")
+	    .then(resp => {
+	        $scope.userid = resp.data;
+	    })
+    }; $scope.getEmpleadoInfo();
 });
