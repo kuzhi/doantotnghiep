@@ -1,9 +1,18 @@
-<nav class="mt-3 mx-3" aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
-		<li class="breadcrumb-item active" aria-current="page">{{titleBread}} <b>{{nameStore}}</b> </li>
-	</ol>
-</nav>
+<div class="d-flex justify-content-between align-items-center">
+	<div>
+		<nav class="mt-3 mx-3" aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+				<li class="breadcrumb-item active" aria-current="page">{{titleBread}} <b>{{nameStore}}</b> </li>
+			</ol>
+		</nav>
+	</div>
+	
+	<div class="mx-3">
+		<button class="btn btn-success btn-sm"
+		data-bs-toggle="modal" data-bs-target="#listStoreModal">Danh sách cửa hàng</button>
+	</div>
+</div>
 
 <form name="nameStoreForm" class="row shadow-sm bg-second mx-3 py-3 rounded" novalidate>
 
@@ -217,6 +226,144 @@
 				<button ng-click="cancelOrderPack(orderPackSee.id)" ng-if="status == 1" type="button" class="btn btn-danger">
 					Hủy gói
 				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal danh sách cửa hàng-->
+<div class="modal fade" id="listStoreModal" tabindex="-1"
+	aria-labelledby="editModal" aria-hidden="true">
+	<div class="modal-dialog modal-xl modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label class="fs-6 color-text" id="editModal">Danh sách cửa hàng của bạn</label>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			
+				<form name="storeForm" class="row" novalidate>
+
+					<div class="col-xl-12">
+						<label class="form-label"> Logo cửa hàng <span class="text-red">*</span> </label>
+						
+						<div class="card mb-4 w-75 mx-auto">
+							<div class="card-body text-center image-upload">
+								<label for="file-input"> 
+									<img
+									class="img__store rounded-circle mb-2"
+									src="/assets/images/default__image.png" 
+									alt="Ảnh logo cửa hàng">
+								</label>
+								<div class="small font-italic text-muted mb-4">
+									Ảnh có kích thước nhỏ hơn 10MB
+								</div>
+								<input id="file-input" type="file" />
+							</div>
+						</div>
+					</div>
+				
+					<div class="col-xl-12">
+						<div class="form-group"> 
+							<label class="form-label"> Tên cửa hàng <span class="text-red">*</span> </label>
+							<!-- Input -->
+							<input ng-model="name" type="text" name="name" 
+							class="form-control" placeholder="--Vui lòng nhập--" required> 
+							
+							<div ng-show="storeForm.name.$dirty && storeForm.name.$invalid">
+								<small class="text-danger fst-italic" ng-show="storeForm.name.$error.required">
+									Vui lòng không để trống <b>*</b>
+								</small>
+							</div>
+						</div> 
+						<div class="form-group"> 
+							<label class="form-label"> Số điện thoại <span class="text-red">*</span> </label>
+							<!-- Input -->
+							<input ng-model="phone" ng-pattern="regexPhone" type="number" name="phone" 
+							class="form-control" placeholder="--Vui lòng nhập--" required> 
+							
+							<div ng-show="storeForm.phone.$dirty && storeForm.phone.$invalid || storeForm.phone.$error.pattern">
+								<small class="text-danger fst-italic" ng-show="storeForm.phone.$error.pattern && storeForm.phone.$invalid">
+									Số điện thoại chưa phù hợp <b>*</b>
+								</small> 
+								<small class="text-danger fst-italic" ng-show="storeForm.phone.$error.required">
+									Vui lòng không để trống <b>*</b>
+								</small>
+							</div>
+						</div> 
+						<div class="form-group"> 
+							<label class="form-label"> Địa chỉ <span class="text-red">*</span> </label>
+							<!-- Input -->
+							<input ng-model="address" type="text" name="address" 
+							class="form-control" placeholder="--Vui lòng nhập--" required>
+							
+							<div ng-show="storeForm.address.$dirty && storeForm.address.$invalid">
+								<small class="text-danger fst-italic" ng-show="storeForm.address.$error.required">
+									Vui lòng không để trống <b>*</b>
+								</small>
+							</div>
+						</div> 
+					</div>
+					
+					<div class="col-xl-12 text-start my-2">
+						<button ng-disabled="storeForm.$invalid" ng-click="update()" type="submit" 
+						class="mx-2 btn btn-info text-white fw-bold">Thêm mới</button>
+						<button ng-disabled="storeForm.$invalid" ng-click="update()" type="submit" 
+						class="mx-2 btn btn-warning text-white fw-bold">Cập nhật</button>
+					</div>
+				</form>
+				
+				<hr class="bg-success" style="height: 2px;">
+			
+				<div class="table-responsive">
+                 <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+                 	 <colgroup>
+				    	<col width="80" span="1">
+				     </colgroup>
+                     <thead class="table_primary">
+                         <tr>
+                             <th>Ảnh</th>
+                             <th>Tên cửa hàng</th>
+                             <th>Số điện thoại</th>
+                             <th>Địa chỉ</th>                             
+                             <th>Trạng thái</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr ng-repeat="item in listStoreByUserId" >
+                             <td class="text-center">
+                                 <img 
+                                 	ng-if="item.image != null"
+                                 	class="rounded-circle" 
+                                 	ng-src="/assets/images/{{item.image}}" 
+                                 	alt="{{item.image}}" 
+                                 	style="width: 40px; height: 40px;"
+                                 >
+                                 <img 
+                                 	ng-if="item.image == null"
+                                 	class="rounded-circle" 
+                                 	src="/assets/images/icon_food.png" 
+                                 	alt="{{item.image}}" 
+                                 	style="width: 40px; height: 40px;"
+                                 >
+                             </td>
+                             <td class="text-start">{{item.name}}</td>
+                             <td class="text-start">{{item.phone}}</td>
+                             <td class="text-start">{{item.address}}</td>
+                             <td class="text-center">
+                             	<!-- Edit -->
+								<button ng-click="edit(product)" class="btn btn-info btn-sm text-white"> 
+									<i class="fa-regular fa-pen-to-square"></i> 
+								</button>
+								<!-- Remove -->
+								<button ng-click="delete(product)" class="btn btn-danger btn-sm" > 
+									<i class="fa-regular fa-trash-can"></i> 
+								</button>
+							</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
 			</div>
 		</div>
 	</div>
