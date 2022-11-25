@@ -27,4 +27,10 @@ public class StoreImplement implements StoreService {
 		return storeDAO.findByUserStore(userid);
 	}
 
+	@Override
+	public Store findByUserid(Integer userid) {
+		// TODO Auto-generated method stub
+		return storeDAO.findByUserid(userid);
+	}
+
 }

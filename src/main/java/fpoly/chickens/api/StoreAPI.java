@@ -25,7 +25,12 @@ public class StoreAPI {
 	}
 	
 	@GetMapping("{userid}")
-	public List<Store> findAll(@PathVariable("userid") Optional<Integer> userid) {
+	public Store findAll(@PathVariable("userid") Optional<Integer> userid) {
+		return storeService.findByUserid(userid.get());
+	}
+
+	@GetMapping("/list/{userid}")
+	public List<Store> findAllStore(@PathVariable("userid") Optional<Integer> userid) {
 		return storeService.findStoreById(userid.get());
 	}
 }

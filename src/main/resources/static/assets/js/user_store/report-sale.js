@@ -1,7 +1,6 @@
 app.controller("report-sale-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Báo cáo';
 	$scope.titleBread = 'Bán hàng';
-	$scope.storeid = 2;
 
 	// Biểu đồ bán hàng
 	$scope.months = [
@@ -50,7 +49,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(0))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 2
 		else if ($scope.list == 2) {
@@ -61,7 +60,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(1))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 3
 		else if ($scope.list == 3) {
@@ -72,7 +71,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(2))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 4
 		else if ($scope.list == 4) {
@@ -83,7 +82,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(3))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 5
 		if ($scope.list == 5) {
@@ -94,7 +93,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(4))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 6
 		else if ($scope.list == 6) {
@@ -105,7 +104,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(5))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 7
 		else if ($scope.list == 7) {
@@ -116,7 +115,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(6))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 8
 		else if ($scope.list == 8) {
@@ -127,7 +126,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(7))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 9
 		if ($scope.list == 9) {
@@ -138,7 +137,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(8))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 10
 		else if ($scope.list == 10) {
@@ -149,7 +148,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(9))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 11
 		else if ($scope.list == 11) {
@@ -160,7 +159,7 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(10))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 		// ======= Tháng 12
 		else if ($scope.list == 12) {
@@ -171,15 +170,25 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			for(var i=1; i<getAllDaysInMonth(now.getFullYear(), now.getMonth(now.setMonth(11))).length+1; i++) {
 				$scope.allDays.push(i)
 			}
-			getData($scope.storeid, now.getFullYear(), newMonth);
+			getData(now.getFullYear(), newMonth);
 		}
 	}
 
-	function getData(storeid, year, month) {
+	function getData(year, month) {
 		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
 		const end =  24 * 60 * 60 * 1000 - 1;
 		$scope.dateStart = new Date(year, month);
 		$scope.dateEnd = new Date(year, month);
+		
+		// Lấy userid
+        $http.get("/api/get")
+	    .then(resp => {
+	        $scope.userid = resp.data;
+	        // Lấy storeid
+	        $http.get("/api/store/list/"+$scope.userid)
+			.then(resp => {
+				$scope.stores = resp.data[0];
+				const storeid = $scope.stores.id;
 		
 		// Ngày 1
 		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setMonth(month); $scope.dateStart.setDate($scope.allDays[0]);
@@ -747,6 +756,8 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 		.catch(error => {
 			console.log('error: ', error)
 		})
-	}; getData($scope.storeid, now.getFullYear(), now.getMonth());
+		})
+    	})
+	}; getData(now.getFullYear(), now.getMonth());
 })
 
