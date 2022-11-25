@@ -74,7 +74,7 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.nameStore = "Pika Tea";
 	$scope.addressStore = "Sóc Trăng";
 	
-	$scope.userid="";
+	$scope.userid=0;
 	$scope.getEmpleadoInfo = function () {
         $http.get("/api/get")
 	    .then(resp => {

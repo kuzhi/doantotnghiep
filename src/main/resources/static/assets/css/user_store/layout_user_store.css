@@ -192,3 +192,8 @@ font__size-btn {
 select {
 	cursor: pointer;
 }
+
+.bg-app{
+	background-color: #3498db !important;
+	color: #FFF;
+}

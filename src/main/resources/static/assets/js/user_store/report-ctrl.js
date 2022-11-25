@@ -17,7 +17,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
 		.then(resp => {
 			$scope.orderLoading = resp.data;
-            console.log($scope.orderLoading);
 		})
 		.catch(error => {
             console.log('error: ', error)
@@ -39,7 +38,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
 		.then(resp => {
 			$scope.orderSuccess = resp.data;
-            console.log($scope.orderLoading);
 		})
 		.catch(error => {
             console.log('error: ', error)
@@ -60,7 +58,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
 		.then(resp => {
 			$scope.orderCancel = resp.data;
-            console.log($scope.orderLoading);
 		})
 		.catch(error => {
             console.log('error: ', error)
@@ -81,7 +78,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		$http.get("/api/count-number/order/" + storeid + "/"  + $scope.dateStart + "/" +  $scope.dateEnd + "/" + $scope.status)
 		.then(resp => {
 			$scope.orderCanceled = resp.data;
-            console.log($scope.orderLoading);
 		})
 		.catch(error => {
             console.log('error: ', error)

@@ -67,6 +67,12 @@ public class UserAdminAPI {
 		userAdminService.delete(id);
 	}
 
+	// LoadUserStore by ID
+	@GetMapping("/{userStoreID}")
+	public ResponseEntity<Optional<UserStore>> LoadUserStoreByID(@PathVariable("userStoreID") Optional<Integer> userStoreID) {
+		return ResponseEntity.ok(userAdminService.findUserByID(userStoreID.get()));
+	}
+	
 	// Find by name
 	@GetMapping("/{nameUser}")
 	public ResponseEntity<List<User>> findByName(@PathVariable("nameUser") Optional<String> nameUser) {
