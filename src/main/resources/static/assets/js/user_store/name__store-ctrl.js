@@ -3,9 +3,14 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
 	$scope.nameStore = "Pika Tea";
-
 	$scope.storeid = 2;
-
+	$scope.userid = 2;
+	
+	$scope.listStoreByUserId=[];
+	$http.get("/api/store/"+$scope.userid)
+	.then(resp => {
+		$scope.listStoreByUserId = resp.data;
+	})
 
 	$scope.update = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -38,40 +43,6 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 		})
 	}
 	$scope.status = 1;
-	$scope.list = {
-		pack: [
-			{
-				name: 'gói 1 năm',
-				price: 200000,
-				date: 365,
-				image: 'goi1nam.png',
-				status: 2
-			},
-			{
-				name: 'gói 1 năm',
-				price: 200000,
-				date: 365,
-				image: 'goi1nam.png',
-				status: 1
-			},
-			{
-				name: 'gói 1 năm',
-				price: 200000,
-				date: 365,
-				image: 'goi1nam.png',
-				status: 1
-			},
-			{
-				name: 'gói 1 năm',
-				price: 200000,
-				date: 365,
-				image: 'goi1nam.png',
-				status: 1
-			},
-		]
-	}
-
-
 	$scope.listOrderPack = []
 	$scope.orderPackSee={}
 	$scope.loadOrderPack = function() {
@@ -166,10 +137,5 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 		})
 
 	}
-
-	$scope.registerOrderPack(2)
-	
-
-
 
 })
