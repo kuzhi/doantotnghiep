@@ -1,6 +1,7 @@
 app.controller("myprofile-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Cá nhân';
 	$scope.titleBread = 'Thông tin';
+	$scope.url = "/api/user/";
 	
 	$scope.update = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -31,5 +32,27 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 				result.dismiss === Swal.DismissReason.cancel
 			){}
 		})
+	}
+	
+	//Cập nhật người dùng
+	$scope.users = [];
+	$scope.update = function() {
+		var user = angular.copy($scope.formUserStore); //copy thông tin người dùng vào user
+		$http.put($scope.url + user.id , user).then(resp => {
+			var index = $scope.users.findIndex(sp => sp.id == user.id);
+			$scope.users[index] = user;
+			// Thông báo
+			Swal.fire({
+				icon: 'success',
+				title: 'Cập nhật thành công!'
+			});
+		}).catch(error => {
+			// Thông báo
+			Swal.fire({
+				icon: 'error',
+				title: 'Cập nhật thất bại!'
+			});
+			console.log("Error", error);
+		});
 	}
 })

@@ -1,6 +1,7 @@
 package fpoly.chickens.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,8 @@ public interface UserAdminService {
 	// Delete
 	void delete(Integer id);
 	
+	// Find by ID
+	Optional<UserStore> findUserByID(Integer id);
 	// Find by name
 	List<User> findUserByName(String name);
 	// Find by user
