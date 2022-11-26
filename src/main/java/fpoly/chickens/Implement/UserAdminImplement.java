@@ -124,6 +124,12 @@ public class UserAdminImplement implements UserAdminService {
 		return userStoreDAO.findById(id);
 	}
 
+	@Override
+	public UserStore loadUserStoreByUserName(String name) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.loadUserStoreByUserName(name);
+	}
+
 	
 
 }

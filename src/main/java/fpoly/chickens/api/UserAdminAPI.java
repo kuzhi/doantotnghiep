@@ -68,7 +68,7 @@ public class UserAdminAPI {
 	}
 
 	// LoadUserStore by ID
-	@GetMapping("/{userStoreID}")
+	@GetMapping("/get-user-store/{userStoreID}")
 	public ResponseEntity<Optional<UserStore>> LoadUserStoreByID(@PathVariable("userStoreID") Optional<Integer> userStoreID) {
 		return ResponseEntity.ok(userAdminService.findUserByID(userStoreID.get()));
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UploadService;
 import fpoly.chickens.service.UserAdminNVService;
 
@@ -32,6 +33,12 @@ public class UserAdminNVAPI {
 	@GetMapping
 	public List<UserApp> findAll() {
 		return userAdminNVService.findAll();
+	}
+	
+	// LoadUserStore by ID
+	@GetMapping("/get-user-app/{userAppID}")
+	public ResponseEntity<Optional<UserApp>> LoadUserStoreByID(@PathVariable("userAppID") Optional<Integer> userAppID) {
+		return ResponseEntity.ok(userAdminNVService.findUserByID(userAppID.get()));
 	}
 
 	// Load

@@ -84,6 +84,9 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.stores = resp.data[0];
 			})
+			$http.get("/api/user/get-user-store/"+$scope.userid).then(resp=>{
+				$scope.userStore = resp.data;
+			})
 	    })
     }; $scope.getEmpleadoInfo();
     

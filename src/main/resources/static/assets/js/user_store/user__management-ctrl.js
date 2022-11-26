@@ -1,6 +1,6 @@
 app.controller("user__management-ctrl", function($scope, $http, $location) {
-	$scope.titleBreadcrumb = 'Khách hàng';
-	$scope.titleBread = 'Thông tin khách hàng';
+	$scope.titleBreadcrumb = 'Người dùng';
+	$scope.titleBread = 'Người mua hàng';
 	$scope.showBtn = true;
 	$scope.url = "/api/user/";
 
@@ -190,36 +190,89 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 			}
 		}).then((result) => {
 			if (result.isConfirmed) {
-
-				//====================================== Bắt đầu xử lý
+				
 				var user = angular.copy($scope.formUser);
-				user.update_at = new Date();
-
-				//console.log("data: ", user);
-
-				$http.put($scope.url + user.id, user).then(resp => {
-					var index = $scope.users.findIndex(p => p.id == user.id);
-
-					$scope.users[index] = user;
-					console.log("Sp: ", $scope.users[index]);
-					$scope.reset();
-					$scope.init();
-
-					// Thông báo
-					swalWithBootstrapButtons.fire(
-						'Thành công',
-						'Cập nhật thành công!',
-						'success'
-					)
-
-				}).catch(error => {
-					// Thông báo
-					Swal.fire({
-						icon: 'error',
-						title: 'Cập nhật thất bại!'
-					});
-					console.log("Error", error);
-				});
+				
+				if ($scope.formUser.username != "") {
+					$http.get($scope.url + "id/user/" + $scope.formUser.username)
+						.then(resp => {
+							$scope.users = resp.data;
+							console.log($scope.users);
+							if($scope.users.length !=1){
+								Swal.fire({
+									icon: 'error',
+									title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
+								});
+								$scope.init();
+							}
+							else if ($scope.formUser.email != "") {
+								console.log("Email: ", $scope.formUser.email)
+								$http.get($scope.url + "email/" + $scope.formUser.email)
+									.then(resp => {
+										$scope.users = resp.data;
+										if($scope.users != ""){
+											Swal.fire({
+												icon: 'error',
+												title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
+											});
+											$scope.init();
+										}
+										else if ($scope.formUser.phone != "") {
+											console.log("Phone: ", $scope.formUser.email)
+											$http.get($scope.url + "phone/" + $scope.formUser.phone)
+												.then(resp => {
+													$scope.users = resp.data;
+													if($scope.users != ""){
+														Swal.fire({
+															icon: 'error',
+															title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
+														});
+														$scope.init();
+													}else{
+														//====================================== Bắt đầu xử lý
+														var user = angular.copy($scope.formUser);
+														user.update_at = new Date();
+										
+														//console.log("data: ", user);
+										
+														$http.put($scope.url + user.id, user).then(resp => {
+															var index = $scope.users.findIndex(p => p.id == user.id);
+										
+															$scope.users[index] = user;
+															console.log("Sp: ", $scope.users[index]);
+															$scope.reset();
+															$scope.init();
+										
+															// Thông báo
+															swalWithBootstrapButtons.fire(
+																'Thành công',
+																'Cập nhật thành công!',
+																'success'
+															)
+										
+														}).catch(error => {
+															// Thông báo
+															Swal.fire({
+																icon: 'error',
+																title: 'Cập nhật thất bại!'
+															});
+															console.log("Error", error);
+														});
+													}
+												}).catch(error => {
+													console.log("Error", error);
+												});
+										}
+									}).catch(error => {
+										console.log("Error", error);
+									});
+							}
+						}).catch(error => {
+							console.log("Error", error);
+						});
+				
+				
+			}
 				//====================================== Kết thúc xử lý
 			} else if (
 				/* Read more about handling dismissals below */

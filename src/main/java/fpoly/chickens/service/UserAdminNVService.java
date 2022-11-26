@@ -1,11 +1,11 @@
 package fpoly.chickens.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 
 public interface UserAdminNVService {
@@ -20,7 +20,8 @@ public interface UserAdminNVService {
 	UserApp update(UserApp userapp);
 	// Delete
 	void delete(Integer id);
-	
+	// Find by ID
+	Optional<UserApp> findUserByID(Integer id);
 	// Find by name
 	List<UserApp> findUserByName(String name);
 	// Find by user

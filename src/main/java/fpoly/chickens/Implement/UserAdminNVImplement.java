@@ -1,6 +1,7 @@
 package fpoly.chickens.Implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -99,6 +100,12 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	public List<UserApp> findUserByPhone(String phone) {
 		// TODO Auto-generated method stub
 		return userAppDAO.findUserByPhone(phone);
+	}
+
+	@Override
+	public Optional<UserApp> findUserByID(Integer id) {
+		// TODO Auto-generated method stub
+		return userAppDAO.findById(id);
 	}
 
 	
