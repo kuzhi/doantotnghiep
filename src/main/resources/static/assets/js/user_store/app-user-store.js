@@ -43,10 +43,10 @@ app.config(function($routeProvider) {
 			controller: "order__management-becanceled-ctrl"
 		})
 		// Nhân viên
-		.when("/user__management", {
-			templateUrl: "/assets/user_store/manage/user_management.html",
-			controller: "user__management-ctrl"
-		})
+		//.when("/user__management", {
+			//templateUrl: "/assets/user_store/manage/user_management.html",
+			//controller: "user__management-ctrl"
+		//})
 		// Báo cáo
 		.when("/report-all", {
 			templateUrl: "/assets/user_store/manage/report.html",

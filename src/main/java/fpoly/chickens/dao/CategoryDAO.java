@@ -10,6 +10,6 @@ import fpoly.chickens.entity.Store;
 
 public interface CategoryDAO extends JpaRepository<Category, Integer> {
 	// Find by storeid
-	@Query("SELECT o FROM Category o WHERE o.store = ?1 ")
-	List<Category> findAllByStore(Store storeid);
+	@Query("SELECT o FROM Category o WHERE o.store = ?1 AND o.Deleted = ?2 ")
+	List<Category> findAllByStore(Store storeid, Boolean delete);
 }
