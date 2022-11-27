@@ -36,8 +36,10 @@ public interface UserAdminService {
 	List<User> findUserByUsername(String name);
 	// Find by email
 	List<User> findUserByEmail(String email);
+	List<User> findUserByEmailForId(String email, Integer id);
 	// Find by phone
 	List<User> findUserByPhone(String phone);
+	List<User> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort AZ
 	List<User> sortAZ();

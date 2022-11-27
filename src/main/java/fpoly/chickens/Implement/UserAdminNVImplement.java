@@ -59,7 +59,7 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		return userAppDAO.findUserByUserName(name);
 	}
-
+	
 	@Override
 	public List<UserApp> sortAZ() {
 		// TODO Auto-generated method stub
@@ -97,9 +97,21 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	}
 
 	@Override
+	public List<UserApp> findUserByEmailForId(String email, Integer id) {
+		// TODO Auto-generated method stub
+		return userAppDAO.findUserByEmailForId(email, id);
+	}
+
+	@Override
 	public List<UserApp> findUserByPhone(String phone) {
 		// TODO Auto-generated method stub
 		return userAppDAO.findUserByPhone(phone);
+	}
+
+	@Override
+	public List<UserApp> findUserByPhoneForId(String phone, Integer id) {
+		// TODO Auto-generated method stub
+		return userAppDAO.findUserByPhoneForId(phone, id);
 	}
 
 	@Override
@@ -107,7 +119,4 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		return userAppDAO.findById(id);
 	}
-
-	
-
 }

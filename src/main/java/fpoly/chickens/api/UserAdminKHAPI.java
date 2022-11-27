@@ -86,11 +86,22 @@ public class UserAdminKHAPI {
 	public ResponseEntity<List<UserStore>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail) {
 		return ResponseEntity.ok(userAdminKHService.findUserByEmail(nameEmail.get()));
 	}
+
+	@GetMapping("email/{nameEmail}/{id}")
+	public ResponseEntity<List<UserStore>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminKHService.findUserByEmailForId(nameEmail.get(), id.get()));
+	}
 		
 	// Find by Email
 	@GetMapping("phone/{phone}")
 	public ResponseEntity<List<UserStore>> findByPhone(@PathVariable("phone") Optional<String> phone) {
 		return ResponseEntity.ok(userAdminKHService.findUserByPhone(phone.get()));
+	}
+	@GetMapping("phone/{phone}/{id}")
+	public ResponseEntity<List<UserStore>> findByPhone(@PathVariable("phone") Optional<String> phone,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminKHService.findUserByPhoneForId(phone.get(), id.get()));
 	}
 
 	// Sort A-Z

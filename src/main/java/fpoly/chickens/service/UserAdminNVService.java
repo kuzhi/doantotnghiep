@@ -28,9 +28,10 @@ public interface UserAdminNVService {
 	List<UserApp> findUserByUserName(String name);
 	// Find by email
 	List<UserApp> findUserByEmail(String email);
+	List<UserApp> findUserByEmailForId(String email, Integer id);
 	// Find by email
 	List<UserApp> findUserByPhone(String phone);
-
+	List<UserApp> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort AZ
 	List<UserApp> sortAZ();

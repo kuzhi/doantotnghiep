@@ -141,7 +141,7 @@
 						<label class="form-label"> Mã khách hàng <span class="text-red">*</span> </label>
 						<!-- Input -->
 						<input type="text" id="username" name="id" class="w-full form-control" ng-model="formUser.username"
-						placeholder="--Vui lòng nhập--" required>
+						ng-disabled="showBtn==false" placeholder="--Vui lòng nhập--" required>
 						
 						<div ng-show="userForm.id.$dirty && userForm.id.$invalid">
 							<small class="text-danger fst-italic" ng-show="userForm.id.$error.required">
@@ -155,11 +155,14 @@
 						<label class="form-label"> Mật khẩu <span class="text-red">*</span> </label>
 						<!-- Input -->
 						<input id="password" type="password" name="password" class="w-full form-control"
-						ng-model="formUser.password" placeholder="--Vui lòng nhập--" required>
+						minlength="5" maxlength="15" ng-model="formUser.password" placeholder="--Vui lòng nhập--" required>
 							
 						<div ng-show="userForm.password.$dirty && userForm.password.$invalid">
 							<small class="text-danger fst-italic" ng-show="userForm.password.$error.required">
 								Vui lòng không để trống <b>*</b>
+							</small>
+							<small ng-show="userForm.password.$invalid" id="passwordhelpId" class="form-text fst-italic text-danger">
+								Mật khẩu ít nhất 5 ký tự và tối đa 15 ký tự <b>*</b>
 							</small>
 						</div>
 					</div>
@@ -219,10 +222,13 @@
 					<div class="form-group mx-auto">
 						<label class="form-label"> Số điện thoại <span class="text-red">*</span> </label>
 						<!-- Input -->
-						<input id="phone" type="text" name="phone" ng-model="formUser.phone"
-						class="w-full form-control" placeholder="--Vui lòng nhập--" required>
+						<input ng-model="formUser.phone" ng-pattern="regexPhone" type="text" name="phone" 
+						class="form-control" placeholder="--Vui lòng nhập--" required>
 						
-						<div ng-show="userForm.phone.$dirty && userForm.phone.$invalid">
+						<div ng-show="userForm.phone.$dirty && userForm.phone.$invalid || userForm.phone.$error.pattern">
+							<small class="text-danger fst-italic" ng-show="userForm.phone.$error.pattern && userForm.phone.$invalid">
+								Số điện thoại chưa phù hợp <b>*</b>
+							</small> 
 							<small class="text-danger fst-italic" ng-show="userForm.phone.$error.required">
 								Vui lòng không để trống <b>*</b>
 							</small>
@@ -233,7 +239,8 @@
 					<div class="form-group mx-auto">
 						<label class="form-label"> Ngày sinh <span class="text-red">*</span> </label>
 						<!-- Input -->
-						<input type="date" class="w-100 form-control" ng-model="formUser.birthday">
+						<input type="date" class="w-100 form-control" ng-model="formUser.birthday"
+						max="{{maxAge | date: 'yyyy-MM-dd'}}" value="{{valueAge | date: 'yyyy-MM-dd'}}">
 					</div>
 
 					<!-- Status -->

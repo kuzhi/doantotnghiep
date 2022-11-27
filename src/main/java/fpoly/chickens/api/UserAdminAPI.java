@@ -105,11 +105,23 @@ public class UserAdminAPI {
 	public ResponseEntity<List<User>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail) {
 		return ResponseEntity.ok(userAdminService.findUserByEmail(nameEmail.get()));
 	}
+	
+	@GetMapping("email/{nameEmail}/{id}")
+	public ResponseEntity<List<User>> findByEmail(@PathVariable("nameEmail") Optional<String> nameEmail,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminService.findUserByEmailForId(nameEmail.get(), id.get()));
+	}
 		
 	// Find by Email
 	@GetMapping("phone/{phone}")
 	public ResponseEntity<List<User>> findByPhone(@PathVariable("phone") Optional<String> phone) {
 		return ResponseEntity.ok(userAdminService.findUserByPhone(phone.get()));
+	}
+
+	@GetMapping("phone/{phone}/{id}")
+	public ResponseEntity<List<User>> findByPhone(@PathVariable("phone") Optional<String> phone,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminService.findUserByPhoneForId(phone.get(), id.get()));
 	}
 
 	// Sort A-Z
