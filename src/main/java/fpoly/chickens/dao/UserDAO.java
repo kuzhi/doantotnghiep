@@ -32,8 +32,14 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	@Query(value = "SELECT o FROM User o WHERE o.Email = ?1 AND o.Deleted = 0")
 	List<User> findUserByEmail(String email);
 	
+	@Query(value = "SELECT o FROM User o WHERE o.Email = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<User> findUserByEmailForId(String email, Integer id);
+	
 	@Query(value = "SELECT o FROM User o WHERE o.Phone = ?1 AND o.Deleted = 0")
 	List<User> findUserByPhone(String phone);
+	
+	@Query(value = "SELECT o FROM User o WHERE o.Phone = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<User> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort A-Z
 	@Query(value = "SELECT o FROM User o ORDER BY o.Fullname ASC")

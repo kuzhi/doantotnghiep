@@ -130,6 +130,15 @@ public class UserAdminImplement implements UserAdminService {
 		return userStoreDAO.loadUserStoreByUserName(name);
 	}
 
-	
+	@Override
+	public List<User> findUserByEmailForId(String email, Integer id) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByEmailForId(email, id);
+	}
 
+	@Override
+	public List<User> findUserByPhoneForId(String phone, Integer id) {
+		// TODO Auto-generated method stub
+		return userDAO.findUserByPhoneForId(phone, id);
+	}
 }

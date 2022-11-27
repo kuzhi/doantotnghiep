@@ -26,8 +26,14 @@ public interface UserStoreDAO extends JpaRepository<UserStore, Integer> {
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Email = ?1 AND o.Deleted = 0")
 	List<UserStore> findUserByEmail(String email);
 	
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Email = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserStore> findUserByEmailForId(String email, Integer id);
+	
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Phone = ?1 AND o.Deleted = 0")
 	List<UserStore> findUserByPhone(String phone);
+
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Phone = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserStore> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort A-Z
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Deleted = 0 ORDER BY o.Fullname ASC")

@@ -27,9 +27,10 @@ public interface UserAdminKHService {
 	List<UserStore> findUserByUserName(String name);
 	// Find by email
 	List<UserStore> findUserByEmail(String email);
+	List<UserStore> findUserByEmailForId(String email, Integer id);
 	// Find by phone
 	List<UserStore> findUserByPhone(String phone);
-
+	List<UserStore> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort AZ
 	List<UserStore> sortAZ();
