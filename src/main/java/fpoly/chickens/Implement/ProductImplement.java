@@ -1,6 +1,7 @@
 package fpoly.chickens.Implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,41 +53,46 @@ public class ProductImplement implements ProductService {
 	}
 
 	@Override
-	public List<Product> findProductByName(String name) {
+	public List<Product> findProductByName(String name, Integer storeid) {
+		Store store = storeDAO.findById(storeid).get();
 		// TODO Auto-generated method stub
-		return productDAO.findByName(name);
+		return productDAO.findByName(name, store);
 	}
 
 	@Override
-	public List<Product> sortAZ() {
+	public List<Product> sortAZ(Integer storeid) {
+		Store store = storeDAO.findById(storeid).get();
 		// TODO Auto-generated method stub
-		return productDAO.sortAZ();
+		return productDAO.sortAZ(store);
 	}
 
 	@Override
-	public List<Product> sortZA() {
+	public List<Product> sortZA(Integer storeid) {
+		Store store = storeDAO.findById(storeid).get();
 		// TODO Auto-generated method stub
-		return productDAO.sortZA();
+		return productDAO.sortZA(store);
 	}
 
 	@Override
-	public List<Product> sort09() {
+	public List<Product> sort09(Integer storeid) {
+		Store store = storeDAO.findById(storeid).get();
 		// TODO Auto-generated method stub
-		return productDAO.sort09();
+		return productDAO.sort09(store);
 	}
 
 	@Override
-	public List<Product> sort90() {
+	public List<Product> sort90(Integer storeid) {
+		Store store = storeDAO.findById(storeid).get();
 		// TODO Auto-generated method stub
-		return productDAO.sort90();
+		return productDAO.sort90(store);
 	}
 
 	@Override
-	public List<Product> findAllProductByStore(Integer storeid) {
+	public List<Product> findAllProductByStore(Integer storeid, Boolean delete) {
 		// TODO Auto-generated method stub
 		Store store = storeDAO.findById(storeid).get();
 		
-		return productDAO.findByStore(store);
+		return productDAO.findByStore(store, delete);
 	}
 
 	@Override

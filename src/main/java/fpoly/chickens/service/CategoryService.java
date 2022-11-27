@@ -8,7 +8,7 @@ public interface CategoryService {
 	List<Category> findAll();
 	
 	// Find all category by storeid
-	List<Category> findAllByStore(Integer storeid);
+	List<Category> findAllByStore(Integer storeid, Boolean delete);
 	
 	// Create
 	Category create(Category category, Integer storeid);
