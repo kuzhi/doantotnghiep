@@ -24,7 +24,6 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 			$scope.users.forEach(user => {
 				user.create_at = new Date(user.create_at)
 				user.update_at = new Date(user.update_at)
-				$scope.showBtn = true;
 			})
 		});
 	}
@@ -94,10 +93,10 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 			$http.get($scope.url + "id/" + $scope.formUser.username)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
+					if($scope.users.length != 1){
 						Swal.fire({
 							icon: 'error',
-							title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
+							title: 'Username: ' + $scope.formUser.username + ' đã tồn tại!'
 						});
 						$scope.init();
 					}
@@ -106,10 +105,10 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 						$http.get($scope.url + "email/" + $scope.formUser.email)
 							.then(resp => {
 								$scope.users = resp.data;
-								if($scope.users != ""){
+								if($scope.users.length != 1){
 									Swal.fire({
 										icon: 'error',
-										title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
+										title: 'Email: ' + $scope.formUser.username + ' đã tồn tại!'
 									});
 									$scope.init();
 								}
@@ -118,10 +117,10 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 									$http.get($scope.url + "phone/" + $scope.formUser.phone)
 										.then(resp => {
 											$scope.users = resp.data;
-											if($scope.users != ""){
+											if($scope.users.length != 1){
 												Swal.fire({
 													icon: 'error',
-													title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
+													title: 'Phone: ' + $scope.formUser.username + ' đã tồn tại!'
 												});
 												$scope.init();
 											}else{
@@ -199,36 +198,39 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 					$http.get($scope.url + "id/" + $scope.formUser.username)
 						.then(resp => {
 							$scope.users = resp.data;
-							if($scope.users != "" ){
+							if($scope.users.length != 1){
 								Swal.fire({
 									icon: 'error',
 									title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
 								});
 								$scope.init();
+								$scope.showBtn = false;
 							}
 							else if ($scope.formUser.email != "") {
 								console.log("Email: ", $scope.formUser.email)
 								$http.get($scope.url + "email/" + $scope.formUser.email)
 									.then(resp => {
 										$scope.users = resp.data;
-										if($scope.users != ""){
+										if($scope.users.length != 1){
 											Swal.fire({
 												icon: 'error',
 												title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
 											});
 											$scope.init();
+											$scope.showBtn = false;
 										}
 										else if ($scope.formUser.phone != "") {
 											console.log("Phone: ", $scope.formUser.email)
 											$http.get($scope.url + "phone/" + $scope.formUser.phone)
 												.then(resp => {
 													$scope.users = resp.data;
-													if($scope.users != ""){
+													if($scope.users.length != 1){
 														Swal.fire({
 															icon: 'error',
 															title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
 														});
 														$scope.init();
+														$scope.showBtn = false;
 													}else{
 															
 														//====================================== Bắt đầu xử lý

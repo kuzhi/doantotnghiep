@@ -23,7 +23,7 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	 User findByUsername(String uname);
 	
 	
-	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1 AND o.Fullname LIKE ?1")
+	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1 AND o.Fullname LIKE ?2")
 	List<User> findUserByUserNameAndFullName(String username, String fullname);
 	
 	@Query(value = "SELECT o FROM User o WHERE o.Username = ?1 AND o.Deleted = 0")

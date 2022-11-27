@@ -6,7 +6,7 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 	
 	$scope.insert = function() {
 		$scope.title = 'Thêm khách hàng mới';
-		$scope.showBtn = true;
+		$scope.showBtn = false;
 	}
 
 	// Load list users
@@ -19,7 +19,6 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 			$scope.users.forEach(user => {
 				user.create_at = new Date(user.create_at)
 				user.update_at = new Date(user.update_at)
-				$scope.showBtn = true;
 			})
 		});
 	}
@@ -91,36 +90,39 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 			$http.get($scope.url + "id/" + $scope.formUserStore.username)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
-						Swal.fire({
-							icon: 'error',
-							title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
+						if($scope.users.length !=1){
+								Swal.fire({
+									icon: 'error',
+									title: 'Username: ' + $scope.formUserStore.username + ' đã tồn tại!'
 						});
 						$scope.init();
+						$scope.showBtn = false;
 					}
 					else if ($scope.formUserStore.email != "") {
 						console.log("Email: ", $scope.formUserStore.email)
 						$http.get($scope.url + "email/" + $scope.formUserStore.email)
 							.then(resp => {
 								$scope.users = resp.data;
-								if($scope.users != ""){
+								if($scope.users.length !=1){
 									Swal.fire({
 										icon: 'error',
-										title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
+										title: 'Email: ' + $scope.formUserStore.email + ' đã tồn tại!'
 									});
 									$scope.init();
+									$scope.showBtn = false;
 								}
 								else if ($scope.formUserStore.phone != "") {
 									console.log("Phone: ", $scope.formUserStore.email)
 									$http.get($scope.url + "phone/" + $scope.formUserStore.phone)
 										.then(resp => {
 											$scope.users = resp.data;
-											if($scope.users != ""){
+											if($scope.users.length !=1){
 												Swal.fire({
 													icon: 'error',
-													title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
+													title: 'Số điện thoại: '+ $scope.formUserStore.phone +'đã tồn tại!'
 												});
 												$scope.init();
+												$scope.showBtn = false;
 											}else{
 												user.create_at = new Date();
 										        user.update_at = new Date();
@@ -196,36 +198,39 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 					$http.get($scope.url + "id/" + $scope.formUserStore.username)
 						.then(resp => {
 							$scope.users = resp.data;
-							if($scope.users != ""){
+							if($scope.users.length !=1){
 								Swal.fire({
 									icon: 'error',
-									title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
+									title: 'Username: ' + $scope.formUserStore.username + ' đã tồn tại!'
 								});
 								$scope.init();
+								$scope.showBtn = false;
 							}
 							else if ($scope.formUserStore.email != "") {
 								console.log("Email: ", $scope.formUserStore.email)
 								$http.get($scope.url + "email/" + $scope.formUserStore.email)
 									.then(resp => {
 										$scope.users = resp.data;
-										if($scope.users != ""){
+										if($scope.users.length !=1){
 											Swal.fire({
 												icon: 'error',
-												title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
+												title: 'Email: ' + $scope.formUserStore.email + ' đã tồn tại!'
 											});
 											$scope.init();
+											$scope.showBtn = false;
 										}
 										else if ($scope.formUserStore.phone != "") {
-											console.log("Phone: ", $scope.formUserStore.email)
+											console.log("Phone: ", $scope.formUserStore.phone)
 											$http.get($scope.url + "phone/" + $scope.formUserStore.phone)
 												.then(resp => {
 													$scope.users = resp.data;
-													if($scope.users != ""){
+													if($scope.users.length !=1){
 														Swal.fire({
 															icon: 'error',
-															title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
+															title: 'Số điện thoại: '+ $scope.formUserStore.phone +'đã tồn tại!'
 														});
 														$scope.init();
+														$scope.showBtn = false;
 													}else{
 														//====================================== Bắt đầu xử lý
 														var user = angular.copy($scope.formUserStore);
