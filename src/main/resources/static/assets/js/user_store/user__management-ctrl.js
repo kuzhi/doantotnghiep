@@ -5,7 +5,8 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 	$scope.url = "/api/user/";
 
 	$scope.insert = function() {
-		$scope.title = 'Thêm nhân viên';
+
+		$scope.showBtn = true;
 		$scope.statusInput = true;
 	}
 
@@ -20,7 +21,6 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 			$scope.users.forEach(user => {
 				user.create_at = new Date(user.create_at)
 				user.update_at = new Date(user.update_at)
-				$scope.showBtn = true;
 			})
 		});
 	}
@@ -86,12 +86,12 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 	// Create user
 	$scope.create = function() {
 		var user = angular.copy($scope.formUser);
-		
+
 		if ($scope.formUser.username != "") {
 			$http.get($scope.url + "id/user/" + $scope.formUser.username)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
+					if ($scope.users.length != 1) {
 						Swal.fire({
 							icon: 'error',
 							title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
@@ -103,7 +103,7 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 						$http.get($scope.url + "email/" + $scope.formUser.email)
 							.then(resp => {
 								$scope.users = resp.data;
-								if($scope.users != ""){
+								if ($scope.users.length != 1) {
 									Swal.fire({
 										icon: 'error',
 										title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
@@ -115,38 +115,38 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 									$http.get($scope.url + "phone/" + $scope.formUser.phone)
 										.then(resp => {
 											$scope.users = resp.data;
-											if($scope.users != ""){
+											if ($scope.users.length != 1) {
 												Swal.fire({
 													icon: 'error',
 													title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
 												});
 												$scope.init();
-											}else{
+											} else {
 												user.create_at = new Date();
-										        user.update_at = new Date();
-										        
-										        user.deleted = false;
-										        // console.log('data: ', user);
-										        
-										        $http.post($scope.url, user).then(resp => {
-										            resp.data.create_at = new Date(resp.data.create_at)  
-										            resp.data.update_at = new Date(resp.data.update_at)  
-										             
-										            $scope.users.push(resp.data); 
-										        	// console.log('data: ', $scope.products);            
-										            $scope.reset(); 
-										            $scope.init();
-										            Swal.fire({
+												user.update_at = new Date();
+
+												user.deleted = false;
+												// console.log('data: ', user);
+
+												$http.post($scope.url, user).then(resp => {
+													resp.data.create_at = new Date(resp.data.create_at)
+													resp.data.update_at = new Date(resp.data.update_at)
+
+													$scope.users.push(resp.data);
+													// console.log('data: ', $scope.products);            
+													$scope.reset();
+													$scope.init();
+													Swal.fire({
 														icon: 'success',
 														title: 'Thêm thành công!'
 													});
-										        }).catch(error => {
+												}).catch(error => {
 													Swal.fire({
 														icon: 'error',
 														title: 'Thêm thất bại!'
 													});
-										            console.log("Error: ", error);
-										        });
+													console.log("Error: ", error);
+												});
 											}
 										}).catch(error => {
 											console.log("Error", error);
@@ -160,10 +160,10 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 					console.log("Error", error);
 				});
 		}
-		
+
 	}
 
-	
+
 	// Update user
 	$scope.update = function() {
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -190,9 +190,9 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 			}
 		}).then((result) => {
 			if (result.isConfirmed) {
-				
+
 				var user = angular.copy($scope.formUser);
-				
+
 				if ($scope.formUser.username != "") {
 					$http.get($scope.url + "id/user/" + $scope.formUser.username)
 						.then(resp => {
@@ -201,55 +201,58 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 							if($scope.users.length !=1){
 								Swal.fire({
 									icon: 'error',
-									title: 'UserName đã tồn tại, Vui lòng nhập UserName khác!'
+									title: 'Email: ' + $scope.formUser.email + ' đã tồn tại!'
 								});
 								$scope.init();
+								$scope.showBtn = false;
 							}
 							else if ($scope.formUser.email != "") {
 								console.log("Email: ", $scope.formUser.email)
 								$http.get($scope.url + "email/" + $scope.formUser.email)
 									.then(resp => {
 										$scope.users = resp.data;
-										if($scope.users != ""){
+										if ($scope.users.length != 1) {
 											Swal.fire({
 												icon: 'error',
-												title: 'Email đã tồn tại, Vui lòng nhập Email khác!'
+												title: 'Email: ' + $scope.formUser.email + ' đã tồn tại!'
 											});
 											$scope.init();
+											$scope.showBtn = false;
 										}
 										else if ($scope.formUser.phone != "") {
-											console.log("Phone: ", $scope.formUser.email)
+											console.log("Phone: ", $scope.formUser.phone)
 											$http.get($scope.url + "phone/" + $scope.formUser.phone)
 												.then(resp => {
 													$scope.users = resp.data;
-													if($scope.users != ""){
+													if ($scope.users.length != 1) {
 														Swal.fire({
 															icon: 'error',
-															title: 'Số điện thoại đã tồn tại, Vui lòng nhập Số điện thoại khác!'
+															title: 'Số điện thoại' + $scope.formUser.phone + 'đã tồn tại!'
 														});
 														$scope.init();
-													}else{
+														$scope.showBtn = false;
+													} else {
 														//====================================== Bắt đầu xử lý
 														var user = angular.copy($scope.formUser);
 														user.update_at = new Date();
-										
+
 														//console.log("data: ", user);
-										
+
 														$http.put($scope.url + user.id, user).then(resp => {
 															var index = $scope.users.findIndex(p => p.id == user.id);
-										
+
 															$scope.users[index] = user;
 															console.log("Sp: ", $scope.users[index]);
 															$scope.reset();
 															$scope.init();
-										
+
 															// Thông báo
 															swalWithBootstrapButtons.fire(
 																'Thành công',
 																'Cập nhật thành công!',
 																'success'
 															)
-										
+
 														}).catch(error => {
 															// Thông báo
 															Swal.fire({
@@ -270,9 +273,9 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 						}).catch(error => {
 							console.log("Error", error);
 						});
-				
-				
-			}
+
+
+				}
 				//====================================== Kết thúc xử lý
 			} else if (
 				/* Read more about handling dismissals below */
@@ -347,13 +350,13 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 			$http.get($scope.url + $scope.nameUser)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
+					if ($scope.users != "") {
 						$scope.users.forEach(user => {
 							user.create_at = new Date(user.create_at)
 							user.update_at = new Date(user.update_at)
 						})
 					}
-					else{
+					else {
 						Swal.fire({
 							icon: 'error',
 							title: 'Không có kết quả phù hợp!'
@@ -369,13 +372,13 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 			$http.get($scope.url + "id/" + $scope.nameUserName)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
+					if ($scope.users != "") {
 						$scope.users.forEach(user => {
 							user.create_at = new Date(user.create_at)
 							user.update_at = new Date(user.update_at)
 						})
 					}
-					else{
+					else {
 						Swal.fire({
 							icon: 'error',
 							title: 'Không có kết quả phù hợp!'
@@ -387,18 +390,18 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 					console.log("Error", error);
 				});
 		}
-		else if($scope.nameUser != "" && $scope.nameUserName != ""){
+		else if ($scope.nameUser != "" && $scope.nameUserName != "") {
 			console.log('tìm theo')
-			$http.get($scope.url + "id/name/" + $scope.nameUserName + "/" +  $scope.nameUser)
+			$http.get($scope.url + "id/name/" + $scope.nameUserName + "/" + $scope.nameUser)
 				.then(resp => {
 					$scope.users = resp.data;
-					if($scope.users != ""){
+					if ($scope.users != "") {
 						$scope.users.forEach(user => {
 							user.create_at = new Date(user.create_at)
 							user.update_at = new Date(user.update_at)
 						})
 					}
-					else{
+					else {
 						Swal.fire({
 							icon: 'error',
 							title: 'Không có kết quả phù hợp!'
@@ -409,7 +412,7 @@ app.controller("user__management-ctrl", function($scope, $http, $location) {
 					console.log("Error", error);
 				});
 		}
-		else{
+		else {
 			$scope.init();
 		}
 	}

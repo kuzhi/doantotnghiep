@@ -35,19 +35,19 @@ public UserApp findByUsernames(String uname);
 	List<UserApp> findUserByPhone(String phone);
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o ORDER BY o.Fullname ASC")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Deleted = 0 ORDER BY o.Fullname ASC")
 	List<UserApp> sortAZ();
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o ORDER BY o.Fullname DESC")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Deleted = 0 ORDER BY o.Fullname DESC")
 	List<UserApp> sortZA();
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = true")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = true AND o.Deleted = 0")
 	List<UserApp> hoatDong();
 
 	
-	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false AND o.Deleted = 0")
 	List<UserApp> ngungHoatDong();
 
 }
