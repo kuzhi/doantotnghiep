@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import fpoly.chickens.entity.Order;
 import fpoly.chickens.entity.OrderDetail;
+import fpoly.chickens.entity.Product;
 import fpoly.chickens.entity.ReportOverViewApp;
 import fpoly.chickens.entity.ReportProductApp;
 import fpoly.chickens.entity.Store;
@@ -29,6 +30,9 @@ public interface OrderDetailDAO extends JpaRepository<OrderDetail, Integer> {
 
 	@Query("SELECT o FROM OrderDetail o WHERE o.order = ?1")
 	List<OrderDetail> findOrderDetailByOrder(Order order);
+
+	@Query("SELECT o FROM OrderDetail o WHERE o.product.id = ?1")
+	List<OrderDetail> findOrderDetailByProductId(Product id);
 
 	
 }

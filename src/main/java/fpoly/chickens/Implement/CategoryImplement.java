@@ -48,10 +48,10 @@ public class CategoryImplement implements CategoryService {
 	}
 
 	@Override
-	public List<Category> findAllByStore(Integer storeid) {
+	public List<Category> findAllByStore(Integer storeid, Boolean delete) {
 		// TODO Auto-generated method stub
 		Store store = storeDAO.findById(storeid).get();
 		
-		return categoryDAO.findAllByStore(store);
+		return categoryDAO.findAllByStore(store, delete);
 	}
 }

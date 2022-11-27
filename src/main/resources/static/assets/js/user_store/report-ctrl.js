@@ -3,13 +3,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 
 	//================ Hóa đơn đang xử lý
 	$scope.loadOrderLoading = function(year, month) {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.status = 1;
-		$scope.dateStart = new Date(year, month);
-		$scope.dateEnd = new Date(year, month);
-
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -19,6 +12,13 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.status = 1;
+						$scope.dateStart = new Date(year, month);
+						$scope.dateEnd = new Date(year, month);
 
 						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
 						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
@@ -36,16 +36,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 
 	//================ Hóa đơn thành công
 	$scope.loadOrderSuccess = function(year, month) {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.status = 3;
-		$scope.dateStart = new Date(year, month);
-		$scope.dateEnd = new Date(year, month);
-
-		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
-		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
-
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -55,6 +45,16 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.status = 3;
+						$scope.dateStart = new Date(year, month);
+						$scope.dateEnd = new Date(year, month);
+
+						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
 
 						$http.get("/api/count-number/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd + "/" + $scope.status)
 							.then(resp => {
@@ -68,16 +68,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	}; $scope.loadOrderSuccess(now.getFullYear(), now.getMonth());
 	//================ Hóa đơn bị hủy
 	$scope.loadOrderCancel = function(year, month) {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.status = 4;
-		$scope.dateStart = new Date(year, month);
-		$scope.dateEnd = new Date(year, month);
-
-		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
-		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
-
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -87,6 +77,17 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.status = 4;
+						$scope.dateStart = new Date(year, month);
+						$scope.dateEnd = new Date(year, month);
+
+						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+
 						$http.get("/api/count-number/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd + "/" + $scope.status)
 							.then(resp => {
 								$scope.orderCancel = resp.data;
@@ -99,16 +100,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	}; $scope.loadOrderCancel(now.getFullYear(), now.getMonth());
 	//================ Hóa đơn đã hủy
 	$scope.loadOrderCanceled = function(year, month) {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.status = 5;
-		$scope.dateStart = new Date(year, month);
-		$scope.dateEnd = new Date(year, month);
-
-		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
-		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
-
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -118,6 +109,17 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.status = 5;
+						$scope.dateStart = new Date(year, month);
+						$scope.dateEnd = new Date(year, month);
+
+						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
+						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
+
 						$http.get("/api/count-number/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd + "/" + $scope.status)
 							.then(resp => {
 								$scope.orderCanceled = resp.data;
@@ -133,11 +135,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	$scope.status = 3;
 	$scope.statusF = 5;
 	$scope.loadDataOrder = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -147,6 +144,13 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+
 						// Tháng 1
 						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(0);
 						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(0);
@@ -525,11 +529,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 
 	//================ Biểu đồ doanh thu
 	$scope.loadDataSale = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -539,6 +538,13 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+
 						// Tháng 1
 						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(0);
 						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(0);
@@ -741,14 +747,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 
 	// Hóa đơn || Doanh thu trong ngày
 	$scope.getOrderInDate = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
-
-		$scope.dateStart.setTime(exampleDate.getTime());
-		$scope.dateEnd.setTime(exampleDate.getTime() + end);
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -758,6 +756,16 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+
+						$scope.dateStart.setTime(exampleDate.getTime());
+						$scope.dateEnd.setTime(exampleDate.getTime() + end);
+
 						$http.get("/api/count/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd)
 							.then(resp => {
 								$scope.orderInDate = resp.data;
@@ -770,14 +778,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.getSaleOrderInDate = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
-
-		$scope.dateStart.setTime(exampleDate.getTime());
-		$scope.dateEnd.setTime(exampleDate.getTime() + end);
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -787,6 +787,16 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+
+						$scope.dateStart.setTime(exampleDate.getTime());
+						$scope.dateEnd.setTime(exampleDate.getTime() + end);
+
 						$http.get("/api/sale/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd)
 							.then(resp => {
 								$scope.saleorderInDate = resp.data;
@@ -803,17 +813,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 
 	// Hóa đơn || Doanh thu trong tháng
 	$scope.getOrderInMonth = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
-		$scope.month = new Date().getMonth() + 1;
-
-		$scope.dateStart.setTime(exampleDate.getTime());
-		$scope.dateStart.setDate(1);
-		$scope.dateEnd.setTime(exampleDate.getTime() + end);
-		$scope.dateEnd.setDate(30);
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -823,6 +822,19 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+						$scope.month = new Date().getMonth() + 1;
+
+						$scope.dateStart.setTime(exampleDate.getTime());
+						$scope.dateStart.setDate(1);
+						$scope.dateEnd.setTime(exampleDate.getTime() + end);
+						$scope.dateEnd.setDate(30);
+
 						$http.get("/api/count/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd)
 							.then(resp => {
 								$scope.orderInMonth = resp.data;
@@ -835,17 +847,6 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.getSaleOrderInMonth = function() {
-		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-		const end = 24 * 60 * 60 * 1000 - 1;
-
-		$scope.dateStart = new Date();
-		$scope.dateEnd = new Date();
-		$scope.month = new Date().getMonth() + 1;
-
-		$scope.dateStart.setTime(exampleDate.getTime());
-		$scope.dateStart.setDate(1);
-		$scope.dateEnd.setTime(exampleDate.getTime() + end);
-		$scope.dateEnd.setDate(30);
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
@@ -855,6 +856,19 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
+
+						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+						const end = 24 * 60 * 60 * 1000 - 1;
+
+						$scope.dateStart = new Date();
+						$scope.dateEnd = new Date();
+						$scope.month = new Date().getMonth() + 1;
+
+						$scope.dateStart.setTime(exampleDate.getTime());
+						$scope.dateStart.setDate(1);
+						$scope.dateEnd.setTime(exampleDate.getTime() + end);
+						$scope.dateEnd.setDate(30);
+
 						$http.get("/api/sale/order/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd)
 							.then(resp => {
 								$scope.saleorderInMonth = resp.data;
@@ -881,10 +895,10 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 					.then(resp => {
 						$scope.stores = resp.data[0];
 						const storeid = $scope.stores.id;
-		$http.get("/api/report-overview-app/"+storeid).then(resp => {
-			$scope.items = resp.data
-		});
-		});
+						$http.get("/api/report-overview-app/" + storeid).then(resp => {
+							$scope.items = resp.data
+						});
+					});
 			});
 	}
 
@@ -893,9 +907,7 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		size: 5,
 		get items() {
 			var start = this.page * this.size;
-
 			return $scope.items.slice(start, start + this.size);
-
 		}
 	}
 

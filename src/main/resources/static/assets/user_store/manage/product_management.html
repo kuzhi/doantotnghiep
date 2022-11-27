@@ -246,6 +246,7 @@
                         <!-- Input -->
                         <input ng-model="formCate.name" type="text" name="name"
                         class="w-full form-control" placeholder="--Vui lòng nhập--" required>
+                        <input type="hidden" ng-model="formCate.deleted">
                           
                        	<div ng-show="cateForm.name.$dirty && cateForm.name.$invalid">
 							<small class="text-danger fst-italic" ng-show="cateForm.name.$error.required">
