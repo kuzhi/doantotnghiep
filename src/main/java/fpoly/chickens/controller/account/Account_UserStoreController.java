@@ -33,23 +33,18 @@ public class Account_UserStoreController {
 		return "home/account/login";
 	}
 	
-//	@PostMapping("/home/auth/form")
-//	public String login2() {
-//		
-//		return "home/account/login";
-//	}
-	
-//	
+
 	@PostMapping("login/store")
 	public String loginStore(Model model) {
 		
 		String username= req.getParameter("username");
 		String password= req.getParameter("password");
 		boolean Check = authen.loginStore(username, password, model);
-		//model.addAttribute("message", "dang nhap store thanh cong!");
+		
 		if(Check) {
-					 return "redirect:/assets/admin/layout_admin.html";
+					 return "redirect:/app";
 		}
+		model.addAttribute("message", "dang nhap store thất bại!");
 		return "home/account/login";
 	}
 	
@@ -60,7 +55,9 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password, model);
 		if(Check) {
+
 			return "redirect:/home/client";
+
 
 		}
 		model.addAttribute("message", "dang nhap user thất bại!");

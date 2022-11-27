@@ -7,26 +7,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user-app/auth")
 
 public class Account_UserAppController {
 
-	@GetMapping("login")
+	@RequestMapping("/user-app/auth/form")
 	public String login() {
-		return "home/account/forgot";
+		return "home/account/loginApp";
 	}
 	
-//	@PostMapping("login/store")
-//	public String loginStore(Model model) {
-//		model.addAttribute("message", "dang nhap store thanh cong!");
-//
-//		return "home/account/login";
-//	}
-//	
-//	@PostMapping("login/user")
-//	public String loginUser(Model model) {
-//		model.addAttribute("message", "dang nhap user thanh cong!");
-//
-//		return "home/account/login";
-//	}
+	@GetMapping("/user-app/auth/error")
+	public String loginStore(Model model) {
+		model.addAttribute("message", "sai tai khoan hoac mat khau hoac tai khoan khong co trong he thong!");
+
+		return "home/account/loginApp";
+	}
+	
+	@GetMapping("/user-app/auth/success")
+	public String loginUser(Model model) {
+		
+
+		return "redirect:/admin";
+	}
 }

@@ -2,6 +2,7 @@ package fpoly.chickens.Implement;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,11 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import fpoly.chickens.dao.RoleAppDAO;
 import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
 import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.RoleApp;
 import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
@@ -31,20 +34,13 @@ import fpoly.chickens.service.UserService;
 public class UserServiceImplement implements UserService {
 	@Autowired
 	HttpSession session;
-	@Autowired
-	StoreDAO StoreDao;
+	
 	@Autowired
 	UserAppDAO userAppDao;
 	
 	@Autowired
-	UserDAO userDao;
-	
-	
-	@Autowired
-	UserStoreDAO userStoreDao;
-	
-	
-	
+	RoleAppDAO roleDao;
+
 	@Autowired
 	UserRoleAppDAO userRoleDao;
 	
@@ -54,30 +50,26 @@ public class UserServiceImplement implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 try {
 			
-			//UserApp userApp = userAppDao.findByUsernames(username); 
+			UserApp userApp = userAppDao.findByUsernames(username); 
+			//this.setToken(userApp.getId());
 
-			UserStore userStore = userStoreDao.findByUsername(username);
-			
-			String passwordStore = userStore.getPassword();
-			System.out.println(userStore);
-			List<Store> store = StoreDao.findByUserStore(userStore.getId());
-			String adminStore = "ADMINSTORE";
-			if(store.size() == 0) {
-				 adminStore = null;
+				String passwordApp = userApp.getPassword();
+				System.out.println("?"+ userApp + " "+ passwordApp);
+				int roleId = userRoleDao.findUserRoleIDByUsername(username);
+				if(roleId <=0){
+					System.out.println("?"+ userApp + " "+ roleId);
+
+				}
 				
-			}
-			System.out.println(store.size());
-			//this.setToken(username, passwordStore);
+				RoleApp role =   roleDao.findById(roleId).get();
+				System.out.println("?"+ userApp + " "+ role);
+				String roleUser = role.getRoleName();
+				System.out.println("?"+ userApp + " "+ roleUser);
 			return User.withUsername(username)
-					.password(pe.encode(passwordStore)).build();
-					//.roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu 
+			 			.password(pe.encode(passwordApp)).roles(roleUser).build();
+			
 		} catch (Exception e) {
 			// TODO: handle exception
-//			fpoly.chickens.entity.User users = userDao.findByUsername(username);
-//			String passwordUser = users.getPassword();
-//			return User.withUsername(username)
-//					.password(pe.encode(passwordUser))
-//					.build();
 			throw new UsernameNotFoundException(username + " not found");
 		} 
 	}
