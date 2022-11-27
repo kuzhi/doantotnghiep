@@ -28,6 +28,8 @@ public interface UserAdminService {
 	List<User> findUserByName(String name);
 	// Find by user
 	List<User> findUserByUserName(String name);
+	// Load user name
+	UserStore loadUserStoreByUserName(String name);
 	// Find by name
 	List<User> findUserByUserNameAndFullName(String username, String fullname);
 	// Find by user

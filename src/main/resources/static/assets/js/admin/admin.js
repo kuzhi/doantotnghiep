@@ -31,6 +31,10 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/admin/user/my-profile.html",
 			controller: "myprofile-ctrl"
 		})
+		.when("/customs", {
+			templateUrl: "/assets/user_store/manage/user_management.html",
+			controller: "user__management-ctrl"
+		})
 		// Gói dịch vụ
 		.when("/pack", {
 			templateUrl: "/assets/admin/pack/pack.html",
@@ -54,3 +58,19 @@ app.config(function($routeProvider) {
 			controller: "sales-channel-ctrl"
 		})
 })
+app.controller("admin-ctrl", function($scope, $http, $location) {
+	// Láy userid
+	//$scope.userid=0;
+	$scope.getEmpleadoInfo = function () {
+		// Lấy userid
+        $http.get("/api/get")
+	    .then(resp => {
+	        //$scope.userid = resp.data;
+	       $scope.userid = 2;
+			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
+				$scope.userApp = resp.data;
+			})
+	    })
+    }; $scope.getEmpleadoInfo();
+    
+});
