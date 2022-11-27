@@ -108,11 +108,7 @@ try {
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
-		String getSubstring = token.substring(6);
-		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
-		String decodedString = new String(decodedBytes);
-		return decodedString;
-
+		return token;
 
 	}
 
@@ -122,12 +118,7 @@ try {
 
 		
 		String token = (String) session.getAttribute("tokenUser");
-		String getSubstring = token.substring(6);
-		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
-		String decodedString = new String(decodedBytes);
-		return decodedString;
-		 
-
+		return token;
 
 	}
 
