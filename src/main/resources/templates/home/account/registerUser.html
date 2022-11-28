@@ -3,7 +3,7 @@
 
 <html lang="en">
 <head>
-<title>Đăng ký</title>
+<title>Đăng ký tài khoản người dùng</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -42,7 +42,7 @@
 					<img src="/assets/images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" th:action="@{create}" th:object="${user}" method="POST" >
+				<form class="login100-form validate-form" th:action="@{create-user}" th:object="${user}" method="POST" >
 					<span class="login100-form-title"> ĐĂNG KÝ </span>
 					<th:block th:if="${error !=null}">
 						<div class="alert alert-danger" role="alert" th:text="${error}"></div>
@@ -93,7 +93,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">Đăng ký</button>
+						<button type="submit" class="login100-form-btn">Đăng ký</button>
 					</div>
 					<th:block th:if="${message !=null}">
 							<div class="alert alert-danger" role="alert" th:text="${message}"></div>
