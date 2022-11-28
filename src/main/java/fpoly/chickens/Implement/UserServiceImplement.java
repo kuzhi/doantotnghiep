@@ -32,53 +32,40 @@ import fpoly.chickens.service.UserService;
 public class UserServiceImplement implements UserService {
 	@Autowired
 	HttpSession session;
-	@Autowired
-	StoreDAO StoreDao;
+	
 	@Autowired
 	UserAppDAO userAppDao;
-
+	
 	@Autowired
-	UserDAO userDao;
-
-	@Autowired
-	UserStoreDAO userStoreDao;
+	RoleAppDAO roleDao;
 
 	@Autowired
 	UserRoleAppDAO userRoleDao;
-
+	
 	@Autowired
 	BCryptPasswordEncoder pe;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		try {
+try {
+			
+			UserApp userApp = userAppDao.findByUsernames(username); 
+			//this.setToken(userApp.getId());
+				String passwordApp = userApp.getPassword().trim();				
+				UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
+			RoleApp role =   roleDao.findById(userRole.getId()).get();
 
-			// UserApp userApp = userAppDao.findByUsernames(username);
-
-			UserStore userStore = userStoreDao.findByUsername(username);
-
-			String passwordStore = userStore.getPassword();
-//			System.out.println(userStore);
-			List<Store> store = StoreDao.findByUserStore(userStore.getId());
-			String adminStore = "ADMINSTORE";
-			if (store.size() == 0) {
-				adminStore = null;
-
-			}
-			System.out.println(store.size());
-			// this.setToken(username, passwordStore);
-			return User.withUsername(username).password(pe.encode(passwordStore)).build();
-			// .roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu
+				String roleUser = role.getRoleName();
+				this.setTokenUserApp(String.valueOf(userApp.getId()));
+			return User.withUsername(username)
+			 			.password(passwordApp).roles(roleUser).build();
+			
 		} catch (Exception e) {
 			// TODO: handle exception
-//			fpoly.chickens.entity.User users = userDao.findByUsername(username);
-//			String passwordUser = users.getPassword();
-//			return User.withUsername(username)
-//					.password(pe.encode(passwordUser))
-//					.build();
 			throw new UsernameNotFoundException(username + " not found");
-		}
+		} 
 	}
+
 
 	@Override
 	public void setTokenStore(Integer userStoreId) {
@@ -112,5 +99,13 @@ public class UserServiceImplement implements UserService {
 		return token;
 
 	}
+	
+	@Override
+	public void setTokenUserApp(String userAppId) {
+		// TODO Auto-generated method stub
+		//byte[] auth = (userId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenUserApp", userAppId);
 
+	}
 }
