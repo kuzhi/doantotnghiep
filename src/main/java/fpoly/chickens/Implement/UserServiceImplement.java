@@ -1,12 +1,14 @@
 package fpoly.chickens.Implement;
 
 import java.util.Base64;
-
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,17 +16,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import fpoly.chickens.dao.RoleAppDAO;
+import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserAppDAO;
+import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
-import fpoly.chickens.entity.RoleApp;
+import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
-
-import fpoly.chickens.entity.UserRoleApp;
-
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.SessionService;
->
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -68,18 +68,15 @@ try {
 
 
 	@Override
-
 	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userStoreId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
 
-
 	}
 
 	@Override
-
 	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userId).getBytes();
@@ -89,26 +86,15 @@ try {
 	}
 
 	@Override
-	public void setTokenUserApp(String userAppId) {
-		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUserApp", userAppId);
-
-	}
-
-	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
-
 		return token;
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-
 		String token = (String) session.getAttribute("tokenUser");
 		return token;
 

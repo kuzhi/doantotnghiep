@@ -19,7 +19,7 @@ public interface UserDAO extends JpaRepository<User, Integer>{
 	@Query(value = "SELECT o FROM User o WHERE o.Username LIKE ?1")
 	List<User> findUserByUserName(String name);
 	
-	@Query(value="SELECT o FROM User o WHERE o.Username = ?1")
+	@Query(value="SELECT o FROM User o WHERE o.Username LIKE ?1")
 	 User findByUsername(String uname);
 	
 	

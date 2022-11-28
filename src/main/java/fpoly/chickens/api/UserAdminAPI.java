@@ -97,7 +97,7 @@ public class UserAdminAPI {
 	// Find by user name
 	@GetMapping("id/user/{nameUsername}")
 	public ResponseEntity<List<User>> findByUsername(@PathVariable("nameUsername") Optional<String> nameUser) {
-		return ResponseEntity.ok(userAdminService.findUserByUserName(nameUser.get()));
+		return ResponseEntity.ok(userAdminService.findUserByUsername(nameUser.get()));
 	}
 		
 	// Find by Email

@@ -26,8 +26,6 @@ public interface UserAdminNVService {
 	List<UserApp> findUserByName(String name);
 	// Find by user
 	List<UserApp> findUserByUserName(String name);
-
-	UserApp findUsersByUserName(String name);
 	// Find by email
 	List<UserApp> findUserByEmail(String email);
 	List<UserApp> findUserByEmailForId(String email, Integer id);

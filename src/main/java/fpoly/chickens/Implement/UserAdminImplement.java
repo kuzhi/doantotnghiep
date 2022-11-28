@@ -101,9 +101,9 @@ public class UserAdminImplement implements UserAdminService {
 	}
 
 	@Override
-	public User findUserByUsername(String name) {
+	public List<User> findUserByUsername(String name) {
 		// TODO Auto-generated method stub
-		return userDAO.findByUsername(name);
+		return userDAO.findUserByUsername(name);
 	}
 
 	@Override

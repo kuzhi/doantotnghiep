@@ -109,11 +109,6 @@ public class UserAdminKHImplement implements UserAdminKHService {
 	}
 
 	@Override
-
-	public UserStore findUsersByUserName(String name) {
-		// TODO Auto-generated method stub
-		return userStoreDAO.findByUsername(name);
-@Override
 	public List<UserStore> findUserByPhoneForId(String phone, Integer id) {
 		// TODO Auto-generated method stub
 		return userStoreDAO.findUserByPhoneForId(phone, id);

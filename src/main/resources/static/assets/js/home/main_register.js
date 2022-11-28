@@ -6,8 +6,6 @@
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
-    var value_password = $("input[name*='password']").val();
-    var value_password2 = $("input[name*='password2']").val();
 
     $('.validate-form').on('submit',function(){
         var check = true;
@@ -29,20 +27,12 @@
         });
     });
 
-    
     function validate (input) {
-        
-        
         if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
             if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
                 return false;
             }
-          
-                    
         }
-        // else if(($(input).attr('name') == 'password') === ($(input).attr('name') == 'password2')){
-        //     return false;
-        // }   
         else {
             if($(input).val().trim() == ''){
                 return false;
@@ -62,7 +52,6 @@
         $(thisAlert).removeClass('alert-validate');
     }
     
-
     
 
 })(jQuery);
