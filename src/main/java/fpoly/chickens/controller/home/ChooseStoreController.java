@@ -16,8 +16,8 @@ public class ChooseStoreController {
 	UserService userService;
 	
 	@GetMapping("home/choosestoreUser")
-	public String ChooseStoreUser(@RequestParam("storeid") Optional<String> storeid) {
-		if(storeid.get().length()>0) {
+	public String ChooseStoreUser(@RequestParam("storeid") Optional<Integer> storeid) {
+		if(storeid.get()>0) {
 			userService.setTokenStore(storeid.get());
 			System.out.println(storeid.get());
 		}
@@ -26,8 +26,8 @@ public class ChooseStoreController {
 	}
 	
 	@GetMapping("home/choosestoreUserStore")
-	public String ChooseStoreUserStore(@RequestParam("storeid") Optional<String> storeid) {
-		if(storeid.get().length()>0) {
+	public String ChooseStoreUserStore(@RequestParam("storeid") Optional<Integer> storeid) {
+		if(storeid.get()>0) {
 			userService.setTokenStore(storeid.get());
 		}
 		return "redirect:/home/client";
