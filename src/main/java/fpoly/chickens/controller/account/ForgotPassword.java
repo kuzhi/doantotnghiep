@@ -110,14 +110,10 @@ public class ForgotPassword {
     public String sendMail(Model model){
         
         String password1 = req.getParameter("password1");
-        
+        String passwordEncode = pe.encode(password1);
         //String password2 = req.getParameter("password2");
         String email = String.valueOf(session.getAttribute("emailCheck")) ;
         String username = String.valueOf(session.getAttribute("usernameCheck")) ;
-
-        
-      
-
 
         User users = userService.findUserByUsername(username);
 
@@ -127,7 +123,7 @@ public class ForgotPassword {
 
         if(users !=null && !users.getDeleted() ){
             if(users.getEmail().equals(email)){
-                users.setPassword(password1);
+                users.setPassword(passwordEncode);
                 userService.update(users);
                 
             }
@@ -135,7 +131,7 @@ public class ForgotPassword {
 
         if(userStore !=null && !userStore.getDeleted() ){
             if(userStore.getEmail().equals(email)){
-                userStore.setPassword(password1);
+                userStore.setPassword(passwordEncode);
                 userStoreService.update(userStore);
              
             }
@@ -143,14 +139,14 @@ public class ForgotPassword {
 
         if(userApp != null && !userApp.getDeleted() ){
             if(userApp.getEmail().equals(email)){
-                userApp.setPassword(password1);
+                userApp.setPassword(passwordEncode);
                 userAppService.update(userApp);
                
             }
         }
-        model.addAttribute("success", "gud");
+        model.addAttribute("success", "Sendmail thanh cong");
         try {
-            mailer.send(email, "[No-reply] Mật khẩu của bạn", "Đây là mật khẩu của bạn: " + password1 );
+            mailer.send(email, "[No-reply] Mật khẩu của bạn", "Đây là mật khẩu mới của bạn "+ username+ ": " + password1 );
         
         } catch (MessagingException e) {
             // TODO Auto-generated catch block

@@ -43,17 +43,15 @@
 					
 					<form class="login100-form validate-form " action="send-mail" method="post">
 						<th:block th:if="${success !=null}">
-						<div class="alert alert-success" role="alert" th:text="${success}"></div>
+						<div class="alert alert-success text-center" role="alert" th:text="${success}"></div>
 					</th:block>
-					<!-- <th:block th:if="${error !=null}">
-						<div class="alert alert-danger" role="alert" th:text="${error}"></div>
-					</th:block> -->
+					
 					<span class="login100-form-title "> QUÊN MẬT KHẨU </span>
 	
 						<div class="wrap-input100 validate-input"
 							data-validate="Vui lòng không để trống">
 							<input class="input100" type="password" name="password1"
-								placeholder="--Vui lòng nhập--"  > <span
+								placeholder="--Vui lòng nhập--"  th:readonly ="${success}" > <span
 								class="focus-input100"></span> <span class="symbol-input100">
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</span>
@@ -62,13 +60,13 @@
 						<div class="wrap-input100 validate-input"
 							data-validate="Vui lòng không để trống">
 							<input class="input100" type="password" name="password2"
-								placeholder="--Vui lòng nhập--" > <span
+								placeholder="--Vui lòng nhập--" th:readonly ="${success}" > <span
 								class="focus-input100" ></span> <span class="symbol-input100">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 							</span>
 						</div>
 						<div class="container-login100-form-btn">
-							<button type ="submit" class="login100-form-btn">Xác nhận</button>
+							<button type ="submit" class="login100-form-btn disabled" disabled>Xác nhận</button>
 						</div>
 						<div class="text-center p-t-12">
 							<a class="login101-form-btn" th:href="@{/user-app/auth/form}"> 
@@ -88,7 +86,7 @@
 	<!--===============================================================================================-->
 	<script src="/assets/suport/jquery/jquery-3.2.1.min.js"></script>
 	<!--===============================================================================================-->
-	<script src="/assets/suport/bootstrap/js/popper.js"></script>
+	<script th:src="@{/assets/suport/bootstrap/js/popper.js}"></script>
 	<script src="/assets/suport/bootstrap/js/bootstrap.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="/assets/suport/select2/select2.min.js"></script>

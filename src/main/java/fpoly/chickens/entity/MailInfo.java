@@ -17,7 +17,7 @@ public class MailInfo {
 	String[] attachments;
 	
 	public MailInfo(String to, String subject, String body) {
-		this.form ="<No-reply> Chicken-gangs company  <KGBbookstore@fpt.edu.vn>";
+		this.form ="<No-reply> Chicken-gangs company";
 		this.to = to;
 		this.subject =subject;
 		this.body = body;
