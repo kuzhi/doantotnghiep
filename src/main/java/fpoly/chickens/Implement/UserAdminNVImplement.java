@@ -102,5 +102,9 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	}
 
 	
-
+	@Override
+	public UserApp findUsersByUserName(String name) {
+		// TODO Auto-generated method stub
+		return userAppDAO.findByUsername(name);
+	}
 }

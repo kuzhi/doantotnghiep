@@ -1,15 +1,12 @@
 package fpoly.chickens.Implement;
 
 import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,15 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.RoleAppDAO;
-import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserAppDAO;
-import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
-import fpoly.chickens.dao.UserStoreDAO;
 import fpoly.chickens.entity.RoleApp;
-import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
-import fpoly.chickens.entity.UserStore;
+import fpoly.chickens.entity.UserRoleApp;
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -52,21 +45,14 @@ try {
 			
 			UserApp userApp = userAppDao.findByUsernames(username); 
 			//this.setToken(userApp.getId());
+				String passwordApp = userApp.getPassword().trim();				
+				UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
+			RoleApp role =   roleDao.findById(userRole.getId()).get();
 
-				String passwordApp = userApp.getPassword();
-				System.out.println("?"+ userApp + " "+ passwordApp);
-				int roleId = userRoleDao.findUserRoleIDByUsername(username);
-				if(roleId <=0){
-					System.out.println("?"+ userApp + " "+ roleId);
-
-				}
-				
-				RoleApp role =   roleDao.findById(roleId).get();
-				System.out.println("?"+ userApp + " "+ role);
 				String roleUser = role.getRoleName();
-				System.out.println("?"+ userApp + " "+ roleUser);
+				this.setTokenUserApp(String.valueOf(userApp.getId()));
 			return User.withUsername(username)
-			 			.password(pe.encode(passwordApp)).roles(roleUser).build();
+			 			.password(passwordApp).roles(roleUser).build();
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -97,6 +83,15 @@ try {
 	}
 	
 	@Override
+	public void setTokenUserApp(String userAppId) {
+		// TODO Auto-generated method stub
+		//byte[] auth = (userId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenUserApp", userAppId);
+
+	}
+
+	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
@@ -118,9 +113,6 @@ try {
 		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
 		String decodedString = new String(decodedBytes);
 		return decodedString;
-		 
-
-
 	}
 
 }

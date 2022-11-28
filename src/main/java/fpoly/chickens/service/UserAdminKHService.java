@@ -25,6 +25,8 @@ public interface UserAdminKHService {
 	List<UserStore> findUserByName(String name);
 	// Find by user
 	List<UserStore> findUserByUserName(String name);
+
+	UserStore findUsersByUserName(String name);
 	// Find by email
 	List<UserStore> findUserByEmail(String email);
 	// Find by phone

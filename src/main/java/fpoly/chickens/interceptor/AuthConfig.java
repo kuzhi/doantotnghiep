@@ -79,7 +79,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //			
 //	//
 			http.authorizeRequests().antMatchers("/admin/**").authenticated()
-				.antMatchers("/admin/report","/rest/authorities").hasRole("ADMIN")
+				.antMatchers("/admin/report","/assets/admin/**").hasRole("ADMIN")
 				.antMatchers("/admin/**","/rest/authorities").hasAnyRole("STAFF","ADMIN")
 				.anyRequest().permitAll();
 //	//
@@ -88,7 +88,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //	//
 ////			// Giao diện đăng nhập
 ////		
-			System.out.println("a");
+			
 			http.formLogin().loginPage("/user-app/auth/form").loginProcessingUrl("/user-app/auth/login")
 			.defaultSuccessUrl("/user-app/auth/success", false).failureUrl("/user-app/auth/error").usernameParameter("username")
 			.passwordParameter("password");
@@ -98,8 +98,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 			http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
 
 			// Đăng xuất
-			http.logout().logoutUrl("/auth/logoff")// dăng xuất
-					.logoutSuccessUrl("/auth/logoff/success");
+			http.logout().logoutUrl("/user-app/logoff")// dăng xuất
+					.logoutSuccessUrl("/home");
 
 
 

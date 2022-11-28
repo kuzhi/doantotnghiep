@@ -47,7 +47,10 @@
 
 				<div class="login100-form validate-form">
 					<span class="login100-form-title"> ĐĂNG NHẬP </span>
-					  		<form action="/user-app/auth/login" method ="post" class="mt-3">
+						<th:block th:if="${message !=null}">
+							<div class="alert alert-danger" role="alert" th:text="${message}"></div>
+						</th:block>
+					  		<form th:action="@{/user-app/auth/login}" method ="post" class="mt-3">
 					  			<div class="wrap-input100 validate-input"
 									data-validate="Vui lòng không để trống">
 									<input class="input100" type="text" name="username"
@@ -73,7 +76,7 @@
 									</div>
 									<div>
 										<span class="txt1"> 
-											<a class="txt2" href="/assets/home/forgot.html" style="text-decoration: none;">
+											<a class="txt2" href="/home/forgot-password/form" style="text-decoration: none;">
 											Quên mật khẩu 
 											</a>
 										</span>
@@ -84,9 +87,7 @@
 									<button type= "submit" class="login100-form-btn">Đăng nhập</button>
 								</div>
 			
-								<div class="text-center p-t-12">
-									<a href="/assets/home/register.html" class="login101-form-btn">Đăng ký</a>
-								</div>
+								
 					  		</form>
 
 				</div>
