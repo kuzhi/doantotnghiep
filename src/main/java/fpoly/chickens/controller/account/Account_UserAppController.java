@@ -1,45 +1,32 @@
 package fpoly.chickens.controller.account;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fpoly.chickens.dao.UserAppDAO;
-import fpoly.chickens.dao.UserRoleAppDAO;
-import fpoly.chickens.entity.UserApp;
-import fpoly.chickens.entity.UserRoleApp;
-
 @Controller
+@RequestMapping("/user-app/auth")
 
 public class Account_UserAppController {
 
-	@Autowired
-	UserAppDAO userAppDao;
-
-	@Autowired
-	UserRoleAppDAO userRoleDao;
-
-	@RequestMapping("/user-app/auth/form")
+	@GetMapping("login")
 	public String login() {
-		UserApp userApp = userAppDao.findByUsernames("khoata"); 
-			
-		return "home/account/loginApp";
+		return "home/account/forgot";
 	}
 	
-	@GetMapping("/user-app/auth/error")
-	public String loginStore(Model model) {
-		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
-
-		return "home/account/loginApp";
-	}
-	
-	@GetMapping("/user-app/auth/success")
-	public String loginUser(Model model) {
-		
-
-		return "redirect:/admin";
-	}
+//	@PostMapping("login/store")
+//	public String loginStore(Model model) {
+//		model.addAttribute("message", "dang nhap store thanh cong!");
+//
+//		return "home/account/login";
+//	}
+//	
+//	@PostMapping("login/user")
+//	public String loginUser(Model model) {
+//		model.addAttribute("message", "dang nhap user thanh cong!");
+//
+//		return "home/account/login";
+//	}
 }

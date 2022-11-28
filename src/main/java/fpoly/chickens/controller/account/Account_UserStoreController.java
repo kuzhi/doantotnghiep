@@ -33,18 +33,23 @@ public class Account_UserStoreController {
 		return "home/account/login";
 	}
 	
-
+//	@PostMapping("/home/auth/form")
+//	public String login2() {
+//		
+//		return "home/account/login";
+//	}
+	
+//	
 	@PostMapping("login/store")
 	public String loginStore(Model model) {
 		
 		String username= req.getParameter("username");
 		String password= req.getParameter("password");
-		boolean Check = authen.loginStore(username, password);
-		
+		boolean Check = authen.loginStore(username, password, model);
+		//model.addAttribute("message", "dang nhap store thanh cong!");
 		if(Check) {
 					 return "redirect:/app";
 		}
-		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
 		return "home/account/login";
 	}
 	
@@ -53,16 +58,22 @@ public class Account_UserStoreController {
 		
 		String username= req.getParameter("username");
 		String password= req.getParameter("password");
-		boolean Check = authen.loginUser(username, password);
+		boolean Check = authen.loginUser(username, password, model);
 		if(Check) {
 
 			return "redirect:/home/client";
 
 
 		}
-		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
+		model.addAttribute("message", "dang nhap user thất bại!");
 		return "home/account/login";
 	}
 	
 	
+//	@RequestMapping("/home/account/auth/success")
+//	public String authLoginSuccess(Model model) {
+//		// TODO Auto-generated constructor stub
+//		System.out.println("oki");
+//		return "home/account/forgot";
+//	}
 }

@@ -5,12 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.Authentication;
@@ -18,8 +19,7 @@ import fpoly.chickens.service.UserService;
 
 @Service
 public class AuthenticationImplement implements Authentication{
-	@Autowired
-	BCryptPasswordEncoder pe;
+	
 	@Autowired
 	UserStoreDAO userStoreDao;
 	@Autowired
@@ -34,27 +34,38 @@ public class AuthenticationImplement implements Authentication{
 	UserDAO userDao;
 	
 	@Override
-	public Boolean loginStore(String username, String password) {
+	public Boolean loginStore(String username, String password, Model model) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("a");
 		UserStore userStore = userStoreDao.findByUsername(username);
 		
 		
 		
 		if(userStore != null) {
-			String passwordStore = userStore.getPassword().trim();
-			boolean match = pe.matches(password, passwordStore);
-		
-			if(match){
+			String passwordStore = userStore.getPassword();
+			List<Store> store = storeDao.findByUserStore(userStore.getId());
+//			String adminStore = "ADMINSTORE";
+//			if(store.size() == 0) {
+//				 adminStore = null;
+//				
+//			}
+			
+			
+			if(password.equals(userStore.getPassword().trim())){
 				if(!userStore.getDeleted()) {
-					String userStoreId = String.valueOf(userStore.getId());
+					Integer userStoreId = Integer.valueOf(userStore.getId());
 					userService.setTokenStore(userStoreId);
 						return true;
 				}
 			
-				return false;
+				else {
+					model.addAttribute("message", "Store  này đã bị xóa");
+				}
 			}
-			return false;
+			else {
+				model.addAttribute("message", "Sai mật khẩu");
+
+			}
 			
 			
 		}
@@ -63,24 +74,38 @@ public class AuthenticationImplement implements Authentication{
 	
 	
 	@Override
-	public Boolean loginUser(String username, String password) {
+	public Boolean loginUser(String username, String password, Model model) {
 		// TODO Auto-generated method stub
 			User users = userDao.findByUsername(username);
 		
 		if(users != null) {
-			String passwordUsers = users.getPassword().trim();
-			boolean match = pe.matches(password, passwordUsers);
-			if(match){
+			//List<Store> store = storeDao.findByUserStore(userStore.getId());
+//			String adminStore = "ADMINSTORE";
+//			if(store.size() == 0) {
+//				 adminStore = null;
+//				
+//			}
+			
+			if(password.equals(users.getPassword().trim())){
 				if(!users.getDeleted()) {
-					String userId = String.valueOf(users.getId());
+					Integer userId = Integer.valueOf(users.getId());
 
 					userService.setTokenUser(userId);
 					return true;
-						
+						//return "redirect:/home/client";
 					
-				}		return false;		
-			}return false;
-	
+				}
+			
+				else {
+					model.addAttribute("error", "Store  này đã bị xóa");
+				}
+			}
+			else {
+				model.addAttribute("errorPass", "Sai mật khẩu");
+
+			}
+			
+			
 		}
 		return false;
 	}
