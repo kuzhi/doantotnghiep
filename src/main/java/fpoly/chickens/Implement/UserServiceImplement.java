@@ -86,7 +86,7 @@ try {
 	
 
 	@Override
-	public void setTokenStore(String userStoreId) {
+	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		//byte[] auth = (userStoreId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
@@ -96,7 +96,7 @@ try {
 	
 	
 	@Override
-	public void setTokenUser(String userId) {
+	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		//byte[] auth = (userId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);

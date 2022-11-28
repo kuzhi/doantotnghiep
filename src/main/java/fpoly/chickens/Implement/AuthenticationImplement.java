@@ -53,7 +53,7 @@ public class AuthenticationImplement implements Authentication{
 			
 			if(password.equals(userStore.getPassword().trim())){
 				if(!userStore.getDeleted()) {
-					String userStoreId = String.valueOf(userStore.getId());
+					Integer userStoreId = Integer.valueOf(userStore.getId());
 					userService.setTokenStore(userStoreId);
 						return true;
 				}
@@ -88,7 +88,7 @@ public class AuthenticationImplement implements Authentication{
 			
 			if(password.equals(users.getPassword().trim())){
 				if(!users.getDeleted()) {
-					String userId = String.valueOf(users.getId());
+					Integer userId = Integer.valueOf(users.getId());
 
 					userService.setTokenUser(userId);
 					return true;
