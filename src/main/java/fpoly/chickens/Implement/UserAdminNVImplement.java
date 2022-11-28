@@ -108,13 +108,6 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		return userAppDAO.findUserByPhone(phone);
 	}
 
-
-	
-	@Override
-	public UserApp findUsersByUserName(String name) {
-		// TODO Auto-generated method stub
-		return userAppDAO.findByUsername(name);
-
 	@Override
 	public List<UserApp> findUserByPhoneForId(String phone, Integer id) {
 		// TODO Auto-generated method stub

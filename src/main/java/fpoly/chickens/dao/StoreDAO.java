@@ -11,10 +11,8 @@ public interface StoreDAO extends JpaRepository<Store, Integer>{
 	@Query(value="SELECT * FROM Store WHERE UserstoreId = ?1", nativeQuery = true)
 	List<Store> findByUserStore(int userStoreId);
 
-
 	@Query(value="SELECT * FROM Store WHERE UserstoreId = ?1", nativeQuery = true)
 	Store findByUserid(int userStoreId);
 	
-
 	
 }
