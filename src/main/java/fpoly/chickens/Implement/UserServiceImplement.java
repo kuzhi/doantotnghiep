@@ -24,7 +24,7 @@ import fpoly.chickens.entity.UserRoleApp;
 
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.SessionService;
->
+
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -88,28 +88,21 @@ try {
 
 	}
 
-	@Override
-	public void setTokenUserApp(String userAppId) {
-		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUserApp", userAppId);
 
-	}
 
 	@Override
-	public String getTokenStore() {
+	public Integer getTokenStore() {
 		// TODO Auto-generated method stub
-		String token = (String) session.getAttribute("tokenStore");
+		Integer token = (Integer) session.getAttribute("tokenStore");
 
 		return token;
 	}
 
 	@Override
-	public String getTokenUser() {
+	public Integer getTokenUser() {
 		// TODO Auto-generated method stub
 
-		String token = (String) session.getAttribute("tokenUser");
+		Integer token = (Integer) session.getAttribute("tokenUser");
 		return token;
 
 	}

@@ -34,8 +34,7 @@ public class Register {
     @Autowired
     HttpServletRequest req;
 
-    @Autowired
-	StoreDAO storeDao;
+   
   
     @Autowired
     UserAdminService userAdminService ;
