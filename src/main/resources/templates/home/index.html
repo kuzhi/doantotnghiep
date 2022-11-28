@@ -78,22 +78,22 @@
 			<!-- ======= Danh sách sản phẩm ======= -->
 			<div class="col-xl-10">
 				<div class="row">
-					<div ng-repeat="product in pager.products"
+					<div th:each="product : ${products}"
 						class="col-xl-3 col-md-4 col-6 card border border-0 p-2">
 						<div class="p-2">
 							<a th:href="@{/home/product/detail}"> <img
-								th:src="@{/assets/images/Products/{{product.image}}}"
+								th:src="@{/assets/images/Products/${product.image}}"
 								class="card-img-top" alt="" style="width: 100%; height: 12.5em;">
 							</a>
 						</div>
 						<div class="card-body px-0">
-							<h5 class="card-title text-truncate">{{product.name}}</h5>
+							<h5 class="card-title text-truncate">[(${product.name})]</h5>
 
 							<div class="d-flex justify-content-between">
 								<div class="col-xl-10 col-10">
 									<div class="d-flex">
 										<span class="fw-bold text-truncate text-secondary me-1">
-											{{product.price | currency:'':0}} </span> <span
+											${product.price | currency:'':0} </span> <span
 											class="fw-bold text-secondary">đ</span>
 									</div>
 								</div>

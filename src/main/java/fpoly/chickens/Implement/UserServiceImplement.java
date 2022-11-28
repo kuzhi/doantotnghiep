@@ -36,42 +36,39 @@ public class UserServiceImplement implements UserService {
 	StoreDAO StoreDao;
 	@Autowired
 	UserAppDAO userAppDao;
-	
+
 	@Autowired
 	UserDAO userDao;
-	
-	
+
 	@Autowired
 	UserStoreDAO userStoreDao;
-	
-	
-	
+
 	@Autowired
 	UserRoleAppDAO userRoleDao;
-	
+
 	@Autowired
 	BCryptPasswordEncoder pe;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-try {
-			
-			//UserApp userApp = userAppDao.findByUsernames(username); 
+		try {
+
+			// UserApp userApp = userAppDao.findByUsernames(username);
 
 			UserStore userStore = userStoreDao.findByUsername(username);
-			
+
 			String passwordStore = userStore.getPassword();
-			System.out.println(userStore);
+//			System.out.println(userStore);
 			List<Store> store = StoreDao.findByUserStore(userStore.getId());
 			String adminStore = "ADMINSTORE";
-			if(store.size() == 0) {
-				 adminStore = null;
-				
+			if (store.size() == 0) {
+				adminStore = null;
+
 			}
 			System.out.println(store.size());
-			//this.setToken(username, passwordStore);
-			return User.withUsername(username)
-					.password(pe.encode(passwordStore)).build();
-					//.roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu 
+			// this.setToken(username, passwordStore);
+			return User.withUsername(username).password(pe.encode(passwordStore)).build();
+			// .roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu
 		} catch (Exception e) {
 			// TODO: handle exception
 //			fpoly.chickens.entity.User users = userDao.findByUsername(username);
@@ -80,46 +77,38 @@ try {
 //					.password(pe.encode(passwordUser))
 //					.build();
 			throw new UsernameNotFoundException(username + " not found");
-		} 
+		}
 	}
-
-	
 
 	@Override
 	public void setTokenStore(String userStoreId) {
 		// TODO Auto-generated method stub
-		//byte[] auth = (userStoreId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		// byte[] auth = (userStoreId).getBytes();
+		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
 
 	}
-	
-	
+
 	@Override
 	public void setTokenUser(String userId) {
 		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		// byte[] auth = (userId).getBytes();
+		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenUser", userId);
 
 	}
-	
+
 	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
-		System.out.println("store: "+token);
 		return token;
-
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-
-		
 		String token = (String) session.getAttribute("tokenUser");
-		System.out.println("user: "+token);
 		return token;
 
 	}

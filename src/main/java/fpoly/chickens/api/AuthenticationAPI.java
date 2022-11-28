@@ -23,12 +23,12 @@ public class AuthenticationAPI {
 	
 	@GetMapping("/api/getStoreid")
 	public ResponseEntity<String> getStoreid() {
-	    String  tokenStore =  userService.getTokenStore();
+		String  tokenStore =  userService.getTokenStore();
 	    return ResponseEntity.ok(tokenStore) ;
 	}
 	@GetMapping("/api/getUserid")
 	public ResponseEntity<String> getUserid() {
-	    String  tokenUser =  userService.getTokenUser();
+		String  tokenUser =  userService.getTokenUser();
 	    return ResponseEntity.ok(tokenUser) ;
 	}
 
