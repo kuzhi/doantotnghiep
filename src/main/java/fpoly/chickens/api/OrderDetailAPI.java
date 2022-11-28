@@ -24,4 +24,10 @@ public class OrderDetailAPI {
 	public ResponseEntity<List<OrderDetail>> getOrderStore(@PathVariable("orderid") Optional<Integer> id) {
 		return ResponseEntity.ok(orderDetailService.findByOrder(id.get()));
 	}
+
+	@GetMapping("/api/orderdetail/get-product-id/{productid}")
+	public ResponseEntity<List<OrderDetail>> getOrderDetailByProduct(@PathVariable("productid") Optional<Integer> id) {
+		return ResponseEntity.ok(orderDetailService.findOrderDetailByProductId(id.get()));
+	}
+	
 }

@@ -5,21 +5,19 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-
 import fpoly.chickens.entity.UserApp;
 
 
-	
+public interface UserAppDAO extends JpaRepository<UserApp, Integer> {
 
-
-public interface UserAppDAO extends JpaRepository<UserApp, Integer>{
-	
 
 	@Query("SELECT o FROM UserApp o WHERE o.Deleted = ?1")
 	List<UserApp> loadUserWithDeleted(Boolean deleted);
-@Query(value="SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
-public UserApp findByUsernames(String uname);
-	@Query(value="SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
+
+	@Query(value = "SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
+	public UserApp findByUsernames(String uname);
+
+	@Query(value = "SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
 	public UserApp findByUsername(String uname);
 
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Fullname LIKE ?1 AND o.Deleted = 0")
@@ -27,27 +25,32 @@ public UserApp findByUsernames(String uname);
 
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Username = ?1 AND o.Deleted = 0")
 	List<UserApp> findUserByUserName(String name);
-	
+
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Email = ?1 AND o.Deleted = 0")
 	List<UserApp> findUserByEmail(String email);
 	
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Email = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserApp> findUserByEmailForId(String name, Integer id);
+
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Phone = ?1 AND o.Deleted = 0")
 	List<UserApp> findUserByPhone(String phone);
+	
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Phone = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserApp> findUserByPhoneForId(String phone, Integer id);
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o ORDER BY o.Fullname ASC")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Deleted = 0 ORDER BY o.Fullname ASC")
 	List<UserApp> sortAZ();
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o ORDER BY o.Fullname DESC")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Deleted = 0 ORDER BY o.Fullname DESC")
 	List<UserApp> sortZA();
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = true")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = true AND o.Deleted = 0")
 	List<UserApp> hoatDong();
 
-	
-	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false")
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false AND o.Deleted = 0")
 	List<UserApp> ngungHoatDong();
 
 }

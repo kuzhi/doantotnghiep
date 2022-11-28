@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UploadService;
 import fpoly.chickens.service.UserAdminNVService;
 
@@ -32,6 +33,12 @@ public class UserAdminNVAPI {
 	@GetMapping
 	public List<UserApp> findAll() {
 		return userAdminNVService.findAll();
+	}
+	
+	// LoadUserStore by ID
+	@GetMapping("/get-user-app/{userAppID}")
+	public ResponseEntity<Optional<UserApp>> LoadUserStoreByID(@PathVariable("userAppID") Optional<Integer> userAppID) {
+		return ResponseEntity.ok(userAdminNVService.findUserByID(userAppID.get()));
 	}
 
 	// Load
@@ -71,9 +78,9 @@ public class UserAdminNVAPI {
 	}
 
 	// Find by user name
-	@GetMapping("id/{nameUserName}")
-	public ResponseEntity<List<UserApp>> findByUserName(@PathVariable("nameUserName") Optional<String> nameUser) {
-		return ResponseEntity.ok(userAdminNVService.findUserByUserName(nameUser.get()));
+	@GetMapping("id/{name}")
+	public ResponseEntity<List<UserApp>> findByUserName(@PathVariable("name") Optional<String> name) {
+		return ResponseEntity.ok(userAdminNVService.findUserByUserName(name.get()));
 	}
 	
 	// Find by Email
@@ -82,10 +89,22 @@ public class UserAdminNVAPI {
 		return ResponseEntity.ok(userAdminNVService.findUserByEmail(nameEmail.get()));
 	}
 	
-	// Find by Email
+	@GetMapping("email/{email}/{id}")
+	public ResponseEntity<List<UserApp>> findByUserNameForId(@PathVariable("email") Optional<String> email,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminNVService.findUserByEmailForId(email.get(), id.get()));
+	}
+	
+	// Find by Phone
 	@GetMapping("phone/{phone}")
 	public ResponseEntity<List<UserApp>> findByPhone(@PathVariable("phone") Optional<String> phone) {
 		return ResponseEntity.ok(userAdminNVService.findUserByPhone(phone.get()));
+	}
+	
+	@GetMapping("phone/{phone}/{id}")
+	public ResponseEntity<List<UserApp>> findByPhoneForId(@PathVariable("phone") Optional<String> phone,
+			@PathVariable("id") Optional<Integer> id) {
+		return ResponseEntity.ok(userAdminNVService.findUserByPhoneForId(phone.get(), id.get()));
 	}
 
 	// Sort A-Z

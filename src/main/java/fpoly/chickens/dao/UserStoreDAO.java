@@ -20,26 +20,35 @@ public interface UserStoreDAO extends JpaRepository<UserStore, Integer> {
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Username = ?1 AND o.Deleted = 0")
 	List<UserStore> findUserByUserName(String name);
 	
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Username = ?1 AND o.Deleted = 0")
+	UserStore loadUserStoreByUserName(String name);
+	
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Email = ?1 AND o.Deleted = 0")
 	List<UserStore> findUserByEmail(String email);
 	
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Email = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserStore> findUserByEmailForId(String email, Integer id);
+	
 	@Query(value = "SELECT o FROM UserStore o WHERE o.Phone = ?1 AND o.Deleted = 0")
 	List<UserStore> findUserByPhone(String phone);
+
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Phone = ?1 AND o.Deleted = 0 AND o.Id = ?2 ")
+	List<UserStore> findUserByPhoneForId(String phone, Integer id);
 	
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserStore o ORDER BY o.Fullname ASC")
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Deleted = 0 ORDER BY o.Fullname ASC")
 	List<UserStore> sortAZ();
 
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserStore o ORDER BY o.Fullname DESC")
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Deleted = 0 ORDER BY o.Fullname DESC")
 	List<UserStore> sortZA();
 	
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserStore o WHERE o.Status = true")
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Status = true AND o.Deleted = 0")
 	List<UserStore> hoatDong();
 	
 	// Sort A-Z
-	@Query(value = "SELECT o FROM UserStore o WHERE o.Status = false")
+	@Query(value = "SELECT o FROM UserStore o WHERE o.Status = false AND o.Deleted = 0")
 	List<UserStore> ngungHoatDong();
 
 	

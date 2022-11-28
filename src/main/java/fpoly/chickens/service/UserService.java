@@ -1,32 +1,30 @@
 package fpoly.chickens.service;
 
-import java.util.List;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import fpoly.chickens.entity.User;
+public interface UserService extends UserDetailsService {
 
-public interface  UserService extends UserDetailsService{
+	@Override
+	default UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
-		@Override
-		default UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	// void setToken(String username, String password);
 
-		
-		 //void setToken(String username, String password);
+	String getTokenStore();
+
+	String getTokenUser();
+
+
+		void setTokenStore(Integer userStoreId);
+
 		 
-		 String getTokenStore();
-		 String getTokenUser();
+		void setTokenUser(Integer userId);
 
-		void setTokenStore(String userStoreId);
+void setTokenUser(String userId);
 
-		void setTokenUserApp(String userAppId);
-
-		void setTokenUser(String userId);
 
 }
