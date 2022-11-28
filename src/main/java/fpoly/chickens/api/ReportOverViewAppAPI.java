@@ -26,11 +26,11 @@ public class ReportOverViewAppAPI {
 	@Autowired
 	OrderDetailService orderDetailService;
 	
-	@RequestMapping("/api/report-overview-app")
-	public List<ReportOverViewApp> getReportOverView() {
+	@RequestMapping("/api/report-overview-app/{storeid}")
+	public List<ReportOverViewApp> getReportOverView(@PathVariable("storeid") Optional<Integer> storeid) {
 		Integer status = 3;
 		
-		return reportOverView.showTop5Product(status);
+		return reportOverView.showTop5Product(status, storeid.get());
 	}
 
 	@RequestMapping("/api/report-product-app/{storeid}/{dateStart}/{dateEnd}")

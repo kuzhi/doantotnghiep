@@ -39,7 +39,9 @@ public class ProductAPI {
 	// Load
 	@GetMapping("store/{storeid}")
 	public List<Product> findAllByStore(@PathVariable("storeid") Optional<Integer> storeid) {
-		return productService.findAllProductByStore(storeid.get());
+		Boolean delete = false;
+		
+		return productService.findAllProductByStore(storeid.get(), delete);
 	}
 
 	// Load status == true
@@ -75,33 +77,35 @@ public class ProductAPI {
 	}
 	
 	// Find by name
-	@GetMapping("/{nameProduct}")
+	@GetMapping("/{nameProduct}/{storeid}")
 	public ResponseEntity<List<Product>> findByName(
-			@PathVariable("nameProduct") Optional<String> nameProduct) {
-		return ResponseEntity.ok(productService.findProductByName("%"+nameProduct.get()+"%"));
+			@PathVariable("nameProduct") Optional<String> nameProduct,
+			@PathVariable("storeid") Optional<Integer> storeid) {
+		
+		return ResponseEntity.ok(productService.findProductByName("%"+nameProduct.get()+"%", storeid.get()));
 	}
 	
 	// Sort A-Z
-	@GetMapping("/sort/a-z")
-	public List<Product> sortAZ() {
-		return productService.sortAZ();
+	@GetMapping("/sort/a-z/{storeid}")
+	public List<Product> sortAZ(@PathVariable("storeid") Optional<Integer> storeid) {
+		return productService.sortAZ(storeid.get());
 	}
 	
 	// Sort A-Z
-	@GetMapping("/sort/z-a")
-	public List<Product> sortZA() {
-		return productService.sortZA();
+	@GetMapping("/sort/z-a/{storeid}")
+	public List<Product> sortZA(@PathVariable("storeid") Optional<Integer> storeid) {
+		return productService.sortZA(storeid.get());
 	}
 	
 	// Sort A-Z
-	@GetMapping("/sort/0-9")
-	public List<Product> sort09() {
-		return productService.sort09();
+	@GetMapping("/sort/0-9/{storeid}")
+	public List<Product> sort09(@PathVariable("storeid") Optional<Integer> storeid) {
+		return productService.sort09(storeid.get());
 	}
 	
 	// Sort A-Z
-	@GetMapping("/sort/9-0")
-	public List<Product> sort90() {
-		return productService.sort90();
+	@GetMapping("/sort/9-0/{storeid}")
+	public List<Product> sort90(@PathVariable("storeid") Optional<Integer> storeid) {
+		return productService.sort90(storeid.get());
 	}
 }

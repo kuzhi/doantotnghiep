@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fpoly.chickens.service.OrderService;
+import fpoly.chickens.service.UserService;
 
 
 @Controller
@@ -19,10 +20,19 @@ public class CilentController {
 	@Autowired
 	OrderService orderService;
 	
+	@Autowired
+	UserService userService;
+	
 	
 	@RequestMapping()
 	public String view_Cart() {
-		return "home/index";
+		if(userService.getTokenStore()==null) {
+			return "home/list_store";
+		}else {
+			return "home/index";
+		}
+		
+		
 	}
 
 	@RequestMapping("/my-profile")

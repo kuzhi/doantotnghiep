@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import fpoly.chickens.entity.Order;
 import fpoly.chickens.entity.OrderDetail;
+import fpoly.chickens.entity.Product;
 import fpoly.chickens.entity.ReportOverViewApp;
 import fpoly.chickens.entity.ReportProductApp;
 import fpoly.chickens.entity.Store;
@@ -16,10 +17,10 @@ import fpoly.chickens.entity.Store;
 public interface OrderDetailDAO extends JpaRepository<OrderDetail, Integer> {
 	@Query("SELECT new ReportOverViewApp(o.product.Id, o.product.Name, o.product.Image, o.product.Price, sum(o.Amount)) "
 			+ " FROM OrderDetail o " 
-			+ " WHERE o.order.Status = ?1 "
+			+ " WHERE o.order.Status = ?1 AND o.order.store = ?2 "
 			+ " GROUP BY o.product.Id, o.product.Name, o.product.Image, o.product.Price "
 			+ " ORDER BY sum(o.Amount) DESC")
-	List<ReportOverViewApp> top5Product(Integer status);
+	List<ReportOverViewApp> top5Product(Integer status, Store storeid);
 
 	@Query("SELECT new ReportProductApp(o.product.Name, SUM(o.TotalMoney*o.Amount)) "
 			+ " FROM OrderDetail o "
@@ -29,5 +30,9 @@ public interface OrderDetailDAO extends JpaRepository<OrderDetail, Integer> {
 
 	@Query("SELECT o FROM OrderDetail o WHERE o.order = ?1")
 	List<OrderDetail> findOrderDetailByOrder(Order order);
+
+	@Query("SELECT o FROM OrderDetail o WHERE o.product.id = ?1")
+	List<OrderDetail> findOrderDetailByProductId(Product id);
+
 	
 }

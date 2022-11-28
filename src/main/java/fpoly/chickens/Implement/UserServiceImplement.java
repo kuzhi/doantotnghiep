@@ -19,7 +19,12 @@ import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
 import fpoly.chickens.entity.RoleApp;
 import fpoly.chickens.entity.UserApp;
+
 import fpoly.chickens.entity.UserRoleApp;
+
+import fpoly.chickens.entity.UserStore;
+import fpoly.chickens.service.SessionService;
+>
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -39,6 +44,7 @@ public class UserServiceImplement implements UserService {
 	
 	@Autowired
 	BCryptPasswordEncoder pe;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 try {
@@ -60,28 +66,34 @@ try {
 		} 
 	}
 
-	
 
 	@Override
+<<<<<<< HEAD
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
-		//byte[] auth = (userStoreId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		// byte[] auth = (userStoreId).getBytes();
+		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenStore", userStoreId);
 
 
 	}
-	
-	
+
 	@Override
+<<<<<<< HEAD
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		// byte[] auth = (userId).getBytes();
+		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
 		session.setAttribute("tokenUser", userId);
 
 	}
-	
+
 	@Override
 	public void setTokenUserApp(String userAppId) {
 		// TODO Auto-generated method stub
@@ -95,15 +107,35 @@ try {
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 		return token;
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		String token = (String) session.getAttribute("tokenUser");
 		return token;
 
 	}
+=======
 
+		String token = (String) session.getAttribute("tokenUser");
+		return token;
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
+
+	}
+	
+	@Override
+	public void setTokenUserApp(String userAppId) {
+		// TODO Auto-generated method stub
+		//byte[] auth = (userId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenUserApp", userAppId);
+
+	}
 }

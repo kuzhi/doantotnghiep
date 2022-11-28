@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+<<<<<<< HEAD
 import fpoly.chickens.dao.StoreDAO;
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
@@ -36,8 +40,12 @@ public class Register {
 
     @Autowired
 	StoreDAO storeDao;
+<<<<<<< HEAD
 
 
+=======
+  
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
     @Autowired
     UserAdminService userAdminService ;
 
@@ -84,6 +92,10 @@ public class Register {
     }
 
     @PostMapping("create-store")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
     public String createNewStore(Model model, @ModelAttribute Optional<UserStore> userStore){
         model.addAttribute("store", userStore);
         if(userStore.isPresent()){
@@ -95,6 +107,10 @@ public class Register {
                 String passwordEncode =pe.encode(userStore.get().getPassword());
                 userStore.get().setPassword(passwordEncode);
                 //storeDao.save(userStore.get());
+<<<<<<< HEAD
+=======
+
+>>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
                 model.addAttribute("error", "Tài khoản hoặc  này đã được sử dụng");
 
                 return "home/account/register";

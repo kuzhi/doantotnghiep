@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
+<head>
+<title>Danh sách cửa hàng từ Chickens</title>
+</head>
+<body>
+	<section class="container">
+		Danh sách cửa hàng
+		
+		<div class="row">
+			<div ng-repeat="store in pager.listStore" class="col-xl-4">
+				<div class="card bg-white shadow-sm rounded p-2 mt-2">
+				  <a href="#">
+				  	<img ng-src="/assets/images/{{store.image}}" class="card-img-top" alt="{{store.image}}">
+				  </a>
+				  <div class="card-body">
+				    <h5 class="card-title"> {{store.name}} | <small>{{store.phone}}</small> </h5>
+				    <p class="card-text text-truncate">
+				    	Đ/c: {{store.address}}
+				    </p>
+				  </div>
+				  <div class="card-footer">
+				  <a th:href="@{|/home/choosestoreUser?storeid={{store.id}}|}">Ghé thăm cửa hàng</a>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

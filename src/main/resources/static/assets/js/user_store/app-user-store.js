@@ -43,10 +43,10 @@ app.config(function($routeProvider) {
 			controller: "order__management-becanceled-ctrl"
 		})
 		// Nhân viên
-		.when("/user__management", {
-			templateUrl: "/assets/user_store/manage/user_management.html",
-			controller: "user__management-ctrl"
-		})
+		//.when("/user__management", {
+			//templateUrl: "/assets/user_store/manage/user_management.html",
+			//controller: "user__management-ctrl"
+		//})
 		// Báo cáo
 		.when("/report-all", {
 			templateUrl: "/assets/user_store/manage/report.html",
@@ -71,6 +71,23 @@ app.config(function($routeProvider) {
 });
 
 app.controller("app-ctrl", function($scope, $http, $location) {
-	$scope.nameStore = "Pika Tea";
-	$scope.addressStore = "Sóc Trăng";
+	// Láy userid
+	$scope.userid=0;
+	$scope.stores=[];
+	$scope.getEmpleadoInfo = function () {
+		// Lấy userid
+        $http.get("/api/get")
+	    .then(resp => {
+	        $scope.userid = resp.data;
+	        // Lấy storeid
+	        $http.get("/api/store/list/"+$scope.userid)
+			.then(resp => {
+				$scope.stores = resp.data[0];
+			})
+			$http.get("/api/user/get-user-store/"+$scope.userid).then(resp=>{
+				$scope.userStore = resp.data;
+			})
+	    })
+    }; $scope.getEmpleadoInfo();
+    
 });

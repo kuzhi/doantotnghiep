@@ -36,7 +36,9 @@ public class CategoryAPI {
 	// Load category by store
 	@GetMapping("store/{storeid}")
 	public ResponseEntity<List<Category>> getOrderStore(@PathVariable("storeid") Optional<Integer> storeid) {
-		return ResponseEntity.ok(categoryService.findAllByStore(storeid.get()));
+		Boolean delete = false;
+		
+		return ResponseEntity.ok(categoryService.findAllByStore(storeid.get(), delete));
 	}
 	
 	// Create
