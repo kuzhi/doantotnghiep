@@ -108,6 +108,7 @@ try {
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
+		System.out.println("store: "+token);
 		return token;
 
 	}
@@ -118,6 +119,7 @@ try {
 
 		
 		String token = (String) session.getAttribute("tokenUser");
+		System.out.println("user: "+token);
 		return token;
 
 	}
