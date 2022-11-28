@@ -63,7 +63,7 @@ try {
 	
 
 	@Override
-	public void setTokenStore(String userStoreId) {
+	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		//byte[] auth = (userStoreId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
@@ -74,7 +74,7 @@ try {
 	
 	
 	@Override
-	public void setTokenUser(String userId) {
+	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		//byte[] auth = (userId).getBytes();
 		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
@@ -95,24 +95,15 @@ try {
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
-		String getSubstring = token.substring(6);
-		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
-		String decodedString = new String(decodedBytes);
-		return decodedString;
-
-
+		return token;
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-
-		
 		String token = (String) session.getAttribute("tokenUser");
-		String getSubstring = token.substring(6);
-		byte[] decodedBytes = Base64.getDecoder().decode(getSubstring);
-		String decodedString = new String(decodedBytes);
-		return decodedString;
+		return token;
+
 	}
 
 }
