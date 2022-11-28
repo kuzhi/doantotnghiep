@@ -1,5 +1,6 @@
 app = angular.module("home-cart", []);
 app.controller("cart-ctrl", function($scope, $http, $location) {
+
 	//Header
 	$scope.auth = false;
 	$scope.amountItems = 0;
@@ -12,9 +13,49 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$http.get("/api/countcart/" + $scope.storeid + "/" + $scope.userid).then(resp => {
 			$scope.amountItems = resp.data
 		})
+	}; $scope.countAmount();
+
+	// Load list products
+	$scope.url = "/api/product";
+	$scope.products = [];
+	$scope.listProducts = function() {
+		$http.get($scope.url+"/store/"+3+"/"+true).then(resp => {
+			$scope.products = resp.data;
+		});
 	}
-	$scope.countAmount()
-	
+
+	// Phân trang và điều hướng
+	$scope.pager = {
+		page: 0,
+		size: 8,
+		get products() {
+			var start = this.page * this.size;
+			return $scope.products.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.products.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		},
+	};
+
+	$scope.listProducts();
 
 	$scope.cateArr = {
 		cates: [
@@ -47,7 +88,6 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.loadCart = function(storeid, userid) { //lấy danh sách giỏ hàng
 		$http.get("/api/cart/" + storeid + "/" + userid).then(resp => {
 			$scope.items = resp.data
-			console.log($scope.items)
 		})
 	}
 
@@ -319,6 +359,42 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.all();
-
-
+	$scope.listStore = [];
+	$http.get("/api/store")
+		.then(resp => {
+			$scope.listStore = resp.data;
+			$scope.listStore.forEach(store => {
+				store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
+			})
+		})
+	// Phân trang và điều hướng
+	$scope.pager = {
+		page: 0,
+		size: 9,
+		get listStore() {
+			var start = this.page * this.size;
+			return $scope.listStore.slice(start, start + this.size);
+		},
+		get count() {
+			return Math.ceil(1.0 * $scope.listStore.length / this.size);
+		},
+		first() {
+			this.page = 0;
+		},
+		prev() {
+			this.page--;
+			if (this.page < 0) {
+				this.last();
+			}
+		},
+		next() {
+			this.page++;
+			if (this.page >= this.count) {
+				this.first();
+			}
+		},
+		last() {
+			this.page = this.count - 1;
+		},
+	}
 })

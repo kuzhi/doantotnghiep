@@ -15,17 +15,17 @@ public class ChooseStoreController {
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("home/choosestoreUser")
+	@GetMapping("/home/choosestoreUser")
 	public String ChooseStoreUser(@RequestParam("storeid") Optional<String> storeid) {
 		if(storeid.get().length()>0) {
 			userService.setTokenStore(storeid.get());
-			System.out.println(storeid.get());
+			//System.out.println(storeid.get());
 		}
 		return "redirect:/home/client";
 		
 	}
 	
-	@GetMapping("home/choosestoreUserStore")
+	@GetMapping("/home/choosestoreUserStore")
 	public String ChooseStoreUserStore(@RequestParam("storeid") Optional<String> storeid) {
 		if(storeid.get().length()>0) {
 			userService.setTokenStore(storeid.get());
