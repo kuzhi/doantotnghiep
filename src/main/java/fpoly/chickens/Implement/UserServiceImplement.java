@@ -105,19 +105,19 @@ try {
 	}
 	
 	@Override
-	public String getTokenStore() {
+	public Integer getTokenStore() {
 		// TODO Auto-generated method stub
-		String token = (String) session.getAttribute("tokenStore");
+		Integer token = (Integer) session.getAttribute("tokenStore");
 		return token;
 
 	}
 
 	@Override
-	public String getTokenUser() {
+	public Integer getTokenUser() {
 		// TODO Auto-generated method stub
 
 		
-		String token = (String) session.getAttribute("tokenUser");
+		Integer token = (Integer) session.getAttribute("tokenUser");
 		return token;
 
 	}
