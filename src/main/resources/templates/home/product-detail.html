@@ -7,15 +7,16 @@
 </head>
 <body>
 	<section class="container bg-white rounded shadow-sm my-3">
+	<form th:objec="${product}">
 		<div class="row">
 			<div class="col-xl-6 col-sm-12 py-3 px-3">
 				<div class="row">
-					<h3>Tên sản phẩm</h3>
+					<h3 th:text="${product.name}"></h3>
 				</div>
 				<div class="row">
 					<div class="col-6 text-start">
-						<h4 class="fw-bold mb-0">80.000 đ</h4>
-						<small>Mã sản phẩm: <b>SP-001</b> </small>
+						<h4 class="fw-bold mb-0" th:text="${product.price}"></h4>
+						<small>Mã sản phẩm: <b>SP-00<b th:text="${product.id}"></b></b> </small>
 					</div>
 					<div class="col-6 text-end">
 						<h6 class="fw-bold text-secondary text-decoration-line-through mb-0">
@@ -26,14 +27,14 @@
 				</div>
 				<div class="text-secondary" style="height: 5px;"> <hr> </div>
 				<div class="row">
-					<p>
-						<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. 
+					<p th:text="${product.description}">
+						<!--<b>Lorem Ipsum</b> is simply dummy text of the printing and typesetting industry. 
 						Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
 						when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
 						It has survived not only five centuries, but also the leap into electronic typesetting, 
 						remaining essentially unchanged. It was popularised in the 1960s with the release 
 						of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-						software like Aldus PageMaker including versions of Lorem Ipsum.
+						software like Aldus PageMaker including versions of Lorem Ipsum.-->
 					</p>
 				</div>
 				<div class="text-secondary" style="height: 5px;"> <hr> </div>
@@ -54,10 +55,11 @@
 				</div>
 			</div>
 			<div class="col-xl-6 col-sm-12 text-center py-3">
-				<img th:src="@{/assets/images/sp1.jpg}" class="w-75 rounded">
+				<img th:src="@{/assets/images/products/}+${product.image}" class="w-75 rounded">
 				<div th:replace="/home/_comment"></div>
 			</div>
 		</div>
+		</form>
 		
 		<div class="row">
 		  <div class="container text-dark">

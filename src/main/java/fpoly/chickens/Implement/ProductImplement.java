@@ -103,4 +103,8 @@ public class ProductImplement implements ProductService {
 		return productDAO.findByStoreWithStatus(store, status);
 	}
 
+	@Override
+	public Product findById(Integer id) {
+		return productDAO.findById(id).get();
+	}
 }

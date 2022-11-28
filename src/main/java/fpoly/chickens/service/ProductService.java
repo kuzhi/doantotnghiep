@@ -24,6 +24,8 @@ public interface ProductService {
 	// Delete
 	void delete(Integer id);
 	
+	// Find product by id
+	Product findById(Integer id);
 	// Find product by name
 	List<Product> findProductByName(String name, Integer storeid);
 	// Sort AZ
