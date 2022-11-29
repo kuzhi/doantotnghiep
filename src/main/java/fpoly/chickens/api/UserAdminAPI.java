@@ -36,6 +36,11 @@ public class UserAdminAPI {
 	public List<User> findAll() {
 		return userAdminService.findAll();
 	}
+	
+	@GetMapping("userid/{userid}")
+	public User findById(@PathVariable("userid") Optional<Integer> userid) {
+		return userAdminService.findByUserId(userid.get());
+	}
 
 	// Load
 	@GetMapping("deleted/{deleted}")

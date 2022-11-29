@@ -15,7 +15,8 @@
 		
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 		<div>
-			<a ng-show="auth" th:href="@{|/home/cart/view/{{storeid}}|}" class="btn btn-light btn-sm rounded-4 position-relative">
+			<a ng-show="userid!=null && storeid!=0" th:href="@{|/home/cart/view/{{storeid}}|}" 
+			class="btn btn-light btn-sm rounded-4 position-relative">
 				<i class="fa-solid fa-cart-shopping text-secondary"></i>				
 				<span
 					class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -26,16 +27,16 @@
 		</div>
 		
 		<div 
-			ng-show="!auth"
+			ng-show="userid==null"
 			>
 			<a href="" class="btn btn-primary mx-4 rounded-3 fw-bold">Đăng nhập</a>
 		</div>
 		<div 
-			ng-show="auth"
+			ng-show="userid!=null"
 			class="nav-item dropdown mx-4"
 		>
 			<a class="nav-link dropdown-toggle text-sm" href="#" role="button"
-				data-bs-toggle="dropdown" aria-expanded="false"> Tên tài khoản
+				data-bs-toggle="dropdown" aria-expanded="false"> {{myProfile.fullname}}
 			</a>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>

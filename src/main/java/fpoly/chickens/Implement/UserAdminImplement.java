@@ -149,4 +149,10 @@ public class UserAdminImplement implements UserAdminService {
 		// TODO Auto-generated method stub
 		return userDAO.findUserByPhoneForId(phone, id);
 	}
+
+	@Override
+	public User findByUserId(Integer userid) {
+		// TODO Auto-generated method stub
+		return userDAO.findByUserId(userid);
+	}
 }
