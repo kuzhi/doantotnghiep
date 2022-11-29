@@ -12,6 +12,7 @@ public interface ProductService {
 	// Load all product	
 	List<Product> findAll();
 	Page<Product> findAllPage(Pageable pageable);
+	Page<Product> findAllPageWithStatus(Pageable pageable, Store storeid, Boolean status);
 	
 	// Load product by store
 	List<Product> findAllProductByStore(Integer storeid, Boolean delete);
