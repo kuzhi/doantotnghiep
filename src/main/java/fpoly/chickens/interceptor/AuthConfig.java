@@ -99,7 +99,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 
 			// Đăng xuất
 			http.logout().logoutUrl("/user-app/logoff")// dăng xuất
-					.logoutSuccessUrl("/home");
+					.logoutSuccessUrl("/user-app/auth/form");
 
 
 
