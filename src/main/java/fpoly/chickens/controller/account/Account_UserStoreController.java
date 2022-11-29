@@ -32,7 +32,7 @@ public class Account_UserStoreController {
 	
 	@GetMapping("form")
 	public String login() {
-		
+		/*
 		String checkSessionStore = userService.getTokenStore();
 		String checkSessionUser = userService.getTokenUser();
 
@@ -44,8 +44,8 @@ public class Account_UserStoreController {
 		}
 		else{
 			return "home/account/login";
-		}
-		
+		}*/
+		return "home/account/login";
 	}
 	
 	@RequestMapping("login")
