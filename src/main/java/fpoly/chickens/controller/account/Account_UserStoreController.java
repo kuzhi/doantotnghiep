@@ -79,7 +79,7 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password);
 		if(Check) {
-			return "redirect:/home/client";
+			return "redirect:/home/client/"+0;
 		}
 		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
 		return "home/account/login";
