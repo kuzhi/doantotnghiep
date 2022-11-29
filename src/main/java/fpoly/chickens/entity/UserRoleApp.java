@@ -29,7 +29,7 @@ import lombok.Setter;
 public class UserRoleApp implements Serializable {
 	
 	@Id
-	@Column(name = "Id")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	

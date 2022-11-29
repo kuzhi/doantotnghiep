@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import fpoly.chickens.entity.UserApp;
 
+
 public interface UserAppDAO extends JpaRepository<UserApp, Integer> {
+
 
 	@Query("SELECT o FROM UserApp o WHERE o.Deleted = ?1")
 	List<UserApp> loadUserWithDeleted(Boolean deleted);

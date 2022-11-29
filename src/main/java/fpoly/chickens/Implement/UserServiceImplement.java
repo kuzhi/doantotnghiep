@@ -1,14 +1,12 @@
 package fpoly.chickens.Implement;
 
 import java.util.Base64;
-import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,15 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import fpoly.chickens.dao.StoreDAO;
+import fpoly.chickens.dao.RoleAppDAO;
 import fpoly.chickens.dao.UserAppDAO;
-import fpoly.chickens.dao.UserDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
-import fpoly.chickens.dao.UserStoreDAO;
-import fpoly.chickens.entity.Store;
+import fpoly.chickens.entity.RoleApp;
 import fpoly.chickens.entity.UserApp;
-import fpoly.chickens.entity.UserStore;
-import fpoly.chickens.service.SessionService;
+
+import fpoly.chickens.entity.UserRoleApp;
+
+
+
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -32,76 +31,71 @@ import fpoly.chickens.service.UserService;
 public class UserServiceImplement implements UserService {
 	@Autowired
 	HttpSession session;
-	@Autowired
-	StoreDAO StoreDao;
+	
 	@Autowired
 	UserAppDAO userAppDao;
-
+	
 	@Autowired
-	UserDAO userDao;
-
-	@Autowired
-	UserStoreDAO userStoreDao;
-
+	RoleAppDAO roleDao;
 	@Autowired
 	UserRoleAppDAO userRoleDao;
-
+	
 	@Autowired
 	BCryptPasswordEncoder pe;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-
-			// UserApp userApp = userAppDao.findByUsernames(username);
-
-			UserStore userStore = userStoreDao.findByUsername(username);
-
-			String passwordStore = userStore.getPassword();
-//			System.out.println(userStore);
-			List<Store> store = StoreDao.findByUserStore(userStore.getId());
-			String adminStore = "ADMINSTORE";
-			if (store.size() == 0) {
-				adminStore = null;
-
+					
+					UserApp userApp = userAppDao.findByUsernames(username); 
+					//this.setToken(userApp.getId());
+						String passwordApp = userApp.getPassword().trim();				
+						UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
+					RoleApp role =   roleDao.findById(userRole.getId()).get();
+						String roleUser = role.getRoleName();
+						this.setTokenUserApp(String.valueOf(userApp.getId()));
+					return User.withUsername(username)
+								 .password(passwordApp).roles(roleUser).build();
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					throw new UsernameNotFoundException(username + " not found");
+				} 
 			}
-			System.out.println(store.size());
-			// this.setToken(username, passwordStore);
-			return User.withUsername(username).password(pe.encode(passwordStore)).build();
-			// .roles("ADMINSTORE").build();// luôn phải mã hóa mật khẩu
-		} catch (Exception e) {
-			// TODO: handle exception
-//			fpoly.chickens.entity.User users = userDao.findByUsername(username);
-//			String passwordUser = users.getPassword();
-//			return User.withUsername(username)
-//					.password(pe.encode(passwordUser))
-//					.build();
-			throw new UsernameNotFoundException(username + " not found");
-		}
-	}
+		
 
 	@Override
-	public void setTokenStore(String userStoreId) {
+
+	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userStoreId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenStore", userStoreId);
+
+		String tokenStoreId = String.valueOf(userStoreId);
+		session.setAttribute("tokenStore", tokenStoreId);
+
 
 	}
 
 	@Override
-	public void setTokenUser(String userId) {
+	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUser", userId);
+		String tokenUserId = String.valueOf(userId);
+
+		session.setAttribute("tokenUser", tokenUserId);
 
 	}
+
+	
 
 	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
+
 		return token;
 	}
 
@@ -112,5 +106,15 @@ public class UserServiceImplement implements UserService {
 		return token;
 
 	}
+
+	@Override
+	public void setTokenUserApp(String userAppId) {
+		// TODO Auto-generated method stub
+		//byte[] auth = (userId).getBytes();
+		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
+		session.setAttribute("tokenUserApp", userAppId);
+
+	}
+
 
 }

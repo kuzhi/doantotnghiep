@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html lang="en">
 <head>
 <title>Đăng nhập</title>
@@ -63,7 +65,11 @@
 						<!-- Store -->
 					  <div class="tab-pane fade show active validate-form" id="home-tab-pane" role="tabpanel" 
 					  	aria-labelledby="home-tab" tabindex="0">
-					  		<form th:action="@{/home/auth/login/store}" method="post" class="mt-3">
+						  <th:block th:if="${message !=null}">
+							<div class="alert alert-danger" role="alert" th:text="${message}"></div>
+							</th:block>
+					  		<form action="/home/auth/login/store" method="POST" class="mt-3">
+
 					  			<div class="wrap-input100 validate-input"
 									data-validate="Vui lòng không để trống">
 									<input class="input100" type="text" name="username"
@@ -89,7 +95,7 @@
 									</div>
 									<div>
 										<span class="txt1"> 
-											<a class="txt2" href="/assets/home/forgot.html" style="text-decoration: none;">
+											<a class="txt2" href="/home/forgot-password/form" style="text-decoration: none;">
 											Quên mật khẩu 
 											</a>
 										</span>
@@ -97,18 +103,21 @@
 								</div>
 				
 								<div class="container-login100-form-btn">
-									<button class="login100-form-btn">Đăng nhập</button>
+									<button type="submit" class="login100-form-btn">Đăng nhập</button>
 								</div>
 			
 								<div class="text-center p-t-12">
-									<a href="/assets/home/register.html" class="login101-form-btn">Đăng ký</a>
+									<a href="/home/register/form-store" class="login101-form-btn">Đăng ký</a>
 								</div>
 					  		</form>
 					  	</div>
 
 					  <div class="tab-pane fade validate-form2" id="profile-tab-pane" role="tabpanel" 
 					  	aria-labelledby="profile-tab" tabindex="2">
-					  		<form th:action="@{/home/auth/login/user}" method="post" class="mt-3">
+						  <th:block th:if="${message !=null}">
+							<div class="alert alert-danger" role="alert" th:text="${message}"></div>
+							</th:block>
+					  		<form action="/home/auth/login/user" method="post" class="mt-3">
 					  			<div class="wrap-input100 validate-input2" data-validate="Vui lòng không để trống">
 									<input class="input100" type="text" name="username"
 										placeholder="--Vui lòng nhập--"> <span
@@ -133,7 +142,7 @@
 									</div>
 									<div>
 										<span class="txt1"> 
-											<a class="txt2" href="/assets/home/forgot.html" style="text-decoration: none;">
+											<a class="txt2" href="/home/forgot-password/form" style="text-decoration: none;">
 											Quên mật khẩu 
 											</a>
 										</span>
@@ -141,11 +150,11 @@
 								</div>
 				
 								<div class="container-login100-form-btn">
-									<button class="login100-form-btn">Đăng nhập</button>
+									<button type="submit" class="login100-form-btn">Đăng nhập</button>
 								</div>
 			
 								<div class="text-center p-t-12">
-									<a href="/assets/home/register.html" class="login101-form-btn">Đăng ký</a>
+									<a href="/home/register/form-user" class="login101-form-btn">Đăng ký</a>
 								</div>
 					  		</form>
 					  	</div>

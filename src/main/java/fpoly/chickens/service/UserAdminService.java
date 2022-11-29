@@ -33,7 +33,7 @@ public interface UserAdminService {
 	// Find by name
 	List<User> findUserByUserNameAndFullName(String username, String fullname);
 	// Find by user
-	List<User> findUserByUsername(String name);
+	User findUserByUsername(String name);
 	// Find by email
 	List<User> findUserByEmail(String email);
 	List<User> findUserByEmailForId(String email, Integer id);

@@ -18,8 +18,12 @@ public interface UserService extends UserDetailsService {
 
 	String getTokenUser();
 
-	void setTokenStore(String userStoreId);
 
-	void setTokenUser(String userId);
+		void setTokenStore(Integer userStoreId);
+
+		void setTokenUser(Integer userId);
+
+		void setTokenUserApp(String userAppId);
+
 
 }
