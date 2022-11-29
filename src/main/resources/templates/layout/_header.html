@@ -6,7 +6,7 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-	<a class="navbar-brand" th:href="@{/home/client}"> <img alt=""
+	<a class="navbar-brand" th:href="@{|/home/client/{{storeid}}|}"> <img alt=""
 		th:src="@{/assets/images/logo.png}"
 		class="img-fluid mx-auto d-block w-50 img__logo">
 	</a>
@@ -15,7 +15,7 @@
 		
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 		<div>
-			<a th:href="@{/home/cart/view}" class="btn btn-light btn-sm rounded-4 position-relative">
+			<a ng-show="auth" th:href="@{|/home/cart/view/{{storeid}}|}" class="btn btn-light btn-sm rounded-4 position-relative">
 				<i class="fa-solid fa-cart-shopping text-secondary"></i>				
 				<span
 					class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -30,7 +30,6 @@
 			>
 			<a href="" class="btn btn-primary mx-4 rounded-3 fw-bold">Đăng nhập</a>
 		</div>
-		
 		<div 
 			ng-show="auth"
 			class="nav-item dropdown mx-4"
@@ -40,8 +39,7 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>
-				<li><a class="dropdown-item" th:href="@{/home/client/my-profile}">Hồ sơ cá nhân</a></li>
-				<li><a class="dropdown-item" th:href="@{/home/client/list-favorite}">Sản phẩm yêu thích</a></li>
+				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{storeid}}|}">Hồ sơ cá nhân</a></li>
 				<li><a class="dropdown-item" href="/assets/home/change.html">Đổi mật khẩu</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="#">Đăng xuất</a></li>

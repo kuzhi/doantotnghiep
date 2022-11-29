@@ -103,4 +103,9 @@ public class ProductImplement implements ProductService {
 		return productDAO.findByStoreWithStatus(store, status);
 	}
 
+	@Override
+	public Page<Product> findAllPageWithStatus(Pageable pageable, Store storeid, Boolean status) {
+		// TODO Auto-generated method stub
+		return productDAO.loadByStoreWithStatus(pageable, storeid, status);	}
+
 }

@@ -56,7 +56,7 @@ public class Account_UserStoreController {
 		boolean Check = authen.loginUser(username, password);
 		if(Check) {
 
-			return "redirect:/home/client";
+			return "redirect:/home/client/"+0;
 
 
 		}
