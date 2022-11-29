@@ -1,31 +1,41 @@
 app = angular.module("home-cart", []);
 app.controller("cart-ctrl", function($scope, $http, $location) {
-
 	//Header
-	$scope.auth = false;
+	$scope.auth = true;
 	$scope.amountItems = 0;
 	$scope.phone = '0942.xxx.xxx'
 	$scope.email = 'anv123@mail.com'
-	$scope.storeid = 2;// Chỉ cần lấy id của store trến session gắn dô đây là ok
+	const queryString = window.location.href;
+	$scope.storeid = queryString.split("/").pop();
 	$scope.userid = 2;//Chỉ cần lấy id của user trến session gắn dô đây là ok
 
 	$scope.countAmount = function() {
-		$http.get("/api/countcart/" + $scope.storeid + "/" + $scope.userid).then(resp => {
-			$scope.amountItems = resp.data
-		})
+		const storeid = queryString.split("/").pop();
+
+		console.log("countAmount: ", storeid)
+		if (storeid != 0) {
+			$http.get("/api/countcart/" + storeid + "/" + $scope.userid).then(resp => {
+				$scope.amountItems = resp.data
+			})
+		}
 	}; $scope.countAmount();
 
 	// Load list products
 	$scope.url = "/api/product";
 	$scope.products = [];
-	$scope.listProducts = function() {
-		$http.get($scope.url+"/store/"+3+"/"+true).then(resp => {
+	$scope.listProducts = function(storeid) {
+		storeid = queryString.split("/").pop();
+		$http.get($scope.url + "/store/" + storeid + "/" + true).then(resp => {
 			$scope.products = resp.data;
 		});
+	};
+
+	if ($scope.storeid != 0) {
+		$scope.listProducts($scope.storeid);
 	}
 
 	// Phân trang và điều hướng
-	$scope.pager = {
+	$scope.pager2 = {
 		page: 0,
 		size: 8,
 		get products() {
@@ -54,8 +64,6 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			this.page = this.count - 1;
 		},
 	};
-
-	$scope.listProducts();
 
 	$scope.cateArr = {
 		cates: [
@@ -86,9 +94,12 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.payment = [];
 
 	$scope.loadCart = function(storeid, userid) { //lấy danh sách giỏ hàng
-		$http.get("/api/cart/" + storeid + "/" + userid).then(resp => {
-			$scope.items = resp.data
-		})
+		storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/cart/" + storeid + "/" + userid).then(resp => {
+				$scope.items = resp.data
+			})
+		}
 	}
 
 	$scope.totalMoney = function() { // lệnh này thì dùng để tính tổng số tiền các mặt hàng trong giỏ
@@ -98,16 +109,19 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.add = function(pd) { //thêm sp vào giỏ
-		var cart = {
-			user: { id: $scope.userid },
-			store: { id: $scope.storeid },
-			product: pd,
-			amount: 1
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			var cart = {
+				user: { id: $scope.userid },
+				store: { id: storeid },
+				product: pd,
+				amount: 1
+			}
+			$http.post("/api/cart/add", cart).then(resp => {
+				location.href = "/home/cart/view/" + storeid;
+				$scope.loadCart($scope.storeid, $scope.userid)
+			});
 		}
-		$http.post("/api/cart/add", cart).then(resp => {
-			location.href = "/home/cart/view";
-			$scope.loadCart($scope.storeid, $scope.userid)
-		});
 	}
 
 	$scope.update = function(cart) { // cập nhật lại số lượng
@@ -121,7 +135,8 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.deleteall = function() { //xóa hết sp trong giỏ
-		$http.delete("/api/cart/deleteall/" + $scope.storeid + "/" + $scope.userid).then(resp => {
+		const storeid = queryString.split("/").pop();
+		$http.delete("/api/cart/deleteall/" + storeid + "/" + $scope.userid).then(resp => {
 
 		})
 	}
@@ -307,33 +322,48 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.orders = [];
 	// Order manager
 	$scope.all = function() { //lấy tất cả các đơn hàng của khách hàng
-		$http.get("/api/order/" + $scope.storeid + "/" + $scope.userid).then(resp => {
-			$scope.orders = resp.data;
-		})
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/order/" + storeid + "/" + $scope.userid).then(resp => {
+				$scope.orders = resp.data;
+			})
+		}
 	}
 
 	$scope.loading = function() { // lấy danh sách đơn hàng đang xử lý
-		$http.get("/api/order/" + $scope.storeid + "/" + $scope.userid + "/" + 1).then(resp => {
-			$scope.orders = resp.data;
-		})
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 1).then(resp => {
+				$scope.orders = resp.data;
+			})
+		}
 	}
 
 	$scope.shipping = function() { // lấy danh sách đơn hàng đang giao
-		$http.get("/api/order/" + $scope.storeid + "/" + $scope.userid + "/" + 2).then(resp => {
-			$scope.orders = resp.data;
-		})
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 2).then(resp => {
+				$scope.orders = resp.data;
+			})
+		}
 	}
 
 	$scope.completed = function() { // lấy danh sách đơn hàng đã nhận
-		$http.get("/api/order/" + $scope.storeid + "/" + $scope.userid + "/" + 3).then(resp => {
-			$scope.orders = resp.data;
-		})
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 3).then(resp => {
+				$scope.orders = resp.data;
+			})
+		}
 	}
 
 	$scope.canceled = function() { // lấy danh sách đơn hàng bị hủy
-		$http.get("/api/order/" + $scope.storeid + "/" + $scope.userid + "/" + 4).then(resp => {
-			$scope.orders = resp.data;
-		})
+		const storeid = queryString.split("/").pop();
+		if (storeid != 0) {
+			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 4).then(resp => {
+				$scope.orders = resp.data;
+			})
+		}
 	}
 
 	$scope.completeOrder = function(idOrder) {

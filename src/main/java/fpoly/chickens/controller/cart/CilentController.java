@@ -27,30 +27,25 @@ public class CilentController {
 	@Autowired ProductService productService;
 	@Autowired UserService userService;
 	
-	@RequestMapping()
-	public String view_Cart() {
+	@RequestMapping("/{storeid}")
+	public String view_Cart(Model model) {
 		if(userService.getTokenStore()==null) {
 			return "home/list_store";
 		}else {
-			return "home/index";
+			String storeid =  userService.getTokenStore();
+			model.addAttribute("storeid", storeid);
+			
+			return "redirect:/home/client/list-product/"+storeid;
 		}
 	}
 	
-	@RequestMapping("/list-product")
-	public String viewProduct(Model model, @RequestParam("storeid") Optional<Integer> storeid) {
-		List<Product> list = productService.findAllProductByStore(3, true);
-		System.out.println("data: "+list);
-		
-		model.addAttribute("products", list);
-		Pageable pageable = PageRequest.of(0, 8);
-		
-		Page<Product> page = productService.findAllPage(pageable);
-		model.addAttribute("page", page);
+	@RequestMapping("/list-product/{storeid}")
+	public String viewProduct() {
 		
 		return "home/index";
 	}
 
-	@RequestMapping("/my-profile")
+	@RequestMapping("/my-profile/{storeid}")
 	public String view_Profile() {
 		return "home/my-profile";
 	}
