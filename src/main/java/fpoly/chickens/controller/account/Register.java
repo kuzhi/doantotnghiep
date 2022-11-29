@@ -34,9 +34,7 @@ public class Register {
     @Autowired
     HttpServletRequest req;
 
-    @Autowired
-	StoreDAO storeDao;
-  
+
     @Autowired
     UserAdminService userAdminService ;
 
@@ -83,7 +81,6 @@ public class Register {
     }
 
     @PostMapping("create-store")
-
     public String createNewStore(Model model, @ModelAttribute Optional<UserStore> userStore){
         model.addAttribute("store", userStore);
         if(userStore.isPresent()){
@@ -95,7 +92,6 @@ public class Register {
                 String passwordEncode =pe.encode(userStore.get().getPassword());
                 userStore.get().setPassword(passwordEncode);
                 //storeDao.save(userStore.get());
-
                 model.addAttribute("error", "Tài khoản hoặc  này đã được sử dụng");
 
                 return "home/account/register";

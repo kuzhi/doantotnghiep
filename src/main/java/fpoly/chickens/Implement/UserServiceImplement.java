@@ -22,9 +22,9 @@ import fpoly.chickens.entity.UserApp;
 
 import fpoly.chickens.entity.UserRoleApp;
 
+
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.SessionService;
-
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -38,34 +38,33 @@ public class UserServiceImplement implements UserService {
 	
 	@Autowired
 	RoleAppDAO roleDao;
-
 	@Autowired
 	UserRoleAppDAO userRoleDao;
 	
 	@Autowired
 	BCryptPasswordEncoder pe;
 
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-try {
-			
-			UserApp userApp = userAppDao.findByUsernames(username); 
-			//this.setToken(userApp.getId());
-				String passwordApp = userApp.getPassword().trim();				
-				UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
-			RoleApp role =   roleDao.findById(userRole.getId()).get();
-
-				String roleUser = role.getRoleName();
-				this.setTokenUserApp(String.valueOf(userApp.getId()));
-			return User.withUsername(username)
-			 			.password(passwordApp).roles(roleUser).build();
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new UsernameNotFoundException(username + " not found");
-		} 
-	}
-
+		try {
+					
+					UserApp userApp = userAppDao.findByUsernames(username); 
+					//this.setToken(userApp.getId());
+						String passwordApp = userApp.getPassword().trim();				
+						UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
+					RoleApp role =   roleDao.findById(userRole.getId()).get();
+						String roleUser = role.getRoleName();
+						this.setTokenUserApp(String.valueOf(userApp.getId()));
+					return User.withUsername(username)
+								 .password(passwordApp).roles(roleUser).build();
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+					throw new UsernameNotFoundException(username + " not found");
+				} 
+			}
+		
 
 	@Override
 
@@ -73,29 +72,25 @@ try {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userStoreId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenStore", userStoreId);
+
+		String tokenStoreId = String.valueOf(userStoreId);
+		session.setAttribute("tokenStore", tokenStoreId);
 
 
 	}
 
 	@Override
-
 	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUser", userId);
+		String tokenUserId = String.valueOf(userId);
+
+		session.setAttribute("tokenUser", tokenUserId);
 
 	}
 
-	@Override
-	public void setTokenUserApp(String userAppId) {
-		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUserApp", userAppId);
-
-	}
+	
 
 	@Override
 	public String getTokenStore() {
@@ -108,12 +103,11 @@ try {
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-
 		String token = (String) session.getAttribute("tokenUser");
 		return token;
 
 	}
-	
+
 	@Override
 	public void setTokenUserApp(String userAppId) {
 		// TODO Auto-generated method stub
@@ -122,4 +116,6 @@ try {
 		session.setAttribute("tokenUserApp", userAppId);
 
 	}
+
+
 }
