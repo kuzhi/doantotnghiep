@@ -3,7 +3,7 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 	$scope.titleTable = 'Tất cả Đơn hàng';
 	$scope.titleBreadcrumb = 'Đơn hàng';
 	$scope.titleBread = 'Tất cả';
-	$scope.storeid = 2;
+	$scope.storeid = Number(document.getElementById("storeid").value);
 	$scope.keyword
 	$scope.pageNumber = 0;
 	$scope.pageSort = 0;
