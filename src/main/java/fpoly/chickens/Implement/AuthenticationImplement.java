@@ -47,7 +47,7 @@ public class AuthenticationImplement implements Authentication{
 		
 			if(match){
 				if(!userStore.getDeleted()) {
-					String userStoreId = String.valueOf(userStore.getId());
+					Integer userStoreId = userStore.getId();
 					userService.setTokenStore(userStoreId);
 						return true;
 				}
@@ -72,7 +72,7 @@ public class AuthenticationImplement implements Authentication{
 			boolean match = pe.matches(password, passwordUsers);
 			if(match){
 				if(!users.getDeleted()) {
-					String userId = String.valueOf(users.getId());
+					Integer userId = users.getId();
 
 					userService.setTokenUser(userId);
 					return true;
