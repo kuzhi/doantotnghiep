@@ -23,7 +23,7 @@ public interface UserService extends UserDetailsService {
 
 		void setTokenUser(Integer userId);
 
-
 		void setTokenUserApp(String userAppId);
+
 
 }
