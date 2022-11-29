@@ -161,16 +161,16 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 				// Nếu email và sdt thuộc user thì update
 				$http.get($scope.url + "email/" + user.email + "/" + user.id).then(resp => {
 					const myEmail = resp.data;
-					console.log("email: ", myEmail)
+					//console.log("email: ", myEmail)
 					// tìm ra thì tìm sdt
 					if (myEmail.length != 0) {
-						console.log("check sdt")
+						//console.log("check sdt")
 						$http.get($scope.url + "phone/" + user.phone + "/" + user.id).then(resp => {
 							const myPhone = resp.data;
-							console.log("phone v2: ", myPhone)
+							//sconsole.log("phone v2: ", myPhone)
 							// tìm ra thì cập nhật
 							if (myPhone.length != 0) {
-								console.log("cap nhat v2")
+								//console.log("cap nhat v2")
 								$scope.updateReal(user);
 							} else { // tìm k ra thì check trùng
 								// Check phone
@@ -179,22 +179,22 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 									if (checkPhone.length != 0) {
 										Swal.fire({ icon: 'warning', title: 'Số điện thoại "' + user.phone + '" đã tồn tại!' });
 									} else { // neu phone moi k trung thi update
-										console.log("check phone -> k trung")
+										//console.log("check phone -> k trung")
 										$scope.updateReal(user);
 									}
 								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
 							}
 						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
 					} else { // tìm k ra thì check trùng
-						console.log("check email trung")
+						//console.log("check email trung")
 						// Check email
 						$http.get($scope.url + "email/" + user.email).then(resp => {
 							const checkEmail = resp.data;
 							if (checkEmail.length != 0) {
 								Swal.fire({ icon: 'warning', title: 'Email "' + user.email + '" đã tồn tại!' });
 							} else {
-								console.log("check email -> k trung")
-								console.log("check sdt")
+								//console.log("check email -> k trung")
+								//console.log("check sdt")
 								$http.get($scope.url + "phone/" + user.phone + "/" + user.id).then(resp => {
 									const myPhone = resp.data;
 									console.log("phone v1: ", myPhone)

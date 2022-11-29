@@ -36,7 +36,8 @@
 				<div class="small font-italic text-muted my-4">
 					Ảnh có kích thước nhỏ hơn 10MB
 				</div>
-			    <input id="file-input" type="file" />
+				<input id="file-input" type="file" name="image"
+                 onchange="angular.element(this).scope().ImageChanged(this.files)"/>
 			</div>	  	
 	  	</div>
 	  	
@@ -66,6 +67,23 @@
 					Email chưa đúng định dạng <b>*</b>
 				</small>
 		    </div>
+		</div>
+		
+		<!-- Số điện thoại -->
+		<div class="form-group mx-auto">
+			<label class="form-label"> Số điện thoại <span class="text-red">*</span> </label>
+			<!-- Input -->
+			<input ng-model="userStore.phone" ng-pattern="regexPhone" type="text" name="phone" 
+			class="form-control" placeholder="--Vui lòng nhập--" required>
+			
+			<div ng-show="profileForm.phone.$dirty && profileForm.phone.$invalid || profileForm.phone.$error.pattern">
+				<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.pattern && profileForm.phone.$invalid">
+					Số điện thoại chưa phù hợp <b>*</b>
+				</small> 
+				<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.required">
+					Vui lòng không để trống <b>*</b>
+				</small>
+			</div>
 		</div>
 
 	  	<div class="form-group mx-auto">

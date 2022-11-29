@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -17,6 +18,9 @@ import fpoly.chickens.service.UserAdminNVService;
 @Service
 public class UserAdminNVImplement implements UserAdminNVService {
 	@Autowired UserAppDAO userAppDAO;
+
+    @Autowired
+	BCryptPasswordEncoder pe;
 
 	@Override
 	public List<UserApp> findAll() {
@@ -33,12 +37,16 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	@Override
 	public UserApp create(UserApp user) {
 		// TODO Auto-generated method stub
+		String encodePass = pe.encode(user.getPassword());
+		user.setPassword(encodePass);
 		return userAppDAO.save(user);
 	}
 
 	@Override
 	public UserApp update(UserApp user) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub'
+		String encodePass = pe.encode(user.getPassword());
+		user.setPassword(encodePass);
 		return userAppDAO.saveAndFlush(user);
 	}
 
