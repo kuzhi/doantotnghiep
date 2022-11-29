@@ -50,7 +50,7 @@ public class CilentController {
 		return "home/my-profile";
 	}
 
-	@RequestMapping("/_order-detail/{id}")
+	@RequestMapping("/_seeorder-detail/{id}")
 	public String view_OrderDetail(@PathVariable("id") Optional<Integer> id, Model model) {
 		model.addAttribute("detail",orderService.findOrderById(id.get()));
 		return "home/_order-detail";

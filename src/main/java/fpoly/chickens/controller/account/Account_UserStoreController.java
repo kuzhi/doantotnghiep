@@ -32,6 +32,7 @@ public class Account_UserStoreController {
 	
 	@GetMapping("form")
 	public String login() {
+
 		
 		String checkSessionStore = userService.getTokenStore();
 		String checkSessionUser = userService.getTokenUser();
@@ -47,8 +48,7 @@ public class Account_UserStoreController {
 		}
 		//return "home/account/login";
 	}
-	
-	@GetMapping("login")
+	@RequestMapping("login")
 	public String logoutErro(Model model, @RequestParam("error") String error){
 		if(error.equalsIgnoreCase("Not Logged In")){
 			error = "Chưa đăng nhập";
@@ -95,8 +95,6 @@ public class Account_UserStoreController {
 	@RequestMapping("logout-user")
 	public String logoutUser(){
 		sessionService.remove("tokenUser");
-		System.out.println(userService.getTokenUser());
-
 		return "redirect:/home/auth/form";
 	}
 }

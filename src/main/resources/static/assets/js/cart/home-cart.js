@@ -7,18 +7,18 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.email = 'anv123@mail.com'
 	const queryString = window.location.href;
 	$scope.storeid = queryString.split("/").pop();
-	$scope.userid = 2;//Chỉ cần lấy id của user trến session gắn dô đây là ok
+	$scope.userid = Number(document.getElementById("userid").value);//Chỉ cần lấy id của user trến session gắn dô đây là ok
 
 	$scope.countAmount = function() {
 		const storeid = queryString.split("/").pop();
-
 		console.log("countAmount: ", storeid)
-		if (storeid != 0) {
+		if (storeid != 0 && $scope.userid != 0) {
 			$http.get("/api/countcart/" + storeid + "/" + $scope.userid).then(resp => {
 				$scope.amountItems = resp.data
 			})
 		}
-	}; $scope.countAmount();
+	}; 
+	$scope.countAmount();
 
 	// Load list products
 	$scope.url = "/api/product";
@@ -95,7 +95,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	$scope.loadCart = function(storeid, userid) { //lấy danh sách giỏ hàng
 		storeid = queryString.split("/").pop();
-		if (storeid != 0) {
+		if ($scope.userid == 0) {
+			location.href = "/home/auth/form";
+		} else if (storeid != 0 && userid != 0) {
 			$http.get("/api/cart/" + storeid + "/" + userid).then(resp => {
 				$scope.items = resp.data
 			})
@@ -111,6 +113,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.add = function(pd) { //thêm sp vào giỏ
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if ($scope.userid == 0) {
+				location.href = "/home/auth/form";
+			}else {
 			var cart = {
 				user: { id: $scope.userid },
 				store: { id: storeid },
@@ -121,6 +126,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 				location.href = "/home/cart/view/" + storeid;
 				$scope.loadCart($scope.storeid, $scope.userid)
 			});
+			}
 		}
 	}
 
@@ -324,6 +330,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.all = function() { //lấy tất cả các đơn hàng của khách hàng
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 			$http.get("/api/order/" + storeid + "/" + $scope.userid).then(resp => {
 				$scope.orders = resp.data;
 			})
@@ -333,6 +342,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.loading = function() { // lấy danh sách đơn hàng đang xử lý
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 1).then(resp => {
 				$scope.orders = resp.data;
 			})
@@ -342,6 +354,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.shipping = function() { // lấy danh sách đơn hàng đang giao
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 2).then(resp => {
 				$scope.orders = resp.data;
 			})
@@ -351,6 +366,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.completed = function() { // lấy danh sách đơn hàng đã nhận
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 3).then(resp => {
 				$scope.orders = resp.data;
 			})
@@ -360,6 +378,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.canceled = function() { // lấy danh sách đơn hàng bị hủy
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
+			if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 			$http.get("/api/order/" + storeid + "/" + $scope.userid + "/" + 4).then(resp => {
 				$scope.orders = resp.data;
 			})
@@ -367,6 +388,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.completeOrder = function(idOrder) {
+		if( $scope.userid==0){
+				location.href = "/home/auth/form";
+		}
 		or = {
 			id: idOrder,
 			status: 3
@@ -378,6 +402,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.cancelOrder = function(idOrder) {
+		if( $scope.userid==0){
+				location.href = "/home/auth/form";
+			}
 		or = {
 			id: idOrder,
 			status: 4
