@@ -77,7 +77,7 @@ public class Register {
         }
         model.addAttribute("error", "Thiếu trường");
 
-        return "home/account/register";
+        return "home/account/registerUser";
     }
 
     @PostMapping("create-store")
@@ -101,7 +101,7 @@ public class Register {
         }
         model.addAttribute("error", "Thiếu trường");
 
-        return "home/account/register";
+        return "home/account/registerStore";
     }
 
 

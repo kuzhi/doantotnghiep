@@ -24,7 +24,6 @@ public class Account_UserAppController {
 
 	@RequestMapping("/user-app/auth/form")
 	public String login() {
-		UserApp userApp = userAppDao.findByUsernames("khoata"); 
 			
 		return "home/account/loginApp";
 	}
@@ -42,4 +41,7 @@ public class Account_UserAppController {
 
 		return "redirect:/admin";
 	}
+
+
+	
 }
