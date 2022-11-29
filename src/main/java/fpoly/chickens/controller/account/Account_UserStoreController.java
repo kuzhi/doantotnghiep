@@ -32,7 +32,19 @@ public class Account_UserStoreController {
 	
 	@GetMapping("form")
 	public String login() {
-		
+		/*
+		String checkSessionStore = userService.getTokenStore();
+		String checkSessionUser = userService.getTokenUser();
+
+		if(!checkSessionStore.isEmpty()){
+			return "redirect:/app";
+		}
+		else if(!checkSessionUser.isEmpty()){
+			return "redirect:/home/client";
+		}
+		else{
+			return "home/account/login";
+		}*/
 		return "home/account/login";
 	}
 	
