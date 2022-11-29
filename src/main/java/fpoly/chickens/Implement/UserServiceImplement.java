@@ -71,7 +71,9 @@ public class UserServiceImplement implements UserService {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userStoreId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenStore", userStoreId);
+
+		String tokenStoreId = String.valueOf(userStoreId);
+		session.setAttribute("tokenStore", tokenStoreId);
 
 
 	}
@@ -81,7 +83,9 @@ public class UserServiceImplement implements UserService {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userId).getBytes();
 		// String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUser", userId);
+		String tokenUserId = String.valueOf(userId);
+
+		session.setAttribute("tokenUser", tokenUserId);
 
 	}
 
