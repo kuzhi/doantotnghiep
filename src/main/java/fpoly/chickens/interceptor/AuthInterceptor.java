@@ -38,6 +38,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 		}
 		if(errorAuth.length()>0) {
 			// co loi
+
 			session.set("errorAuth", errorAuth);
 			response.sendRedirect("/home/auth/login?error=" + errorAuth);
 			return false;
