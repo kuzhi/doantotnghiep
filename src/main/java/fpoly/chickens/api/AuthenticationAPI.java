@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fpoly.chickens.service.SessionService;
 import fpoly.chickens.service.UserService;
 
 @CrossOrigin("*")
@@ -20,6 +21,7 @@ public class AuthenticationAPI {
 	
 	@Autowired
 	UserService userService;
+	@Autowired SessionService sessionService;
 	
 	@GetMapping("/api/getStoreid")
 	public ResponseEntity<String> getStoreid() {
@@ -37,5 +39,11 @@ public class AuthenticationAPI {
 	    String  tokenStore =  (String) session.getAttribute("tokenStore");
 
 	    return tokenStore ;
+	}
+
+	@RequestMapping(value = "/api/getUserApp", method = RequestMethod.GET, headers="Accept=*/*")
+	public @ResponseBody Object getTokenUserApp(HttpSession session) {
+		String  tokenStore =  (String) sessionService.get("tokenUserApp");
+		return tokenStore ;
 	}
 }

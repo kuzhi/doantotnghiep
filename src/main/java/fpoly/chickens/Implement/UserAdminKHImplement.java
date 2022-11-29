@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -17,6 +18,9 @@ import fpoly.chickens.service.UserAdminKHService;
 @Service
 public class UserAdminKHImplement implements UserAdminKHService {
 	@Autowired UserStoreDAO userStoreDAO;
+	
+	@Autowired
+	BCryptPasswordEncoder pe;
 
 	@Override
 	public List<UserStore> findAll() {
@@ -33,12 +37,16 @@ public class UserAdminKHImplement implements UserAdminKHService {
 	@Override
 	public UserStore create(UserStore user) {
 		// TODO Auto-generated method stub
+		String encodePass = pe.encode(user.getPassword());
+		user.setPassword(encodePass);
 		return userStoreDAO.save(user);
 	}
 
 	@Override
 	public UserStore update(UserStore user) {
 		// TODO Auto-generated method stub
+		String encodePass = pe.encode(user.getPassword());
+		user.setPassword(encodePass);
 		return userStoreDAO.saveAndFlush(user);
 	}
 
@@ -114,10 +122,9 @@ public class UserAdminKHImplement implements UserAdminKHService {
 		// TODO Auto-generated method stub
 		return userStoreDAO.findByUsername(name);
 	}
-
-@Override
-	public List<UserStore> findUserByPhoneForId(String phone, Integer id) {
-		// TODO Auto-generated method stub
-		return userStoreDAO.findUserByPhoneForId(phone, id);
+	@Override
+		public List<UserStore> findUserByPhoneForId(String phone, Integer id) {
+			// TODO Auto-generated method stub
+			return userStoreDAO.findUserByPhoneForId(phone, id);
+		}
 	}
-}

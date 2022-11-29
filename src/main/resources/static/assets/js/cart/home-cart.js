@@ -1,26 +1,30 @@
 app = angular.module("home-cart", []);
 app.controller("cart-ctrl", function($scope, $http, $location) {
-	//Header
-	$scope.auth = true;
+	//================================Header
 	$scope.amountItems = 0;
-	$scope.phone = '0942.xxx.xxx'
-	$scope.email = 'anv123@mail.com'
 	const queryString = window.location.href;
 	$scope.storeid = queryString.split("/").pop();
-	$scope.userid = Number(document.getElementById("userid").value);//Chỉ cần lấy id của user trến session gắn dô đây là ok
-
+	$scope.userid = Number(document.getElementById("userid").value);
+	$scope.sid = Number(document.getElementById("storeid").value);
+	$scope.regexPhone = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
+	
 	$scope.countAmount = function() {
 		const storeid = queryString.split("/").pop();
-		console.log("countAmount: ", storeid)
 		if (storeid != 0 && $scope.userid != 0) {
 			$http.get("/api/countcart/" + storeid + "/" + $scope.userid).then(resp => {
 				$scope.amountItems = resp.data
 			})
 		}
-	}; 
-	$scope.countAmount();
+	}; $scope.countAmount();
+	
+	$scope.loadTitleStore = function() {
+		$scope.sid -= 1;
+		$http.get("/api/store/"+$scope.sid).then(resp=>{
+			$scope.titleStore = resp.data;
+		})
+	};$scope.loadTitleStore();
 
-	// Load list products
+	//================================ Load list products
 	$scope.url = "/api/product";
 	$scope.products = [];
 	$scope.listProducts = function(storeid) {
@@ -65,6 +69,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		},
 	};
 
+	//================================ Load loại để lọc
 	$scope.cateArr = {
 		cates: [
 			{
@@ -86,7 +91,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		]
 	}
 
-	// Cart Control
+	//================================ Cart Control
 	$scope.items = [];
 
 	$scope.ship = [];
@@ -207,7 +212,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	$scope.loadPayment()//lấy danh sách các loại thanh toán
 
-	//OrderControl
+	//================================ OrderControl
 	$scope.order = {
 		user: { id: $scope.userid },
 		store: { id: $scope.storeid },
@@ -256,6 +261,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 					alert("Vui lòng nhập địa chỉ")
 				} else {
 					$http.post("/api/order/add", $scope.order).then(resp => {
+						$scope.loadCart($scope.storeid, $scope.userid)
 					})
 					swalWithBootstrapButtons.fire(
 						'Thành công',
@@ -272,61 +278,172 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		})
 	}
 
-	// Profile
-	//Info
-	$scope.updatePhone = function() {
-		Swal.fire({
-			title: 'Nhập số điện thoại mới',
-			input: 'text',
-			inputAttributes: {
-				autocapitalize: 'off'
-			},
-			showCancelButton: true,
-			confirmButtonText: 'Xác nhận',
-			showLoaderOnConfirm: true,
-			allowOutsideClick: () => !Swal.isLoading()
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire({
-					title: 'Đã cập nhật',
-					icon: 'success'
-				})
-			}
+	//================================ Profile
+	$scope.myProfile={};
+	$scope.urlInfo = "/api/user/";
+	$scope.loadProfile = function() {
+		$http.get("/api/user/userid/"+$scope.userid).then(resp=>{
+			$scope.myProfile = resp.data;
+			$scope.myProfile.birthday = new Date($scope.myProfile.birthday);
 		})
-	}
+	}; $scope.loadProfile();
+	
+	//Edit
+	$scope.resetProfile = function() {
+		$scope.formUser = {};
+		// Set độ tuổi
+		const now = new Date();
+		$scope.valueAge = new Date(); $scope.valueAge.setMonth(0); $scope.valueAge.setFullYear(now.getFullYear() - 17);
+		$scope.maxAge = new Date(); $scope.maxAge.setFullYear(now.getFullYear() - 17);
+		$scope.formatDate = function(date) {
+			var d = new Date(date),
+				month = '' + (d.getMonth() + 1),
+				day = '' + d.getDate(),
+				year = d.getFullYear();
 
-	$scope.updateEmail = function() {
-		Swal.fire({
-			title: 'Nhập email mới',
-			input: 'text',
-			inputAttributes: {
-				autocapitalize: 'off'
-			},
-			showCancelButton: true,
-			confirmButtonText: 'Xác nhận',
-			showLoaderOnConfirm: true,
-			allowOutsideClick: () => !Swal.isLoading()
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire({
-					title: 'Đã cập nhật',
-					icon: 'success'
-				})
-			}
+			if (month.length < 2)
+				month = '0' + month;
+			if (day.length < 2)
+				day = '0' + day;
+
+			return [year, month, day].join('-');
+		}; $scope.formatDate($scope.maxAge);
+	}; $scope.resetProfile();
+		
+	//Change image
+	$scope.ImageChanged = function(files) {
+		var data = new FormData();
+		data.append('file', files[0]);
+		$http.post('/api/upload/User', data, {
+			transformRequest: angular.identity,
+			headers: { 'Content-Type': undefined }
+		}).then(resp => {
+			// console.log('data: ', resp.data)
+			$scope.myProfile.photo = resp.data.name;
+		}).catch(error => {
+			alert("Lỗi tải hình ảnh")
+			console.log('error: ', error)
 		})
-	}
-
+	};
+	
+	// Update info
 	$scope.updateProfile = function() {
-		Swal.fire({
-			icon: 'success',
-			title: 'Đã lưu thay đổi',
-			showConfirmButton: false,
-			timer: 1500
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-danger ms-2',
+				cancelButton: 'btn btn-success'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			title: 'Thông báo',
+			icon: 'warning',
+			text: "Bạn có chắc muốn thực hiện?",
+			showCancelButton: true,
+			confirmButtonText: 'OK',
+			cancelButtonText: 'Quay lại',
+			reverseButtons: true,
+			showClass: {
+				popup: 'animate__animated animate__fadeInDownBig'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUpBig'
+			}
+		}).then((result) => {
+			if (result.isConfirmed) {
+
+				//====================================== Bắt đầu xử lý
+				var user = angular.copy($scope.myProfile);
+				user.update_at = new Date();
+
+				// Nếu email và sdt thuộc user thì update
+				$http.get($scope.urlInfo + "email/" + user.email + "/" + user.id).then(resp => {
+					const myEmail = resp.data;
+					// tìm ra thì tìm sdt
+					if (myEmail.length != 0) {
+						$http.get($scope.urlInfo + "phone/" + user.phone + "/" + user.id).then(resp => {
+							const myPhone = resp.data;
+							// tìm ra thì cập nhật
+							if (myPhone.length != 0) {
+								$scope.updateReal(user);
+							} else { // tìm k ra thì check trùng
+								// Check phone
+								$http.get($scope.urlInfo + "phone/" + user.phone).then(resp => {
+									const checkPhone = resp.data;
+									if (checkPhone.length != 0) {
+										Swal.fire({ icon: 'warning', title: 'Số điện thoại "' + user.phone + '" đã tồn tại!' });
+									} else { // neu phone moi k trung thi update
+										$scope.updateReal(user);
+									}
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+							}
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+					} else { // tìm k ra thì check trùng
+						// Check email
+						$http.get($scope.urlInfo + "email/" + user.email).then(resp => {
+							const checkEmail = resp.data;
+							if (checkEmail.length != 0) {
+								Swal.fire({ icon: 'warning', title: 'Email "' + user.email + '" đã tồn tại!' });
+							} else {
+								$http.get($scope.urlInfo + "phone/" + user.phone + "/" + user.id).then(resp => {
+									const myPhone = resp.data;
+									// tìm ra thì cập nhật
+									if (myPhone.length != 0) {
+										$scope.updateReal(user);
+									} else { // tìm k ra thì check trùng
+										// Check phone
+										$http.get($scope.urlInfo + "phone/" + user.phone).then(resp => {
+											const checkPhone = resp.data;
+											if (checkPhone.length != 0) {
+												Swal.fire({ icon: 'warning', title: 'Số điện thoại "' + user.phone + '" đã tồn tại!' });
+											} else { // neu phone moi k trung thi update
+												$scope.updateReal(user);
+											}
+										}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+									}
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+							}
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+					}
+					$http.get($scope.url + "phone/" + user.phone + "/" + user.id).then(resp => {
+
+
+
+					}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+					// Ngược lại email và sdt không thuộc user thì báo lỗi
+				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+				//====================================== Kết thúc xử lý
+			} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			) { }
 		})
 	}
+	$scope.updateReal = function(user) {
+		$http.put($scope.urlInfo + user.id, user).then(resp => {
 
+			$scope.myProfile = user;
+			//console.log("Sp: ", $scope.userStore);
+
+			// Thông báo
+			Swal.fire({
+				icon: 'success',
+				title: 'Cập nhật thành công!'
+			})
+
+		}).catch(error => {
+			// Thông báo
+			Swal.fire({
+				icon: 'error',
+				title: 'Cập nhật thất bại!'
+			});
+			console.log("Error", error);
+		});
+	}
+
+	//================================ Order manager
 	$scope.orders = [];
-	// Order manager
 	$scope.all = function() { //lấy tất cả các đơn hàng của khách hàng
 		const storeid = queryString.split("/").pop();
 		if (storeid != 0) {
@@ -416,6 +533,8 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.all();
+	
+	//================================ Load danh sách cửa hàng
 	$scope.listStore = [];
 	$http.get("/api/store")
 		.then(resp => {

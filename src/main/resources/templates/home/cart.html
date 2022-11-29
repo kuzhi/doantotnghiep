@@ -35,12 +35,14 @@
 					<div class="col-xl-10">
 						<div class="row">
 							<div class="col-xl-9 col-8">
-								<span class="text-truncate"> <b>{{p.product.name}}</b>
+								<span class="text-truncate"> 
+									<b>{{p.product.name}}</b> : {{p.product.price | currency : '' : 0}} đ
 								</span>
 							</div>
 							<div class="col-xl-3 col-4 d-flex justify-content-end">
-								<p class="text-secondary text-truncate">{{p.product.price |
-									currency : '' : 0}}</p>
+								<p class="text-secondary text-truncate">
+									{{p.product.price * p.amount | currency : '' : 0}}
+								</p>
 								<span class="mx-1">đ</span>
 							</div>
 						</div>
@@ -69,6 +71,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 			<div class="col-xl-4 col-sm-12 text-center">
 				<div class="bg-white p-4 rounded">
@@ -133,7 +136,7 @@
 							<h6>Tổng tiền thanh toán:</h6>
 						</div>
 						<div class="col-xl-6 col-4 d-flex justify-content-end">
-							<p class="text-secondary text-truncate mb-0">${{totalMoney()}}</p>
+							<p class="text-secondary text-truncate mb-0">{{totalMoney() | currency:'':0}}</p>
 							<span class="mx-1">đ</span>
 
 						</div>

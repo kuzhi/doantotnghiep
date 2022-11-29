@@ -24,6 +24,7 @@ public interface UserAdminService {
 	
 	// Find by ID
 	Optional<UserStore> findUserByID(Integer id);
+	User findByUserId(Integer userid);
 	// Find by name
 	List<User> findUserByName(String name);
 	// Find by user

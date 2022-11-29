@@ -23,7 +23,8 @@ import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
 
 
-
+import fpoly.chickens.entity.UserStore;
+import fpoly.chickens.service.SessionService;
 import fpoly.chickens.service.UserService;
 
 @SessionScope

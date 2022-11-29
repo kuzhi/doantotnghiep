@@ -48,6 +48,7 @@
 	
 	<body ng-app="home-cart" ng-controller="cart-ctrl">
 		<input id="userid" type="hidden" th:attr="value=${session.tokenUser}" ></input>
+		<input id="storeid" type="hidden" th:attr="value=${session.tokenStore}" ></input>
 		<div th:replace="/layout/_header"></div>
 		<div th:replace="${section}" ></div>
 		

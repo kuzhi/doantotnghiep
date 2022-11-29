@@ -1,8 +1,12 @@
 package fpoly.chickens.service;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import fpoly.chickens.entity.User;
 
 public interface UserService extends UserDetailsService {
 
@@ -18,12 +22,10 @@ public interface UserService extends UserDetailsService {
 
 	String getTokenUser();
 
+	void setTokenStore(Integer userStoreId);
 
-		void setTokenStore(Integer userStoreId);
+	void setTokenUser(Integer userId);
 
-		void setTokenUser(Integer userId);
-
-		void setTokenUserApp(String userAppId);
-
-
+	void setTokenUserApp(String userAppId);
+	
 }

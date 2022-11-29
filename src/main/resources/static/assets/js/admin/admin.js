@@ -63,12 +63,13 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 	//$scope.userid=0;
 	$scope.getEmpleadoInfo = function () {
 		// Lấy userid
-        $http.get("/api/get")
+        $http.get("/api/getUserApp")
 	    .then(resp => {
-	        //$scope.userid = resp.data;
-	       $scope.userid = 2;
+	        $scope.userid = resp.data;
+	       //$scope.userid = 2;
 			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
 				$scope.userApp = resp.data;
+				$scope.userApp.birthday = new Date($scope.userApp.birthday)
 			})
 	    })
     }; $scope.getEmpleadoInfo();
