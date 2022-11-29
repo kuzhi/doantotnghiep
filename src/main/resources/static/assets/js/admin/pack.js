@@ -1,6 +1,6 @@
 app.controller("pack-ctrl", function($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Gói dịch vụ';
-	$scope.titleBread = 'Duyệt gói dịch vụ trong hệ thống';
+	$scope.titleBread = 'Quản lý gói dịch vụ';
 	$scope.url = "/api/pack/";
 	$scope.status = 1;
 	$scope.showBtn = true;
