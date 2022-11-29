@@ -1,7 +1,10 @@
 package fpoly.chickens.controller.account;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,10 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
+import fpoly.chickens.service.StoreService;
 import fpoly.chickens.service.UserAdminKHService;
 import fpoly.chickens.service.UserAdminNVService;
 import fpoly.chickens.service.UserAdminService;
@@ -34,6 +38,8 @@ public class Register {
     @Autowired
     HttpServletRequest req;
 
+    @Autowired
+    StoreService storeService;
 
     @Autowired
     UserAdminService userAdminService ;
@@ -64,16 +70,22 @@ public class Register {
             List<UserStore> checkUStore = userAdminKHService.findUserByUserName(user.get().getUsername());
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(user.get().getUsername());
             List<User> checkU = userAdminService.findUserByUserName(user.get().getUsername());
-            if(checkU.isEmpty() && checkUApp.isEmpty() && checkUStore.isEmpty()){
+            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
                 String passwordEncode =pe.encode(user.get().getPassword());
-                user.get().setPassword(passwordEncode);
+                user.get().setPassword(passwordEncode); 
+                user.get().setDeleted(false);
+                user.get().setStatus(true);
                 userAdminService.create(user.get());
-                model.addAttribute("error", "Tài khoản hoặc  này đã được sử dụng");
+                
+                return "redirect:/home/auth/form";
 
-                return "home/account/register";
+
             }
+           
             model.addAttribute("error", "Tài khoản hoặc email này đã được sử dụng");
-            return "home/account/register";
+            return "home/account/registerUser";
+         
+           
         }
         model.addAttribute("error", "Thiếu trường");
 
@@ -88,16 +100,34 @@ public class Register {
             List<UserStore> checkUStore = userAdminKHService.findUserByUserName(userStore.get().getUsername());
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(userStore.get().getUsername());
             List<User> checkU = userAdminService.findUserByUserName(userStore.get().getUsername());
-            if(checkU.isEmpty() && checkUApp.isEmpty() && checkUStore.isEmpty()){
+            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
+                System.out.println(checkUStore.size() + " "+ checkUApp.size()+ " "+checkU.size());
+
                 String passwordEncode =pe.encode(userStore.get().getPassword());
                 userStore.get().setPassword(passwordEncode);
-                //storeDao.save(userStore.get());
-                model.addAttribute("error", "Tài khoản hoặc  này đã được sử dụng");
+                userStore.get().setDeleted(false);
+                UserStore uStore = userStore.get();
 
-                return "home/account/register";
+                userAdminKHService.create(uStore);
+    
+                Date endDate = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(endDate);
+                calendar.add(Calendar.DATE,3);
+                endDate = calendar.getTime();
+                Store store = new Store();
+                store.setUserstoreId(uStore);
+                store.setName(uStore.getUsername() + uStore.getId());
+                store.setEnddate(endDate);
+                store.setDeleted(false);
+                storeService.create(store);
+                return "redirect:/home/auth/form";
+               
+
             }
+            
             model.addAttribute("error", "Tài khoản hoặc email này đã được sử dụng");
-            return "home/account/register";
+            return "home/account/registerStore";
         }
         model.addAttribute("error", "Thiếu trường");
 

@@ -9,4 +9,11 @@ public interface StoreService {
 	
 	List<Store> findStoreById(Integer userid);
 	Store findByUserid(Integer userid);
+
+	Store create(Store store);
+
+	Store update(Store store);
+
+	void deleteStore(Integer storeId);
+
 }

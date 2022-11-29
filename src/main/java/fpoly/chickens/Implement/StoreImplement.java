@@ -33,4 +33,20 @@ public class StoreImplement implements StoreService {
 		return storeDAO.findByUserid(userid);
 	}
 
+	@Override
+	public Store create(Store store) {
+		// TODO Auto-generated method stub
+		return storeDAO.save(store);
+	}
+
+	@Override
+	public void deleteStore(Integer storeId) {
+		// TODO Auto-generated method stub
+	 storeDAO.deleteById(storeId);	
+	
+	}
+	@Override
+	public Store update(Store store) {
+		// TODO Auto-generated method stub
+		return storeDAO.saveAndFlush(store);	}
 }

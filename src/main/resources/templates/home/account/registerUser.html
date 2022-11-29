@@ -43,7 +43,7 @@
 				</div>
 
 				<form class="login100-form validate-form" th:action="@{create-user}" th:object="${user}" method="POST" >
-					<span class="login100-form-title"> ĐĂNG KÝ </span>
+					<span class="login100-form-title"> ĐĂNG KÝ THÀNH VIÊN </span>
 					<th:block th:if="${error !=null}">
 						<div class="alert alert-danger" role="alert" th:text="${error}"></div>
 					</th:block>
