@@ -7,24 +7,56 @@
 </head>
 <body>
 	<section class="container">
-		Danh sách cửa hàng
-		
+		<label class="fw-bold">Danh sách cửa hàng</label>
+
 		<div class="row">
 			<div ng-repeat="store in pager.listStore" class="col-xl-4">
 				<div class="card bg-white shadow-sm rounded p-2 mt-2">
-				  <a href="#">
-				  	<img ng-src="/assets/images/{{store.image}}" class="card-img-top" alt="{{store.image}}">
-				  </a>
-				  <div class="card-body">
-				    <h5 class="card-title"> {{store.name}} | <small>{{store.phone}}</small> </h5>
-				    <p class="card-text text-truncate">
-				    	Đ/c: {{store.address}}
-				    </p>
-				  </div>
-				  <div class="card-footer">
-				  <a th:href="@{|/home/choosestoreUser?storeid={{store.id}}|}">Ghé thăm cửa hàng</a>
-				  </div>
+					<a href="#" class="text-center"> <img
+						ng-src="/assets/images/{{store.image==''?'icon_cart_blank.png':store.image}}"
+						class="card-img-top" alt="{{store.image}}"
+						style="width: 300px; height: 300px;">
+					</a>
+					<div class="card-body">
+						<h5 class="card-title">
+							{{store.name}} | <small>{{store.phone}}</small>
+						</h5>
+						<div class="row">
+							<div class="col-5">
+								<p class="card-text text-truncate">Đ/c: {{store.address}}</p>
+							</div>
+							<div class="col-7 text-center">
+								<a th:href="@{|/home/choosestoreUser?storeid={{store.id}}|}">
+									<button class="glow-on-hover"> Vào cửa hàng </button>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
+			</div>
+		</div>
+		
+		<div class="row mt-3 text-start">
+			<div class="col-xl text-end">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-end mb-0">
+						<li class="page-item">
+							<a ng-click="pager.first()" class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
+						</li>
+						<li class="page-item">
+							<a ng-click="pager.prev()" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
+						</li>
+						<li class="page-item">
+							<span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
+						</li>
+						<li class="page-item">
+							<a ng-click="pager.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
+						</li>
+						<li class="page-item">
+							<a ng-click="pager.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</section>

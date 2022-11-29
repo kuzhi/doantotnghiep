@@ -7,18 +7,23 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.email = 'anv123@mail.com'
 	const queryString = window.location.href;
 	$scope.storeid = queryString.split("/").pop();
-	$scope.userid = Number(document.getElementById("userid").value);//Chỉ cần lấy id của user trến session gắn dô đây là ok
-
+	$scope.userid = Number(document.getElementById("userid").value);
+	$scope.sid = Number(document.getElementById("storeid").value);
 	$scope.countAmount = function() {
 		const storeid = queryString.split("/").pop();
-		console.log("countAmount: ", storeid)
 		if (storeid != 0 && $scope.userid != 0) {
 			$http.get("/api/countcart/" + storeid + "/" + $scope.userid).then(resp => {
 				$scope.amountItems = resp.data
 			})
 		}
-	}; 
-	$scope.countAmount();
+	}; $scope.countAmount();
+	
+	$scope.loadTitleStore = function() {
+		$scope.sid -= 1;
+		$http.get("/api/store/"+$scope.sid).then(resp=>{
+			$scope.titleStore = resp.data;
+		})
+	};$scope.loadTitleStore();
 
 	// Load list products
 	$scope.url = "/api/product";
@@ -256,6 +261,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 					alert("Vui lòng nhập địa chỉ")
 				} else {
 					$http.post("/api/order/add", $scope.order).then(resp => {
+						$scope.loadCart($scope.storeid, $scope.userid)
 					})
 					swalWithBootstrapButtons.fire(
 						'Thành công',
