@@ -24,7 +24,7 @@ import fpoly.chickens.entity.UserRoleApp;
 
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.SessionService;
->
+
 import fpoly.chickens.service.UserService;
 
 @SessionScope
@@ -68,10 +68,7 @@ try {
 
 
 	@Override
-<<<<<<< HEAD
-=======
 
->>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 	public void setTokenStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userStoreId).getBytes();
@@ -82,10 +79,6 @@ try {
 	}
 
 	@Override
-<<<<<<< HEAD
-=======
-
->>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 	public void setTokenUser(Integer userId) {
 		// TODO Auto-generated method stub
 		// byte[] auth = (userId).getBytes();
@@ -94,41 +87,25 @@ try {
 
 	}
 
-	@Override
-	public void setTokenUserApp(String userAppId) {
-		// TODO Auto-generated method stub
-		//byte[] auth = (userId).getBytes();
-		//String token = "Basic " + Base64.getEncoder().encodeToString(auth);
-		session.setAttribute("tokenUserApp", userAppId);
-
-	}
+	
 
 	@Override
 	public String getTokenStore() {
 		// TODO Auto-generated method stub
 		String token = (String) session.getAttribute("tokenStore");
-<<<<<<< HEAD
-=======
 
->>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
 		return token;
 	}
 
 	@Override
 	public String getTokenUser() {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		String token = (String) session.getAttribute("tokenUser");
 		return token;
 
 	}
-=======
 
-		String token = (String) session.getAttribute("tokenUser");
-		return token;
->>>>>>> 242a2bc3c6643f2494ff010adb6694fa743e7158
-
-	}
+	
 	
 	@Override
 	public void setTokenUserApp(String userAppId) {
@@ -138,4 +115,5 @@ try {
 		session.setAttribute("tokenUserApp", userAppId);
 
 	}
+
 }
