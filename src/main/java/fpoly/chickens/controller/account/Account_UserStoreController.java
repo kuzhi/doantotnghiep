@@ -36,16 +36,16 @@ public class Account_UserStoreController {
 		
 		String checkSessionStore = userService.getTokenStore();
 		String checkSessionUser = userService.getTokenUser();
-
+		System.out.println(checkSessionStore + checkSessionUser);
 		if(checkSessionStore == null){
 			return "redirect:/app";
 		}
-		else if(checkSessionUser == null){
-			return "redirect:/home/client/0";
+		if(checkSessionUser == null){
+			return "redirect:/home/client";
 		}
-		else{
+		
 			return "home/account/login";
-		}
+		
 		//return "home/account/login";
 	}
 	@RequestMapping("login")
@@ -79,20 +79,19 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 		boolean Check = authen.loginUser(username, password);
 		if(Check) {
-			return "redirect:/home/client/"+0;
+			return "redirect:/home/client";
 		}
 		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
 		return "home/account/login";
 	}
 	
-	@RequestMapping("logout-store")
+	@GetMapping("logout-store")
 	public String logoutStore(){
 		sessionService.remove("tokenStore");
-		//System.out.println(userService.getTokenStore());
 		return "home/account/login";
 	}
 
-	@RequestMapping("logout-user")
+	@GetMapping("logout-user")
 	public String logoutUser(){
 		sessionService.remove("tokenUser");
 		return "home/account/login";

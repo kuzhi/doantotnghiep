@@ -13,7 +13,7 @@
 				aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item">
-						<a th:href="@{/home/client}"
+						<a th:href="@{/home/client/list-store/view}"
 						class="text-decoration-none text-dark">Trang chủ</a>
 					</li>
 					<li class="breadcrumb-item" aria-current="page">
@@ -97,7 +97,7 @@
 								<div class="col-xl-10 col-10">
 									<div class="d-flex">
 										<span class="fw-bold text-truncate text-secondary me-1">
-											{{product.price}}
+											{{product.price | currency:'':0}}
 										</span> <span class="fw-bold text-secondary">đ</span>
 									</div>
 								</div>

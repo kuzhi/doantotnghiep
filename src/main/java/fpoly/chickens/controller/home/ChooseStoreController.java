@@ -22,7 +22,7 @@ public class ChooseStoreController {
 			userService.setTokenStore(storeid.get());
 			//System.out.println(storeid.get());
 		}
-		return "redirect:/home/client/"+0;
+		return "redirect:/home/client";
 		
 	}
 	
@@ -31,7 +31,7 @@ public class ChooseStoreController {
 		if(storeid.get()>0) {
 			userService.setTokenStore(storeid.get());
 		}
-		return "redirect:/home/client";
+		return "redirect:/app";
 		
 	}
 	

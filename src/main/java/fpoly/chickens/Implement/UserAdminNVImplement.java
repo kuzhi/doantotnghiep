@@ -135,4 +135,10 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		return userAppDAO.findById(id);
 	}
+
+	@Override
+	public List<UserApp> getAdmins() {
+		// TODO Auto-generated method stub
+		return userAppDAO.getAdmins();
+	}
 }

@@ -25,9 +25,9 @@ public class AuthInterceptor implements HandlerInterceptor{
 		//lay account tu session
 		String user = session.get("tokenUser");
 		String store = session.get("tokenStore");
-		
+		String userApp = session.get("tokenUserApp");
 		String errorAuth = "";
-		if(user == null && store == null) {
+		if(user == null && store == null && userApp == null) {
 			//khi chua dang nhap
 			errorAuth = "Not Logged In";
 		}

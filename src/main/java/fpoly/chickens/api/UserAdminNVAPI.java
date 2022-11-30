@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.UserApp;
@@ -34,7 +35,10 @@ public class UserAdminNVAPI {
 	public List<UserApp> findAll() {
 		return userAdminNVService.findAll();
 	}
-	
+	@GetMapping("getamin")
+	public List<UserApp> getAdmins(@RequestParam("admin") Optional<Boolean> admin) {
+		return userAdminNVService.getAdmins();
+	}
 	// LoadUserStore by ID
 	@GetMapping("/get-user-app/{userAppID}")
 	public ResponseEntity<Optional<UserApp>> LoadUserStoreByID(@PathVariable("userAppID") Optional<Integer> userAppID) {
