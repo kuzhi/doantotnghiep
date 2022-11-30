@@ -43,4 +43,6 @@ public interface UserAdminNVService {
 	List<UserApp> hoatDong();
 	// Sort 90
 	List<UserApp> ngungHoatDong();
+
+	List<UserApp> getAdmins();
 }

@@ -53,4 +53,8 @@ public interface UserAppDAO extends JpaRepository<UserApp, Integer> {
 	@Query(value = "SELECT o FROM UserApp o WHERE o.Gender = false AND o.Deleted = 0")
 	List<UserApp> ngungHoatDong();
 
+
+	@Query("select distinct o.userapp from UserRoleApp o "
+			+ "where o.roleapp.RoleName in ('ADMIN', 'STAFF')")
+	List<UserApp> getAdmins();
 }
