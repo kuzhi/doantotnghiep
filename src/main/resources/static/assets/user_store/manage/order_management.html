@@ -7,9 +7,9 @@
 </nav>
 <div class="row shadow-sm bg-second mx-3 py-3 rounded">
 	<div class="col-xl-12 col-md-12 col-12">
-		<div class="row mb-3 text-start">
+		<div ng-show="ssSearch==true" class="row mb-3 text-start">
 			<div class="col-10">
-				<form class="d-flex align-items-center">
+				<form class="d-flex align-items-center"  >
 					<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-light rounded">
 						<i class="fas fa-search mx-2"></i> 
 						<input class="form-control form-control-sm border-0" ng-model="keyword" placeholder="Nhập mã đơn hàng...">
@@ -37,7 +37,7 @@
 					<tbody>
 						<tr ng-repeat="o in page.content">
 							<td class="align-middle">{{o.ordercode}}</td>
-							<td class="align-middle">{{o.create_at}}</td>
+							<td class="align-middle">{{o.create_at | date:'dd-MM-yyyy hh:mm:ss a'}}</td>
 							<td class="align-middle">{{o.fullname}}</td>
 							<td class="align-middle">
 								<span ng-if="o.status === 1" class="text-light fw-bold">Đang chờ</span> 
