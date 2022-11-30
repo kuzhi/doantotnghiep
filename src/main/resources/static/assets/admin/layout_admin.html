@@ -55,13 +55,13 @@
 					<img class="img__logo" src="/assets/images/logo.png" alt="Logo">
 				</div>
 				<div class="btn-group account__user">
-					<label aria-expanded="false class="dropdown-toggle" data-bs-toggle="dropdown" > {{userApp.fullname}} </label>
+					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > {{userApp.fullname}} </label>
 					<ul class="dropdown-menu">
 						<li>
 							<a class="dropdown-item" href="#!profile"> Cá nhân </a>
 						</li>
 						<li>
-							<a class="dropdown-item" href="#"> Đăng xuất </a>
+							<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
 						</li>
 					</ul>
 				</div>
@@ -232,13 +232,13 @@
 							>
 								<i class="fas fa-people-arrows size-icon text-muted"></i> 
 									<span class="fw-semibold text-body">
-										Cấp quyền
+										Hỗ trợ
 									</span>
 								</li>
 							<del class="collapse text-decoration-none" id="collapseProduct">
 								<a href="#!supporter"
 									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Phân công quản trị </a>
+									Phân công hỗ trợ </a>
 							</del>
 							<!-- Phân quyền -->
 							<li 
@@ -276,15 +276,17 @@
 								<a 
 									href="#!user_admin"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Nhân viên </a> <br> 
-								<a 
-									href="#!customs"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Người mua hàng </a>
+								> Nhân viên </a> 
+								<br>
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
 								> Khách hàng </a>
+								<br>
+								<a 
+									href="#!customs"
+									class="text-decoration-none text-black-50 fw-semibold list__item"
+								> Người mua hàng </a>
 							</del>
 							<!-- Gói dịch vụ -->
 							<li 

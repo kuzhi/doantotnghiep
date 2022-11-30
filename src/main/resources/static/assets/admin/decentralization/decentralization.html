@@ -41,38 +41,19 @@
 
 		<div class="row mt-3">
 			<div class="table-responsive">
-				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
-					<thead class="table_primary">
-                     	<tr class="text-center">
-							<th>Ảnh</th>
-							<th>Tên</th>
-							<th>Email</th>
-							<th>Giới tính</th>
-							<th>Chức vụ</th>
-							<th>Hoạt động</th>
+				<table class="table table-bordered">
+					<thead class="table-dark">
+						<tr>
+							<th></th>
+							<th ng-repeat="r in roles" class="text-center">{{r.name}}</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="u in list.user">
-							<td class="align-middle text-center">
-								<img 
-                                 	class="rounded-circle" 
-                                 	src="/assets/images/{{u.img}}" 
-                                 	alt="ảnh món" 
-                                 	style="width: 40px; height: 40px;"
-                                 >
-							</td>
-							<td class="align-middle"> {{u.fullname}} </td>
-							<td class="align-middle"> {{u.email}} </td>
-							<td class="align-middle"> {{u.gender ? 'Nam' : 'Nữ'}} </td>
-							<td class="align-middle"> {{u.admin ? 'Admin' : 'Nhân viên'}} </td>
-							<td class="text-center align-middle">
-								<!-- Edit -->
-								<button ng-click="edit()" class="btn btn-info btn-sm text-white" 
-								data-bs-toggle="modal" data-bs-target="#addModal">
-									<i class="fa-regular fa-pen-to-square"></i>
-								</button>
-							</td>
+						<tr ng-repeat="a in admins">
+							<td>{{a.username}}</td>
+							<th ng-repeat="r in roles" class="text-center">
+								<input ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">
+							</th>
 						</tr>
 					</tbody>
 				</table>
