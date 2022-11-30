@@ -18,7 +18,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	}; $scope.countAmount();
 	
 	$scope.loadTitleStore = function() {
-		$scope.sid -= 1;
+		$scope.sid;
 		$http.get("/api/store/"+$scope.sid).then(resp=>{
 			$scope.titleStore = resp.data;
 		})
@@ -31,6 +31,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		storeid = queryString.split("/").pop();
 		$http.get($scope.url + "/store/" + storeid + "/" + true).then(resp => {
 			$scope.products = resp.data;
+			console.log($scope.products)
 		});
 	};
 

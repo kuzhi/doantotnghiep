@@ -88,13 +88,13 @@ public class Account_UserStoreController {
 	@RequestMapping("logout-store")
 	public String logoutStore(){
 		sessionService.remove("tokenStore");
-		System.out.println(userService.getTokenStore());
-		return "redirect:/home/auth/form";
+		//System.out.println(userService.getTokenStore());
+		return "home/account/login";
 	}
 
 	@RequestMapping("logout-user")
 	public String logoutUser(){
 		sessionService.remove("tokenUser");
-		return "redirect:/home/auth/form";
+		return "home/account/login";
 	}
 }
