@@ -14,6 +14,7 @@ app.controller("supporter-ctrl", function($scope, $http, $location) {
 			{
 				$scope.supports = resp.data;
 			})
+
 	}
 	
 	$scope.initUsers =  function(){
@@ -21,6 +22,12 @@ app.controller("supporter-ctrl", function($scope, $http, $location) {
 			{
 				$scope.users = resp.data;
 			})
+			$http.get("/api/userApp/getamin").then(resp =>
+				{
+					let a = resp.data;
+					console.log({a});
+				})
+
 	}
 
 	// Phân trang và điều hướng
