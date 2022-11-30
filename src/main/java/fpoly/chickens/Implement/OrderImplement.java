@@ -92,11 +92,11 @@ public class OrderImplement implements OrderService {
 		} else {
 			sort = Sort.by(Direction.ASC, field);
 		}
-		Pageable pageable = PageRequest.of(pageNumber, 1, sort);
+		Pageable pageable = PageRequest.of(pageNumber, 10, sort);
 		Page<Order> page = orderDao.findAllByStore(store, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
-			pageable = PageRequest.of(pageNumber, 1);
+			pageable = PageRequest.of(pageNumber, 10, sort);
 			page = orderDao.findAllByStore(store, pageable);
 		}
 		return page;
@@ -129,11 +129,11 @@ public class OrderImplement implements OrderService {
 		} else {
 			sort = Sort.by(Direction.ASC, field);
 		}
-		Pageable pageable = PageRequest.of(pageNumber, 1, sort);
+		Pageable pageable = PageRequest.of(pageNumber, 10, sort);
 		Page<Order> page = orderDao.findAllByStoreAndStatus(store, status, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
-			pageable = PageRequest.of(pageNumber, 1);
+			pageable = PageRequest.of(pageNumber, 10, sort);
 			page = orderDao.findAllByStoreAndStatus(store, status, pageable);
 		}
 		return page;
