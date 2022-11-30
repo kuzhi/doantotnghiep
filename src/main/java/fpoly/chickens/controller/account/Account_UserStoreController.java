@@ -36,16 +36,16 @@ public class Account_UserStoreController {
 		
 		String checkSessionStore = userService.getTokenStore();
 		String checkSessionUser = userService.getTokenUser();
-
+		System.out.println(checkSessionStore + checkSessionUser);
 		if(checkSessionStore == null){
 			return "redirect:/app";
 		}
-		else if(checkSessionUser == null){
+		if(checkSessionUser == null){
 			return "redirect:/home/client/0";
 		}
-		else{
+		
 			return "home/account/login";
-		}
+		
 		//return "home/account/login";
 	}
 	@RequestMapping("login")
@@ -85,16 +85,17 @@ public class Account_UserStoreController {
 		return "home/account/login";
 	}
 	
-	@RequestMapping("logout-store")
+	@GetMapping("logout-store")
 	public String logoutStore(){
 		sessionService.remove("tokenStore");
-		System.out.println(userService.getTokenStore());
-		return "redirect:/home/auth/form";
+		
+		return "home/account/login";
 	}
 
-	@RequestMapping("logout-user")
+	@GetMapping("logout-user")
 	public String logoutUser(){
 		sessionService.remove("tokenUser");
-		return "redirect:/home/auth/form";
+		
+		return "home/account/login";
 	}
 }

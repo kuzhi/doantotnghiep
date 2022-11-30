@@ -47,14 +47,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="c in list.chanel" >
-							<td class="align-middle"> {{c.id}} </td>
-							<td class="align-middle"> {{c.name}} </td>
-							<td class="align-middle"> {{c.address}} </td>
-							<td class="align-middle"> {{c.phone}} </td>
+						<tr ng-repeat="store in pager.stores" >
+							<td class="align-middle"> {{store.id}} </td>
+							<td class="align-middle"> {{store.name}} </td>
+							<td class="align-middle"> {{store.address}} </td>
+							<td class="align-middle"> {{store.phone}} </td>
 							<td class="text-center align-middle">
 								<!-- Edit -->
-								<button type="button" ng-click="edit()" class="btn btn-info btn-sm text-white"
+								<button type="button" ng-click="edit(store)" class="btn btn-info btn-sm text-white"
 								data-bs-toggle="modal" data-bs-target="#addModal"> <i class="fa-regular fa-pen-to-square"></i> </button>
 							</td>
 						</tr>
@@ -106,25 +106,25 @@
 								<tr>
 									<td class="fw-bold">Tên chủ kênh</td>
 									<td>
-										<input type="text" class="w-100 form-control" disabled readonly>
+										<input  ng-model="formStore.userstoreId.username" type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Số điện thoại</td>
 									<td>
-										<input type="text" class="w-100 form-control" disabled readonly>
+										<input ng-model="formStore.phone" type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Tên kênh</td>
 									<td>
-										<input type="text" class="w-100 form-control" disabled readonly>
+										<input ng-model="formStore.name" type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
 									<td class="fw-bold">Địa chỉ</td>
 									<td>
-										<input type="text" class="w-100 form-control" disabled readonly>
+										<input ng-model="formStore.address" type="text" class="w-100 form-control" disabled readonly>
 									</td>
 								</tr>
 								<tr>
@@ -144,12 +144,7 @@
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<td class="fw-bold">Tên quản trị</td>
-									<td>
-										<input class="w-100 form-control" type="text" disabled readonly>
-									</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>

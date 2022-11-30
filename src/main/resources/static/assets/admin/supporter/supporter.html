@@ -43,7 +43,7 @@
 				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
 					<thead class="table_primary">
                      	<tr>
-			                 <th>Mã kênh</th>
+			                 
 			                 <th>Tên kênh</th>
 			                 <th>Chủ kênh</th>
 			                 <th>Nhân viên</th>
@@ -52,18 +52,17 @@
 			             </tr>
 			         </thead>
 			         <tbody>
-			             <tr ng-repeat="p in list.suporter">
-			                 <td> {{p.id}} </td>
-			                 <td>{{p.name}}</td>
-			                 <td>{{p.username}}</td>                             
-			                 <td>{{p.staff}}</td>
-			                 <td>{{p.status ? 'Đang hoạt động':'Ngưng hoạt động'}}</td>
+			             <tr ng-repeat="support in supports">
+			                 <td>{{support.store.name}}</td>
+			                 <td>{{support.store.userstoreId.username}}</td>                             
+			                 <td>{{support.userApp.fullname}}</td>
+			                 <td>{{support.status ? 'Hoàn thành':'Đang chờ hỗ trợ'}}</td>
 			                 <td class="text-center align-middle">
 			                 	<!-- Edit -->
-								<button type="button" ng-click="edit()" class="btn btn-info btn-sm text-white"
+								<button type="button" ng-click="edit(support)" class="btn btn-info btn-sm text-white"
 								data-bs-toggle="modal" data-bs-target="#editModal"> <i class="fa-regular fa-pen-to-square"></i> </button>
 								<!-- Remove -->
-								<button ng-click="delete()" class="btn btn-danger btn-sm"> <i class="fa-regular fa-trash-can"></i> </button>
+								<button ng-click="delete(support)" class="btn btn-danger btn-sm"> <i class="fa-regular fa-trash-can"></i> </button>
 							</td>
 			             </tr>
 			         </tbody>
@@ -108,36 +107,30 @@
 		    </div>
 			<div class="modal-body">
 				<form action="" name="chanelForm" novalidate>
-					<!-- Id -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Mã kênh <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <input ng-model="id" type="text" name="id"
-                       	class="w-full form-control" placeholder="--Vui lòng nhập--" required >
-                    </div>
+					
                     <!-- Name -->
 					<div class="form-group mx-auto">
                         <label class="form-label"> Tên kênh <span class="text-red">*</span> </label>
                         <!-- Input -->
-                        <input ng-model="name" type="text" name="name"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" required>
+                        <input ng-model="formSupport.store.name"  type="text" name="name"
+                        class="w-full form-control" placeholder="--Vui lòng nhập--" readonly>
                     </div>
                     <!-- Chủ kênh -->
 					<div class="form-group mx-auto">
-                        <label class="form-label"> Tên kênh <span class="text-red">*</span> </label>
+                        <label class="form-label"> Chủ kênh <span class="text-red">*</span> </label>
                         <!-- Input -->
-                        <input ng-model="user" type="text" name="user"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" required>
+                        <input ng-model="formSupport.store.userstoreId.username"  type="text" name="user"
+                        class="w-full form-control" placeholder="--Vui lòng nhập--" readonly>
                     </div>
                     <!-- Nhân viên -->
 					<div class="form-group mx-auto">
                         <label class="form-label"> Nhân viên <span class="text-red">*</span> </label>
-                      	<select class="form-select" aria-label="Default select example">
-						  <option selected>--Vui lòng chọn--</option>
-						  <option 
-						  	ng-repeat="(id,c) in list.user"
-						  	value="{{c.id}}"
-						  >{{c.name}}</option>
+                      	<select class="form-select" id="selectUser"  aria-label="Default select example">
+							<option selected>--Vui lòng chọn--</option>
+							<option ng-model="formSupport.userApp" 
+						  	ng-repeat="user in users" ng-selected="user.id == formSupport.userApp.id"
+						  	value="{{user.id}}"
+						  >{{user.fullname}}</option>
 						</select>
                     </div>
                     <!-- Status -->
@@ -146,13 +139,13 @@
                         <div class="d-flex">
                         
                         	<div class="form-check me-2">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="true" checked >
-								<label class="form-check-label" for="gridRadios1" > Đang hoạt động </label>
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="formSupport.status" ng-value="false" checked >
+								<label class="form-check-label" for="gridRadios1" > Đang chờ hỗ trợ </label>
 							 </div> 
 							 
 							 <div class="form-check">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="false" > 
-								<label class="form-check-label" for="gridRadios2" > Ngừng hoạt động </label>
+								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="formSupport.status" ng-value="true" > 
+								<label class="form-check-label" for="gridRadios2" > Hoàn thành </label>
 							 </div>
                         </div>
                     </div>
@@ -163,7 +156,7 @@
 						<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
 					</div>
 					<div class="col-xl-6">
-						<button ng-disabled="chanelForm.$invalid" class="btn btn-info text-white w-100">Lưu</button>
+						<button ng-click="update()" class="btn btn-info text-white w-100">Lưu</button>
 					</div>
 				</div>
 			</div>
