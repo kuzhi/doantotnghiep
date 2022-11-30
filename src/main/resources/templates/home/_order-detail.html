@@ -14,7 +14,7 @@
 	        <div class="card" style="border-radius: 10px;">
 	          <div class="card-header px-4 py-3">
 	            <h5 class="text-muted mb-0">
-	            	<a th:href="@{|/home/client/my-profile/{{storeid}}|}" class="text-decoration-none text-secondary">
+	            	<a th:href="@{|/home/client/my-profile/{{sid}}|}" class="text-decoration-none text-secondary">
 	            		<i class="fa-solid fa-arrow-left me-2"></i>
 	            	</a>
 	            	Đơn hàng của bạn, 
@@ -63,8 +63,8 @@
 	              <div class="card-body">
 	                <div class="row">
 	                  <div class="col-md-2">
-	                    <img th:src="'/assets/images/products/'+${p.product.image}"
-							style="width: 50px; height: 50px; bdetail-radius: 10px;">
+	                    <img th:src="@{'/assets/images/Products/'+${p.product.image==''?'icon_food.png':p.product.image}}"
+							style="width: 50px; height: 50px; border-radius: 10px;">
 	                  </div>
 	                  <div class="col-md-6 text-start d-flex justify-content-start align-items-center">
 	                    <span class="text-truncate"> 

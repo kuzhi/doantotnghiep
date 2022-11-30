@@ -1,5 +1,6 @@
 package fpoly.chickens.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -25,8 +26,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "Store")
-public class Store {
+public class Store implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "Id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

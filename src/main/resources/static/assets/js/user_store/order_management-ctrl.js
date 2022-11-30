@@ -55,6 +55,7 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 	$scope.edit = function(id) {
 		$http.get("/api/orderdetail/" + id).then(resp => {
 			$scope.orderDetail = resp.data;
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
 
@@ -64,7 +65,8 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 			status: 2
 		}
 		$http.put("/api/order/update", order).then(resp => {
-			alert("Bạn đã duyệt đơn hàng thành công")
+			swalWithBootstrapButtons.fire( 'Thành công', 'Đơn hàng đã được duyệt thành công!', 'success' )
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
 
@@ -80,7 +82,7 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 		swalWithBootstrapButtons.fire({
 			title: 'Thông báo',
 			icon: 'warning',
-			text: "Bạn có chắc muốn thực hiện xóa?",
+			text: "Bạn có chắc muốn hủy đơn này?",
 			showCancelButton: true,
 			confirmButtonText: 'OK',
 			cancelButtonText: 'Quay lại',
@@ -99,10 +101,11 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 				}
 				$http.put("/api/order/update", order).then(resp => {
 					swalWithBootstrapButtons.fire(
-						'Đã xóa',
-						'Đã xóa thành công!',
+						'Thành công',
+						'Đã hủy đơn hàng!',
 						'success'
 					)
+					$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 				})
 			} else if (
 				/* Read more about handling dismissals below */
@@ -150,6 +153,7 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 	$scope.edit = function(id) {
 		$http.get("/api/orderdetail/" + id).then(resp => {
 			$scope.orderDetail = resp.data;
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
 
@@ -165,7 +169,7 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 		swalWithBootstrapButtons.fire({
 			title: 'Thông báo',
 			icon: 'warning',
-			text: "Bạn có chắc muốn thực hiện xóa?",
+			text: "Bạn có chắc muốn hủy đơn này?",
 			showCancelButton: true,
 			confirmButtonText: 'OK',
 			cancelButtonText: 'Quay lại',
@@ -184,10 +188,11 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 				}
 				$http.put("/api/order/update", order).then(resp => {
 					swalWithBootstrapButtons.fire(
-						'Đã xóa',
-						'Đã xóa thành công!',
+						'Thành công',
+						'Đã hủy đơn hàng!',
 						'success'
 					)
+					$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 				})
 			} else if (
 				/* Read more about handling dismissals below */
@@ -235,6 +240,7 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 	$scope.edit = function(id) {
 		$http.get("/api/orderdetail/" + id).then(resp => {
 			$scope.orderDetail = resp.data;
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
 
@@ -244,7 +250,8 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 			status: 2
 		}
 		$http.put("/api/order/update", order).then(resp => {
-			alert("Bạn đã duyệt đơn hàng thành công")
+			swalWithBootstrapButtons.fire( 'Thành công', 'Đơn hàng đã được duyệt thành công!', 'success' )
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
 
