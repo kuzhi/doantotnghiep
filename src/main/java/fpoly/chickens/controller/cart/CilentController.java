@@ -18,30 +18,37 @@ import fpoly.chickens.service.OrderService;
 import fpoly.chickens.service.ProductService;
 import fpoly.chickens.service.UserService;
 
-
 @Controller
 @RequestMapping({ "/home/client", "/home/cart/menu" })
 public class CilentController {
-	
-	@Autowired OrderService orderService;
-	@Autowired ProductService productService;
-	@Autowired UserService userService;
-	
+
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	ProductService productService;
+	@Autowired
+	UserService userService;
+
 	@RequestMapping("/{storeid}")
 	public String view_Cart(Model model) {
-		if(userService.getTokenStore()==null) {
+		if (userService.getTokenStore() == null) {
 			return "home/list_store";
-		}else {
-			String storeid =  userService.getTokenStore();
+		} else {
+			String storeid = userService.getTokenStore();
 			model.addAttribute("storeid", storeid);
-			
-			return "redirect:/home/client/list-product/"+storeid;
+
+			return "redirect:/home/client/list-product/" + storeid;
 		}
 	}
-	
+
+	@RequestMapping("/list-store/view")
+	public String view_list() {
+		return "home/list_store";
+	}
+
 	@RequestMapping("/list-product/{storeid}")
 	public String viewProduct() {
-		
+
 		return "home/index";
 	}
 
@@ -52,7 +59,7 @@ public class CilentController {
 
 	@RequestMapping("/_seeorder-detail/{id}")
 	public String view_OrderDetail(@PathVariable("id") Optional<Integer> id, Model model) {
-		model.addAttribute("detail",orderService.findOrderById(id.get()));
+		model.addAttribute("detail", orderService.findOrderById(id.get()));
 		return "home/_order-detail";
 	}
 }
