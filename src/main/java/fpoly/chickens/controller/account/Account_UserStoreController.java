@@ -41,7 +41,8 @@ public class Account_UserStoreController {
 			return "redirect:/app";
 		}
 		if(checkSessionUser == null){
-			return "redirect:/home/client";
+			return "redirect:/home/client/0";
+
 		}
 		
 			return "home/account/login";

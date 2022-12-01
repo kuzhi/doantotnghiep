@@ -1,8 +1,9 @@
 package fpoly.chickens.Implement;
 
+import java.io.Console;
 import java.util.Base64;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,10 @@ import fpoly.chickens.service.UserService;
 public class UserServiceImplement implements UserService {
 	@Autowired
 	HttpSession session;
-	
+
+	@Autowired
+	HttpServletRequest req;
+
 	@Autowired
 	UserAppDAO userAppDao;
 	
@@ -48,16 +52,26 @@ public class UserServiceImplement implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-					
+			String a = req.getParameter("username");
+			String b = req.getParameter("password");
+			System.out.println(a + b);
 					UserApp userApp = userAppDao.findByUsernames(username); 
+					System.out.println(userApp);
 					//this.setToken(userApp.getId());
-						String passwordApp = userApp.getPassword().trim();				
+						String passwordApp = userApp.getPassword().trim();
+						boolean match = pe.matches(b, passwordApp);
+						if(match){
+							System.out.println("ok");
+						}
+
 						UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
-					RoleApp role =   roleDao.findById(userRole.getId()).get();
-						String roleUser = role.getRoleName();
+						String role= userRole.getRoleapp().getRoleName();
+						
+				
 						this.setTokenUserApp(String.valueOf(userApp.getId()));
+						
 					return User.withUsername(username)
-								 .password(passwordApp).roles(roleUser).build();
+								 .password(passwordApp).roles(role).build();
 					
 				} catch (Exception e) {
 					// TODO: handle exception

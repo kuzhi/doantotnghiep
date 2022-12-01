@@ -9,26 +9,7 @@
 	class="row shadow-sm bg-white mx-3 py-3 rounded">
 	<div class="col-xl-12 col-md-12 col-12">
 
-		<div class="row">
-			<form class="d-flex align-items-center justify-content-between">
-				<div class="d-flex align-items-center w-75">
-					<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input type="search" class="form-control form-control-sm border-0" placeholder="Nhập mã nhân viên...">
-					</div>
-	
-					<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input type="search" class="form-control form-control-sm border-0" placeholder="Nhập tên nhân viên...">
-					</div>
-				</div>
-					
-				<!-- Tìm kiếm -->	
-				<div class="w-25">
-					<button type="submit" class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
-				</div>
-			</form>
-		</div>
+		
 		
 		<div class="row my-2">
 			<!-- Select -->
@@ -45,14 +26,14 @@
 					<thead class="table-dark">
 						<tr>
 							<th></th>
-							<th ng-repeat="r in roles" class="text-center">{{r.name}}</th>
+							<th ng-repeat="r in roles" class="text-center">{{r.roleName}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="a in admins">
 							<td>{{a.username}}</td>
 							<th ng-repeat="r in roles" class="text-center">
-								<input ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">
+								<input  ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">{{r.id}}
 							</th>
 						</tr>
 					</tbody>
@@ -74,7 +55,7 @@
 							<span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
 						</li>
 						<li class="page-item">
-							<a ng-click="pager.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
+							<a ng-click="pager.next()" disabled class="page-link text-dark " > <i class="fas fa-forward"></i> </a>
 						</li>
 						<li class="page-item">
 							<a ng-click="pager.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
@@ -86,91 +67,4 @@
 	</div>
 </div>
 
-<!-- Full screen modal add product -->
-<div class="modal fade" id="addModal" tabindex="-1"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">Chi tiết</h1>
-		    </div>
-			<div class="modal-body">
-				<form name="userForm" action="" novalidate>
-					<!-- Image -->
-					<div class="row">
-			          <label class="form-label"> Hình ảnh <span class="text-red">*</span> </label>
-			          <div class="card mb-4 w-75 mx-auto">
-						<div class="card-body text-center image-upload">
-							<label for="file-input"> 
-								<img ng-src="/assets/images/icon_user.png" 
-		                     	alt="" class="rounded-circle mb-2 w-50">
-							</label>
-							<div class="small font-italic text-muted mb-4"> Ảnh có kích thước nhỏ hơn 10MB </div>
-							<input id="file-input" type="file" name="image"
-			                onchange="angular.element(this).scope().ImageChanged(this.files)"/>
-						</div>
-					  </div>
-			        </div>
-                    <!-- Fullname -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Họ và tên <span class="text-red">*</span> </label>
-						<!-- Input -->
-                          <input ng-model="fullname" type="text" name="fullname"
-                          class="w-full form-control" placeholder="--Vui lòng nhập--" required>
-                          
-                          <div ng-show="userForm.fullname.$dirty && userForm.fullname.$invalid">
-							<small class="text-danger fst-italic" ng-show="userForm.fullname.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-						  </div>
-                    </div>
-                    <!-- Email -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Email <span class="text-red">*</span> </label>
-						<!-- Input -->
-                        <input ng-model="email" type="email" name="email"
-                        class="form-control" placeholder="--Vui lòng nhập--" required>
-                          
-                         <div ng-show="userForm.email.$dirty && userForm.email.$invalid && userForm.email.$error.email" >
-							<small class="text-danger fst-italic" ng-show="userForm.email.$error.required" >
-								Vui lòng không để trống <b>*</b>
-							</small> 
-							<small class="text-danger fst-italic" ng-show="userForm.email.$error.email" >
-								Email chưa đúng định dạng <b>*</b>
-							</small>
-					     </div>
-                    </div>
-                    <!-- Gender -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Giới tính <span class="text-red">*</span> </label>
-                        <div class="d-flex">
-                        
-                        	<div class="form-check me-2">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="true">
-								<label class="form-check-label" for="gridRadios1" > Nam </label>
-							 </div> 
-							 
-							 <div class="form-check">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="false"> 
-								<label class="form-check-label" for="gridRadios2" > Nữ </label>
-							 </div>
-                        </div>
-                    </div>
-                    <!-- position -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Chức vụ <span class="text-red">*</span> </label>
-                    </div>
-                    
-                    <div class="row mt-2">
-						<div class="col-xl-6">
-							<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
-						</div>
-						<div class="col-xl-6">
-							<button ng-disabled="userForm.$invalid" class="btn btn-info text-white w-100">Lưu</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
+
