@@ -19,6 +19,7 @@ public interface UserAdminService {
 	User create(User user);
 	// Update
 	User update(User user);
+	User updateProfile(User user);
 	// Delete
 	void delete(Integer id);
 	

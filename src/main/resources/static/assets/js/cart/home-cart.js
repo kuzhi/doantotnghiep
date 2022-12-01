@@ -367,9 +367,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 									} else { // neu phone moi k trung thi update
 										$scope.updateReal(user);
 									}
-								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 							}
-						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					} else { // tìm k ra thì check trùng
 						// Check email
 						$http.get($scope.urlInfo + "email/" + user.email).then(resp => {
@@ -391,19 +391,19 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 											} else { // neu phone moi k trung thi update
 												$scope.updateReal(user);
 											}
-										}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+										}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 									}
-								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 							}
-						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					}
-					$http.get($scope.url + "phone/" + user.phone + "/" + user.id).then(resp => {
+					$http.get($scope.urlInfo + "phone/" + user.phone + "/" + user.id).then(resp => {
 
 
 
-					}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+					}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					// Ngược lại email và sdt không thuộc user thì báo lỗi
-				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 				//====================================== Kết thúc xử lý
 			} else if (
 				/* Read more about handling dismissals below */
@@ -412,10 +412,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		})
 	}
 	$scope.updateReal = function(user) {
-		$http.put($scope.urlInfo + user.id, user).then(resp => {
+		$http.put($scope.urlInfo+ "updateProfile/" + user.id, user).then(resp => {
 
 			$scope.myProfile = user;
-			//console.log("Sp: ", $scope.userStore);
 
 			// Thông báo
 			Swal.fire({
