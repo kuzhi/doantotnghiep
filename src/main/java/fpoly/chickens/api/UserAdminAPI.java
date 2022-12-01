@@ -66,6 +66,13 @@ public class UserAdminAPI {
 		return ResponseEntity.ok().build();
 	}
 
+	@PutMapping("updateProfile/{id}")
+	public ResponseEntity<Void> updateProfile(@PathVariable("id") Optional<String> id, @RequestBody User user) {
+		userAdminService.updateProfile(user);
+		
+		return ResponseEntity.ok().build();
+	}
+
 	// Delete
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") Integer id) {

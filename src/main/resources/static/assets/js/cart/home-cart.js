@@ -65,12 +65,15 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.listProducts();
 	$scope.cates = [];
 	$scope.listCategory = function() {
+
 		storeid = queryString.split("/").pop();
 		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
+
 			$scope.cates = resp.data;
 		});
 	}
 	$scope.listCategory();
+
 //Sort
 $scope.sortBy = function(propertyName) {
     $scope.propertyName = propertyName;
@@ -79,7 +82,9 @@ $scope.sortBy = function(propertyName) {
   $scope.sortByCate = function(cate) {
     $scope.cate = cate;
     console.log($scope.cate);
-  };
+  
+	
+	
 	//================================ Cart Control
 	$scope.items = [];
 
@@ -115,7 +120,7 @@ $scope.sortBy = function(propertyName) {
 			}
 			$http.post("/api/cart/add", cart).then(resp => {
 				location.href = "/home/cart/view/" + $scope.sid;
-				$scope.loadCart($scope.storeid, $scope.userid)
+				$scope.loadCart($scope.sid, $scope.userid)
 			});
 		}
 	}
@@ -132,7 +137,7 @@ $scope.sortBy = function(propertyName) {
 
 	$scope.deleteall = function() { //xóa hết sp trong giỏ
 		$http.delete("/api/cart/deleteall/" + $scope.sid + "/" + $scope.userid).then(resp => { })
-		$scope.loadCart($scope.storeid, $scope.userid)
+		$scope.loadCart($scope.sid, $scope.userid)
 	}
 
 	$scope.delete = function(id) { // xóa sp khỏi giỏ
@@ -161,7 +166,7 @@ $scope.sortBy = function(propertyName) {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$http.delete("/api/cart/delete/" + id).then(resp => {
-					swalWithBootstrapButtons.fire( 'Đã xóa', 'Đã xóa sản phẩm!', 'success' )
+					swalWithBootstrapButtons.fire('Đã xóa', 'Đã xóa sản phẩm!', 'success')
 					$scope.loadCart($scope.sid, $scope.userid)
 					$scope.countAmount($scope.sid);
 				})
@@ -368,9 +373,9 @@ $scope.sortBy = function(propertyName) {
 									} else { // neu phone moi k trung thi update
 										$scope.updateReal(user);
 									}
-								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 							}
-						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					} else { // tìm k ra thì check trùng
 						// Check email
 						$http.get($scope.urlInfo + "email/" + user.email).then(resp => {
@@ -392,19 +397,19 @@ $scope.sortBy = function(propertyName) {
 											} else { // neu phone moi k trung thi update
 												$scope.updateReal(user);
 											}
-										}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+										}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 									}
-								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+								}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 							}
-						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					}
-					$http.get($scope.url + "phone/" + user.phone + "/" + user.id).then(resp => {
+					$http.get($scope.urlInfo + "phone/" + user.phone + "/" + user.id).then(resp => {
 
 
 
-					}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+					}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 					// Ngược lại email và sdt không thuộc user thì báo lỗi
-				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }) });
+				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); console.log(error) });
 				//====================================== Kết thúc xử lý
 			} else if (
 				/* Read more about handling dismissals below */
@@ -413,10 +418,9 @@ $scope.sortBy = function(propertyName) {
 		})
 	}
 	$scope.updateReal = function(user) {
-		$http.put($scope.urlInfo + user.id, user).then(resp => {
+		$http.put($scope.urlInfo+ "updateProfile/" + user.id, user).then(resp => {
 
 			$scope.myProfile = user;
-			//console.log("Sp: ", $scope.userStore);
 
 			// Thông báo
 			Swal.fire({
@@ -490,7 +494,7 @@ $scope.sortBy = function(propertyName) {
 			status: 3
 		}
 		$http.put("/api/order/update", or).then(resp => {
-			swal.fire( 'Thành công', 'Đơn hàng đã được xác nhận!', 'success' )
+			swal.fire('Thành công', 'Đơn hàng đã được xác nhận!', 'success')
 		})
 
 	}
