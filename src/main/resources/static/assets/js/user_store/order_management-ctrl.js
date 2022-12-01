@@ -65,7 +65,7 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 			status: 2
 		}
 		$http.put("/api/order/update", order).then(resp => {
-			swalWithBootstrapButtons.fire( 'Thành công', 'Đơn hàng đã được duyệt thành công!', 'success' )
+			Swal.fire({ icon: 'success', title: 'Đơn hàng đã được duyệt thành công!' });
 			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
@@ -100,11 +100,7 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 					status: 5
 				}
 				$http.put("/api/order/update", order).then(resp => {
-					swalWithBootstrapButtons.fire(
-						'Thành công',
-						'Đã hủy đơn hàng!',
-						'success'
-					)
+					Swal.fire({ icon: 'success', title: 'Đơn hàng đã hủy!' });
 					$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 				})
 			} else if (
@@ -250,7 +246,7 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 			status: 2
 		}
 		$http.put("/api/order/update", order).then(resp => {
-			swalWithBootstrapButtons.fire( 'Thành công', 'Đơn hàng đã được duyệt thành công!', 'success' )
+			Swal.fire({ icon: 'success', title: 'Đơn hàng đã được duyệt thành công!' });
 			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
