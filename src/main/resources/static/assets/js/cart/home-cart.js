@@ -65,19 +65,26 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.listProducts();
 	$scope.cates = [];
 	$scope.listCategory = function() {
-		$http.get("/api/category/" + "store/" + $scope.sid).then(resp => {
+
+		storeid = queryString.split("/").pop();
+		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
+
 			$scope.cates = resp.data;
 		});
 	}
 	$scope.listCategory();
-	//Sort
-	$scope.sortBy = function(propertyName) {
-		$scope.propertyName = propertyName;
-	};
 
-	$scope.sortByCate = function(cate) {
-		$scope.cate = cate;
-	};
+//Sort
+$scope.sortBy = function(propertyName) {
+    $scope.propertyName = propertyName;
+  };
+  
+  $scope.sortByCate = function(cate) {
+    $scope.cate = cate;
+    console.log($scope.cate);
+  
+	
+	
 	//================================ Cart Control
 	$scope.items = [];
 
