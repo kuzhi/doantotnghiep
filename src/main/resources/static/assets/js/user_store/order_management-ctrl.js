@@ -152,6 +152,17 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
 		})
 	}
+	
+	$scope.confirm = function(orderid) {
+		order = {
+			id: orderid,
+			status: 2
+		}
+		$http.put("/api/order/update", order).then(resp => {
+			Swal.fire({ icon: 'success', title: 'Đơn hàng đã được duyệt thành công!' });
+			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
+		})
+	}
 
 	$scope.cancel = function(orderid) {
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -240,16 +251,7 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 		})
 	}
 
-	$scope.confirm = function(orderid) {
-		order = {
-			id: orderid,
-			status: 2
-		}
-		$http.put("/api/order/update", order).then(resp => {
-			Swal.fire({ icon: 'success', title: 'Đơn hàng đã được duyệt thành công!' });
-			$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
-		})
-	}
+	
 
 
 
