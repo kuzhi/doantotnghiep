@@ -196,4 +196,34 @@ app.controller("supporter-ctrl", function($scope, $http, $location) {
 		{ id: 4, name: "Giới tính nữ" },
 	]
 	
+
+	$scope.nameUser;
+  $scope.findByName = function () {
+    if ($scope.nameUser != null) {
+      $http
+        .get("/api/userStore/" + $scope.nameUser)
+        .then((resp) => {
+          $scope.supports = resp.data;
+          if ($scope.supports != "") {
+
+            $scope.supports.forEach((u) => {
+              u.create_at = new Date(u.create_at);
+              u.update_at = new Date(u.update_at);
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Không có kết quả phù hợp!",
+            });
+            $scope.init();
+          }
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
+    } else {
+    $scope.init();
+    }
+    
+  };
 })
