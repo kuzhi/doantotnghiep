@@ -65,21 +65,20 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.listProducts();
 	$scope.cates = [];
 	$scope.listCategory = function() {
-		storeid = queryString.split("/").pop();
-		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
+		$http.get("/api/category/" + "store/" + $scope.sid).then(resp => {
 			$scope.cates = resp.data;
 		});
 	}
 	$scope.listCategory();
-//Sort
-$scope.sortBy = function(propertyName) {
-    $scope.propertyName = propertyName;
-  };
-  
-  $scope.sortByCate = function(cate) {
-    $scope.cate = cate;
-    console.log($scope.cate);
-  };
+	//Sort
+	$scope.sortBy = function(propertyName) {
+		$scope.propertyName = propertyName;
+	};
+
+	$scope.sortByCate = function(cate) {
+		$scope.cate = cate;
+		console.log($scope.cate)
+	};
 	//================================ Cart Control
 	$scope.items = [];
 
@@ -161,7 +160,7 @@ $scope.sortBy = function(propertyName) {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$http.delete("/api/cart/delete/" + id).then(resp => {
-					swalWithBootstrapButtons.fire( 'Đã xóa', 'Đã xóa sản phẩm!', 'success' )
+					swalWithBootstrapButtons.fire('Đã xóa', 'Đã xóa sản phẩm!', 'success')
 					$scope.loadCart($scope.sid, $scope.userid)
 					$scope.countAmount($scope.sid);
 				})
@@ -489,7 +488,7 @@ $scope.sortBy = function(propertyName) {
 			status: 3
 		}
 		$http.put("/api/order/update", or).then(resp => {
-			swal.fire( 'Thành công', 'Đơn hàng đã được xác nhận!', 'success' )
+			swal.fire('Thành công', 'Đơn hàng đã được xác nhận!', 'success')
 		})
 
 	}
