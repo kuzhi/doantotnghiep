@@ -62,27 +62,24 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	};
 
 	//================================ Load loại để lọc
-	$scope.cateArr = {
-		cates: [
-			{
-				"id": "01",
-				"name": "Bánh mì"
-			},
-			{
-				"id": "02",
-				"name": "Nước suối"
-			},
-			{
-				"id": "03",
-				"name": "Nước ngọt"
-			},
-			{
-				"id": "04",
-				"name": "Hamberger"
-			},
-		]
+	$scope.listProducts();
+	$scope.cates = [];
+	$scope.listCategory = function() {
+		storeid = queryString.split("/").pop();
+		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
+			$scope.cates = resp.data;
+		});
 	}
-
+	$scope.listCategory();
+//Sort
+$scope.sortBy = function(propertyName) {
+    $scope.propertyName = propertyName;
+  };
+  
+  $scope.sortByCate = function(cate) {
+    $scope.cate = cate;
+    console.log($scope.cate);
+  };
 	//================================ Cart Control
 	$scope.items = [];
 

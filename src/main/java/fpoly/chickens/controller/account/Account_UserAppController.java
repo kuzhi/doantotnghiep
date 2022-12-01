@@ -1,6 +1,9 @@
 package fpoly.chickens.controller.account;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +16,10 @@ import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
 
 @Controller
-
 public class Account_UserAppController {
+
+
+	
 
 	@Autowired
 	UserAppDAO userAppDao;
@@ -22,14 +27,18 @@ public class Account_UserAppController {
 	@Autowired
 	UserRoleAppDAO userRoleDao;
 
-	@RequestMapping("/user-app/auth/form")
+	@GetMapping("/user-app/auth/form")
 	public String login() {
 			
 		return "home/account/loginApp";
 	}
 	
+
+
+
 	@GetMapping("/user-app/auth/error")
 	public String loginStore(Model model) {
+		
 		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
 
 		return "home/account/loginApp";

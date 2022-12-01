@@ -80,7 +80,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //	//
 			http.authorizeRequests().antMatchers("/admin/**").authenticated()
 				.antMatchers("/admin/report","/assets/admin/**").hasRole("ADMIN")
-				.antMatchers("/admin/**","/rest/authorities").hasAnyRole("STAFF","ADMIN")
+				.antMatchers("/admin/**","/api/authorities").hasAnyRole("STAFF","ADMIN")
 				.anyRequest().permitAll();
 //	//
 ////			// Điều khiển lỗi truy cập không đúng vai trò
@@ -93,6 +93,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 			.defaultSuccessUrl("/user-app/auth/success", false).failureUrl("/user-app/auth/error").usernameParameter("username")
 			.passwordParameter("password");
 
+			
 		
 			// remember me
 			http.rememberMe().rememberMeParameter("remember").tokenValiditySeconds(3600);
