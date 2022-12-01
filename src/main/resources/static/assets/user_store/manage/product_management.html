@@ -9,7 +9,7 @@
 
 	<div class="col-xl-12 col-md-12 col-12">
 		<div class="row">
-			<div class="col-8 d-flex mt-2">
+			<div class="col-xl-8 d-flex mt-2">
 				<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-light rounded">
 					<i class="fas fa-search mx-2"></i>
 					<input type="search" ng-model="nameProduct" 
@@ -19,9 +19,8 @@
 				<!-- Tìm kiếm -->	
 				<button ng-click="findByName()" type="submit" 
 				class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
-				
 			</div>
-			<div class="col-4 mt-2 d-flex justify-content-end">
+			<div class="col-xl-4 col-12 mt-2 d-flex justify-content-end">
 
 				<!-- Thêm -->
 				<button ng-click="insert()" class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
@@ -323,7 +322,7 @@
 					<div class="col-xl-6">
 						<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
 					</div>
-					<div class="col-xl-6">
+					<div class="col-xl-6 mt-2">
 						<button ng-click="createCate()" ng-disabled="cateForm.$invalid" class="btn btn-info text-white w-100">Lưu thay đổi</button>
 					</div>
 				</div>
