@@ -40,6 +40,7 @@
 		                 <th>Mã hóa đơn</th>
 		                 <th>Tên người nhận</th>
 		                 <th>Tên cửa hàng</th>
+		                 <th>Trạng thái</th>
 		                 <th>Tổng tiền</th>
 		                 <th></th>
 		             </tr>
@@ -49,6 +50,13 @@
 		                 <td class="text-start">{{o.ordercode}}</td>
 		                 <td class="text-start">{{o.fullname}}</td>
 		                 <td class="text-start">{{o.store.name}}</td>
+		                 <td class="text-center">
+		                 	<span ng-show="o.status == 1" class="bg-secondary px-5 py-1 bg-opacity-10 text-secondary rounded-3 fst-italic">Đang xử lý</span>
+		                 	<span ng-show="o.status == 2" class="bg-success px-5 py-1 bg-opacity-10 text-success rounded-3 fst-italic">Đang giao</span>
+		                 	<span ng-show="o.status == 3" class="bg-success px-5 py-1 bg-opacity-10 text-success rounded-3 fst-italic">Nhận hàng thành công</span>
+		                 	<span ng-show="o.status == 4" class="bg-danger px-5 py-1 bg-opacity-10 text-danger rounded-3 fst-italic">Đã hủy</span>
+		                 	<span ng-show="o.status == 5" class="bg-danger px-5 py-1 bg-opacity-10 text-danger rounded-3 fst-italic">Bị hủy do CH</span>
+		                 </td>
 		                 <td class="text-end">{{o.totalMoney | currency:'':0}} đ</td>                             
 		                 <td class="text-center align-middle">
 							<!-- Edit -->

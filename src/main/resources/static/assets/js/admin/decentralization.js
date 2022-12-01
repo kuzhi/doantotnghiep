@@ -18,7 +18,8 @@ $scope.roles = [];
 	$scope.initialize = function() {
 		$http.get("/api/roles").then(resp => {
 			$scope.roles = resp.data;
-			})
+		})
+
 		
 		$http.get("/api/userApp/getamin?admin=true").then(resp => {
 			$scope.admins = resp.data;			
@@ -37,12 +38,8 @@ $scope.roles = [];
 		console.log($scope.authorities)
 			return $scope.authorities.find(ur =>				
 						ur.userapp.id === a.id &&  ur.roleapp.id === r.id 
-
-			 
-			);
-			
-		}
-		
+			);			
+		}		
 	}
 	
 	
@@ -83,7 +80,8 @@ $scope.roles = [];
 	// hủy quyền
 	$scope.revoke_authority = function(authority){
 		$http.delete(`/api/authorities/${authority.id}`).then(resp => {
-			
+			//var index = $scope.authorities.findIndex(a => a.id == authority.id);
+			//$scope.authorities.push(index, 1);
 			// Thông báo
 			Swal.fire({
 				icon: 'success',
@@ -100,8 +98,6 @@ $scope.roles = [];
 			console.log("Error", error);
 		})
 	}
-	
-	
 
 	$scope.initialize();
 
