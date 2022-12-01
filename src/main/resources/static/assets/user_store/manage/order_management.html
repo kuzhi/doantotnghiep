@@ -105,18 +105,18 @@
 						<div class="row">
 							<div class="col">
 								<label for="fullname" class="form-label">Khách hàng</label> 
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" disabled
 								ng-value="orderDetail[0].order.fullname" id="fullname">
 							</div>
 							<div class="col">
 								<label for="phone" class="form-label">Số điện thoại</label> 
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" disabled
 								ng-value="orderDetail[0].order.phone" id="phone">
 							</div>
 						</div>
 						<div class="row mx-1">
 							<label for="address" class="form-label">Địa chỉ</label> 
-							<input type="text" class="form-control"
+							<input type="text" class="form-control" disabled
 							ng-value="orderDetail[0].order.address" id="address">
 						</div>
 					</div>
@@ -128,28 +128,28 @@
 						<div class="row">
 							<div class="col">
 								<label for="id" class="form-label">Mã đơn hàng</label> 
-								<input type="text" class="form-control" id="id"
+								<input type="text" class="form-control" id="id" disabled
 								ng-value="orderDetail[0].order.ordercode">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Ngày đặt hàng</label> 
-								<input type="text" class="form-control" id="date"
+								<input type="text" class="form-control" id="date" disabled
 								ng-value="orderDetail[0].order.create_at">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Phương thức thanh toán</label> 
-								<input type="text" class="form-control" id="date"
+								<input type="text" class="form-control" id="date" disabled
 								ng-value="orderDetail[0].order.paymentType.paymentName">
 							</div>
 							<div class="col">
 								<label for="date" class="form-label">Hình thức nhận hàng</label>
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" disabled
 								ng-value="orderDetail[0].order.shippingType.shippingName">
 							</div>
 							<div class="col">
-								<label for="status" class="form-label">Tổng tiền</label> 
-								<input type="text" class="form-control"
-								ng-value="orderDetail[0].order.totalMoney">
+								<label for="status" class="form-label">Tổng tiền (đ)</label> 
+								<input type="text" class="form-control" disabled
+								ng-value="orderDetail[0].order.totalMoney | currency:'':0">
 							</div>
 						</div>
 					</div>
@@ -187,9 +187,9 @@
 								<tr ng-repeat="d in orderDetail">
 									<td class="align-middle">{{d.id}}</td>
 									<td class="align-middle">{{d.product.name}}</td>
-									<td class="align-middle">{{d.product.price }}đ</td>
+									<td class="align-middle">{{d.product.price | currency:'':0 }}đ</td>
 									<td class="align-middle">{{d.amount}}</td>
-									<td class="align-middle">{{d.amount * d.product.price }}đ</td>
+									<td class="align-middle">{{d.amount * d.product.price | currency:'':0 }}đ</td>
 								</tr>
 							</tbody>
 						</table>

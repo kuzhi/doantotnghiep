@@ -29,7 +29,7 @@ public class CilentController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping("/{storeid}")
+	@RequestMapping
 	public String view_Cart(Model model) {
 		if (userService.getTokenStore() == null) {
 			return "home/list_store";
@@ -53,7 +53,7 @@ public class CilentController {
 	}
 
 	@RequestMapping("/my-profile/{storeid}")
-	public String view_Profile() {
+	public String view_Profile(@PathVariable("storeid") Optional<Integer> storeid) {
 		return "home/my-profile";
 	}
 
