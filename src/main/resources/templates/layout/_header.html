@@ -14,7 +14,10 @@
 	<div class="collapse collapse-header navbar-collapse" id="navbarSupportedContent">
 		
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-		<div>
+		<div class="text-start mt-3">
+			<a class="dropdown-item home-show me-5" th:href="@{/home/client}">Trang chủ</a>
+		</div>
+		<div class="home-hide">
 			<a ng-show="userid!=null && storeid!=0" th:href="@{|/home/cart/view/{{sid}}|}" 
 			class="btn btn-light btn-sm rounded-4 position-relative">
 				<i class="fa-solid fa-cart-shopping text-secondary"></i>				
@@ -33,15 +36,15 @@
 		</div>
 		<div 
 			ng-show="userid!=null"
-			class="nav-item dropdown mx-4"
+			class="nav-item dropdown mx-4 mt-3"
 		>
 			<a class="nav-link dropdown-toggle text-sm" href="#" role="button"
-				data-bs-toggle="dropdown" aria-expanded="false"> {{myProfile.fullname}}
+				data-bs-toggle="dropdown" aria-expanded="false">Xin chào, {{myProfile.fullname==''?'Người dùng mới':myProfile.fullname}}
 			</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>
+				<li><a class="dropdown-item home-show" th:href="@{|/home/cart/view/{{sid}}|}">Giỏ hàng</a></li>
 				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{sid}}|}">Hồ sơ cá nhân</a></li>
-				<li><a class="dropdown-item" href="/assets/home/change.html">Đổi mật khẩu</a></li>
+				<li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="/home/auth/logout-user">Đăng xuất</a></li>
 			</ul>

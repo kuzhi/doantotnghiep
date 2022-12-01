@@ -9,19 +9,22 @@
      <div class="container-fluid pt-4 px-4 mb-3">
          <div class="row mx-1">
              <div class="bg-second text-center rounded p-4">
-                 <div class="d-flex align-items-center justify-content-between mb-4">
-                     <h6 class="mb-0 color-text">Thống kê doanh thu bán hàng</h6>
-                 
-                 	<div class="d-flex align-items-center">
-				        <select 
-				        	ng-change="getReportByMonth()"
-							ng-model="list"
-							ng-options="month.id as month.name for month in months"
-				        	class="form-select form-select-sm border-0 border-bottom rounded-0" 
-				        >
-						  <option value="" class="fw-bold bg-info text-white">--Vui lòng chọn--</option>
-						</select>
-                 	</div>    
+                 <div class="row mb-4">
+                    <div class="col-xl-6 col-md-6 col-12 text-start">
+                    	<h6 class="mb-0 color-text">Thống kê doanh thu bán hàng</h6>
+                    </div>
+                 	<div class="col-xl-6 col-md-6 col-12">
+	                 	<div class="d-flex justify-content-end align-items-center">
+					        <select 
+					        	ng-change="getReportByMonth()"
+								ng-model="list"
+								ng-options="month.id as month.name for month in months"
+					        	class="form-select form-select-sm border-0 border-bottom rounded-0 w-50" 
+					        >
+							  <option value="" class="fw-bold bg-info text-white">--Vui lòng chọn--</option>
+							</select>
+	                 	</div>   
+                 	</div> 
                  </div>
                  
 				<canvas id="saleChart"></canvas>

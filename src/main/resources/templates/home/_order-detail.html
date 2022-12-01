@@ -71,12 +71,12 @@
 	                    	<b>[[${p.product.name}]]</b>
 						</span>
 	                  </div>
-	                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+	                  <div class="col-md-2 col-6 d-flex justify-content-start align-items-center">
 	                    <p class="text-muted mb-0 small">
 							Số lượng: [[${p.amount}]]
 						</p>
 	                  </div>
-	                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+	                  <div class="col-md-2 col-6 d-flex justify-content-end align-items-center">
 	                    <p class="text-muted mb-0 small">
 							[[${p.product.price}]] đ
 						</p>
@@ -86,26 +86,26 @@
 	            </div>
 	
 	            <div class="d-flex justify-content-between pt-2">
-	              <p class="fw-bold mb-0">Chi tiết hóa đơn</p>
-	              <p class="text-muted mb-0">
-	              	<span class="fw-bold me-4">Tổng thanh toán</span> 
-	              	[[${detail.totalMoney}]] đ
+	              <p class="fw-bold mb-0">Chi tiết HĐ</p>
+	              <p class="mb-0 d-flex justify-content-between">
+	              	<label>Tổng thanh toán: </label> 
+	              	<span class="fw-bold ms-1"> [[${detail.totalMoney}]] đ</span> 
 				  </p>
 	            </div>
 	
 	            <div class="d-flex justify-content-between pt-2">
 	              <p class="text-muted mb-0">Phương thức thanh toán:</p>
-	              <p class="text-muted mb-0">[[${detail.paymentType.paymentName}]]</p>
+	              <p class="fw-bold mb-0">[[${detail.paymentType.paymentName}]]</p>
 	            </div>
 	
 	            <div class="d-flex justify-content-between">
 	              <p class="text-muted mb-0">Hình thức nhận hàng:</p>
-	              <p class="text-muted mb-0">[[${detail.shippingType.shippingName}]]</p>
+	              <p class="fw-bold mb-0">[[${detail.shippingType.shippingName}]]</p>
 	            </div>
 
 	            <div class="d-flex justify-content-between">
 	              <p class="text-muted mb-0">Ngày tạo:</p>
-	              <p class="text-muted mb-0">[[${detail.create_at}]]</p>
+	              <p class="fw-bold mb-0">[[${detail.create_at}]]</p>
 	            </div>
 	
 	          </div>

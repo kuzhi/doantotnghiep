@@ -265,6 +265,10 @@ translateX(
 	display: none;
 }
 
+.home-hide {
+	display: block;
+}
+
 .fade-loading {
 	width: 10px;
 	height: 10px;
@@ -316,5 +320,8 @@ translateX(
 	}
 	.home-show {
 		display: block;
+	}
+	.home-hide {
+		display: none;
 	}
 }
