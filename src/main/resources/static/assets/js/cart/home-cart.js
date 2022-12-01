@@ -77,7 +77,6 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	$scope.sortByCate = function(cate) {
 		$scope.cate = cate;
-		console.log($scope.cate)
 	};
 	//================================ Cart Control
 	$scope.items = [];
@@ -114,7 +113,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			}
 			$http.post("/api/cart/add", cart).then(resp => {
 				location.href = "/home/cart/view/" + $scope.sid;
-				$scope.loadCart($scope.storeid, $scope.userid)
+				$scope.loadCart($scope.sid, $scope.userid)
 			});
 		}
 	}
@@ -131,7 +130,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	$scope.deleteall = function() { //xóa hết sp trong giỏ
 		$http.delete("/api/cart/deleteall/" + $scope.sid + "/" + $scope.userid).then(resp => { })
-		$scope.loadCart($scope.storeid, $scope.userid)
+		$scope.loadCart($scope.sid, $scope.userid)
 	}
 
 	$scope.delete = function(id) { // xóa sp khỏi giỏ
