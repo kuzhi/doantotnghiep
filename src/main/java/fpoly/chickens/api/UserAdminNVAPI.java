@@ -61,18 +61,6 @@ public class UserAdminNVAPI {
 		return ResponseEntity.ok().build();
 	}
 
-	// Change
-	@PostMapping("checkPassworrd/{password}")
-	public ResponseEntity<Boolean> changepassword(@RequestBody Optional<UserApp> userApp, @PathVariable("password") String password) {
-		if (userApp.isPresent()) {
-			 
-			 return ResponseEntity.ok(userAdminNVService.checkPassword(userApp.get(), password));
-		}
-
-		return ResponseEntity.badRequest().build();
-	}
-
-
 	// Update
 	@PutMapping("{id}")
 	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id, @RequestBody UserApp userapp) {

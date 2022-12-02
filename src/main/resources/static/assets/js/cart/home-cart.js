@@ -66,13 +66,11 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.cates = [];
 	$scope.listCategory = function() {
 
-		storeid = queryString.split("/").pop();
-		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
+		$http.get("/api/category/" + "store/" + $scope.sid).then(resp => {
 			$scope.cates = resp.data;
 		});
 	}
 	$scope.listCategory();
-
 
 	//Sort
 	$scope.sortBy = function(propertyName) {

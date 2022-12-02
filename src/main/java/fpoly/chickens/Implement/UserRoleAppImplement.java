@@ -75,10 +75,4 @@ public class UserRoleAppImplement  implements UserRoleAppService{
         // TODO Auto-generated method stub
         return uDao.existsById(id);
     }
-
-    @Override
-    public Integer countRoleByUserId(Integer userId) {
-        // TODO Auto-generated method stub
-        return uDao.countRoleByUserId(userId);
-    }
 }

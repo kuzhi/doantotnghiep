@@ -42,11 +42,9 @@
 				data-bs-toggle="dropdown" aria-expanded="false">Xin chào, {{myProfile.fullname==''?'Người dùng mới':myProfile.fullname}}
 			</a>
 			<ul class="dropdown-menu">
-				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>
 				<li><a class="dropdown-item home-show" th:href="@{|/home/cart/view/{{sid}}|}">Giỏ hàng</a></li>
 				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{sid}}|}">Hồ sơ cá nhân</a></li>
-				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{storeid}}/change-password|}">Đổi mật khẩu</a></li>
-
+				<li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="/home/auth/logout-user">Đăng xuất</a></li>
 			</ul>

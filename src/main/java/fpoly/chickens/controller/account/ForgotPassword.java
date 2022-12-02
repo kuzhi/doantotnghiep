@@ -48,19 +48,14 @@ public class ForgotPassword {
     @Autowired
     UserAdminKHService userStoreService;
 
-    @GetMapping("form-client")
-    public String getFormClient(){
+    @GetMapping("form")
+    public String getForm(){
 
-        return "home/account/forgotClient";
+        return "home/account/forgot";
     }
 
-    @GetMapping("form-app")
-    public String getFormApp(){
 
-        return "home/account/forgotApp";
-    }
-
-    @PostMapping("check-info-client")
+    @PostMapping("check-info")
     public String chek(Model model){
 
 
@@ -77,7 +72,7 @@ public class ForgotPassword {
             if(users.getEmail().equals(email)){
                 session.setAttribute("emailCheck", email);
                 session.setAttribute("usernameCheck", username);
-                return "redirect:/home/forgot-password/change-password-client";
+                return "redirect:/home/forgot-password/change-password";
             }
         }
 
@@ -85,29 +80,37 @@ public class ForgotPassword {
             if(userStore.getEmail().equals(email)){
                 session.setAttribute("emailCheck", email);
                 session.setAttribute("usernameCheck", username);
-                return "redirect:/home/forgot-password/change-password-client";
+                return "redirect:/home/forgot-password/change-password";
             }
         }
 
         if(userApp != null && !userApp.getDeleted() ){
             if(userApp.getEmail().equals(email)){
-                model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản không tồn tại");
-
-                return "home/account/forgotClient";
+                session.setAttribute("emailCheck", email);
+                session.setAttribute("usernameCheck", username);
+                return "redirect:/home/forgot-password/change-password";
             }
         }
 
         model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản không tồn tại");
 
-        return "home/account/forgotClient";
+        return "home/account/forgot";
     }
 
-    @PostMapping("check-info-app")
-    public String chekApp(Model model){
+    @GetMapping("change-password")
+    public String changePassword(){
+        return "/home/account/sendMail";
+    }
 
 
-        String username = req.getParameter("username");
-        String email = req.getParameter("email");
+    @PostMapping("send-mail")
+    public String sendMail(Model model){
+        
+        String password1 = req.getParameter("password1");
+        String passwordEncode = pe.encode(password1);
+        //String password2 = req.getParameter("password2");
+        String email = String.valueOf(session.getAttribute("emailCheck")) ;
+        String username = String.valueOf(session.getAttribute("usernameCheck")) ;
 
         User users = userService.findUserByUsername(username);
 
@@ -117,58 +120,23 @@ public class ForgotPassword {
 
         if(users !=null && !users.getDeleted() ){
             if(users.getEmail().equals(email)){
-                model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản không tồn tại");
-
-        return "home/account/forgotApp";
+                users.setPassword(passwordEncode);
+                userService.update(users);
+                
             }
         }
 
         if(userStore !=null && !userStore.getDeleted() ){
             if(userStore.getEmail().equals(email)){
-                model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản không tồn tại");
-
-                return "home/account/forgotApp";
+                userStore.setPassword(passwordEncode);
+                userStoreService.update(userStore);
+             
             }
         }
 
         if(userApp != null && !userApp.getDeleted() ){
             if(userApp.getEmail().equals(email)){
-                session.setAttribute("emailCheck", email);
-                session.setAttribute("usernameCheck", username);
-                return "redirect:/home/forgot-password/change-password-app";
-            }
-        }
-
-        model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản không tồn tại");
-
-        return "home/account/forgotApp";
-    }
-
-    @GetMapping("change-password-client")
-    public String changePasswordClient(){
-        return "/home/account/sendMailClient";
-    }
-    @GetMapping("change-password-app")
-    public String changePasswordApp(){
-        return "/home/account/sendMailApp";
-    }
-
-    @PostMapping("send-mail-app")
-    public String sendMailApp(Model model){
-        
-        String password1 = req.getParameter("password1");
-        //String password2 = req.getParameter("password2");
-        String email = String.valueOf(session.getAttribute("emailCheck")) ;
-        String username = String.valueOf(session.getAttribute("usernameCheck")) ;
-
-     
-
-        UserApp userApp =  userAppService.findUsersByUserName(username);
-
-
-        if(userApp != null && !userApp.getDeleted() ){
-            if(userApp.getEmail().equals(email)){
-                userApp.setPassword(password1);
+                userApp.setPassword(passwordEncode);
                 userAppService.update(userApp);
                
             }
@@ -182,49 +150,6 @@ public class ForgotPassword {
             e.printStackTrace();
         }
 
-        return "/home/account/sendMailApp";
-    }
-
-    @PostMapping("send-mail-client")
-    public String sendMailClient(Model model){
-        
-        String password1 = req.getParameter("password1");
-       
-        //String password2 = req.getParameter("password2");
-        String email = String.valueOf(session.getAttribute("emailCheck")) ;
-        String username = String.valueOf(session.getAttribute("usernameCheck")) ;
-
-        User users = userService.findUserByUsername(username);
-
-        UserStore userStore = userStoreService.findUsersByUserName(username);
-
-
-        if(users !=null && !users.getDeleted() ){
-            if(users.getEmail().equals(email)){
-                users.setPassword(password1);
-                userService.update(users);
-                
-            }
-        }
-
-        if(userStore !=null && !userStore.getDeleted() ){
-            if(userStore.getEmail().equals(email)){
-                userStore.setPassword(password1);
-                userStoreService.update(userStore);
-             
-            }
-        }
-
-       
-        model.addAttribute("success", "Sendmail thanh cong");
-        try {
-            mailer.send(email, "[No-reply] Mật khẩu của bạn", "Đây là mật khẩu mới của bạn "+ username+ ": " + password1 );
-        
-        } catch (MessagingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        return "/home/account/sendMailClient";
+        return "/home/account/sendMail";
     }
 }

@@ -2,7 +2,6 @@ package fpoly.chickens.Implement;
 
 import java.io.Console;
 import java.util.Base64;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,15 +52,22 @@ public class UserServiceImplement implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		try {
-			
+			String a = req.getParameter("username");
+			String b = req.getParameter("password");
+			System.out.println(a + b);
 					UserApp userApp = userAppDao.findByUsernames(username); 
+					System.out.println(userApp);
 					//this.setToken(userApp.getId());
 						String passwordApp = userApp.getPassword().trim();
-						System.out.println(userApp + passwordApp);
-			
-						String[] role = userRoleDao.findUserRoleIDByUsername(userApp.getId()).toArray(new String[0]);
+						boolean match = pe.matches(b, passwordApp);
+						if(match){
+							System.out.println("ok");
+						}
+
+						UserRoleApp userRole = userRoleDao.findUserRoleIDByUsername(userApp.getId());
+						String role= userRole.getRoleapp().getRoleName();
 						
-						
+				
 						this.setTokenUserApp(String.valueOf(userApp.getId()));
 						
 					return User.withUsername(username)
@@ -124,12 +130,6 @@ public class UserServiceImplement implements UserService {
 		session.setAttribute("tokenUserApp", userAppId);
 
 	}
-@Override
-public String getTokenUserApp() {
-	// TODO Auto-generated method stub
-	String token = (String) session.getAttribute("tokenUserApp");
 
-	return token;
-}
 
 }
