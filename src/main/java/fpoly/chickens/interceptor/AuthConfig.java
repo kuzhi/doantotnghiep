@@ -79,8 +79,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //			
 //	//		
 			http.authorizeRequests().antMatchers("/admin/**").authenticated()
-				.antMatchers("/admin/report","/assets/admin/**").hasRole("ADMIN")
-				.antMatchers("/admin/**","/api/authorities").hasAnyRole("STAFF","ADMIN")
+				.antMatchers("/admin/report","/assets/admin/**").hasRole("Admin")
+				.antMatchers("/admin/**","/api/authorities").hasAnyRole("Staff","Admin")
 				.anyRequest().permitAll();
 //	//
 ////			// Điều khiển lỗi truy cập không đúng vai trò

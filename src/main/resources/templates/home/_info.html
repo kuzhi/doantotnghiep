@@ -1,94 +1,97 @@
-<form name="profileForm" class="row shadow rounded p-3 mb-3 mx-1" novalidate>
-	<div class="col-xl-3">
-		<div class="form-group mx-auto">
-			<label class="form-label"> Hình ảnh <span class="text-red">*</span> </label>
-			<div class="card mb-4 w-75 mx-auto">
-				<div class="card-body text-center image-upload">
-					<label for="file-input"> 
-						<img class="img__store rounded-circle mb-2 w-50" ng-if="myProfile.photo==null"
-						ng-src="/assets/images/User/default__image.png">
-						<img class="img__store rounded-circle mb-2 w-50" alt="{{myProfile.photo}}" ng-if="myProfile.photo!=null"
-						ng-src="/assets/images/User/{{myProfile.photo==''?'default__image.png':myProfile.photo}}">
-					</label>
-					<div class="small font-italic text-muted mb-4">
-						Ảnh có kích thước nhỏ hơn 10MB
+<form name="profileForm" class="shadow rounded p-3 mb-3 mx-1" novalidate>
+	<div class="row">
+		<div class="col-xl-3">
+			<div class="form-group mx-auto">
+				<label class="form-label"> Hình ảnh <span class="text-red">*</span> </label>
+				<div class="card mb-4 w-75 mx-auto">
+					<div class="card-body text-center image-upload">
+						<label for="file-input"> 
+							<img class="img__store rounded-circle mb-2 w-50" ng-if="myProfile.photo==null"
+							ng-src="/assets/images/User/default__image.png">
+							<img class="img__store rounded-circle mb-2 w-50" alt="{{myProfile.photo}}" ng-if="myProfile.photo!=null"
+							ng-src="/assets/images/User/{{myProfile.photo==''?'default__image.png':myProfile.photo}}">
+						</label>
+						<div class="small font-italic text-muted mb-4">
+							Ảnh có kích thước nhỏ hơn 10MB
+						</div>
+						<input id="file-input" type="file" name="image"
+	                     		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
 					</div>
-					<input id="file-input" type="file" name="image"
-                     		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
 				</div>
 			</div>
+			
 		</div>
 		
-		<div class="form-group mx-auto text-center">
-			<button ng-click="updateProfile()" class="btn btn-primary btn-sm w-75">Lưu thay đổi</button>
-		</div>
-	</div>
+		<div class="col-xl-9 border-start">
+			<div class="form-group mx-auto">
+				<label class="form-label"> Họ và tên <span class="text-red">*</span> </label>
+				<!-- Input -->
+				<input type="text" id="fullname" name="fullname" class="form-control"
+				ng-model="myProfile.fullname" placeholder="--Vui lòng nhập--" required>
+				
+				<div ng-show="profileForm.fullname.$dirty && profileForm.fullname.$invalid" >
+					<small class="text-danger fst-italic" ng-show="profileForm.fullname.$error.required">
+						Vui lòng không để trống <b>*</b>
+					</small>
+				</div>
+			</div>
 	
-	<div class="col-xl-9 border-start">
-		<div class="form-group mx-auto">
-			<label class="form-label"> Họ và tên <span class="text-red">*</span> </label>
-			<!-- Input -->
-			<input type="text" id="fullname" name="fullname" class="form-control"
-			ng-model="myProfile.fullname" placeholder="--Vui lòng nhập--" required>
-			
-			<div ng-show="profileForm.fullname.$dirty && profileForm.fullname.$invalid" >
-				<small class="text-danger fst-italic" ng-show="profileForm.fullname.$error.required">
-					Vui lòng không để trống <b>*</b>
-				</small>
+		  	<div class="form-group mx-auto">
+				<label class="form-label"> Email <span class="text-red">*</span> </label>
+				<!-- Input -->
+				<input ng-model="myProfile.email" name="email" type="email"
+				class="form-control" placeholder="--Vui lòng nhập--" required>
+				<div ng-show="profileForm.email.$dirty && profileForm.email.$invalid || profileForm.email.$error.email">
+					<small class="text-danger fst-italic" ng-show="profileForm.email.$error.required">
+						Vui lòng không để trống <b>*</b>
+					</small>
+					<small class="text-danger fst-italic" ng-show="profileForm.email.$error.email">
+						Email chưa đúng định dạng <b>*</b>
+					</small>
+			    </div>
 			</div>
-		</div>
-
-	  	<div class="form-group mx-auto">
-			<label class="form-label"> Email <span class="text-red">*</span> </label>
-			<!-- Input -->
-			<input ng-model="myProfile.email" name="email" type="email"
-			class="form-control" placeholder="--Vui lòng nhập--" required>
-			<div ng-show="profileForm.email.$dirty && profileForm.email.$invalid || profileForm.email.$error.email">
-				<small class="text-danger fst-italic" ng-show="profileForm.email.$error.required">
-					Vui lòng không để trống <b>*</b>
-				</small>
-				<small class="text-danger fst-italic" ng-show="profileForm.email.$error.email">
-					Email chưa đúng định dạng <b>*</b>
-				</small>
-		    </div>
-		</div>
-		
-		<!-- Số điện thoại -->
-		<div class="form-group mx-auto">
-			<label class="form-label"> Số điện thoại <span class="text-red">*</span> </label>
-			<!-- Input -->
-			<input ng-model="myProfile.phone" ng-pattern="regexPhone" type="text" name="phone" 
-			class="form-control" placeholder="--Vui lòng nhập--" required>
 			
-			<div ng-show="profileForm.phone.$dirty && profileForm.phone.$invalid || profileForm.phone.$error.pattern">
-				<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.pattern && profileForm.phone.$invalid">
-					Số điện thoại chưa phù hợp <b>*</b>
-				</small> 
-				<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.required">
-					Vui lòng không để trống <b>*</b>
-				</small>
-			</div>
-		</div>
-
-	  	<div class="form-group mx-auto">
-			<label class="form-label"> Giới tính <span class="text-red">*</span> </label>
-			<div class="d-flex">
-				<div class="form-check mx-3">
-					<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-value="true" ng-model="myProfile.gender">
-					<label class="form-check-label" for="gridRadios1" > Nam </label>
-				</div> 
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-value="false" ng-model="myProfile.gender"> 
-					<label class="form-check-label" for="gridRadios2" > Nữ </label>
+			<!-- Số điện thoại -->
+			<div class="form-group mx-auto">
+				<label class="form-label"> Số điện thoại <span class="text-red">*</span> </label>
+				<!-- Input -->
+				<input ng-model="myProfile.phone" ng-pattern="regexPhone" type="text" name="phone" 
+				class="form-control" placeholder="--Vui lòng nhập--" required>
+				
+				<div ng-show="profileForm.phone.$dirty && profileForm.phone.$invalid || profileForm.phone.$error.pattern">
+					<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.pattern && profileForm.phone.$invalid">
+						Số điện thoại chưa phù hợp <b>*</b>
+					</small> 
+					<small class="text-danger fst-italic" ng-show="profileForm.phone.$error.required">
+						Vui lòng không để trống <b>*</b>
+					</small>
 				</div>
 			</div>
+	
+		  	<div class="form-group mx-auto">
+				<label class="form-label"> Giới tính <span class="text-red">*</span> </label>
+				<div class="d-flex">
+					<div class="form-check mx-3">
+						<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-value="true" ng-model="myProfile.gender">
+						<label class="form-check-label" for="gridRadios1" > Nam </label>
+					</div> 
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-value="false" ng-model="myProfile.gender"> 
+						<label class="form-check-label" for="gridRadios2" > Nữ </label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group mx-auto">
+				<label class="form-label"> Ngày sinh <span class="text-red">*</span> </label>
+				<!-- Input -->
+				<input class="w-100 form-control" type="date" ng-model="myProfile.birthday"
+				max="{{maxAge | date: 'yyyy-MM-dd'}}" value="{{valueAge | date: 'yyyy-MM-dd'}}">
+			</div>
 		</div>
-		
-		<div class="form-group mx-auto">
-			<label class="form-label"> Ngày sinh <span class="text-red">*</span> </label>
-			<!-- Input -->
-			<input class="w-100 form-control" type="date" ng-model="myProfile.birthday"
-			max="{{maxAge | date: 'yyyy-MM-dd'}}" value="{{valueAge | date: 'yyyy-MM-dd'}}">
+		<div class="col-xl-12 form-group mx-auto text-start mt-2">
+			<hr>
+			<button ng-click="updateProfile()" class="btn btn-primary btn-sm w-100">Lưu thay đổi</button>
 		</div>
 	</div>
 </form>

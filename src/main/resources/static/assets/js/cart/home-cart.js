@@ -28,7 +28,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$http.get($scope.url + "/store/" + $scope.sid + "/" + true).then(resp => {
 			$scope.products = resp.data;
 		});
-	}; $scope.listProducts($scope.storeid);
+	}; $scope.listProducts($scope.sid);
 
 	// Phân trang và điều hướng
 	$scope.pager2 = {
@@ -68,23 +68,22 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 		storeid = queryString.split("/").pop();
 		$http.get("/api/category/" + "store/"+ storeid).then(resp => {
-
 			$scope.cates = resp.data;
 		});
 	}
 	$scope.listCategory();
 
-//Sort
-$scope.sortBy = function(propertyName) {
-    $scope.propertyName = propertyName;
-  };
-  
-  $scope.sortByCate = function(cate) {
-    $scope.cate = cate;
-    console.log($scope.cate);
-  
-	
-	
+
+	//Sort
+	$scope.sortBy = function(propertyName) {
+		$scope.propertyName = propertyName;
+	};
+
+	$scope.sortByCate = function(cate) {
+		$scope.cate = cate;
+	}
+
+
 	//================================ Cart Control
 	$scope.items = [];
 
@@ -418,7 +417,7 @@ $scope.sortBy = function(propertyName) {
 		})
 	}
 	$scope.updateReal = function(user) {
-		$http.put($scope.urlInfo+ "updateProfile/" + user.id, user).then(resp => {
+		$http.put($scope.urlInfo + "updateProfile/" + user.id, user).then(resp => {
 
 			$scope.myProfile = user;
 

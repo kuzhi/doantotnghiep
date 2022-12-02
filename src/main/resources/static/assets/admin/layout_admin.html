@@ -68,7 +68,7 @@
 
 				<div class="dropdown dropstart account__user-mobile">
 					<label aria-expanded="false" data-bs-toggle="dropdown" class="btn dropdown-toggle" > 
-						<img alt="Ảnh người dùng" class="img__user rounded-4" src="/assets/images/icon_user.png">
+						{{userApp.fullname}}
 					</label>
 					<ul class="dropdown-menu">
 						<li>
@@ -102,50 +102,21 @@
 					<div class="offcanvas-body">
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 							<!-- Kênh bán hàng -->
-							<li 
-								aria-expanded="false"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								aria-controls="collapseInfo"
-								data-bs-target="#collapseInfo" 
-							>
-								<i class="fas fa-street-view size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Kênh bán hàng 
-								</span>
-							</li>
-							
-							<del class="collapse text-decoration-none" id="collapseInfo">
-								<a 
-									href="#!sales-channel"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Kênh quản lý </a> <br>
-							</del>
+							<a href="#!sales-channel"
+								class="text-decoration-none fw-semibold text-body mb-2"
+							> <i class="fas fa-street-view size-icon text-muted"></i>  Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
-							<li aria-expanded="false" class="menu__item mb-3" 
-							data-bs-toggle="collapse" aria-controls="collapseProduct" data-bs-target="#collapseProduct">
-								
-								<i class="fas fa-people-arrows size-icon text-muted"></i> 
-								<span class="fw-semibold text-body"> Cấp quyền </span>
-							</li>
-							
-							<del class="collapse text-decoration-none" id="collapseProduct">
-								<a href="#!supporter" class="text-decoration-none text-black-50 fw-semibold list__item"> Phân công quản trị </a>
-							</del>
+							<a href="#!supporter" class="text-decoration-none text-body fw-semibold mb-2">
+								<i class="fas fa-people-arrows size-icon text-muted"></i>  Phân công quản trị 
+							</a>
 							<!-- Phân quyền -->
-							<li aria-expanded="false" class="menu__item mb-3" 
-							data-bs-toggle="collapse" aria-controls="collapseOrder" data-bs-target="#collapseOrder">
-								<i class="fas fa-user-cog size-icon text-muted"></i> 
-								<span class="fw-semibold text-body"> Phân quyền </span>
-							</li>
-							
-							<del class="collapse text-decoration-none" id="collapseOrder">
-								<a href="#!decentralization" class="text-decoration-none text-black-50 fw-semibold list__item"> Phân quyền </a>
-							</del>
+							<a href="#!decentralization" class="text-decoration-none text-body fw-semibold mb-2">
+								<i class="fas fa-user-cog size-icon text-muted"></i>  Phân quyền 
+							</a>
 							<!-- Người dùng -->
 							<li 
 								aria-expanded="false"
-								class="menu__item mb-3" 
+								class="menu__item mb-2" 
 								data-bs-toggle="collapse"
 								aria-controls="collapseUser"
 								data-bs-target="#collapseUser" 
@@ -166,31 +137,34 @@
 									class="text-decoration-none text-black-50 fw-semibold list__item"
 								> Khách hàng </a> 
 							</del>
-							
-							<!-- Báo cáo -->
+							<!-- Gói dịch vụ -->
 							<li 
 								aria-expanded="false"
 								class="menu__item mb-3" 
 								data-bs-toggle="collapse"
-								aria-controls="collapseReport"
-								data-bs-target="#collapseReport" 
-							>	
-								<i class="fas fa-chart-bar size-icon text-muted"></i> 
+								aria-controls="collapsePack"
+								data-bs-target="#collapsePack" 
+							>
+								<i class="fas fa-user-cog size-icon text-muted"></i> 
 								<span class="fw-semibold text-body">
-									Báo cáo
+									Gói dịch vụ
 								</span>
 							</li>
-							
-							<del class="collapse text-decoration-none" id="collapseReport">
+							<del class="collapse text-decoration-none" id="collapsePack">
 								<a 
-									href="#!report"
+									href="#!orderpack"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Tổng quan </a> <br> 
+								> Duyệt gói </a> <br>
 								<a 
-									href="#!feedback"
+									href="#!pack"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Phản hồi </a>
+								> Quản lý </a>
 							</del>
+							<!-- Báo cáo -->
+							<a 
+								href="#!report"
+								class="text-decoration-none text-body fw-semibold"
+							><i class="fas fa-chart-bar size-icon text-muted"></i>  Tổng quan </a> <br> 
 						</ul>
 					</div>
 				</div>
@@ -204,61 +178,19 @@
 					<div class="row pt-3">
 						<ul class="navbar-nav justify-content-end flex-grow-1">
 							<!-- Kênh bán hàng -->
-							<li 
-								aria-expanded="false"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								aria-controls="collapseInfo"
-								data-bs-target="#collapseInfo" 
-							>
-								<i class="fas fa-street-view size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Kênh bán hàng
-								</span>
-							</li>
-							<del class="collapse text-decoration-none" id="collapseInfo">
-								<a 
-									href="#!sales-channel"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Kênh quản lý </a> <br>
-							</del>
+							<a 
+								href="#!sales-channel"
+								class="text-decoration-none text-body fw-semibold mb-3"
+							><i class="fas fa-street-view size-icon text-muted"></i> Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
-							<li 
-								aria-expanded="false"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								aria-controls="collapseProduct"
-								data-bs-target="#collapseProduct" 
-							>
-								<i class="fas fa-people-arrows size-icon text-muted"></i> 
-									<span class="fw-semibold text-body">
-										Hỗ trợ
-									</span>
-								</li>
-							<del class="collapse text-decoration-none" id="collapseProduct">
-								<a href="#!supporter"
-									class="text-decoration-none text-black-50 fw-semibold list__item">
-									Phân công hỗ trợ </a>
-							</del>
+							<a href="#!supporter"
+								class="text-decoration-none text-body fw-semibold mb-3">
+								<i class="fas fa-people-arrows size-icon text-muted"></i> Phân công hỗ trợ </a>
 							<!-- Phân quyền -->
-							<li 
-								aria-expanded="false"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								aria-controls="collapseOrder"
-								data-bs-target="#collapseOrder" 
-							>
-								<i class="fas fa-user-cog size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Phân quyền
-								</span>
-							</li>
-							<del class="collapse text-decoration-none" id="collapseOrder">
 								<a 
 									href="#!decentralization"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Phân quyền </a>
-							</del>
+									class="text-decoration-none text-body fw-semibold mb-3"
+								><i class="fas fa-user-cog size-icon text-muted"></i> Phân quyền </a>
 							<!-- Người dùng -->
 							<li 
 								aria-expanded="false"
@@ -312,24 +244,10 @@
 								> Quản lý </a>
 							</del>
 							<!-- Báo cáo -->
-							<li 
-								aria-expanded="false"
-								class="menu__item mb-3" 
-								data-bs-toggle="collapse"
-								aria-controls="collapseReport"
-								data-bs-target="#collapseReport" 
-							>
-								<i class="fas fa-chart-bar size-icon text-muted"></i> 
-								<span class="fw-semibold text-body">
-									Báo cáo
-								</span>
-							</li>
-							<del class="collapse text-decoration-none" id="collapseReport">
-								<a 
-									href="#!report"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Tổng quan </a>
-							</del>
+							<a 
+								href="#!report"
+								class="text-decoration-none text-body fw-semibold mb-3"
+							> <i class="fas fa-chart-bar size-icon text-muted"></i> Tổng quan </a>
 						</ul>
 					</div>
 				</div>
