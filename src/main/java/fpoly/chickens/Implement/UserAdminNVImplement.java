@@ -141,12 +141,4 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		return userAppDAO.getAdmins();
 	}
-
-	@Override
-	public Boolean checkPassword(UserApp uStore, String password) {
-		// TODO Auto-generated method stub
-		boolean match = pe.matches(password, uStore.getPassword().trim());
-		
-		return match;
-	}
 }

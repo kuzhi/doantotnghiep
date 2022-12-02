@@ -13,7 +13,7 @@ public interface UserAdminKHService {
 	List<UserStore> findAll();
 	Page<UserStore> findAllPage(Pageable pageable);
 	List<UserStore> loadUserWithDeleted(Boolean deleted);
-	UserStore findById(Integer userId);
+	
 	// Create
 	UserStore create(UserStore userStore);
 	// Update
@@ -42,6 +42,4 @@ public interface UserAdminKHService {
 	List<UserStore> hoatDong();
 	// Sort 90
 	List<UserStore> ngungHoatDong();
-
-	Boolean checkPassword(UserStore uStore,  String password);
 }

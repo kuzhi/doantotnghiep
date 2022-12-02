@@ -33,7 +33,7 @@
 						<tr ng-repeat="a in admins">
 							<td>{{a.username}}</td>
 							<th ng-repeat="r in roles" class="text-center">
-								<input  ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">
+								<input  ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">{{r.id}}
 							</th>
 						</tr>
 					</tbody>

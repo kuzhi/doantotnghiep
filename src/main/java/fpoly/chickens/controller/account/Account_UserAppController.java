@@ -14,7 +14,6 @@ import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
-import fpoly.chickens.service.UserService;
 
 @Controller
 public class Account_UserAppController {
@@ -28,17 +27,9 @@ public class Account_UserAppController {
 	@Autowired
 	UserRoleAppDAO userRoleDao;
 
-	
-	@Autowired
-	UserService userService;
-
 	@GetMapping("/user-app/auth/form")
 	public String login() {
-		String checkSessionUserApp = userService.getTokenUserApp();
-		if(checkSessionUserApp !=null){
-			return "redirect:/admin";
-		}
-
+			
 		return "home/account/loginApp";
 	}
 	
