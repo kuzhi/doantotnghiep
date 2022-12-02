@@ -9,9 +9,12 @@ import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
 
 public interface UserRoleAppDAO extends JpaRepository<UserRoleApp, Integer>{
-	@Query(value ="SELECT o FROM UserRoleApp o  WHERE o.userapp.id = ?1")
-	 UserRoleApp findUserRoleIDByUsername(int userAppId);
+	@Query(value ="SELECT o.roleapp.RoleName FROM UserRoleApp o  WHERE o.userapp.id = ?1")
+	 List<String> findUserRoleIDByUsername(int userAppId);
 
 	 @Query("select distinct o from UserRoleApp o where o.userapp in ?1")
 	 List<UserRoleApp> authoritiesOf(List<UserApp> userApp);
+
+	 @Query(value ="SELECT count(o) FROM UserRoleApp o  WHERE o.userapp.id = ?1")
+	 Integer countRoleByUserId(int userAppId);
 }

@@ -36,15 +36,14 @@ public class Account_UserStoreController {
 		
 		String checkSessionStore = userService.getTokenStore();
 		String checkSessionUser = userService.getTokenUser();
-		System.out.println(checkSessionStore + checkSessionUser);
-		if(checkSessionStore == null){
-			return "redirect:/app";
-		}
-		if(checkSessionUser == null){
+		
+		if(checkSessionUser != null ){
 			return "redirect:/home/client/0";
 
 		}
-		
+		if(checkSessionStore != null ){
+			return "redirect:/app";
+		}
 			return "home/account/login";
 		
 		//return "home/account/login";
