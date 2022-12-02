@@ -15,7 +15,7 @@
 		
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
 		<div>
-			<a ng-show="userid!=null && storeid!=0" th:href="@{|/home/cart/view/{{storeid}}|}" 
+			<a ng-show="userid!=null && storeid!=0" th:href="@{|/home/cart/view/{{sid}}|}" 
 			class="btn btn-light btn-sm rounded-4 position-relative">
 				<i class="fa-solid fa-cart-shopping text-secondary"></i>				
 				<span
@@ -40,8 +40,13 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item home-show" th:href="@{/home/client}">Trang chủ</a></li>
+<<<<<<< HEAD
 				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{storeid}}|}">Hồ sơ cá nhân</a></li>
 				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{storeid}}/change-password|}">Đổi mật khẩu</a></li>
+=======
+				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{sid}}|}">Hồ sơ cá nhân</a></li>
+				<li><a class="dropdown-item" href="/assets/home/change.html">Đổi mật khẩu</a></li>
+>>>>>>> 401457c02fb5f910ec4084103291c7c17d303825
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="/home/auth/logout-user">Đăng xuất</a></li>
 			</ul>

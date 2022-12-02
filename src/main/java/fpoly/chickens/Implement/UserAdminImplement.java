@@ -155,4 +155,10 @@ public class UserAdminImplement implements UserAdminService {
 		// TODO Auto-generated method stub
 		return userDAO.findByUserId(userid);
 	}
+
+	@Override
+	public User updateProfile(User user) {
+		// TODO Auto-generated method stub
+		return userDAO.saveAndFlush(user);
+	}
 }

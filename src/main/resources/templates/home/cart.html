@@ -29,7 +29,7 @@
 				<div ng-repeat="p in items" class="row shadow rounded my-3 py-3">
 					<div class="col-xl-2 text-end text-end-mb">
 
-						<img th:src="@{/assets/images/products/{{p.product.image}}}"
+						<img ng-src="/assets/images/Products/{{p.product.image==''?'icon_food.png':p.product.image}}" 
 							style="width: 50px; height: 50px; border-radius: 10px;">
 					</div>
 					<div class="col-xl-10">
@@ -54,7 +54,7 @@
 										class="input-group-text bg-white">
 										<i class="fa-solid fa-minus"></i>
 									</button>
-									<input ng-model="p.amount" type="number"
+									<input ng-model="p.amount" 
 										class="form-control text-center" ng-change="update(p)">
 									<button ng-click="p.amount = p.amount + 1; update(p);" 
 										class="input-group-text bg-white">
