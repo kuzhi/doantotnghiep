@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.UserRoleApp;
 import fpoly.chickens.service.UserRoleAppService;
+import fpoly.chickens.service.UserService;
 
 @CrossOrigin("*")
 @RestController
@@ -26,6 +27,9 @@ public class UserRoleAPI {
 
     @Autowired
     UserRoleAppService uService;
+
+	@Autowired
+    UserService userService;
 
     @GetMapping()
 	public List<UserRoleApp> findAllUsersRole( @RequestParam("admin") Optional<Boolean> admin) {
@@ -64,10 +68,20 @@ public class UserRoleAPI {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id ){
 		if (!uService.existsById(id)) {
 			return ResponseEntity.badRequest().build();
 		}
+		
+		UserRoleApp user = uService.findByIds(id);
+		Integer currentUser = Integer.parseInt(userService.getTokenUserApp());
+		Integer count = uService.countRoleByUserId(user.getUserapp().getId());
+		
+		if(count == 1 || user.getUserapp().getId() == currentUser){
+			
+			return ResponseEntity.badRequest().build();
+		}
+		
 		uService.delete(id);
 		return ResponseEntity.ok().build();
 	}
