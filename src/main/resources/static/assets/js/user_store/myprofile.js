@@ -1,7 +1,11 @@
+
 app.controller("myprofile-ctrl", function($scope, $http, $location) {
+
+
 	$scope.titleBreadcrumb = 'Cá nhân';
 	$scope.titleBread = 'Thông tin';
 	$scope.url = "/api/userStore/";
+	$scope.changePassword= [];
 	$scope.regexPhone = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
 
 	$scope.loadUserStore = function() {
@@ -12,13 +16,14 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 
 				$http.get("/api/user/get-user-store/" + $scope.userid).then(resp => {
 					$scope.userStore = resp.data;
+					console.log($scope.userStore)
 					$scope.userStore.birthday = new Date($scope.userStore.birthday)
 				})
 			})
 
 	};
 	$scope.loadUserStore();
-
+	
 	//Change image
 	$scope.ImageChanged = function(files) {
 		var data = new FormData();
@@ -162,5 +167,10 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 			});
 			console.log("Error", error);
 		});
+	}
+
+	$scope.updatePassword = function(changePassword){
+		 $scope.changePassword = changePassword;
+		console.log( changePassword)
 	}
 })

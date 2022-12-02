@@ -14,8 +14,8 @@ public interface UserAppDAO extends JpaRepository<UserApp, Integer> {
 	@Query("SELECT o FROM UserApp o WHERE o.Deleted = ?1")
 	List<UserApp> loadUserWithDeleted(Boolean deleted);
 
-	@Query(value = "SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
-	public UserApp findByUsernames(String uname);
+	@Query(value = "SELECT o FROM UserApp o WHERE o.Username = ?1")
+	 UserApp findByUsernames(String uname);
 
 	@Query(value = "SELECT * FROM UserApp WHERE username = ?1", nativeQuery = true)
 	public UserApp findByUsername(String uname);

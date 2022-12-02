@@ -39,7 +39,7 @@ public class UserAdminKHImplement implements UserAdminKHService {
 		// TODO Auto-generated method stub
 		String encodePass = pe.encode(user.getPassword());
 		user.setPassword(encodePass);
-		return userStoreDAO.save(user);
+		return userStoreDAO.saveAndFlush(user);
 	}
 
 	@Override
@@ -127,4 +127,17 @@ public class UserAdminKHImplement implements UserAdminKHService {
 			// TODO Auto-generated method stub
 			return userStoreDAO.findUserByPhoneForId(phone, id);
 		}
+	@Override
+	public UserStore findById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.findById(userId).get();
 	}
+	
+	@Override
+	public Boolean checkPassword(UserStore uStore, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	}
+
+

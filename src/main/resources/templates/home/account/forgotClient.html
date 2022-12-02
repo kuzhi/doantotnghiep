@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <html lang="en">
 <head>
-<title>Đổi mật khẩu</title>
+<title>Lấy lại mật khẩu</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -30,7 +29,7 @@
 	href="/assets/suport/select2/select2.min.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/assets/css/home/util.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/home/main	.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/home/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -41,52 +40,42 @@
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="/assets/images/img-01.png" alt="IMG">
 				</div>
-
-				<form class="login100-form validate-form" th:action="@{|/home/client/my-profile/change-password|}" method="post">
-					<span class="login100-form-title"> ĐỔI MẬT KHẨU </span>
+				<form class="login100-form validate-form" action="check-info-client" method="post">
+					<span class="login100-form-title"> QUÊN MẬT KHẨU </span>
 					<th:block th:if="${message !=null}">
 						<div class="alert alert-danger" role="alert" th:text="${message}"></div>
-						</th:block>
-						<th:block th:if="${success !=null}">
-						<div class="alert alert-success" role="alert" th:text="${success}"></div>
-						</th:block>
+					</th:block>
 					<div class="wrap-input100 validate-input"
 						data-validate="Vui lòng không để trống">
-						<input class="input100" type="password" name="oldPassword"
-							placeholder="--Vui lòng nhập mật khẩu hiện tại--"> <span
-							class="focus-input100" th:readonly ="${success}"></span> <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
+						<input class="input100" type="text" name="username" 
+							placeholder="--Vui lòng nhập--"  > <span
+							class="focus-input100"></span> <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Vui lòng không để trống">
-						<input class="input100" type="password" name="newPassword"
-							placeholder="--Vui lòng nhập mật khẩu mới--"> <span
-							class="focus-input100" th:readonly ="${success}"></span> <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
+						<input class="input100" type="email" name="email"
+							placeholder="--Vui lòng nhập--"> <span
+							class="focus-input100" ></span> <span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
+					</div>
+					<div class="container-login100-form-btn">
+						<button type ="submit" class="login100-form-btn">Xác nhận</button>
 					</div>
 					
-					<div class="wrap-input100 validate-input"
-						data-validate="Vui lòng không để trống">
-						<input class="input100" type="password" name="checkNewPassword"
-							placeholder="--Vui lòng nhập xác nhận mật khẩu mới--"> <span
-							class="focus-input100" th:readonly ="${success}"></span> <span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">Xác nhận</button>
-					</div>
-
 					<div class="text-center p-t-12">
-						<a class="login101-form-btn" href="/home/auth/form"> 
-							Đăng nhập ngay
+						<a class="login101-form-btn" th:href="@{/home/auth/form}"> 
+							Đăng nhập trang chủ
 						</a>
+						
 					</div>
 				</form>
+			
+				
+				 
 			</div>
 		</div>
 	</div>
@@ -109,7 +98,7 @@
 		})
 	</script>
 	<!--===============================================================================================-->
-	<script src="/assets/js/home/main_change.js"></script>
+	<script src="/assets/js/home/main_forgot.js"></script>
 
 </body>
 </html>
