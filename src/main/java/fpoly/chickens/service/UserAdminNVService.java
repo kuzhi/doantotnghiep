@@ -45,4 +45,7 @@ public interface UserAdminNVService {
 	List<UserApp> ngungHoatDong();
 
 	List<UserApp> getAdmins();
+
+	Boolean checkPassword(UserApp uStore,  String password);
+
 }

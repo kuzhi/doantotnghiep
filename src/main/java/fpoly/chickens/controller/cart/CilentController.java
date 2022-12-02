@@ -34,7 +34,6 @@ import fpoly.chickens.service.UserService;
 @Controller
 @RequestMapping({ "/home/client", "/home/cart/menu" })
 public class CilentController {
-<<<<<<< HEAD
 	
 	@Autowired OrderService orderService;
 	@Autowired ProductService productService;
@@ -47,17 +46,6 @@ public class CilentController {
 	@Autowired BCryptPasswordEncoder  pe;
 
 	@RequestMapping("/{storeid}")
-=======
-
-	@Autowired
-	OrderService orderService;
-	@Autowired
-	ProductService productService;
-	@Autowired
-	UserService userService;
-
-	@RequestMapping
->>>>>>> 401457c02fb5f910ec4084103291c7c17d303825
 	public String view_Cart(Model model) {
 		if (userService.getTokenStore() == null) {
 			return "home/list_store";

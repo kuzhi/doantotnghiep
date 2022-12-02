@@ -56,13 +56,14 @@ public class UserAdminKHAPI {
 	}
 
 	
-	@PostMapping("changePassworrd/{password}")
-	public ResponseEntity<UserStore> changepassword(@RequestBody Optional<UserStore> userStore, @PathVariable("password") String password) {
+	@PostMapping("checkPassworrd/{password}")
+	public ResponseEntity<Boolean> changepassword(@RequestBody Optional<UserStore> userStore, @PathVariable("password") String password) {
 		if (userStore.isPresent()) {
-			userAdminKHService.checkPassword(userStore.get(), password);
+			 
+			 return ResponseEntity.ok(userAdminKHService.checkPassword(userStore.get(), password));
 		}
 
-		return ResponseEntity.ok().build();
+		return ResponseEntity.badRequest().build();
 	}
 
 	// Update

@@ -136,7 +136,9 @@ public class UserAdminKHImplement implements UserAdminKHService {
 	@Override
 	public Boolean checkPassword(UserStore uStore, String password) {
 		// TODO Auto-generated method stub
-		return null;
+		boolean match = pe.matches(password, uStore.getPassword().trim());
+		
+		return match;
 	}
 	}
 

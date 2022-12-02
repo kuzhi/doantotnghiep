@@ -171,6 +171,56 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 
 	$scope.updatePassword = function(changePassword){
 		 $scope.changePassword = changePassword;
-		console.log( changePassword)
+		  
+		 let newPassword =  $scope.changePassword.newPassword;
+		 let checkPassword= $scope.changePassword.confirmNewPassword;
+		
+		
+		 var data = $scope.userStore;
+		$http.post($scope.url+ "checkPassworrd/"+changePassword.oldPassword,data).then(resp =>{
+			const check = resp.data;
+			
+			if(check === true){
+				if(newPassword === checkPassword){
+					data.password = newPassword;
+					$http.put($scope.url+data.id,data).then(resp=>{
+						Swal.fire({
+							icon: 'success',
+							title: 'Đổi mật khẩu thành công!'
+						})
+						location.reload();
+					}).catch(error => {
+						// Thông báo
+						Swal.fire({
+							icon: 'error',
+							title: 'Đổi mật khẩu hk thành công!'
+						});
+						
+					});
+				}else{
+					// Thông báo
+			Swal.fire({
+				icon: 'error',
+				title: 'Xác nhận mật khẩu không đúng!'
+			})
+				}
+			}
+			else{
+				// Thông báo
+			Swal.fire({
+				icon: 'error',
+				title: 'Mật khẩu hiện tại không đúng!'
+			})
+			}
+
+		}).catch(error => {
+			// Thông báo
+			Swal.fire({
+				icon: 'error',
+				title: 'Lỗi!'
+			});
+			console.log("Error", error);
+		});
+		 //checkPassworrd/{password}
 	}
 })

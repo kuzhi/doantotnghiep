@@ -3,7 +3,7 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Thông tin';
 	$scope.url = "/api/userApp/";
 	$scope.regexPhone = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
-	
+	$scope.changePassword =[]
 	$scope.loadUserStore = function(){
 		// Lấy userid
         $http.get("/api/getUserApp")
@@ -150,4 +150,62 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 				console.log("Error", error);
 			});
 	}
+
+	
+	$scope.updatePassword = function(changePassword){
+		$scope.changePassword = changePassword;
+		let newPassword =  $scope.changePassword.newPassword;
+		let checkPassword= $scope.changePassword.confirmPassword;
+	  
+
+
+		var data = $scope.userApp;
+	   $http.post($scope.url+ "checkPassworrd/"+changePassword.oldPassword,data).then(resp =>{
+		   const check = resp.data;
+		   
+		   if(check === true){
+			   if(newPassword === checkPassword){
+				   data.password = newPassword;
+				   $http.put($scope.url+data.id,data).then(resp=>{
+					   Swal.fire({
+						   icon: 'success',
+						   title: 'Đổi mật khẩu thành công!'
+					   })
+					   location.reload();
+				   }).catch(error => {
+					   // Thông báo
+					   Swal.fire({
+						   icon: 'error',
+						   title: 'Đổi mật khẩu hk thành công!'
+					   });
+					   
+				   });
+			   }else{
+				   // Thông báo
+		   Swal.fire({
+			   icon: 'error',
+			   title: 'Xác nhận mật khẩu không đúng!'
+		   })
+			   }
+		   }
+		   else{
+			   // Thông báo
+		   Swal.fire({
+			   icon: 'error',
+			   title: 'Mật khẩu hiện tại không đúng!'
+		   })
+		   }
+
+	   }).catch(error => {
+		   // Thông báo
+		   Swal.fire({
+			   icon: 'error',
+			   title: 'Lỗi!'
+		   });
+		   console.log("Error", error);
+	   });
+		//checkPassworrd/{password}
+   }
+
 })
+
