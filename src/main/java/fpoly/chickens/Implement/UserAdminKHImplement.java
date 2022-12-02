@@ -127,4 +127,18 @@ public class UserAdminKHImplement implements UserAdminKHService {
 			// TODO Auto-generated method stub
 			return userStoreDAO.findUserByPhoneForId(phone, id);
 		}
+
+		@Override
+	public Boolean checkPassword(UserStore uStore, String password) {
+		// TODO Auto-generated method stub
+		boolean match = pe.matches(password, uStore.getPassword().trim());
+		
+		return match;
+	}
+	@Override
+	public UserStore findById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.findById(userId).get();
+	}
+
 	}

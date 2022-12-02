@@ -44,7 +44,7 @@
 			<ul class="dropdown-menu">
 				<li><a class="dropdown-item home-show" th:href="@{|/home/cart/view/{{sid}}|}">Giỏ hàng</a></li>
 				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{sid}}|}">Hồ sơ cá nhân</a></li>
-				<li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
+				<li><a class="dropdown-item" th:href="@{|/home/client/my-profile/{{sid}}/change-password|}">Đổi mật khẩu</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="/home/auth/logout-user">Đăng xuất</a></li>
 			</ul>

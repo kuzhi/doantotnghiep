@@ -18,11 +18,13 @@ public interface UserRoleAppService {
 	void delete(Integer supportId);
 
 
-	UserRoleApp findByIds(Integer supportId);
+	UserRoleApp findByIds(Integer userRoleId);
 
 	List<UserRoleApp> findAuthoritiesOfAdmin();
 
 	Optional<UserRoleApp> findById(Integer id);
 
 	Boolean existsById(Integer id) ;
+
+	Integer countRoleByUserId(Integer userId);
 }
