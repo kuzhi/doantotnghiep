@@ -563,8 +563,8 @@ $scope.getUsersbyFilter = function () {
 	$http.get("/api/store")
 		.then(resp => {
 			$scope.listStore = resp.data;
-			$scope.listStore.forEach(store => {
-				store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
+			// $scope.listStore.forEach(store => {
+			// 	store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
 			// })
 		})
 	// Phân trang và điều hướng
