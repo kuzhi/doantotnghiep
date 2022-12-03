@@ -72,9 +72,11 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		});
 	}
 	$scope.listCategory();
+
 	$scope.getUsersbyFilter = function(id) {
 		// ======= A-Z
 		$http.get("/api/product/sort/" + id).then((resp) => {
+
 			$scope.products = resp.data;
 
 			$scope.products.forEach((us) => {

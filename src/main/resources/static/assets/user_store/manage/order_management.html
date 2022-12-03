@@ -200,7 +200,7 @@
 					<div class="col-xl-12 text-end">
 						<button ng-if="orderDetail[0].order.status === 1" ng-click="confirm(orderDetail[0].order.id)"
 						class="btn btn-info text-white px-5 py-1">Duyệt đơn này</button>
-						<button ng-if="orderDetail[0].order.status === 2" ng-click="confirm(orderDetail[0].order.id)"
+						<button ng-if="orderDetail[0].order.status === 2" ng-click="cancel(orderDetail[0].order.id)"
 						class="btn btn-danger px-5 py-1">Hủy đơn này</button>
 					</div>
 				</div>
