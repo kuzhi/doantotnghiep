@@ -9,7 +9,31 @@ app.controller("decentralization-ctrl", function($scope, $http, $location) {
 		{ id: 2, name: "Fullname tăng dần Z-A" },
 	
 	]
-	
+
+$scope.getUsersbyFilter = function () {
+    // ======= A-Z
+    if ($scope.list == 1) {
+      $http.get("/api/userApp/" + "sort/a-z").then((resp) => {
+        $scope.admins = resp.data;
+
+        $scope.admins.forEach((us) => {
+          us.create_at = new Date(us.create_at);
+          us.update_at = new Date(us.update_at);
+        });
+      });
+    }
+    // ======= Z-A
+    else if ($scope.list == 2) {
+      $http.get("/api/userApp/" + "sort/z-a").then((resp) => {
+        $scope.admins = resp.data;
+
+        $scope.admins.forEach((us) => {
+          us.create_at = new Date(us.create_at);
+          us.update_at = new Date(us.update_at);
+        });
+      });
+    }
+  };
 
 $scope.roles = [];
 	$scope.admins = [];
