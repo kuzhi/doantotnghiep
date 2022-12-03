@@ -68,21 +68,21 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 		$http.get("/api/category/" + "store/" + $scope.sid).then(resp => {
 			$scope.cates = resp.data;
-			
+
 		});
 	}
 	$scope.listCategory();
-$scope.getUsersbyFilter = function () {
-    // ======= A-Z
-    $http.get("/api/product/" + "sort/" + cates.id).then((resp) => {
-      $scope.products = resp.data;
+	$scope.getUsersbyFilter = function(id) {
+		// ======= A-Z
+		$http.get("/api/product/sort/" + id).then((resp) => {
+			$scope.products = resp.data;
 
-      $scope.products.forEach((us) => {
-        us.create_at = new Date(us.create_at);
-        us.update_at = new Date(us.update_at);
-      });
-    });
-  };
+			$scope.products.forEach((us) => {
+				us.create_at = new Date(us.create_at);
+				us.update_at = new Date(us.update_at);
+			});
+		});
+	};
 
 	//Sort
 	$scope.sortBy = function(propertyName) {
@@ -92,6 +92,7 @@ $scope.getUsersbyFilter = function () {
 	$scope.sortByCate = function(cate) {
 		$scope.cate = cate;
 	}
+
 
 
 	//================================ Cart Control

@@ -49,4 +49,22 @@ public class StoreImplement implements StoreService {
 	public Store update(Store store) {
 		// TODO Auto-generated method stub
 		return storeDAO.saveAndFlush(store);	}
+
+	@Override
+	public List<Store> findStoreByName(String name) {
+		// TODO Auto-generated method stub
+		return storeDAO.findStoreByName(name);
+	}
+
+	@Override
+	public List<Store> sortAZ() {
+		// TODO Auto-generated method stub
+		return storeDAO.sortAZ();
+	}
+
+	@Override
+	public List<Store> sortZA() {
+		// TODO Auto-generated method stub
+		return storeDAO.sortZA();
+	}
 }

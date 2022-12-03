@@ -38,12 +38,12 @@
 					</h6>
 					<div class="collapse show" id="collapseCate">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked> 
+							<input ng-click="listProducts()" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked> 
 							<label class="form-check-label" for="flexCheckDefault"> Tất cả </label>
 						</div>
 						<div ng-repeat="c in cates" class="form-check">
 			                <input class="form-check-input" type="checkbox"
-		                  ng-model="{c.id}" ng-change="getUsersbyFilter()"  ng-click="sortByCate(c.name)" value="{{c.name}}" id="flexCheckDefault" />
+		                   ng-click="getUsersbyFilter(c.id)"   value="{{c.id}}" id="flexCheckDefault" />
 			                <label class="form-check-label" for="flexCheckDefault"> {{c.name}} </label>
 		                </div>
 					</div>
