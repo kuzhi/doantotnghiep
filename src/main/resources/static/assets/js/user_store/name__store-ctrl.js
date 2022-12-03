@@ -3,8 +3,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
 	$scope.nameStore = "Pika Tea";
-	$scope.storeid = 2;
-	$scope.userid = 2;
+	  $scope.storeid = 1;
+  	$scope.userid = 1;
 	
 	$scope.listStoreByStoreId = [];
   $scope.listStoreByUserId = [];
