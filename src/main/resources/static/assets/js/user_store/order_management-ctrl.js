@@ -243,6 +243,51 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 
 	}
 	$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
+	
+	
+	$scope.cancel = function(orderid) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-danger ms-2',
+				cancelButton: 'btn btn-success'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			title: 'Thông báo',
+			icon: 'warning',
+			text: "Bạn có chắc muốn hủy đơn này?",
+			showCancelButton: true,
+			confirmButtonText: 'OK',
+			cancelButtonText: 'Quay lại',
+			reverseButtons: true,
+			showClass: {
+				popup: 'animate__animated animate__fadeInDownBig'
+			},
+			hideClass: {
+				popup: 'animate__animated animate__fadeOutUpBig'
+			}
+		}).then((result) => {
+			if (result.isConfirmed) {
+				order = {
+					id: orderid,
+					status: 5
+				}
+				$http.put("/api/order/update", order).then(resp => {
+					swalWithBootstrapButtons.fire(
+						'Thành công',
+						'Đã hủy đơn hàng!',
+						'success'
+					)
+					$scope.loadData($scope.pageNumber, $scope.pageField, $scope.pageSort);
+				})
+			} else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			) { }
+		})
+	}
 
 	$scope.edit = function(id) {
 		$http.get("/api/orderdetail/" + id).then(resp => {
