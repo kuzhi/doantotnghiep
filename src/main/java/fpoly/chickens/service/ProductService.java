@@ -35,7 +35,8 @@ public interface ProductService {
 	List<Product> sort09(Integer storeid);
 	// Sort 90
 	List<Product> sort90(Integer storeid);
-
+	// Sort category
+	List<Product> sortCategory(Integer storeid);
 	
 	// Find product by id
 	Product findById(Integer id);

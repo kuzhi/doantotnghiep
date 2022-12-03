@@ -71,6 +71,17 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		});
 	}
 	$scope.listCategory();
+$scope.getUsersbyFilter = function () {
+    // ======= A-Z
+    $http.get("/api/product/" + "sort/" + cates.id).then((resp) => {
+      $scope.products = resp.data;
+
+      $scope.products.forEach((us) => {
+        us.create_at = new Date(us.create_at);
+        us.update_at = new Date(us.update_at);
+      });
+    });
+  };
 
 	//Sort
 	$scope.sortBy = function(propertyName) {

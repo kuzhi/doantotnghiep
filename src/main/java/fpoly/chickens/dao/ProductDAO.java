@@ -42,5 +42,9 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 	// Sort A-Z
 	@Query(value = "SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = 0 ORDER BY o.Price DESC")
 	List<Product> sort90(Store storeid);
+
+	// Sort Category
+	@Query(value = "SELECT o FROM Product o WHERE o.category= ?1 AND o.Deleted = 0")
+		List<Product> sortCategory(Store storeid);
 	
 }

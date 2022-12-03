@@ -196,6 +196,52 @@ app.controller("supporter-ctrl", function($scope, $http, $location) {
 		{ id: 4, name: "Giới tính nữ" },
 	]
 	
+$scope.getUsersbyFilter = function () {
+    // ======= A-Z
+    if ($scope.list == 1) {
+      $http.get("/api/userStore/" + "sort/a-z").then((resp) => {
+        $scope.users = resp.data;
+
+        $scope.users.forEach((us) => {
+          us.create_at = new Date(us.create_at);
+          us.update_at = new Date(us.update_at);
+        });
+      });
+    }
+    // ======= Z-A
+    else if ($scope.list == 2) {
+      $http.get("/api/userStore/" + "sort/z-a").then((resp) => {
+        $scope.users = resp.data;
+
+        $scope.users.forEach((us) => {
+          us.create_at = new Date(us.create_at);
+          us.update_at = new Date(us.update_at);
+        });
+      });
+    }
+    // ======= Hoạt động
+    else if ($scope.list == 3) {
+      $http.get("/api/userStore/" + "sort/0-9").then((resp) => {
+        $scope.users = resp.data;
+
+        $scope.users.forEach((us) => {
+          us.create_at = new Date(user.create_at);
+          us.update_at = new Date(user.update_at);
+        });
+      });
+    }
+    // ======= Ngừng hoạt động
+    else if ($scope.list == 4) {
+      $http.get("/api/userStore/" + "sort/9-0").then((resp) => {
+        $scope.users = resp.data;
+
+        $scope.users.forEach((us) => {
+          us.create_at = new Date(us.create_at);
+          us.update_at = new Date(us.update_at);
+        });
+      });
+    }
+  };
 
 	$scope.nameUser;
   $scope.findByName = function () {

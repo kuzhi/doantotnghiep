@@ -108,4 +108,10 @@ public class ProductAPI {
 	public List<Product> sort90(@PathVariable("storeid") Optional<Integer> storeid) {
 		return productService.sort90(storeid.get());
 	}
+
+	// Sort Category
+	@GetMapping("/sort/{categoryid}")
+	public List<Product> sortCategory(@PathVariable("categoryid") Integer categoryid) {
+		return productService.sortCategory(categoryid);
+	}
 }

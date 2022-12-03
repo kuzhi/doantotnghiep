@@ -6,42 +6,168 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.storeid = 2;
 	$scope.userid = 2;
 	
-	$scope.listStoreByUserId=[];
-	$http.get("/api/store/"+$scope.userid)
-	.then(resp => {
-		$scope.listStoreByUserId = resp.data;
-	})
+	$scope.listStoreByStoreId = [];
+  $scope.listStoreByUserId = [];
+  $scope.init = function () {
+    $http.get("/api/store/" + $scope.storeid).then((resp) => {
+      $scope.listStoreByStoreId = resp.data;
+    });
 
-	$scope.update = function() {
-		const swalWithBootstrapButtons = Swal.mixin({
-			customClass: {
-				confirmButton: 'btn btn-success ms-2',
-				cancelButton: 'btn btn-danger'
-			},
-			buttonsStyling: false
-		})
+    $http.get("/api/store/list/" + $scope.userid).then((resp) => {
+      $scope.listStoreByUserId = resp.data;
+    });
+  };
 
-		swalWithBootstrapButtons.fire({
-			title: 'Thông báo',
-			icon: 'warning',
-			text: "Bạn chắc chắn muốn thay đổi?",
-			showCancelButton: true,
-			confirmButtonText: 'OK',
-			cancelButtonText: 'Quay lại',
-			reverseButtons: true
-		}).then((result) => {
-			if (result.isConfirmed) {
-				swalWithBootstrapButtons.fire(
-					'Thành công',
-					'Đã cập nhật thay đổi!',
-					'success'
-				)
-			} else if (
-				/* Read more about handling dismissals below */
-				result.dismiss === Swal.DismissReason.cancel
-			) { }
-		})
-	}
+  //edit list store
+  $scope.formStore = {};
+  $scope.edit = function (store) {
+    $scope.formStore = angular.copy(store);
+  };
+
+  $scope.init();
+  //update
+  $scope.update = function () {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success ms-2",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Thông báo",
+        icon: "warning",
+        text: "Bạn chắc chắn muốn thay đổi?",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Quay lại",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          //====================================== Bắt đầu xử lý
+          var store = angular.copy($scope.listStoreByStoreId);
+          var url = $scope.url;
+          $http
+            .patch("/api/store/" + $scope.storeid, store)
+            .then((resp) => {
+              $scope.init();
+
+              // Thông báo
+              swalWithBootstrapButtons.fire(
+                "Thành công",
+                "Cập nhật thành công!",
+                "success"
+              );
+            })
+            .catch((error) => {
+              // Thông báo
+              Swal.fire({
+                icon: "error",
+                title: "Cập nhật thất bại!",
+              });
+              console.log("Error", error);
+            });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+  };
+
+  // Create
+  $scope.create = function () {
+    var store = angular.copy($scope.formStore);
+    $http
+      .post("/api/store/", store)
+      .then((resp) => {
+        resp.data.create_at = new Date(resp.data.create_at);
+        resp.data.update_at = new Date(resp.data.update_at);
+
+        $scope.init();
+        Swal.fire({
+          icon: "success",
+          title: "Thêm thành công!",
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Thêm thất bại!",
+        });
+        console.log("Error: ", error);
+      });
+  };
+
+  //detele
+  $scope.delete = function (store) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-danger ms-2",
+        cancelButton: "btn btn-success",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Thông báo",
+        icon: "warning",
+        text: "Bạn có chắc muốn thực hiện xóa?",
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Quay lại",
+        reverseButtons: true,
+        showClass: {
+          popup: "animate__animated animate__fadeInDownBig",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUpBig",
+        },
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          //====================================== Bắt đầu xử lý
+          store.update_at = new Date();
+          store.deleted = true;
+
+          $http
+            .delete("/api/store/" + $scope.storeid, store)
+            .then((resp) => {
+              var index = $scope.listStoreByStoreId.findIndex(
+                (p) => p.id == store.id
+              );
+
+              $scope.listStoreByStoreId[index] = store;
+
+              $scope.init();
+              // Thông báo
+              swalWithBootstrapButtons.fire(
+                "Đã xóa",
+                "Đã xóa thành công!",
+                "success"
+              );
+            })
+            .catch((error) => {
+              // Thông báo
+              Swal.fire({
+                icon: "error",
+                title: "Xóa thất bại!",
+              });
+              console.log("Error", error);
+            });
+          //====================================== Kết thúc xử lý
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+  };
+  
 	$scope.status = 1;
 	$scope.listOrderPack = []
 	$scope.orderPackSee={}
