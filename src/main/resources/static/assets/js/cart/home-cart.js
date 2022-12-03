@@ -68,6 +68,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 		$http.get("/api/category/" + "store/" + $scope.sid).then(resp => {
 			$scope.cates = resp.data;
+			
 		});
 	}
 	$scope.listCategory();
@@ -564,7 +565,7 @@ $scope.getUsersbyFilter = function () {
 			$scope.listStore = resp.data;
 			$scope.listStore.forEach(store => {
 				store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
-			})
+			// })
 		})
 	// Phân trang và điều hướng
 	$scope.pager = {
