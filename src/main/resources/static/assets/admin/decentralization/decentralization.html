@@ -12,7 +12,7 @@
 		<div class="row my-2">
 			<!-- Select -->
 			<div class="text-start">
-				<select ng-model="list" ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
+				<select ng-change="getUsersbyFilter()" ng-model="list" ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
 				  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
 				</select>
 			</div>
