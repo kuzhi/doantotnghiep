@@ -15,5 +15,10 @@ public interface StoreService {
 	Store update(Store store);
 
 	void deleteStore(Integer storeId);
-
+	// Find by name
+	List<Store> findStoreByName(String name);
+	// Sort AZ
+		List<Store> sortAZ();
+		// Sort ZA
+		List<Store> sortZA();
 }

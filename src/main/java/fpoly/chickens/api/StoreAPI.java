@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.Store;
+import fpoly.chickens.entity.User;
 import fpoly.chickens.service.StoreService;
 
 @CrossOrigin("*")
@@ -62,4 +63,22 @@ public class StoreAPI {
 
 		return ResponseEntity.ok().build();
 	}
+
+	
+	// Find by name
+	@GetMapping("/name/{storeName}")
+	public ResponseEntity<List<Store>> findByName(@PathVariable("storeName") Optional<String> storeName) {
+		return ResponseEntity.ok(storeService.findStoreByName("%" + storeName.get() + "%"));
+	}
+	// Sort A-Z
+		@GetMapping("/sort/a-z")
+		public List<Store> sortAZ() {
+			return storeService.sortAZ();
+		}
+
+		// Sort A-Z
+		@GetMapping("/sort/z-a")
+		public List<Store> sortZA() {
+			return storeService.sortZA();
+		}
 }

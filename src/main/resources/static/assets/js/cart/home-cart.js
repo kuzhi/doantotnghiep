@@ -72,9 +72,11 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		});
 	}
 	$scope.listCategory();
-	$scope.getUsersbyFilter = function() {
+
+	$scope.getUsersbyFilter = function(id) {
 		// ======= A-Z
-		$http.get("/api/product/" + "sort/" + cates.id).then((resp) => {
+		$http.get("/api/product/sort/" + id).then((resp) => {
+
 			$scope.products = resp.data;
 
 			$scope.products.forEach((us) => {
@@ -92,6 +94,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.sortByCate = function(cate) {
 		$scope.cate = cate;
 	}
+
 
 
 	//================================ Cart Control
@@ -563,9 +566,9 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$http.get("/api/store")
 		.then(resp => {
 			$scope.listStore = resp.data;
-			$scope.listStore.forEach(store => {
-				store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
-			})
+			// $scope.listStore.forEach(store => {
+			// 	store.phone = store.phone.substr(0, 3) + '-' + store.phone.substr(3, 3) + '-' + store.phone.substr(6, 4);
+			// })
 		})
 	// Phân trang và điều hướng
 	$scope.pager = {

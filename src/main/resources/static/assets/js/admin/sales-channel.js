@@ -62,7 +62,7 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location) {
 $scope.getUsersbyFilter = function () {
     // ======= A-Z
     if ($scope.list == 1) {
-      $http.get("/api/userStore/" + "sort/a-z").then((resp) => {
+      $http.get("/api/store/" + "sort/a-z").then((resp) => {
         $scope.stores = resp.data;
 
         $scope.stores.forEach((us) => {
@@ -73,29 +73,7 @@ $scope.getUsersbyFilter = function () {
     }
     // ======= Z-A
     else if ($scope.list == 2) {
-      $http.get("/api/userStore/" + "sort/z-a").then((resp) => {
-        $scope.stores = resp.data;
-
-        $scope.stores.forEach((us) => {
-          us.create_at = new Date(us.create_at);
-          us.update_at = new Date(us.update_at);
-        });
-      });
-    }
-    // ======= Hoạt động
-    else if ($scope.list == 3) {
-      $http.get("/api/userStore/" + "sort/0-9").then((resp) => {
-        $scope.stores = resp.data;
-
-        $scope.stores.forEach((us) => {
-          us.create_at = new Date(user.create_at);
-          us.update_at = new Date(user.update_at);
-        });
-      });
-    }
-    // ======= Ngừng hoạt động
-    else if ($scope.list == 4) {
-      $http.get("/api/userStore/" + "sort/9-0").then((resp) => {
+      $http.get("/api/store/" + "sort/z-a").then((resp) => {
         $scope.stores = resp.data;
 
         $scope.stores.forEach((us) => {
@@ -106,13 +84,11 @@ $scope.getUsersbyFilter = function () {
     }
   };
 	// tìm theo id, tên người dùng
-	$scope.namePack;
+	$scope.storeName;
 	$scope.findByName = function () {
-		console.log($scope.namePack)
-
-	  if ($scope.nameUser != null) {
+	  if ($scope.storeName != null) {
 		$http
-		  .get("/api/store/" + $scope.namePack)
+		  .get("/api/store/name/"+ $scope.storeName)
 		  .then((resp) => {
 			$scope.stores = resp.data;
 			console.log({resp})
