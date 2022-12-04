@@ -3,7 +3,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
 	$scope.nameStore = "Pika Tea";
-	  $scope.storeid = 1;
+	$scope.storeid = 1;
   	$scope.userid = 1;
 	
 	$scope.listStoreByStoreId = [];
@@ -172,16 +172,24 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.listOrderPack = []
 	$scope.orderPackSee={}
 	$scope.loadOrderPack = function() {
-		$http.get("/api/orderpackstore/"+$scope.storeid).then(resp=>{
+		$http.get("/api/pack").then(resp=>{
 			$scope.listOrderPack = resp.data
 		})
+	}
+	$scope.pagerPack = {
+		page: 0,
+		size: 4,
+		get listOrderPack() {
+			var start = this.page * this.size;
+			return $scope.listOrderPack.slice(start, start + this.size);
+		}
 	}
 	
 	$scope.seemore = function(id) {
 		$http.get("/api/orderpackid/"+id).then(resp=>{
 				$scope.orderPackSee = resp.data
 		})
-	}
+	}; $scope.loadOrderPack();
 	
 
 	$scope.orderPack = {}
