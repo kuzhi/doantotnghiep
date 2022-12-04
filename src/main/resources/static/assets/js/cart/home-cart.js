@@ -19,7 +19,8 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$http.get("/api/store/" + $scope.sid).then(resp => {
 			$scope.titleStore = resp.data;
 		})
-	}; $scope.loadTitleStore();
+	}; 
+	if($scope.sid != 0){$scope.loadTitleStore()};
 
 	//================================ Load list products
 	$scope.url = "/api/product";
@@ -28,7 +29,8 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 		$http.get($scope.url + "/store/" + $scope.sid + "/" + true).then(resp => {
 			$scope.products = resp.data;
 		});
-	}; $scope.listProducts($scope.sid);
+	}; 
+	if($scope.sid != 0) {$scope.listProducts($scope.sid)};
 
 	// Phân trang và điều hướng
 	$scope.pager2 = {
@@ -62,7 +64,6 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	};
 
 	//================================ Load loại để lọc
-	$scope.listProducts();
 	$scope.cates = [];
 	$scope.listCategory = function() {
 
@@ -71,7 +72,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 		});
 	}
-	$scope.listCategory();
+	if($scope.sid != 0) {$scope.listCategory();}
 	$scope.getUsersbyFilter = function() {
 		// ======= A-Z
 		$http.get("/api/product/" + "sort/" + cates.id).then((resp) => {
@@ -96,11 +97,8 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 
 	//================================ Cart Control
 	$scope.items = [];
-
 	$scope.ship = [];
-
 	$scope.payment = [];
-
 	$scope.loadCart = function(storeid, userid) { //lấy danh sách giỏ hàng
 		if ($scope.userid == 0) {
 			location.href = "/home/auth/form";
@@ -555,8 +553,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 			}
 		})
 	}
-
-	$scope.all();
+	if($scope.sid != 0) {$scope.all()};
 
 	//================================ Load danh sách cửa hàng
 	$scope.listStore = [];
