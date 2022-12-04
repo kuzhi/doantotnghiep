@@ -103,17 +103,9 @@ public class ProductImplement implements ProductService {
 		@Override
 		public Product findById(Integer id) {
 			return productDAO.findById(id).get();
-		}
-
-	@Override
-	public Page<Product> findAllPageWithStatus(Pageable pageable, Store storeid, Boolean status) {
-		// TODO Auto-generated method stub
-		return productDAO.loadByStoreWithStatus(pageable, storeid, status);	}
+                }
 		
-		@Override
-		public Product findById(Integer id) {
-			return productDAO.findById(id).get();
-		}
+		
 	
 	@Override
 	public List<Product> sortCategory(Integer id) {
