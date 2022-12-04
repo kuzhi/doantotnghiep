@@ -3,13 +3,19 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
 	$scope.nameStore = "Pika Tea";
-	$scope.storeid = 2;
-	$scope.userid = 2;
+	
+
 
 	$scope.listStoreByStoreId = [];
 	$scope.listStoreByUserId = [];
+
+	//get storeid and user id
+	
+
 	$scope.init = function() {
-		$http.get("/api/store/" + $scope.storeid).then((resp) => {
+	
+		$http.get("/api/store/getCurrentStore/" +  $scope.stores.id).then((resp) => {
+				
 			$scope.listStoreByStoreId = resp.data;
 		});
 
@@ -17,10 +23,11 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 			$scope.listStoreByUserId = resp.data;
 		});
 	};
-
+	
 	//edit list store
 	$scope.formStore = {};
 	$scope.edit = function(store) {
+		
 		$scope.formStore = angular.copy(store);
 	};
 
@@ -51,7 +58,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 					var store = angular.copy($scope.listStoreByStoreId);
 					var url = $scope.url;
 					$http
-						.patch("/api/store/" + $scope.storeid, store)
+						.patch("/api/store/" + $scope.stores.id, store)
 						.then((resp) => {
 							$scope.init();
 
@@ -81,6 +88,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	// Create
 	$scope.create = function() {
 		var store = angular.copy($scope.formStore);
+		store.userstoreId = $scope.listStoreByStoreId.userstoreId;
+		console.log(store)
 		$http
 			.post("/api/store/", store)
 			.then((resp) => {
@@ -133,9 +142,9 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 					//====================================== Bắt đầu xử lý
 					store.update_at = new Date();
 					store.deleted = true;
-
+					console.log(store)
 					$http
-						.delete("/api/store/" + $scope.storeid, store)
+						.delete("/api/store/" + store.id, store)
 						.then((resp) => {
 							var index = $scope.listStoreByStoreId.findIndex(
 								(p) => p.id == store.id
@@ -173,7 +182,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.orderPackSee = {}
 
 	$scope.loadOrderPack = function() {
-		$http.get("/api/orderpackstore/" + $scope.storeid).then(resp => {
+		$http.get("/api/orderpackstore/" + $scope.stores.id).then(resp => {
 			$scope.listOrderPack = resp.data
 		})
 	}
@@ -228,7 +237,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$scope.orderPack = {
-					store: { id: $scope.storeid },
+					store: { id: $scope.stores.id },
 					pack: { id: packid },
 					create_at: new Date(),
 					status: 1,

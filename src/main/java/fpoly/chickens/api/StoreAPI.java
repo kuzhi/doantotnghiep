@@ -32,7 +32,20 @@ public class StoreAPI {
 	
 	@GetMapping("{userid}")
 	public Store findAll(@PathVariable("userid") Optional<Integer> userid) {
+		
 		return storeService.findByUserid(userid.get());
+	}
+	
+	@GetMapping("getCurrentStore/{storeid}")
+	public Store findById(@PathVariable("storeid") Optional<Integer> storeid) {
+		
+		return storeService.findById(storeid.get());
+	}
+
+
+	@GetMapping("/getOneStore/{userid}")
+	public Integer getOneStore(@PathVariable("userid") Optional<Integer> userid) {
+		return storeService.getOneStore(userid.get());
 	}
 
 	@GetMapping("/list/{userid}")

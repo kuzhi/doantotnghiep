@@ -67,4 +67,16 @@ public class StoreImplement implements StoreService {
 		// TODO Auto-generated method stub
 		return storeDAO.sortZA();
 	}
+
+	@Override
+	public Integer getOneStore(Integer userStoreId) {
+		// TODO Auto-generated method stub
+		return storeDAO.getOneByUserStoreId(userStoreId);
+	}
+
+	@Override
+	public Store findById(Integer storeid) {
+		// TODO Auto-generated method stub
+		return storeDAO.findById(storeid).get();
+	}
 }

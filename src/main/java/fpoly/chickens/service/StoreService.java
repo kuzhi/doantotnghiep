@@ -21,4 +21,8 @@ public interface StoreService {
 		List<Store> sortAZ();
 		// Sort ZA
 		List<Store> sortZA();
+
+		Integer getOneStore(Integer userStoreId);	
+
+		Store findById(Integer storeid);
 }
