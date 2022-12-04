@@ -3,194 +3,217 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
 	$scope.nameStore = "Pika Tea";
-	$scope.storeid = 1;
-  	$scope.userid = 1;
 	
+
+
 	$scope.listStoreByStoreId = [];
-  $scope.listStoreByUserId = [];
-  $scope.init = function () {
-    $http.get("/api/store/" + $scope.storeid).then((resp) => {
-      $scope.listStoreByStoreId = resp.data;
-    });
+	$scope.listStoreByUserId = [];
 
-    $http.get("/api/store/list/" + $scope.userid).then((resp) => {
-      $scope.listStoreByUserId = resp.data;
-    });
-  };
+	//get storeid and user id
+	
 
-  //edit list store
-  $scope.formStore = {};
-  $scope.edit = function (store) {
-    $scope.formStore = angular.copy(store);
-  };
+	$scope.init = function() {
+	
+		$http.get("/api/store/getCurrentStore/" +  $scope.stores.id).then((resp) => {
+				
+			$scope.listStoreByStoreId = resp.data;
+		});
 
-  $scope.init();
-  //update
-  $scope.update = function () {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-success ms-2",
-        cancelButton: "btn btn-danger",
-      },
-      buttonsStyling: false,
-    });
+		$http.get("/api/store/list/" + $scope.userid).then((resp) => {
+			$scope.listStoreByUserId = resp.data;
+		});
+	};
+	
+	//edit list store
+	$scope.formStore = {};
+	$scope.edit = function(store) {
+		
+		$scope.formStore = angular.copy(store);
+	};
 
-    swalWithBootstrapButtons
-      .fire({
-        title: "Thông báo",
-        icon: "warning",
-        text: "Bạn chắc chắn muốn thay đổi?",
-        showCancelButton: true,
-        confirmButtonText: "OK",
-        cancelButtonText: "Quay lại",
-        reverseButtons: true,
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          //====================================== Bắt đầu xử lý
-          var store = angular.copy($scope.listStoreByStoreId);
-          var url = $scope.url;
-          $http
-            .patch("/api/store/" + $scope.storeid, store)
-            .then((resp) => {
-              $scope.init();
+	$scope.init();
+	//update
+	$scope.update = function() {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success ms-2",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
 
-              // Thông báo
-              swalWithBootstrapButtons.fire(
-                "Thành công",
-                "Cập nhật thành công!",
-                "success"
-              );
-            })
-            .catch((error) => {
-              // Thông báo
-              Swal.fire({
-                icon: "error",
-                title: "Cập nhật thất bại!",
-              });
-              console.log("Error", error);
-            });
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-        }
-      });
-  };
+		swalWithBootstrapButtons
+			.fire({
+				title: "Thông báo",
+				icon: "warning",
+				text: "Bạn chắc chắn muốn thay đổi?",
+				showCancelButton: true,
+				confirmButtonText: "OK",
+				cancelButtonText: "Quay lại",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					//====================================== Bắt đầu xử lý
+					var store = angular.copy($scope.listStoreByStoreId);
+					var url = $scope.url;
+					$http
+						.patch("/api/store/" + $scope.stores.id, store)
+						.then((resp) => {
+							$scope.init();
 
-  // Create
-  $scope.create = function () {
-    var store = angular.copy($scope.formStore);
-    $http
-      .post("/api/store/", store)
-      .then((resp) => {
-        resp.data.create_at = new Date(resp.data.create_at);
-        resp.data.update_at = new Date(resp.data.update_at);
+							// Thông báo
+							swalWithBootstrapButtons.fire(
+								"Thành công",
+								"Cập nhật thành công!",
+								"success"
+							);
+						})
+						.catch((error) => {
+							// Thông báo
+							Swal.fire({
+								icon: "error",
+								title: "Cập nhật thất bại!",
+							});
+							console.log("Error", error);
+						});
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+				}
+			});
+	};
 
-        $scope.init();
-        Swal.fire({
-          icon: "success",
-          title: "Thêm thành công!",
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Thêm thất bại!",
-        });
-        console.log("Error: ", error);
-      });
-  };
+	// Create
+	$scope.create = function() {
+		var store = angular.copy($scope.formStore);
+		store.userstoreId = $scope.listStoreByStoreId.userstoreId;
+		console.log(store)
+		$http
+			.post("/api/store/", store)
+			.then((resp) => {
+				resp.data.create_at = new Date(resp.data.create_at);
+				resp.data.update_at = new Date(resp.data.update_at);
 
-  //detele
-  $scope.delete = function (store) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "btn btn-danger ms-2",
-        cancelButton: "btn btn-success",
-      },
-      buttonsStyling: false,
-    });
+				$scope.init();
+				Swal.fire({
+					icon: "success",
+					title: "Thêm thành công!",
+				});
+			})
+			.catch((error) => {
+				Swal.fire({
+					icon: "error",
+					title: "Thêm thất bại!",
+				});
+				console.log("Error: ", error);
+			});
+	};
 
-    swalWithBootstrapButtons
-      .fire({
-        title: "Thông báo",
-        icon: "warning",
-        text: "Bạn có chắc muốn thực hiện xóa?",
-        showCancelButton: true,
-        confirmButtonText: "OK",
-        cancelButtonText: "Quay lại",
-        reverseButtons: true,
-        showClass: {
-          popup: "animate__animated animate__fadeInDownBig",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUpBig",
-        },
-      })
-      .then((result) => {
-        if (result.isConfirmed) {
-          //====================================== Bắt đầu xử lý
-          store.update_at = new Date();
-          store.deleted = true;
+	//detele
+	$scope.delete = function(store) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-danger ms-2",
+				cancelButton: "btn btn-success",
+			},
+			buttonsStyling: false,
+		});
 
-          $http
-            .delete("/api/store/" + $scope.storeid, store)
-            .then((resp) => {
-              var index = $scope.listStoreByStoreId.findIndex(
-                (p) => p.id == store.id
-              );
+		swalWithBootstrapButtons
+			.fire({
+				title: "Thông báo",
+				icon: "warning",
+				text: "Bạn có chắc muốn thực hiện xóa?",
+				showCancelButton: true,
+				confirmButtonText: "OK",
+				cancelButtonText: "Quay lại",
+				reverseButtons: true,
+				showClass: {
+					popup: "animate__animated animate__fadeInDownBig",
+				},
+				hideClass: {
+					popup: "animate__animated animate__fadeOutUpBig",
+				},
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+					//====================================== Bắt đầu xử lý
+					store.update_at = new Date();
+					store.deleted = true;
+					console.log(store)
+					$http
+						.delete("/api/store/" + store.id, store)
+						.then((resp) => {
+							var index = $scope.listStoreByStoreId.findIndex(
+								(p) => p.id == store.id
+							);
 
-              $scope.listStoreByStoreId[index] = store;
+							$scope.listStoreByStoreId[index] = store;
 
-              $scope.init();
-              // Thông báo
-              swalWithBootstrapButtons.fire(
-                "Đã xóa",
-                "Đã xóa thành công!",
-                "success"
-              );
-            })
-            .catch((error) => {
-              // Thông báo
-              Swal.fire({
-                icon: "error",
-                title: "Xóa thất bại!",
-              });
-              console.log("Error", error);
-            });
-          //====================================== Kết thúc xử lý
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-        }
-      });
-  };
-  
-	$scope.status = 1;
+							$scope.init();
+							// Thông báo
+							swalWithBootstrapButtons.fire(
+								"Đã xóa",
+								"Đã xóa thành công!",
+								"success"
+							);
+						})
+						.catch((error) => {
+							// Thông báo
+							Swal.fire({
+								icon: "error",
+								title: "Xóa thất bại!",
+							});
+							console.log("Error", error);
+						});
+					//====================================== Kết thúc xử lý
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+				}
+			});
+	};
+
+
 	$scope.listOrderPack = []
-	$scope.orderPackSee={}
+	$scope.orderPackSee = {}
+
 	$scope.loadOrderPack = function() {
-		$http.get("/api/pack").then(resp=>{
+		$http.get("/api/orderpackstore/" + $scope.stores.id).then(resp => {
 			$scope.listOrderPack = resp.data
+		})
+	}
+
+	$scope.seemore = function(id) {
+		$http.get("/api/orderpackid/" + id).then(resp => {
+			$scope.orderPackSee = resp.data
+		})
+	}
+
+
+	$scope.orderPack = {}
+
+	$scope.status = 1;
+	$scope.listPack = [];
+	$scope.loadPack = function() {
+		$http.get("/api/pack").then(resp => {
+			$scope.listPack = resp.data
 		})
 	}
 	$scope.pagerPack = {
 		page: 0,
 		size: 4,
-		get listOrderPack() {
+		get listPack() {
 			var start = this.page * this.size;
-			return $scope.listOrderPack.slice(start, start + this.size);
+			return $scope.listPack.slice(start, start + this.size);
 		}
 	}
-	
-	$scope.seemore = function(id) {
-		$http.get("/api/orderpackid/"+id).then(resp=>{
-				$scope.orderPackSee = resp.data
-		})
-	}; $scope.loadOrderPack();
-	
+
+	$scope.loadPack();
+
 
 	$scope.orderPack = {}
 
@@ -214,7 +237,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$scope.orderPack = {
-					store: { id: $scope.storeid },
+					store: { id: $scope.stores.id },
 					pack: { id: packid },
 					create_at: new Date(),
 					status: 1,

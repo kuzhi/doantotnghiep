@@ -4,10 +4,7 @@ app = angular.module("app-user-store", ["ngRoute"]);
 app.config(function($routeProvider) {
 	$routeProvider
 		// Thông tin cửa hàng
-		.when("/name__store", {
-			templateUrl: "/assets/user_store/info_store/name_store.html",
-			controller: "name__store-ctrl",
-		})
+		
 		.when("/myProfile", {
 			templateUrl: "/assets/user_store/info_store/my-profile.html",
 			controller: "myprofile-ctrl"
@@ -16,6 +13,9 @@ app.config(function($routeProvider) {
 		.when("/product__management", {
 			templateUrl: "/assets/user_store/manage/product_management.html",
 			controller: "product__management-ctrl"
+		}).when("/name__store", {
+			templateUrl: "/assets/user_store/info_store/name_store.html",
+			controller: "name__store-ctrl",
 		})
 		// Đơn hàng
 		.when("/order__management-all", {
@@ -72,6 +72,7 @@ app.config(function($routeProvider) {
 
 app.controller("app-ctrl", function($scope, $http, $location) {
 	// Láy userid
+	
 	$scope.userid=0;
 	$scope.stores=[];
 	$scope.getEmpleadoInfo = function () {

@@ -165,7 +165,7 @@
 
   <div class="container mt-2">
     <div class="row">
-      <div ng-repeat="p in pagerPack.listOrderPack" class="col-xl-3">
+      <div ng-repeat="p in pagerPack.listPack" class="col-xl-3">
         <div class="card" style="width: 18rem">
           <img
             ng-src="/assets/images/Pack/{{p.image}}"
@@ -175,7 +175,7 @@
           <div class="card-body">
             <h5 class="card-title color-text">{{p.name}}</h5>
             <span>Giá: {{p.price | currency:'':0}} đ</span> <br />
-            <a href="#" class="btn btn-info w-100 mt-1 text-white fw-bold"
+            <a ng-click="registerOrderPack(p.id)" class="btn btn-info w-100 mt-1 text-white fw-bold"
               >Đăng ký ngay</a
             >
           </div>
