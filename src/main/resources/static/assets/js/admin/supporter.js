@@ -67,7 +67,7 @@ app.controller("supporter-ctrl", function($scope, $http, $location) {
 		$scope.edit = function(support) {
 			$scope.titleTable = 'Cập nhật';
 			$scope.formSupport = angular.copy(support);
-			console.log({support})
+			
 		}
 	
 	// Update 
