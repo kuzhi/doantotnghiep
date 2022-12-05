@@ -14,6 +14,7 @@ import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
+import fpoly.chickens.service.SessionService;
 import fpoly.chickens.service.UserService;
 
 @Controller
@@ -28,7 +29,9 @@ public class Account_UserAppController {
 	@Autowired
 	UserRoleAppDAO userRoleDao;
 
-	
+	@Autowired
+	SessionService sessionService;
+
 	@Autowired
 	UserService userService;
 
@@ -56,10 +59,17 @@ public class Account_UserAppController {
 	@GetMapping("/user-app/auth/success")
 	public String loginUser(Model model) {
 		
-
+		
 		return "redirect:/admin";
 	}
 
 
+	// @GetMapping("/user-app/access/denied")
+	// public String errorStore(Model model) {
+	// 	sessionService.remove("tokenUserApp");
+	// 	model.addAttribute("message", "Bạn không có quyền");
+
+	// 	return "home/account/loginApp";
+	// }
 	
 }
