@@ -114,9 +114,9 @@ public class ProductImplement implements ProductService {
 		}
 	
 	@Override
-	public List<Product> sortCategory(Integer storeid) {
+	public List<Product> sortCategory(Integer id) {
 		// TODO Auto-generated method stub
-		Store store = storeDAO.findById(storeid).get();
-		return productDAO.sortCategory(store);
+
+		return productDAO.sortCategory(id);
 	}
 }

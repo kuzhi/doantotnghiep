@@ -13,7 +13,7 @@
 			<div class="col-xl-8 d-flex mt-2">
 				<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
 					<i class="fas fa-search mx-2"></i>
-					<input type="search" ng-model="namePack" 
+					<input type="search" ng-model="storeName" 
 					class="form-control form-control-sm border-0" placeholder="Nhập tên kênh...">
 				</div>
 				
@@ -26,7 +26,7 @@
 
 				<!-- Select -->
 				<div class="text-end">
-					<select ng-change="getProductsbyFilter()" ng-model="list"
+					<select ng-change="getUsersbyFilter()" ng-model="list"
 					ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
 					  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
 					</select>

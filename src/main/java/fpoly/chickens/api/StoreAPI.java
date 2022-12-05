@@ -16,19 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.Store;
+import fpoly.chickens.entity.User;
 import fpoly.chickens.service.StoreService;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/store")
 public class StoreAPI {
-	@Autowired StoreService storeService;
-	
+	@Autowired
+	StoreService storeService;
+
 	@GetMapping
 	public List<Store> findAll() {
 		return storeService.findAll();
 	}
-	
+
 	@GetMapping("{userid}")
 	public Store findAll(@PathVariable("userid") Optional<Integer> userid) {
 		return storeService.findByUserid(userid.get());
@@ -39,7 +41,7 @@ public class StoreAPI {
 		return storeService.findStoreById(userid.get());
 	}
 
-// update
+	// update
 	@PatchMapping("{id}")
 	public ResponseEntity<Object> update(@PathVariable("id") Optional<Integer> id,
 			@RequestBody Store Store) {
@@ -61,5 +63,23 @@ public class StoreAPI {
 		}
 
 		return ResponseEntity.ok().build();
+	}
+
+	// Find by name
+	@GetMapping("/name/{storeName}")
+	public ResponseEntity<List<Store>> findByName(@PathVariable("storeName") Optional<String> storeName) {
+		return ResponseEntity.ok(storeService.findStoreByName("%" + storeName.get() + "%"));
+	}
+
+	// Sort A-Z
+	@GetMapping("/sort/a-z")
+	public List<Store> sortAZ() {
+		return storeService.sortAZ();
+	}
+
+	// Sort A-Z
+	@GetMapping("/sort/z-a")
+	public List<Store> sortZA() {
+		return storeService.sortZA();
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.entity.Store;
+import fpoly.chickens.entity.User;
 import fpoly.chickens.service.StoreService;
 
 @SessionScope
@@ -48,5 +49,23 @@ public class StoreImplement implements StoreService {
 	@Override
 	public Store update(Store store) {
 		// TODO Auto-generated method stub
-		return storeDAO.saveAndFlush(store);	}
+		return storeDAO.saveAndFlush(store);	
+	}
+	@Override
+	public List<Store> findStoreByName(String name) {
+		// TODO Auto-generated method stub
+		return storeDAO.findStoreByName(name);
+	}
+
+	@Override
+	public List<Store> sortAZ() {
+		// TODO Auto-generated method stub
+		return storeDAO.sortAZ();
+	}
+
+	@Override
+	public List<Store> sortZA() {
+		// TODO Auto-generated method stub
+		return storeDAO.sortZA();
+	}
 }
