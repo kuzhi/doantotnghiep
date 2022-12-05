@@ -171,7 +171,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 					store.update_at = new Date();
 					store.deleted = true;
 					$http
-						.delete("/api/store/" + store.id, store)
+						.patch("/api/store/" + store.id, store)
 						.then((resp) => {
 							
 
