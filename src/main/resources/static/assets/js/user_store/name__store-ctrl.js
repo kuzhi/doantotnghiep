@@ -20,7 +20,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 
 			}).then(function(res){
 				def.resolve($http.get("/api/store/getCurrentStore/" +  storeId).then((resp) => {
-					console.log(storeId)
+					
 	
 					$scope.listStoreByStoreId = resp.data;
 					
@@ -28,7 +28,10 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 		
 				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 					$scope.listStoreByUserId = resp.data;
-				}));
+				})
+				
+				);
+				
 			});
 			
 			
@@ -42,7 +45,9 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 
 		$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 			$scope.listStoreByUserId = resp.data;
-		});}
+		});
+		
+	}
 	};
 	
 	//edit list store
@@ -81,8 +86,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 					$http
 						.patch("/api/store/" + $scope.stores.id, store)
 						.then((resp) => {
-							$scope.init();
-
+							
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Thành công",
@@ -97,7 +101,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 								title: "Cập nhật thất bại!",
 							});
 							console.log("Error", error);
-						});
+						});$scope.init();
+						$scope.reset();
 				} else if (
 					/* Read more about handling dismissals below */
 					result.dismiss === Swal.DismissReason.cancel
@@ -105,7 +110,11 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 				}
 			});
 	};
-
+	//reset
+	$scope.reset = function() {
+		$scope.formStore= null; 
+		
+	};
 	// Create
 	$scope.create = function() {
 		var store = angular.copy($scope.formStore);
@@ -116,7 +125,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 			.then((resp) => {
 				resp.data.create_at = new Date(resp.data.create_at);
 				resp.data.update_at = new Date(resp.data.update_at);
-
+				resp.data.deleted =false;
 				$scope.init();
 				Swal.fire({
 					icon: "success",
