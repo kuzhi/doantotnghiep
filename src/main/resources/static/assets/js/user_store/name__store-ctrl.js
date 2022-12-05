@@ -30,6 +30,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 					$scope.listStoreByUserId = resp.data;
 				})	
 				);			
+
 			});
 			
 		}
@@ -121,7 +122,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 		$http
 			.post("/api/store/", store)
 			.then((resp) => {
-			
+
 				Swal.fire({
 					icon: "success",
 					title: "Thêm thành công!",
