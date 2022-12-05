@@ -179,10 +179,8 @@ app.controller("report-sale-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						const storeid = $scope.stores.id;
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
 
 						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
 						const end = 24 * 60 * 60 * 1000 - 1;
