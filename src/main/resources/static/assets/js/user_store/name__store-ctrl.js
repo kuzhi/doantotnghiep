@@ -28,12 +28,10 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 		
 				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 					$scope.listStoreByUserId = resp.data;
-				})
-				
-				);
-				
+				})	
+				);			
+
 			});
-			
 			
 		}
 		else{
@@ -119,18 +117,18 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 	$scope.create = function() {
 		var store = angular.copy($scope.formStore);
 		store.userstoreId = $scope.listStoreByStoreId.userstoreId;
-		console.log(store)
+		store.deleted= false;
+		store.create_at = new Date();
 		$http
 			.post("/api/store/", store)
 			.then((resp) => {
-				resp.data.create_at = new Date(resp.data.create_at);
-				resp.data.update_at = new Date(resp.data.update_at);
-				resp.data.deleted =false;
-				$scope.init();
+
 				Swal.fire({
 					icon: "success",
 					title: "Thêm thành công!",
 				});
+				$scope.init();
+			
 			})
 			.catch((error) => {
 				Swal.fire({
@@ -138,7 +136,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 					title: "Thêm thất bại!",
 				});
 				console.log("Error: ", error);
-			});
+			});$scope.reset();
+			
 	};
 
 	//detele
@@ -172,17 +171,12 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 					//====================================== Bắt đầu xử lý
 					store.update_at = new Date();
 					store.deleted = true;
-					console.log(store)
 					$http
-						.delete("/api/store/" + store.id, store)
+						.patch("/api/store/" + store.id, store)
 						.then((resp) => {
-							var index = $scope.listStoreByStoreId.findIndex(
-								(p) => p.id == store.id
-							);
+							
 
-							$scope.listStoreByStoreId[index] = store;
-
-							$scope.init();
+							
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Đã xóa",
@@ -196,8 +190,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 								icon: "error",
 								title: "Xóa thất bại!",
 							});
-							console.log("Error", error);
-						});
+						});$scope.init();
+						$scope.reset();
 					//====================================== Kết thúc xử lý
 				} else if (
 					/* Read more about handling dismissals below */
