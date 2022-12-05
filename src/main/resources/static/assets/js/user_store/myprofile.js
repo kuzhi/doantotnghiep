@@ -16,7 +16,7 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 
 				$http.get("/api/user/get-user-store/" + $scope.userid).then(resp => {
 					$scope.userStore = resp.data;
-					console.log($scope.userStore)
+					//console.log($scope.userStore)
 					$scope.userStore.birthday = new Date($scope.userStore.birthday)
 				})
 			})

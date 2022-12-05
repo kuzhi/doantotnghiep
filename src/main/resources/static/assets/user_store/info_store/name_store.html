@@ -224,6 +224,11 @@
                 </tr>
               </thead>
               <tbody>
+              	<tr ng-if="listOrderPack == 0">
+		            <th colspan="5" class="text-center">
+						<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
+					</th>
+		        </tr>
                 <tr ng-repeat="p in listOrderPack">
                   <td>{{p.orderpackcode}}</td>
                   <td>{{p.pack.name}}</td>

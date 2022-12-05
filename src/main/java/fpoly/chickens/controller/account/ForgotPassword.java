@@ -173,7 +173,7 @@ public class ForgotPassword {
                
             }
         }
-        model.addAttribute("success", "Sendmail thanh cong");
+        model.addAttribute("success", "Mật khẩu đã được thay đổi!");
         try {
             mailer.send(email, "[No-reply] Mật khẩu của bạn", "Đây là mật khẩu mới của bạn "+ username+ ": " + password1 );
         
@@ -216,7 +216,7 @@ public class ForgotPassword {
         }
 
        
-        model.addAttribute("success", "Sendmail thanh cong");
+        model.addAttribute("success", "Mật khẩu đã được thay đổi!");
         try {
             mailer.send(email, "[No-reply] Mật khẩu của bạn", "Đây là mật khẩu mới của bạn "+ username+ ": " + password1 );
         
