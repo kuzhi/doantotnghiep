@@ -1,12 +1,16 @@
 package fpoly.chickens.api;
 
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,5 +49,22 @@ public class AuthenticationAPI {
 	public @ResponseBody Object getTokenUserApp(HttpSession session) {
 		String  tokenStore =  (String) sessionService.get("tokenUserApp");
 		return tokenStore ;
+	}
+
+	@RequestMapping(value = "/api/storeToken", method = RequestMethod.POST, headers="Accept=*/*")
+	public ResponseEntity<Void>  setTokenStore(HttpSession session, @RequestBody Optional<String> id) {
+		if(id.isPresent()){
+			sessionService.set("tokenStoreSelected", id.get());
+			
+			return  ResponseEntity.ok().build();
+		}
+		return  ResponseEntity.badRequest().build();
+	}
+
+	@RequestMapping(value = "/api/getStoreToken", method = RequestMethod.GET, headers="Accept=*/*")
+	public @ResponseBody Object getStoreToken(HttpSession session) {
+	    String  tokenStoreId =  (String) session.getAttribute("tokenStoreSelected");
+
+	    return tokenStoreId ;
 	}
 }

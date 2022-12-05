@@ -88,6 +88,7 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	        $http.get("/api/store/list/"+$scope.userid)
 			.then(resp => {
 				$scope.stores = resp.data[0];
+				$http.post("/api/storeToken",$scope.stores.id);
 			})
 			$http.get("/api/user/get-user-store/"+$scope.userid).then(resp=>{
 				$scope.userStore = resp.data;
@@ -100,6 +101,14 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 
     }; $scope.getEmpleadoInfo();
 	$scope.click=function(){
-		$scope.stores = $scope.formSupport 
+		$scope.stores = $scope.formSupport;
+		if($scope.formSupport){
+		
+			$http.post("/api/storeToken",$scope.formSupport.id);
+		}
+		else{
+			$scope.getEmpleadoInfo()
+		}
+		
 	}
 });
