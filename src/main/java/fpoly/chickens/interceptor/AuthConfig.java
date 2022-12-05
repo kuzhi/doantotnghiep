@@ -79,12 +79,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
 //			
 //	//
 			http.authorizeRequests().antMatchers("/admin/**").authenticated()
-				.antMatchers("/admin/report","/assets/admin/**").hasRole("ADMIN")
+				.antMatchers("/admin/report","/assets/admin/layout_admin.html#!/decentralization","/assets/admin/layout_admin.html#!/pack").hasRole("ADMIN")
 				.antMatchers("/admin/**","/api/authorities").hasAnyRole("STAFF","ADMIN")
 				.anyRequest().permitAll();
 //	//
 ////			// Điều khiển lỗi truy cập không đúng vai trò
-				//http.exceptionHandling().accessDeniedPage("/home/access/denied");
+				http.exceptionHandling().accessDeniedPage("/user-app/access/denied");
 //	//
 ////			// Giao diện đăng nhập
 ////		

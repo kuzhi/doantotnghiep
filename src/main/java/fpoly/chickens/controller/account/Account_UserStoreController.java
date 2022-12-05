@@ -2,6 +2,7 @@ package fpoly.chickens.controller.account;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,10 +64,36 @@ public class Account_UserStoreController {
 		
 		String username= req.getParameter("username");
 		String password= req.getParameter("password");
-		boolean Check = authen.loginStore(username, password);
+	
+		String Check = authen.loginStore(username, password);
+			System.out.println(Check);		
+
 		
-		if(Check) {
-					 return "redirect:/app";
+		if(!Check.equalsIgnoreCase("storenotexited")){
+			if(!Check.equalsIgnoreCase("wrongaccountorpass")){
+				if(!Check.equalsIgnoreCase("equalenddate")){
+					if(!Check.equalsIgnoreCase("storedeleted")){
+						if(!Check.equalsIgnoreCase("accountdeleted")){
+							if(Check.equalsIgnoreCase("loginsuccess")) {
+							return "redirect:/app";
+						   }
+
+						}
+						model.addAttribute("message", "Tài khoản đã bị xóa!");
+						return "home/account/login";
+
+					}
+					model.addAttribute("message", "Cửa hàng của bạn đã bị xóa!");
+					return "home/account/login";
+					
+				}
+				model.addAttribute("message", "Cửa hàng của tài khoản này đã hết hạn sử dụng vui lòng liên hệ đến công ty để gia hạn thêm!");
+				return "home/account/login";
+
+			}
+			model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
+			return "home/account/login";
+
 		}
 		model.addAttribute("message", "Sai tài khoản, mật khẩu hoặc tài khoản chưa được đăng ký!");
 		return "home/account/login";
