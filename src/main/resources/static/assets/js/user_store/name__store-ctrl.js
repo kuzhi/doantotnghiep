@@ -1,24 +1,48 @@
-app.controller("name__store-ctrl", function($scope, $http, $location) {
+app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 	$scope.regexPhone = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
-
+	let storeId;
 	$scope.listStoreByStoreId = [];
 	$scope.listStoreByUserId = [];
-
+	
+	
 	//get storeid and user id
 	
-
-	$scope.init = function() {
 	
+	$scope.init = function() {
+		///getOneStore/{userid}
+		var def = $q.defer();
+		if( !$scope.stores.id){
+			$http.get("/api/store/getOneStore/" +  $scope.userid).then((resp) => {
+				 storeId = resp.data;
+				
+
+			}).then(function(res){
+				def.resolve($http.get("/api/store/getCurrentStore/" +  storeId).then((resp) => {
+					console.log(storeId)
+	
+					$scope.listStoreByStoreId = resp.data;
+					
+				}),
+		
+				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
+					$scope.listStoreByUserId = resp.data;
+				}));
+			});
+			
+			
+		}
+		else{
 		$http.get("/api/store/getCurrentStore/" +  $scope.stores.id).then((resp) => {
 				
 			$scope.listStoreByStoreId = resp.data;
+			
 		});
 
 		$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 			$scope.listStoreByUserId = resp.data;
-		});
+		});}
 	};
 	
 	//edit list store

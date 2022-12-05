@@ -68,13 +68,17 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/manage/report.html",
 			controller: "report-all-ctrl"
 		})
-});
+}
+
+);
 
 app.controller("app-ctrl", function($scope, $http, $location) {
 	// Láy userid
 	
 	$scope.userid=0;
 	$scope.stores=[];
+	
+	
 	$scope.getEmpleadoInfo = function () {
 		// Lấy userid
         $http.get("/api/get")
@@ -90,8 +94,12 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 			})
 			$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 				$scope.listStoreByUserId = resp.data;
+			
 			});
-	    })
+	    })	
+
     }; $scope.getEmpleadoInfo();
-    
+	$scope.click=function(){
+		$scope.stores = $scope.formSupport 
+	}
 });
