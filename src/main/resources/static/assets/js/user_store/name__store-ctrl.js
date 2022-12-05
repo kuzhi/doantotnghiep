@@ -1,26 +1,57 @@
-app.controller("name__store-ctrl", function($scope, $http, $location) {
+app.controller("name__store-ctrl", function($scope, $http, $location, $q) {
 	$scope.regexPhone = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
 	$scope.titleBread = 'Chi tiết cửa hàng';
 	$scope.titleBreadcrumb = 'Thông tin chung'
-	$scope.nameStore = "Pika Tea";
-	$scope.storeid = 2;
-	$scope.userid = 2;
-
+	let storeId;
 	$scope.listStoreByStoreId = [];
 	$scope.listStoreByUserId = [];
+	
+	
+	//get storeid and user id
+	
+	
 	$scope.init = function() {
-		$http.get("/api/store/" + $scope.storeid).then((resp) => {
+		///getOneStore/{userid}
+		var def = $q.defer();
+		if( !$scope.stores.id){
+			$http.get("/api/store/getOneStore/" +  $scope.userid).then((resp) => {
+				 storeId = resp.data;
+				
+
+			}).then(function(res){
+				def.resolve($http.get("/api/store/getCurrentStore/" +  storeId).then((resp) => {
+					
+	
+					$scope.listStoreByStoreId = resp.data;
+					
+				}),
+		
+				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
+					$scope.listStoreByUserId = resp.data;
+				})	
+				);			
+
+			});
+			
+		}
+		else{
+		$http.get("/api/store/getCurrentStore/" +  $scope.stores.id).then((resp) => {
+				
 			$scope.listStoreByStoreId = resp.data;
+			
 		});
 
 		$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 			$scope.listStoreByUserId = resp.data;
 		});
+		
+	}
 	};
-
+	
 	//edit list store
 	$scope.formStore = {};
 	$scope.edit = function(store) {
+		
 		$scope.formStore = angular.copy(store);
 	};
 
@@ -51,10 +82,9 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 					var store = angular.copy($scope.listStoreByStoreId);
 					var url = $scope.url;
 					$http
-						.patch("/api/store/" + $scope.storeid, store)
+						.patch("/api/store/" + $scope.stores.id, store)
 						.then((resp) => {
-							$scope.init();
-
+							
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Thành công",
@@ -69,7 +99,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 								title: "Cập nhật thất bại!",
 							});
 							console.log("Error", error);
-						});
+						});$scope.init();
+						$scope.reset();
 				} else if (
 					/* Read more about handling dismissals below */
 					result.dismiss === Swal.DismissReason.cancel
@@ -77,21 +108,27 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 				}
 			});
 	};
-
+	//reset
+	$scope.reset = function() {
+		$scope.formStore= null; 
+		
+	};
 	// Create
 	$scope.create = function() {
 		var store = angular.copy($scope.formStore);
+		store.userstoreId = $scope.listStoreByStoreId.userstoreId;
+		store.deleted= false;
+		store.create_at = new Date();
 		$http
 			.post("/api/store/", store)
 			.then((resp) => {
-				resp.data.create_at = new Date(resp.data.create_at);
-				resp.data.update_at = new Date(resp.data.update_at);
 
-				$scope.init();
 				Swal.fire({
 					icon: "success",
 					title: "Thêm thành công!",
 				});
+				$scope.init();
+			
 			})
 			.catch((error) => {
 				Swal.fire({
@@ -99,7 +136,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 					title: "Thêm thất bại!",
 				});
 				console.log("Error: ", error);
-			});
+			});$scope.reset();
+			
 	};
 
 	//detele
@@ -133,17 +171,12 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 					//====================================== Bắt đầu xử lý
 					store.update_at = new Date();
 					store.deleted = true;
-
 					$http
-						.delete("/api/store/" + $scope.storeid, store)
+						.patch("/api/store/" + store.id, store)
 						.then((resp) => {
-							var index = $scope.listStoreByStoreId.findIndex(
-								(p) => p.id == store.id
-							);
+							
 
-							$scope.listStoreByStoreId[index] = store;
-
-							$scope.init();
+							
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Đã xóa",
@@ -157,8 +190,8 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 								icon: "error",
 								title: "Xóa thất bại!",
 							});
-							console.log("Error", error);
-						});
+						});$scope.init();
+						$scope.reset();
 					//====================================== Kết thúc xử lý
 				} else if (
 					/* Read more about handling dismissals below */
@@ -173,7 +206,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 	$scope.orderPackSee = {}
 
 	$scope.loadOrderPack = function() {
-		$http.get("/api/orderpackstore/" + $scope.storeid).then(resp => {
+		$http.get("/api/orderpackstore/" + $scope.stores.id).then(resp => {
 			$scope.listOrderPack = resp.data
 		})
 	}
@@ -228,7 +261,7 @@ app.controller("name__store-ctrl", function($scope, $http, $location) {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				$scope.orderPack = {
-					store: { id: $scope.storeid },
+					store: { id: $scope.stores.id },
 					pack: { id: packid },
 					create_at: new Date(),
 					status: 1,
