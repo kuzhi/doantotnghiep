@@ -26,7 +26,9 @@
 </div>
 <div class="col-xl-9 col-12">
   <div class="tab-content w-100" id="v-pills-tabContent">
-	<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">	  <form name="profileForm" class="p-3" novalidate>
+	<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" 
+	aria-labelledby="v-pills-home-tab" tabindex="0">	  
+	<form name="profileForm" class="p-3" novalidate>
 	  	
 	  	<label class="fw-bold fs-3 mb-0">Thông tin cơ bản</label>
 	  	<hr class="bg-primary mt-0" style="height: 2px;">
@@ -107,12 +109,15 @@
 		</div>
 		
 		<div class="mt-3 text-center">
-			<button ng-click="update()" class="btn btn-info text-white w-50" >Lưu thay đổi</button>
+			<button ng-disabled="profileForm.$invalid" ng-click="update()" 
+			class="btn btn-info text-white w-50" >Lưu thay đổi</button>
 		</div>
 		
   	  </form>
 	</div>
-	<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">    	<form name="changeForm" class="p-3" novalidate>
+	<div class="tab-pane fade" id="v-pills-profile" role="tabpanel" 
+	aria-labelledby="v-pills-profile-tab" tabindex="0">    	
+		<form name="changeForm" class="p-3" novalidate>
 	  	
 		  	<label class="fw-bold fs-3 mb-0">Đổi mật khẩu</label>
 		  	<hr class="bg-primary mt-0" style="height: 2px;">
@@ -136,7 +141,8 @@
 			</div>
 			
 			<div class="mt-3 text-center">
-				<button ng-click="updatePassword(changePassword)" class="btn btn-info text-white w-50" >Thay đổi</button>
+				<button ng-click="updatePassword(changePassword)" 
+				class="btn btn-info text-white w-50" >Thay đổi</button>
 			</div>
 		</form>
     </div>

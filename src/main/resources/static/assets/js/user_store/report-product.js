@@ -80,68 +80,66 @@ app.controller("report-product-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						const storeid = $scope.stores.id;
+				$http.get("/api/getStoreToken").then(resp => {
+					const storeid = resp.data;
 
-						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-						const end = 24 * 60 * 60 * 1000 - 1;
+					const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+					const end = 24 * 60 * 60 * 1000 - 1;
 
-						$scope.dateStart = new Date(year, month);
-						$scope.dateEnd = new Date(year, month);
+					$scope.dateStart = new Date(year, month);
+					$scope.dateEnd = new Date(year, month);
 
-						// Tháng 1
-						$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(dateStart); $scope.dateStart.setMonth(month);
-						$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(dateEnd); $scope.dateEnd.setMonth(month);
+					// Tháng 1
+					$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(dateStart); $scope.dateStart.setMonth(month);
+					$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(dateEnd); $scope.dateEnd.setMonth(month);
 
-						$http.get("/api/report-product-app/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd).then(resp => {
-							$scope.datas = resp.data;
+					$http.get("/api/report-product-app/" + storeid + "/" + $scope.dateStart + "/" + $scope.dateEnd).then(resp => {
+						$scope.datas = resp.data;
 
-							$scope.labels = [];
-							for (let i in $scope.datas) {
-								$scope.labels.push($scope.datas[i].name);
-							}
+						$scope.labels = [];
+						for (let i in $scope.datas) {
+							$scope.labels.push($scope.datas[i].name);
+						}
 
-							$scope.data = [];
-							for (let i in $scope.datas) {
-								$scope.data.push($scope.datas[i].total);
-							}
+						$scope.data = [];
+						for (let i in $scope.datas) {
+							$scope.data.push($scope.datas[i].total);
+						}
 
-							if (window.myChart2 instanceof Chart) {
-								window.myChart2.destroy();
-							}
-							month += 1;
+						if (window.myChart2 instanceof Chart) {
+							window.myChart2.destroy();
+						}
+						month += 1;
 
-							var ctx1 = $("#productChart").get(0).getContext("2d");
-							window.myChart2 = new Chart(ctx1, {
-								type: "bar",
-								data: {
-									labels: $scope.labels,
-									datasets: [{
-										label: "Doanh thu tháng " + month,
-										data: $scope.data,
-										backgroundColor: "rgba(0, 84, 230, 90)"
-									},
-									]
+						var ctx1 = $("#productChart").get(0).getContext("2d");
+						window.myChart2 = new Chart(ctx1, {
+							type: "bar",
+							data: {
+								labels: $scope.labels,
+								datasets: [{
+									label: "Doanh thu tháng " + month,
+									data: $scope.data,
+									backgroundColor: "rgba(0, 84, 230, 90)"
 								},
-								options: {
-									responsive: true,
-									indexAxis: 'y',
-									scales: {
-										y: {
-											grid: {
-												drawOnChartArea: false
-											}
-										},
-										x: {
-											beginAtZero: true
+								]
+							},
+							options: {
+								responsive: true,
+								indexAxis: 'y',
+								scales: {
+									y: {
+										grid: {
+											drawOnChartArea: false
 										}
+									},
+									x: {
+										beginAtZero: true
 									}
 								}
-							});
+							}
 						});
 					});
+				});
 			});
 	}; $scope.load(now.getFullYear(), now.getMonth(), 1, now.getDate(now.setDate(30)));
 
@@ -153,14 +151,12 @@ app.controller("report-product-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						const storeid = $scope.stores.id;
-						$http.get("/api/report-overview-app/" + storeid).then(resp => {
-							$scope.items = resp.data
-						});
+				$http.get("/api/getStoreToken").then(resp => {
+					const storeid = resp.data;
+					$http.get("/api/report-overview-app/" + storeid).then(resp => {
+						$scope.items = resp.data
 					});
+				});
 			});
 	}
 
