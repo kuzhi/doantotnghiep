@@ -77,4 +77,10 @@ public class SupportImplement implements SupportService {
         // TODO Auto-generated method stub
         return supDao.sortZA();
     }
+
+    @Override
+    public Support findByStoreId(Integer storeId) {
+        // TODO Auto-generated method stub
+        return supDao.findByStore(storeId);
+    }
 }
