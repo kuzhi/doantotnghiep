@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserRoleApp;
 
 public interface UserAdminNVService {
 	// Load all product	
@@ -16,8 +17,10 @@ public interface UserAdminNVService {
 	
 	// Create
 	UserApp create(UserApp userapp);
+	UserRoleApp createUserRoleApp(UserRoleApp userRoleApp);
 	// Update
 	UserApp update(UserApp userapp);
+	UserApp updateProfile(UserApp userapp);
 	// Delete
 	void delete(Integer id);
 	// Find by ID

@@ -115,10 +115,26 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 
 									$scope.users.push(resp.data);
 
-									$scope.reset();
-									$scope.init();
-									Swal.fire({ icon: 'success', title: 'Thêm thành công!' });
+									$http.get($scope.url + "deleted/" + $scope.deleted).then(resp => {
+										$scope.userz = resp.data;
 
+										const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
+										const end = (24 * 60 * 60 * 1000 - 1)*3;
+										$scope.store = {};
+										$scope.store.name = $scope.userz[$scope.userz.length - 1].username + $scope.userz[$scope.userz.length - 1].id;
+										$scope.store.userstoreId = $scope.userz[$scope.userz.length - 1];
+										$scope.store.enddate = new Date(end);
+										$scope.store.delete = false;
+										$scope.store.create_at = new Date();
+										console.log($scope.store);
+										$http.post($scope.url + "store/", $scope.store).then(resp => {
+											$scope.reset();
+											$scope.init();
+											Swal.fire({ icon: 'success', title: 'Thêm thành công!' });
+										}).catch(error => {
+											Swal.fire({ icon: 'error', title: 'Thêm thất bại!' });
+										});
+									})
 								}).catch(error => {
 									Swal.fire({ icon: 'error', title: 'Thêm thất bại!' });
 								});

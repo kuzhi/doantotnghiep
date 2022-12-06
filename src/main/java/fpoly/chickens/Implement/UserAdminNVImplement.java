@@ -11,15 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.UserAppDAO;
+import fpoly.chickens.dao.UserRoleAppDAO;
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserRoleApp;
 import fpoly.chickens.service.UserAdminNVService;
 
 @SessionScope
 @Service
 public class UserAdminNVImplement implements UserAdminNVService {
-	@Autowired UserAppDAO userAppDAO;
+	@Autowired
+	UserAppDAO userAppDAO;
+	@Autowired UserRoleAppDAO userRoleAppDAO;
 
-    @Autowired
+	@Autowired
 	BCryptPasswordEncoder pe;
 
 	@Override
@@ -39,6 +43,7 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		String encodePass = pe.encode(user.getPassword());
 		user.setPassword(encodePass);
+
 		return userAppDAO.save(user);
 	}
 
@@ -53,7 +58,7 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	@Override
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -61,13 +66,13 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		// TODO Auto-generated method stub
 		return userAppDAO.findByName(name);
 	}
-	
+
 	@Override
 	public List<UserApp> findUserByUserName(String name) {
 		// TODO Auto-generated method stub
 		return userAppDAO.findUserByUserName(name);
 	}
-	
+
 	@Override
 	public List<UserApp> sortAZ() {
 		// TODO Auto-generated method stub
@@ -116,8 +121,6 @@ public class UserAdminNVImplement implements UserAdminNVService {
 		return userAppDAO.findUserByPhone(phone);
 	}
 
-
-	
 	@Override
 	public UserApp findUsersByUserName(String name) {
 		// TODO Auto-generated method stub
@@ -146,7 +149,19 @@ public class UserAdminNVImplement implements UserAdminNVService {
 	public Boolean checkPassword(UserApp uStore, String password) {
 		// TODO Auto-generated method stub
 		boolean match = pe.matches(password, uStore.getPassword().trim());
-		
+
 		return match;
+	}
+
+	@Override
+	public UserApp updateProfile(UserApp userapp) {
+		// TODO Auto-generated method stub
+		return userAppDAO.saveAndFlush(userapp);
+	}
+
+	@Override
+	public UserRoleApp createUserRoleApp(UserRoleApp userRoleApp) {
+		// TODO Auto-generated method stub
+		return userRoleAppDAO.save(userRoleApp);
 	}
 }

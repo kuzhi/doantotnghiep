@@ -18,10 +18,9 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/order/store/" + $scope.stores.id + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/order/store/" + storeid + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;
@@ -39,10 +38,9 @@ app.controller("order__management-all-ctrl", function($scope, $http, $location) 
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/findorders/storeandkeyword/" + $scope.stores.id + "/" + $scope.keyword).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/findorders/storeandkeyword/" + storeid + "/" + $scope.keyword).then(resp => {
 							$scope.page = resp.data;
 						})
 					})
@@ -130,10 +128,9 @@ app.controller("order__management-loading-ctrl", function($scope, $http, $locati
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/orders/store/" + $scope.stores.id + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/orders/store/" + storeid + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;
@@ -229,10 +226,9 @@ app.controller("order__management-confirmed-ctrl", function($scope, $http, $loca
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/orders/store/" + $scope.stores.id + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/orders/store/" + storeid + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;
@@ -320,10 +316,9 @@ app.controller("order__management-success-ctrl", function($scope, $http, $locati
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/orders/store/" + $scope.stores.id + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/orders/store/" + storeid + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;
@@ -360,10 +355,9 @@ app.controller("order__management-canceled-ctrl", function($scope, $http, $locat
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/orders/store/" + $scope.stores.id + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/orders/store/" + storeid + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;
@@ -400,10 +394,9 @@ app.controller("order__management-becanceled-ctrl", function($scope, $http, $loc
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						$http.get("/api/orders/store/" + $scope.stores.id + "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
+				$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+						$http.get("/api/orders/store/" + storeid+ "/" + $scope.status + "/" + number + "/" + field + "/" + sort).then(resp => {
 							$scope.page = resp.data;
 							$scope.pageNumber = number;
 							$scope.pageField = field;

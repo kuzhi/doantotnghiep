@@ -66,7 +66,6 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
         $http.get("/api/getUserApp")
 	    .then(resp => {
 	        $scope.userid = resp.data;
-	        console.log("id: ", $scope.userid)
 	       //$scope.userid = 2;
 			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
 				$scope.userApp = resp.data;

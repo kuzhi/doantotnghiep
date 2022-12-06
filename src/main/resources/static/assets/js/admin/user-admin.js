@@ -104,13 +104,34 @@ app.controller("user-admin-ctrl", function($scope, $http, $location) {
 
 									$scope.users.push(resp.data);
 
-									$scope.reset();
-									$scope.init();
-									Swal.fire({ icon: 'success', title: 'Thêm thành công!' });
+									$http.get($scope.url + "deleted/" + $scope.deleted).then(resp => {
+										$scope.userz = resp.data;
+										//console.log("u: ", $scope.userz[$scope.userz.length - 1])
 
-								}).catch(error => {
-									Swal.fire({ icon: 'error', title: 'Thêm thất bại!' });
-								});
+										$scope.roleApp = {
+											id: 2, 
+											name: "STAFF", 
+											create_at: new Date("2022-11-30 00:00:00.000"), 
+											update_at: new Date("2022-11-30 00:00:00.000")
+										}
+										$scope.userRoleApp = {};
+										$scope.userRoleApp.userapp = $scope.userz[$scope.userz.length - 1];
+										$scope.userRoleApp.roleapp = $scope.roleApp;
+										$scope.userRoleApp.permission = $scope.roleApp.name;
+										$scope.userRoleApp.Create_at = new Date();
+										$scope.userRoleApp.Update_at = new Date();
+										//console.log($scope.userRoleApp);
+										$http.post($scope.url + "userroleapp/", $scope.userRoleApp).then(resp => {
+
+											$scope.reset();
+											$scope.init();
+											Swal.fire({ icon: 'success', title: 'Thêm thành công!' });
+										}).catch(error => {
+											Swal.fire({ icon: 'error', title: 'Thêm thất bại!' });
+											console.log("error: ", error)
+										});
+									})
+								})
 							}
 						}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); });
 					}
