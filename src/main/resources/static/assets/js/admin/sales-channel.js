@@ -77,13 +77,11 @@ app.controller("sales-channel-ctrl", function ($scope, $http, $location) {
     }
   };
   // tìm theo id, tên người dùng
-  $scope.namePack = "";
+  $scope.storeName = "";
   $scope.findByName = function () {
-    console.log($scope.namePack);
-
-    if ($scope.nameUser == "") {
+    if ($scope.storeName != "") {
       $http
-        .get("/api/store/" + $scope.namePack)
+        .get("/api/store/name/" + $scope.storeName)
         .then((resp) => {
           $scope.stores = resp.data;
           console.log({ resp });
@@ -97,7 +95,6 @@ app.controller("sales-channel-ctrl", function ($scope, $http, $location) {
               icon: "error",
               title: "Không có kết quả phù hợp!",
             });
-            $scope.init();
           }
         })
         .catch((error) => {

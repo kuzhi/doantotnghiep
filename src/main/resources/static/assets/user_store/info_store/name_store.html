@@ -38,7 +38,7 @@
             ng-if="listStoreByStoreId.image != null"
             ng-src="/assets/images/{{listStoreByStoreId.image}}"
             class="img__store rounded-circle mb-2"
-            alt="Ảnh logo cửa hàng"
+            src="/assets/images/{{listStoreByStoreId.image}}"
           />
           <img
             ng-if="listStoreByStoreId.image == null"
@@ -174,9 +174,13 @@
           />
           <div class="card-body">
             <h5 class="card-title color-text">{{p.name}}</h5>
-            <small ng-if="p.price == 1000000" class="text-danger fw-bold">Ưu đãi</small>
+            <small ng-if="p.price == 1000000" class="text-danger fw-bold"
+              >Ưu đãi</small
+            >
             <span>Giá: {{p.price | currency:'':0}} đ</span> <br />
-            <a ng-click="registerOrderPack(p.id)" class="btn btn-info w-100 mt-1 text-white fw-bold"
+            <a
+              ng-click="registerOrderPack(p.id)"
+              class="btn btn-info w-100 mt-1 text-white fw-bold"
               >Đăng ký ngay</a
             >
           </div>
@@ -224,11 +228,15 @@
                 </tr>
               </thead>
               <tbody>
-              	<tr ng-if="listOrderPack == 0">
-		            <th colspan="5" class="text-center">
-						<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
-					</th>
-		        </tr>
+                <tr ng-if="listOrderPack == 0">
+                  <th colspan="5" class="text-center">
+                    <img
+                      alt=""
+                      src="/assets/images/icon_cart_blank.png"
+                      class="w-50"
+                    />
+                  </th>
+                </tr>
                 <tr ng-repeat="p in listOrderPack">
                   <td>{{p.orderpackcode}}</td>
                   <td>{{p.pack.name}}</td>
@@ -522,13 +530,12 @@
             </button>
 
             <button
-           
-            ng-click="reset()"
-            type="submit"
-            class="mx-2 btn btn-warning text-white fw-bold"
-          >
-            Reset
-          </button>
+              ng-click="reset()"
+              type="submit"
+              class="mx-2 btn btn-warning text-white fw-bold"
+            >
+              Reset
+            </button>
           </div>
         </form>
 
