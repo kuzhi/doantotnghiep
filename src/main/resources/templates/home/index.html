@@ -1,130 +1,192 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-	th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}">
-<head>
-<title>Trang chủ</title>
-</head>
-<body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+  th:replace="~{/layout/layout :: dynamic(~{::title}, ~{::section})}"
+>
+  <head>
+    <title>Trang chủ</title>
+  </head>
+  <body>
+    <section class="container">
+      <div class="row">
+        <nav
+          style="-bs-breadcrumb-divider: '&gt;'; font-size: 14px"
+          aria-label="breadcrumb"
+        >
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a
+                th:href="@{/home/client/list-store/view}"
+                class="text-decoration-none text-dark"
+                >Danh sách cửa hàng</a
+              >
+            </li>
+            <li class="breadcrumb-item" aria-current="page">
+              <a href="#" class="text-decoration-none text-dark">
+                Sản phẩm của <b class="text-primary">{{titleStore.name}}</b>
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col-xl-2">
+          <!-- ======= Loại ======= -->
+          <div class="row mb-1">
+            <h6
+              class="d-flex justify-content-between"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseCate"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              style="cursor: pointer"
+            >
+              Loại <i class="fa-solid fa-sort-down"></i>
+            </h6>
+            <div class="collapse show" id="collapseCate">
+              <div class="form-check">
+                <input
+                  ng-click="listProducts()"
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="flexCheckDefault"
+                  checked
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Tất cả
+                </label>
+              </div>
+              <div ng-repeat="c in cates" class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  ng-click="getUsersbyFilter(c.id)"
+                  value="{{c.id}}"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{c.name}}
+                </label>
+              </div>
+            </div>
+          </div>
 
-	<section class="container">
-		<div class="row">
-			<nav style="-bs-breadcrumb-divider: '&gt;'; font-size: 14px;"
-				aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a th:href="@{/home/client/list-store/view}"
-						class="text-decoration-none text-dark">Danh sách cửa hàng</a>
-					</li>
-					<li class="breadcrumb-item" aria-current="page">
-						<a href="#" class="text-decoration-none text-dark">
-							Sản phẩm của <b class="text-primary">{{titleStore.name}}</b>
-						</a>
-					</li>
-				</ol>
-			</nav>
-		</div>
-		<div class="row">
-			<div class="col-xl-2">
-				<!-- ======= Loại ======= -->
-				<div class="row mb-1">
+          <!-- ======= Giá ======= -->
+          <div class="row mb-3">
+            <h6
+              class="d-flex justify-content-between"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapsePrice"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+              style="cursor: pointer"
+            >
+              Giá <i class="fa-solid fa-sort-down"></i>
+            </h6>
+            <div class="collapse" id="collapsePrice">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="true"
+                  ng-click="sortBy('-price')"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Cao - Thấp
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value="false"
+                  ng-click="sortBy('price')"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Thấp - Cao
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
 
-					<h6 class="d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#collapseCate"
-					aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
-						Loại <i class="fa-solid fa-sort-down"></i>
-					</h6>
-					<div class="collapse show" id="collapseCate">
-						<div class="form-check">
-							<input ng-click="listProducts()" class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked> 
-							<label class="form-check-label" for="flexCheckDefault"> Tất cả </label>
-						</div>
-						<div ng-repeat="c in cates" class="form-check">
-			                <input class="form-check-input" type="checkbox"
+        <!-- ======= Danh sách sản phẩm ======= -->
+        <div class="col-xl-10">
+          <div class="row g-3 px-2">
+            <div
+              ng-repeat="product in pager2.products | orderBy: propertyName"
+              class="col-xl-3 col-md-4 col-12 card border border-2"
+            >
+              <div class="p-2">
+                <a th:href="@{/home/product/detail?id={{product.id}}}">
+                  <img
+                    ng-src="/assets/images/Products/{{product.image==''?'icon_food.png':product.image}}"
+                    class="card-img-top"
+                    alt="{{product.image}}"
+                    style="width: 100%; height: 12.5em"
+                  />
+                </a>
+              </div>
+              <div class="card-body px-0">
+                <h5 class="card-title text-truncate">{{product.name}}</h5>
 
-		                   ng-click="getUsersbyFilter(c.id)"   value="{{c.id}}" id="flexCheckDefault" />
+                <div class="d-flex justify-content-between">
+                  <div class="col-xl-10 col-10">
+                    <div class="d-flex">
+                      <span class="fw-bold text-truncate text-secondary me-1">
+                        {{product.price | currency:'':0}}
+                      </span>
+                      <span class="fw-bold text-secondary">đ</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-			                <label class="form-check-label" for="flexCheckDefault"> {{c.name}} </label>
-		                </div>
-					</div>
-				</div>
+              <div ng-click="add(product)" class="mb-2">
+                <button class="btn btn-primary w-100">Thêm Vào Giỏ</button>
+              </div>
+            </div>
+          </div>
 
-				<!-- ======= Giá ======= -->
-		          <div class="row mb-3">
-		            <h6 class="d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#collapsePrice"
-		            aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer" >
-		              Giá <i class="fa-solid fa-sort-down"></i>
-		            </h6>
-		            <div class="collapse" id="collapsePrice">
-		              <div class="form-check">
-		                <input class="form-check-input" type="checkbox" value="true" 
-		                ng-click="sortBy('-price')" id="flexCheckDefault" />
-		                <label class="form-check-label" for="flexCheckDefault"> Cao - Thấp </label>
-		              </div>
-		              <div class="form-check">
-		                <input class="form-check-input" type="checkbox" value="false"
-	                    ng-click="sortBy('price')" id="flexCheckDefault" />
-		                <label class="form-check-label" for="flexCheckDefault"> Thấp - Cao </label>
-		              </div>
-		            </div>
-		          </div>
-			</div>
-
-			<!-- ======= Danh sách sản phẩm ======= -->
-			<div class="col-xl-10">
-				<div class="row g-3 px-2">
-					<div ng-repeat="product in pager2.products | orderBy: propertyName"
-						class="col-xl-3 col-md-4 col-12 card border border-2">
-						<div class="p-2">
-							<a th:href="@{/home/product/detail?id={{product.id}}}"> 
-								<img ng-src="/assets/images/Products/{{product.image==''?'icon_food.png':product.image}}" 
-								class="card-img-top" alt="{{product.image}}" style="width: 100%; height: 12.5em;">
-							</a>
-						</div>
-						<div class="card-body px-0">
-							<h5 class="card-title text-truncate">{{product.name}}</h5>
-
-							<div class="d-flex justify-content-between">
-								<div class="col-xl-10 col-10">
-									<div class="d-flex">
-										<span class="fw-bold text-truncate text-secondary me-1">
-											{{product.price | currency:'':0}}
-										</span> <span class="fw-bold text-secondary">đ</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div  ng-click="add(product)" class="mb-2">
-							<button class="btn btn-primary w-100">Thêm Vào Giỏ</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="row my-3 text-start">
-					<div class="col-xl text-end">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-end mb-0">
-								<li class="page-item">
-									<a ng-click="pager2.first()" class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
-								</li>
-								<li class="page-item">
-									<a ng-click="pager2.prev()" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
-								</li>
-								<li class="page-item">
-									<span class="page-link bg-white text-dark">{{pager2.page + 1}}</span>
-								</li>
-								<li class="page-item">
-									<a ng-click="pager2.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
-								</li>
-								<li class="page-item">
-									<a ng-click="pager2.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-</body>
+          <div class="row my-3 text-start">
+            <div class="col-xl text-end">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item">
+                    <a ng-click="pager2.first()" class="page-link text-dark">
+                      <i class="fas fa-step-backward"></i>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager2.prev()" class="page-link text-dark">
+                      <i class="fas fa-backward"></i>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <span class="page-link bg-white text-dark"
+                      >{{pager2.page + 1}}</span
+                    >
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager2.next()" class="page-link text-dark">
+                      <i class="fas fa-forward"></i>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a ng-click="pager2.last()" class="page-link text-dark">
+                      <i class="fas fa-step-forward"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

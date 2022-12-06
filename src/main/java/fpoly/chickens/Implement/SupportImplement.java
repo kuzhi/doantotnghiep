@@ -11,7 +11,7 @@ import fpoly.chickens.entity.Support;
 import fpoly.chickens.service.SupportService;
 
 @Service
-public class SupportImplement  implements SupportService{
+public class SupportImplement implements SupportService {
 
     @Autowired
     SupportDAO supDao;
@@ -19,9 +19,9 @@ public class SupportImplement  implements SupportService{
     @Override
     public Support create(Support support) {
         // TODO Auto-generated method stub
-        
+
         Support sup = this.findByStoreId(support.getStore().getId());
-        if(sup !=null){
+        if (sup != null) {
             sup.setUpdate_at(new Date());
             return supDao.saveAndFlush(sup);
         }
@@ -43,10 +43,9 @@ public class SupportImplement  implements SupportService{
     @Override
     public Support findById(Integer supportId) {
         // TODO Auto-generated method stub
-        Support sup =  supDao.findById(supportId).get();
+        Support sup = supDao.findById(supportId).get();
         return sup;
     }
-
 
     @Override
     public Support update(Support support) {
@@ -59,6 +58,24 @@ public class SupportImplement  implements SupportService{
     public List<Support> findByUserAppId(Integer supportId) {
         // TODO Auto-generated method stub
         return supDao.findByUserAppId(supportId);
+    }
+
+    @Override
+    public List<Support> findByUserName(String name) {
+        // TODO Auto-generated method stub
+        return supDao.findByUserName(name);
+    }
+
+    @Override
+    public List<Support> sortAZ() {
+        // TODO Auto-generated method stub
+        return supDao.sortAZ();
+    }
+
+    @Override
+    public List<Support> sortZA() {
+        // TODO Auto-generated method stub
+        return supDao.sortZA();
     }
 
     @Override
