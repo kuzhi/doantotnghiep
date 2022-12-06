@@ -68,11 +68,11 @@ public class OrderPackImplement implements OrderPackService {
 		} else {
 			sort = Sort.by(Direction.ASC, field);
 		}
-		Pageable pageable = PageRequest.of(pageNumber, 1, sort);
+		Pageable pageable = PageRequest.of(pageNumber, 10, sort);
 		Page<OrderPack> page = orderPackDao.findAllOrderpack(pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
-			pageable = PageRequest.of(pageNumber, 1);
+			pageable = PageRequest.of(pageNumber, 10, sort);
 			page = orderPackDao.findAll(pageable);
 		}
 		return page;
