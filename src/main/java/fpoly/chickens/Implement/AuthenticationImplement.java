@@ -2,6 +2,7 @@ package fpoly.chickens.Implement;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,7 @@ import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.Authentication;
+import fpoly.chickens.service.StoreService;
 import fpoly.chickens.service.UserService;
 
 @Service
@@ -27,8 +29,9 @@ public class AuthenticationImplement implements Authentication{
 	@Autowired
 	HttpSession session;
 	@Autowired
+	StoreService storeService;
+	@Autowired
 	StoreDAO storeDao;
-	
 	@Autowired
 	UserService userService;
 	
@@ -46,9 +49,23 @@ public class AuthenticationImplement implements Authentication{
 		if(userStore != null) {
 			String passwordStore = userStore.getPassword().trim();
 			boolean match = pe.matches(password, passwordStore);
-			Store store = storeDao.findByUserid(userStore.getId());
+			List<Store> listStore = storeService.findStoreById(userStore.getId());
+
 			Date today = new Date();
-			boolean matchDate = today.after(store.getEnddate());
+			 boolean matchDate = false;
+
+			Store store = storeDao.getStoreByUserStoreId(userStore.getId());
+			
+			for(int i = 0 ; i< listStore.size();i++){
+				if(today.after(listStore.get(i).getEnddate()) == true){
+					matchDate = true;
+				}
+			}
+			
+			if(store ==null){
+				return "storedeleted";
+			}
+			
 			
 			if(match){
 				if(matchDate == false){

@@ -78,6 +78,18 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.userid = 0;
 	$scope.stores = [];
 
+	$scope.create = function(){
+		var data= {
+			status:false,
+			store:$scope.stores,
+			create_at: new Date(),
+			userApp: $scope.userid,
+		}
+		$http.post("/api/support",data).then((resp)=>{
+			var a = resp.data;
+			console.log(a)
+		})
+	}
 
 	$scope.getEmpleadoInfo = function() {
 		// Lấy userid
@@ -96,7 +108,8 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
 					$scope.listStoreByUserId = resp.data;
 
-				});
+				})
+				
 			})
 
 	}; $scope.getEmpleadoInfo();
@@ -109,5 +122,56 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 			$scope.getEmpleadoInfo()
 		}
 
+	}
+	$scope.create= function(){
+		let data = {
+			status: false,
+			store: $scope.stores
+
+		}
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success ms-2",
+				cancelButton: "btn btn-danger",
+			},
+			buttonsStyling: false,
+		});
+		swalWithBootstrapButtons
+			.fire({
+				title: "Thông báo",
+				icon: "warning",
+				text: "Bạn chắc chắn muốn thay đổi?",
+				showCancelButton: true,
+				confirmButtonText: "OK",
+				cancelButtonText: "Quay lại",
+				reverseButtons: true,
+			})
+			.then((result) => {
+				if (result.isConfirmed) {
+		$http.post("/api/support", data).then((resp)=>{
+			if(resp.data){
+				// Thông báo
+				swalWithBootstrapButtons.fire(
+					"Thành công",
+					"Gọi hỗ trợ thành công!",
+					"success"
+				);				
+			}
+			})
+			.catch((error) => {
+				// Thông báo
+				Swal.fire({
+					icon: "error",
+					title: "Gọi hỗ trợ thất bại!",
+				});
+				console.log("Error", error);
+			});
+	
+		}else if (
+			/* Read more about handling dismissals below */
+			result.dismiss === Swal.DismissReason.cancel
+		) {
+		}
+	})		
 	}
 });

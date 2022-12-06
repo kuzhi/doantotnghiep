@@ -57,11 +57,12 @@ public class SupportAPI {
 		return ResponseEntity.ok().build();
 	}
 
-	@PostMapping("/api/support/update")
+	@PostMapping("/api/support")
 	public ResponseEntity<Support> update(@RequestBody Optional<Support> support) {
 		if (support.isPresent()) {
 
-			supportService.create(support.get());
+			return ResponseEntity.ok(supportService.create(support.get()));
+
 		}
 
 		return ResponseEntity.ok().build();

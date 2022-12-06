@@ -54,10 +54,10 @@ public class StoreAPI {
 
 	// update
 	@PatchMapping("{id}")
-	public ResponseEntity<Object> update(@PathVariable("id") Optional<Integer> id,
+	public ResponseEntity<Store> update(@PathVariable("id") Optional<Integer> id,
 			@RequestBody Store Store) {
-		storeService.update(Store);
-		return ResponseEntity.ok().build();
+		
+		return ResponseEntity.ok(storeService.update(Store));
 	}
 
 	// Delete
@@ -70,7 +70,8 @@ public class StoreAPI {
 	@PostMapping
 	public ResponseEntity<Store> create(@RequestBody Optional<Store> store) {
 		if (store.isPresent()) {
-			storeService.create(store.get());
+			   storeService.create(store.get());
+			
 		}
 
 		return ResponseEntity.ok().build();
