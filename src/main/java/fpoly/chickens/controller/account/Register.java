@@ -65,24 +65,46 @@ public class Register {
     @PostMapping("create-user")
        public String createNew(Model model, @ModelAttribute Optional<User> user){
         model.addAttribute("user", user);
+        String confirmPass = req.getParameter("password2");
         if(user.isPresent()){
             //model.addAttribute("error", "user");
             List<UserStore> checkUStore = userAdminKHService.findUserByUserName(user.get().getUsername());
+           List<UserStore> checkEmailUStore = userAdminKHService.findUserByEmail(user.get().getEmail());
+           List<UserStore> checkPhoneUStore = userAdminKHService.findUserByPhone(user.get().getPhone());
+
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(user.get().getUsername());
+            List<UserApp> checkEmailUApp = userAdminNVService.findUserByEmail(user.get().getEmail());
+            List<UserApp> checkPhoneUApp = userAdminNVService.findUserByPhone(user.get().getPhone());
+
             List<User> checkU = userAdminService.findUserByUserName(user.get().getUsername());
-            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
-              
+            List<User> checkEmailU = userAdminService.findUserByEmail(user.get().getEmail());
+            List<User> checkPhoneU = userAdminService.findUserByPhone(user.get().getPhone());
+
+
+            boolean check = user.get().getPassword().equals(confirmPass);
+            
+          
+            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0 
+            && checkEmailUStore.size()==0 && checkEmailUApp.size() == 0 && checkEmailU.size() == 0 
+            && checkPhoneUStore.size() == 0 && checkPhoneUApp.size() == 0 && checkPhoneU.size() == 0){
+              if(check){
                 user.get().setDeleted(false);
                 user.get().setStatus(true);
                 userAdminService.create(user.get());
-                
-                return "redirect:/home/auth/form";
-
+                model.addAttribute("error", "Đăng Ký thành công");
+                model.addAttribute("user", new User());
+                return "home/account/registerUser";
+              }
+               
+              model.addAttribute("error", "Không trùng mật khẩu và mật khẩu xác nhận!");
+              return "home/account/registerUser";
+            }else{
+                model.addAttribute("error", "Tài khoản hoặc email hoặc số điện thoại này đã được sử dụng");
 
             }
-           
-            model.addAttribute("error", "Tài khoản hoặc email này đã được sử dụng");
+
             return "home/account/registerUser";
+          
          
            
         }
@@ -94,13 +116,28 @@ public class Register {
     @PostMapping("create-store")
     public String createNewStore(Model model, @ModelAttribute Optional<UserStore> userStore){
         model.addAttribute("store", userStore);
+        String confirmPass = req.getParameter("password2");
+
         if(userStore.isPresent()){
             //model.addAttribute("error", "user");
             List<UserStore> checkUStore = userAdminKHService.findUserByUserName(userStore.get().getUsername());
+           List<UserStore> checkEmailUStore = userAdminKHService.findUserByEmail(userStore.get().getEmail());
+           List<UserStore> checkPhoneUStore = userAdminKHService.findUserByPhone(userStore.get().getPhone());
+
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(userStore.get().getUsername());
+            List<UserApp> checkEmailUApp = userAdminNVService.findUserByEmail(userStore.get().getEmail());
+            List<UserApp> checkPhoneUApp = userAdminNVService.findUserByPhone(userStore.get().getPhone());
+
             List<User> checkU = userAdminService.findUserByUserName(userStore.get().getUsername());
-            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
-              
+            List<User> checkEmailU = userAdminService.findUserByEmail(userStore.get().getEmail());
+            List<User> checkPhoneU = userAdminService.findUserByPhone(userStore.get().getPhone());
+
+
+            boolean check = userStore.get().getPassword().equals(confirmPass);
+            if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0
+            && checkEmailUStore.size()==0 && checkEmailUApp.size() == 0 && checkEmailU.size() == 0 
+            && checkPhoneUStore.size() == 0 && checkPhoneUApp.size() == 0 && checkPhoneU.size() == 0){
+              if(check){
                 userStore.get().setDeleted(false);
                 UserStore uStore = userStore.get();
 
@@ -117,13 +154,22 @@ public class Register {
                 store.setEnddate(endDate);
                 store.setDeleted(false);
                 storeService.create(store);
-                return "redirect:/home/auth/form";
-               
+                model.addAttribute("store", new UserStore());
 
+                model.addAttribute("error", "Đăng Ký thành công");
+
+                return "home/account/registerStore";
+              }
+                
+              model.addAttribute("error", "Không trùng mật khẩu và mật khẩu xác nhận!");
+              return "home/account/registerStore";
+
+            }else{
+                model.addAttribute("error", "Tài khoản hoặc email hoặc số điện thoại này đã được sử dụng");
+                return "home/account/registerStore";
             }
             
-            model.addAttribute("error", "Tài khoản hoặc email này đã được sử dụng");
-            return "home/account/registerStore";
+           
         }
         model.addAttribute("error", "Thiếu trường");
 

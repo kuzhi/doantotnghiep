@@ -41,12 +41,13 @@ $scope.roles = [];
 
 	$scope.initialize = function() {
 		$http.get("/api/roles").then(resp => {
+			
 			$scope.roles = resp.data;
 		})
 
 		
 		$http.get("/api/userApp/getamin?admin=true").then(resp => {
-			$scope.admins = resp.data;			
+			$scope.admins = resp.data;		
 		})
 		
 		$http.get("/api/authorities?admin=true").then(resp => {
@@ -59,7 +60,6 @@ $scope.roles = [];
 	$scope.authority_of =  function(a, r){
 		if($scope.authorities){
 		
-		console.log($scope.authorities)
 			return $scope.authorities.find(ur =>				
 						ur.userapp.id === a.id &&  ur.roleapp.id === r.id 
 			);			
@@ -68,15 +68,23 @@ $scope.roles = [];
 	
 	
 	$scope.authority_changed = function(a, r){
+		let userRole = $scope.userRole;
+		if(userRole.permission != "STAFF"){
+			let authority = $scope.authority_of(a, r);
 		
-		let authority = $scope.authority_of(a, r);
-		
-		if(authority){ // 	đã cấp quyền => thu hồi quyền (xóa)
-			$scope.revoke_authority(authority);
-		}else{ // chưa được cấp quyền => cấp quyền (thêm mới)
-			authority = {userapp:a, roleapp:r, permission:r.roleName};
-			console.log(authority)
-			$scope.grant_authority(authority);
+			if(authority){ // 	đã cấp quyền => thu hồi quyền (xóa)
+				$scope.revoke_authority(authority);
+			}else{ // chưa được cấp quyền => cấp quyền (thêm mới)
+				authority = {userapp:a, roleapp:r, permission:r.roleName};
+				
+				$scope.grant_authority(authority);
+			}
+		}
+		else{
+			Swal.fire({
+				icon: 'error',
+				title: 'Không có quyền!'
+			});$scope.initialize();
 		}
 	}
 	
@@ -104,13 +112,15 @@ $scope.roles = [];
 	// hủy quyền
 	$scope.revoke_authority = function(authority){
 		$http.delete(`/api/authorities/${authority.id}`).then(resp => {
-			//var index = $scope.authorities.findIndex(a => a.id == authority.id);
-			//$scope.authorities.push(index, 1);
+			
 			// Thông báo
-			Swal.fire({
-				icon: 'success',
-				title: 'Thu hồi quyền thành công!'
-			});
+			
+			
+				Swal.fire({
+					icon: 'success',
+					title: 'Thu hồi quyền thành công!'
+				});
+			
 			$scope.initialize();
 		}).catch(error => {
 			// Thông báo
@@ -119,7 +129,7 @@ $scope.roles = [];
 				title: 'Thu hồi quyền thất bại!'
 			});
 			$scope.initialize();
-			console.log("Error", error);
+			
 		})
 	}
 

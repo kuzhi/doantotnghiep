@@ -71,6 +71,9 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 				$scope.userApp = resp.data;
 				$scope.userApp.birthday = new Date($scope.userApp.birthday)
 			})
+			$http.get("/api/authorities/"+$scope.userid).then(resp=>{
+				$scope.userRole = resp.data; 
+			})
 	    })
     }; $scope.getEmpleadoInfo();
     
