@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.UserApp;
+import fpoly.chickens.entity.UserRoleApp;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UploadService;
 import fpoly.chickens.service.UserAdminNVService;
+import fpoly.chickens.service.UserRoleAppService;
 
 @CrossOrigin("*")
 @RestController
@@ -27,6 +29,7 @@ import fpoly.chickens.service.UserAdminNVService;
 public class UserAdminNVAPI {
 	@Autowired
 	UserAdminNVService userAdminNVService;
+	@Autowired UserRoleAppService userRoleAppService;
 	@Autowired
 	UploadService uploadService;
 
@@ -61,6 +64,15 @@ public class UserAdminNVAPI {
 		return ResponseEntity.ok().build();
 	}
 
+	@PostMapping("userroleapp")
+	public ResponseEntity<UserRoleApp> createUserRoleApp(@RequestBody Optional<UserRoleApp> userRoleApp) {
+		if (userRoleApp.isPresent()) {
+			userAdminNVService.createUserRoleApp(userRoleApp.get());
+		}
+		
+		return ResponseEntity.ok().build();
+	}
+	
 	// Change
 	@PostMapping("checkPassworrd/{password}")
 	public ResponseEntity<Boolean> changepassword(@RequestBody Optional<UserApp> userApp, @PathVariable("password") String password) {
@@ -78,6 +90,13 @@ public class UserAdminNVAPI {
 	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id, @RequestBody UserApp userapp) {
 		userAdminNVService.update(userapp);
 
+		return ResponseEntity.ok().build();
+	}
+	
+	@PutMapping("updateProfile/{id}")
+	public ResponseEntity<Void> updateProfile(@PathVariable("id") Optional<String> id, @RequestBody UserApp userapp) {
+		userAdminNVService.updateProfile(userapp);
+		
 		return ResponseEntity.ok().build();
 	}
 

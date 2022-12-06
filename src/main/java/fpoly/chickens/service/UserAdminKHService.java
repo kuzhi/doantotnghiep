@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
 
@@ -16,8 +17,10 @@ public interface UserAdminKHService {
 	UserStore findById(Integer userId);
 	// Create
 	UserStore create(UserStore userStore);
+	Store createStore(Store store);
 	// Update
 	UserStore update(UserStore userStore);
+	UserStore updateProfile(UserStore userStore);
 	// Delete
 	void delete(Integer id);
 	

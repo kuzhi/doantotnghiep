@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
@@ -55,6 +56,15 @@ public class UserAdminKHAPI {
 		return ResponseEntity.ok().build();
 	}
 
+	@PostMapping("store")
+	public ResponseEntity<Store> createStore(@RequestBody Optional<Store> store) {
+		if (store.isPresent()) {
+			userAdminKHService.createStore(store.get());
+		}
+		
+		return ResponseEntity.ok().build();
+	}
+
 	@PostMapping("checkPassworrd/{password}")
 	public ResponseEntity<Boolean> changepassword(@RequestBody Optional<UserStore> userStore, @PathVariable("password") String password) {
 		if (userStore.isPresent()) {
@@ -71,6 +81,13 @@ public class UserAdminKHAPI {
 	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id, @RequestBody UserStore userStore) {
 		userAdminKHService.update(userStore);
 
+		return ResponseEntity.ok().build();
+	}
+	
+	@PutMapping("updateProfile/{id}")
+	public ResponseEntity<Void> updateProfile(@PathVariable("id") Optional<String> id, @RequestBody UserStore userStore) {
+		userAdminKHService.updateProfile(userStore);
+		
 		return ResponseEntity.ok().build();
 	}
 

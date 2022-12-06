@@ -9,7 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.dao.UserStoreDAO;
+import fpoly.chickens.entity.Store;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.UserAdminKHService;
@@ -17,8 +19,10 @@ import fpoly.chickens.service.UserAdminKHService;
 @SessionScope
 @Service
 public class UserAdminKHImplement implements UserAdminKHService {
-	@Autowired UserStoreDAO userStoreDAO;
-	
+	@Autowired
+	UserStoreDAO userStoreDAO;
+	@Autowired StoreDAO storeDAO;
+
 	@Autowired
 	BCryptPasswordEncoder pe;
 
@@ -53,7 +57,7 @@ public class UserAdminKHImplement implements UserAdminKHService {
 	@Override
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -61,7 +65,7 @@ public class UserAdminKHImplement implements UserAdminKHService {
 		// TODO Auto-generated method stub
 		return userStoreDAO.findByName(name);
 	}
-	
+
 	@Override
 	public List<UserStore> findUserByUserName(String name) {
 		// TODO Auto-generated method stub
@@ -122,23 +126,37 @@ public class UserAdminKHImplement implements UserAdminKHService {
 		// TODO Auto-generated method stub
 		return userStoreDAO.findByUsername(name);
 	}
-	@Override
-		public List<UserStore> findUserByPhoneForId(String phone, Integer id) {
-			// TODO Auto-generated method stub
-			return userStoreDAO.findUserByPhoneForId(phone, id);
-		}
 
-		@Override
+	@Override
+	public List<UserStore> findUserByPhoneForId(String phone, Integer id) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.findUserByPhoneForId(phone, id);
+	}
+
+	@Override
 	public Boolean checkPassword(UserStore uStore, String password) {
 		// TODO Auto-generated method stub
 		boolean match = pe.matches(password, uStore.getPassword().trim());
-		
+
 		return match;
 	}
+
 	@Override
 	public UserStore findById(Integer userId) {
 		// TODO Auto-generated method stub
 		return userStoreDAO.findById(userId).get();
 	}
 
+	@Override
+	public UserStore updateProfile(UserStore userStore) {
+		// TODO Auto-generated method stub
+		return userStoreDAO.saveAndFlush(userStore);
 	}
+
+	@Override
+	public Store createStore(Store store) {
+		// TODO Auto-generated method stub
+		return storeDAO.save(store);
+	}
+
+}

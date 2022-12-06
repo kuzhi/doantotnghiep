@@ -129,7 +129,7 @@ app.controller("myprofile-ctrl", function($scope, $http, $location) {
 		})
 	}
 	$scope.updateReal = function(user) {
-		$http.put($scope.url + user.id, user).then(resp => {
+		$http.put($scope.url + "updateProfile/" + user.id, user).then(resp => {
 
 				$scope.userApp = user;
 				//console.log("Sp: ", $scope.userStore);
