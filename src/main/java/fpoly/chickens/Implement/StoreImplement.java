@@ -36,7 +36,16 @@ public class StoreImplement implements StoreService {
 	@Override
 	public Store create(Store store) {
 		// TODO Auto-generated method stub
-		return storeDAO.save(store);
+
+		
+		Store getStore = storeDAO.findDuplicateStoreName(store.getName());
+		Store getPhone = storeDAO.findDuplicateStorePhone(store.getPhone());
+		Store getAddress = storeDAO.findDuplicateStoreAddress(store.getAddress());
+		if(getStore == null && getPhone ==null && getAddress ==null){
+			
+			return storeDAO.saveAndFlush(store);
+		}
+		return null;
 	}
 
 	@Override
@@ -48,7 +57,42 @@ public class StoreImplement implements StoreService {
 	@Override
 	public Store update(Store store) {
 		// TODO Auto-generated method stub
-		return storeDAO.saveAndFlush(store);	}
+		Store findStore = this.findById(store.getId());
+		Store getStore = storeDAO.findDuplicateStoreName(store.getName());
+		Store getPhone = storeDAO.findDuplicateStorePhone(store.getPhone());
+		Store getAddress = storeDAO.findDuplicateStoreAddress(store.getAddress());
+		Boolean checkName = false;
+		Boolean checkPhone = false;
+		Boolean checkAddress =false;
+		if(getStore == null && getPhone ==null && getAddress ==null){
+			
+
+			return storeDAO.saveAndFlush(store);
+		}else{
+			if(getStore != null){
+				checkName = findStore.getName().equalsIgnoreCase(getStore.getName());
+
+			}
+			if(getPhone !=null){
+				checkPhone = findStore.getPhone().equalsIgnoreCase(getPhone.getPhone());
+
+			}
+			if(getAddress !=null){
+				checkAddress = findStore.getAddress().equalsIgnoreCase(getAddress.getAddress());
+
+			}
+		}
+		
+		if(findStore.getName().equalsIgnoreCase(store.getName()) || findStore.getPhone().equalsIgnoreCase(store.getPhone()) || findStore.getAddress().equalsIgnoreCase(store.getAddress())){
+			System.out.println(findStore.getName()); System.out.println(store.getName());
+				return storeDAO.saveAndFlush(store);
+			
+		}
+		if(getStore != null && getPhone != null && getAddress !=null && checkName == true && checkPhone == true && checkAddress == true){
+			return storeDAO.saveAndFlush(store); 
+		 }
+		return null;
+	}
 
 	@Override
 	public List<Store> findStoreByName(String name) {
@@ -77,6 +121,10 @@ public class StoreImplement implements StoreService {
 	@Override
 	public Store findById(Integer storeid) {
 		// TODO Auto-generated method stub
-		return storeDAO.findById(storeid).get();
+		Store getStore= storeDAO.findById(storeid).get();
+		if(getStore.getDeleted() == false){
+			return getStore;
+		}
+		return null;
 	}
 }

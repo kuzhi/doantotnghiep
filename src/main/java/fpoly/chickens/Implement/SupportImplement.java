@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class SupportImplement  implements SupportService{
     @Override
     public Support create(Support support) {
         // TODO Auto-generated method stub
+        
+        Support sup = this.findByStoreId(support.getStore().getId());
+        if(sup !=null){
+            sup.setUpdate_at(new Date());
+            return supDao.saveAndFlush(sup);
+        }
         return supDao.saveAndFlush(support);
     }
 
@@ -52,5 +59,11 @@ public class SupportImplement  implements SupportService{
     public List<Support> findByUserAppId(Integer supportId) {
         // TODO Auto-generated method stub
         return supDao.findByUserAppId(supportId);
+    }
+
+    @Override
+    public Support findByStoreId(Integer storeId) {
+        // TODO Auto-generated method stub
+        return supDao.findByStore(storeId);
     }
 }

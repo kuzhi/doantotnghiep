@@ -11,4 +11,7 @@ public interface SupportDAO extends JpaRepository<Support, Integer>{
 
     @Query(value="SELECT o FROM Support o WHERE o.userApp.id = ?1")
 	List<Support> findByUserAppId(int userAppId);
+
+    @Query(value="SELECT o FROM Support o WHERE o.store.id = ?1 and o.status=0")
+	Support findByStore(int storeId);
 }

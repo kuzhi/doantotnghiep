@@ -18,6 +18,7 @@ public interface SupportService {
 
 
 	Support findById(Integer supportId);
+	Support findByStoreId(Integer storeId);
 
 	List<Support> findByUserAppId(Integer supportId);
 
