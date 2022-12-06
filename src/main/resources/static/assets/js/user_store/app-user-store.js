@@ -4,10 +4,7 @@ app = angular.module("app-user-store", ["ngRoute"]);
 app.config(function($routeProvider) {
 	$routeProvider
 		// Thông tin cửa hàng
-		.when("/name__store", {
-			templateUrl: "/assets/user_store/info_store/name_store.html",
-			controller: "name__store-ctrl",
-		})
+
 		.when("/myProfile", {
 			templateUrl: "/assets/user_store/info_store/my-profile.html",
 			controller: "myprofile-ctrl"
@@ -16,6 +13,9 @@ app.config(function($routeProvider) {
 		.when("/product__management", {
 			templateUrl: "/assets/user_store/manage/product_management.html",
 			controller: "product__management-ctrl"
+		}).when("/name__store", {
+			templateUrl: "/assets/user_store/info_store/name_store.html",
+			controller: "name__store-ctrl",
 		})
 		// Đơn hàng
 		.when("/order__management-all", {
@@ -44,8 +44,8 @@ app.config(function($routeProvider) {
 		})
 		// Nhân viên
 		//.when("/user__management", {
-			//templateUrl: "/assets/user_store/manage/user_management.html",
-			//controller: "user__management-ctrl"
+		//templateUrl: "/assets/user_store/manage/user_management.html",
+		//controller: "user__management-ctrl"
 		//})
 		// Báo cáo
 		.when("/report-all", {
@@ -68,26 +68,46 @@ app.config(function($routeProvider) {
 			templateUrl: "/assets/user_store/manage/report.html",
 			controller: "report-all-ctrl"
 		})
-});
+}
+
+);
 
 app.controller("app-ctrl", function($scope, $http, $location) {
 	// Láy userid
-	$scope.userid=0;
-	$scope.stores=[];
-	$scope.getEmpleadoInfo = function () {
+
+	$scope.userid = 0;
+	$scope.stores = [];
+
+
+	$scope.getEmpleadoInfo = function() {
 		// Lấy userid
-        $http.get("/api/get")
-	    .then(resp => {
-	        $scope.userid = resp.data;
-	        // Lấy storeid
-	        $http.get("/api/store/list/"+$scope.userid)
+		$http.get("/api/get")
 			.then(resp => {
-				$scope.stores = resp.data[0];
+				$scope.userid = resp.data;
+				// Lấy storeid
+				$http.get("/api/store/list/" + $scope.userid)
+					.then(resp => {
+						$scope.stores = resp.data[0];
+						$http.post("/api/storeToken", $scope.stores.id);
+					})
+				$http.get("/api/user/get-user-store/" + $scope.userid).then(resp => {
+					$scope.userStore = resp.data;
+				})
+				$http.get("/api/store/list/" + $scope.userid).then((resp) => {
+					$scope.listStoreByUserId = resp.data;
+
+				});
 			})
-			$http.get("/api/user/get-user-store/"+$scope.userid).then(resp=>{
-				$scope.userStore = resp.data;
-			})
-	    })
-    }; $scope.getEmpleadoInfo();
-    
+
+	}; $scope.getEmpleadoInfo();
+	$scope.click = function() {
+		$scope.stores = $scope.formSupport;
+		if ($scope.formSupport) {
+			$http.post("/api/storeToken", $scope.formSupport.id);
+		}
+		else {
+			$scope.getEmpleadoInfo()
+		}
+
+	}
 });

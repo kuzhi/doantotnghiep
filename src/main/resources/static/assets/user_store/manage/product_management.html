@@ -50,6 +50,11 @@
 			             </tr>
 			         </thead>
 			         <tbody>
+			         	<tr ng-if="pager.products == 0">
+				            <th colspan="6" class="text-center">
+								<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
+							</th>
+				        </tr>
 			             <tr ng-repeat="product in pager.products" >
 			                 <td class="text-start">SP{{product.id}}</td>
 			                 <td class="text-start">{{product.name}}</td>
@@ -233,7 +238,7 @@
 <!-- Full screen modal add category -->
 <div class="modal fade" id="addCateModal" tabindex="-1"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-xl">
+	<div class="modal-dialog modal-xl modal-dialog-scrollable ">
 		<div class="modal-content">
 			<div class="modal-body">
 				<h5 class="color-text text-center">Chi tiết loại sản phẩm</h5>
@@ -273,6 +278,11 @@
 					             </tr>
 					         </thead>
 					         <tbody>
+					         	<tr ng-if="pagerCate.cates == 0">
+						            <th colspan="5" class="text-center">
+										<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
+									</th>
+						        </tr>
 					             <tr ng-repeat="cate in pagerCate.cates">
 					                 <td class="text-start">{{cate.id}}</td>
 					                 <td class="text-start">{{cate.name}}</td>
@@ -318,8 +328,8 @@
 					</div>
 				</div>
 				
-				<div class="row mt-2">
-					<div class="col-xl-6">
+				<div class="row">
+					<div class="col-xl-6 mt-2">
 						<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
 					</div>
 					<div class="col-xl-6 mt-2">

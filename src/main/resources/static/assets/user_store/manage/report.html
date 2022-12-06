@@ -118,7 +118,12 @@
                          </tr>
                      </thead>
                      <tbody>
-                         <tr ng-repeat="item in pager.items  " >
+                    	<tr ng-if="pager.items == 0">
+				            <th colspan="4" class="text-center">
+								<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
+							</th>
+				        </tr>
+                        <tr ng-repeat="item in pager.items" >
                              <td class="text-center">
                                  <img 
                                  	ng-if="item.productImage != null"

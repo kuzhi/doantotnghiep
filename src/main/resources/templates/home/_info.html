@@ -91,7 +91,8 @@
 		</div>
 		<div class="col-xl-12 form-group mx-auto text-start mt-2">
 			<hr>
-			<button ng-click="updateProfile()" class="btn btn-primary btn-sm w-100">Lưu thay đổi</button>
+			<button ng-disabled="profileForm.$invalid" ng-click="updateProfile()" 
+			class="btn btn-primary btn-sm w-100">Lưu thay đổi</button>
 		</div>
 	</div>
 </form>

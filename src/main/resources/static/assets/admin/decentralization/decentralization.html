@@ -20,18 +20,21 @@
 
 		<div class="row mt-3">
 			<div class="table-responsive">
-				<table class="table table-bordered">
-					<thead class="table-dark">
+				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+					<thead class="table_primary">
 						<tr>
 							<th></th>
-							<th ng-repeat="r in roles" class="text-center">{{r.roleName}}</th>
+							<th ng-repeat="r in roles">{{r.roleName}}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="a in admins">
 							<td>{{a.username}}</td>
-							<th ng-repeat="r in roles" class="text-center">
-								<input  ng-checked="authority_of(a, r)" ng-click="authority_changed(a, r)" type="checkbox">
+							<th ng-repeat="r in roles">
+								<div class="form-check form-switch">
+									<input  ng-checked="authority_of(a, r)" class="form-check-input"
+									ng-click="authority_changed(a, r)" type="checkbox" role="switch">
+								</div>
 							</th>
 						</tr>
 					</tbody>

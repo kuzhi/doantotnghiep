@@ -19,9 +19,11 @@ import fpoly.chickens.service.ProductService;
 @Service
 public class ProductImplement implements ProductService {
 
-	@Autowired ProductDAO productDAO;
-	@Autowired StoreDAO storeDAO;
-	
+	@Autowired
+	ProductDAO productDAO;
+	@Autowired
+	StoreDAO storeDAO;
+
 	@Override
 	public List<Product> findAll() {
 		// TODO Auto-generated method stub
@@ -88,35 +90,28 @@ public class ProductImplement implements ProductService {
 	}
 
 	@Override
-	public List<Product> findAllProductByStore(Integer storeid, Boolean delete) {
-		// TODO Auto-generated method stub
-		Store store = storeDAO.findById(storeid).get();
-		
-		return productDAO.findByStore(store, delete);
-	}
-
-	@Override
 	public List<Product> findAllProductByStoreWithStatus(Integer storeid, Boolean status) {
 		// TODO Auto-generated method stub
 		Store store = storeDAO.findById(storeid).get();
-		
+
 		return productDAO.findByStoreWithStatus(store, status);
 	}
 
 	@Override
 	public Page<Product> findAllPageWithStatus(Pageable pageable, Store storeid, Boolean status) {
 		// TODO Auto-generated method stub
-		return productDAO.loadByStoreWithStatus(pageable, storeid, status);	}
-		
-		@Override
-		public Product findById(Integer id) {
-			return productDAO.findById(id).get();
-		}
-	
-	@Override
-	public List<Product> sortCategory(Integer id) {
-		// TODO Auto-generated method stub
+		return productDAO.loadByStoreWithStatus(pageable, storeid, status);
+	}
 
-		return productDAO.sortCategory(id);
+	@Override
+	public Product findById(Integer id) {
+		return productDAO.findById(id).get();
+	}
+
+	@Override
+	public List<Product> sortCategory(Integer storeid) {
+		// TODO Auto-generated method stub
+		Store store = storeDAO.findById(storeid).get();
+		return productDAO.sortCategory(store);
 	}
 }

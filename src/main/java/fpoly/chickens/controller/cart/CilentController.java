@@ -55,6 +55,7 @@ public class CilentController {
 
 	@RequestMapping("/list-store/view")
 	public String view_list() {
+		userService.setTokenStore(0);
 		return "home/list_store";
 	}
 

@@ -14,8 +14,9 @@ import fpoly.chickens.service.StoreService;
 @SessionScope
 @Service
 public class StoreImplement implements StoreService {
-	@Autowired StoreDAO storeDAO;
-	
+	@Autowired
+	StoreDAO storeDAO;
+
 	@Override
 	public List<Store> findAll() {
 		// TODO Auto-generated method stub
@@ -43,14 +44,16 @@ public class StoreImplement implements StoreService {
 	@Override
 	public void deleteStore(Integer storeId) {
 		// TODO Auto-generated method stub
-	 storeDAO.deleteById(storeId);	
-	
+		storeDAO.deleteById(storeId);
+
 	}
+
 	@Override
 	public Store update(Store store) {
 		// TODO Auto-generated method stub
-		return storeDAO.saveAndFlush(store);	
+		return storeDAO.saveAndFlush(store);
 	}
+
 	@Override
 	public List<Store> findStoreByName(String name) {
 		// TODO Auto-generated method stub
@@ -67,5 +70,17 @@ public class StoreImplement implements StoreService {
 	public List<Store> sortZA() {
 		// TODO Auto-generated method stub
 		return storeDAO.sortZA();
+	}
+
+	@Override
+	public Integer getOneStore(Integer userStoreId) {
+		// TODO Auto-generated method stub
+		return storeDAO.getOneByUserStoreId(userStoreId);
+	}
+
+	@Override
+	public Store findById(Integer storeid) {
+		// TODO Auto-generated method stub
+		return storeDAO.findById(storeid).get();
 	}
 }

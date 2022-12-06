@@ -63,7 +63,7 @@ public class Register {
     }
 
     @PostMapping("create-user")
-    public String createNew(Model model, @ModelAttribute Optional<User> user){
+       public String createNew(Model model, @ModelAttribute Optional<User> user){
         model.addAttribute("user", user);
         if(user.isPresent()){
             //model.addAttribute("error", "user");
@@ -71,8 +71,7 @@ public class Register {
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(user.get().getUsername());
             List<User> checkU = userAdminService.findUserByUserName(user.get().getUsername());
             if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
-                String passwordEncode =pe.encode(user.get().getPassword());
-                user.get().setPassword(passwordEncode); 
+              
                 user.get().setDeleted(false);
                 user.get().setStatus(true);
                 userAdminService.create(user.get());
@@ -101,10 +100,7 @@ public class Register {
             List<UserApp> checkUApp = userAdminNVService.findUserByUserName(userStore.get().getUsername());
             List<User> checkU = userAdminService.findUserByUserName(userStore.get().getUsername());
             if(checkU.size()==0 && checkUApp.size()==0 && checkUStore.size()==0){
-                System.out.println(checkUStore.size() + " "+ checkUApp.size()+ " "+checkU.size());
-
-                String passwordEncode =pe.encode(userStore.get().getPassword());
-                userStore.get().setPassword(passwordEncode);
+              
                 userStore.get().setDeleted(false);
                 UserStore uStore = userStore.get();
 

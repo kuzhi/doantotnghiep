@@ -19,30 +19,28 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						const storeid = $scope.stores.id;
+				$http.get("/api/getStoreToken").then(resp => {
+					const storeid = resp.data;
 
-						$http.get($scope.url + "store/" + storeid).then(resp => {
-							$scope.products = resp.data;
+					$http.get($scope.url + "store/" + storeid).then(resp => {
+						$scope.products = resp.data;
 
-							$scope.products.forEach(product => {
-								product.create_at = new Date(product.create_at)
-								product.update_at = new Date(product.update_at)
-							})
-						});
-
-						$http.get($scope.urlCate + "store/" + storeid).then(resp => {
-							$scope.showBtnCate = true;
-							$scope.categorys = resp.data;
-
-							$scope.categorys.forEach(category => {
-								category.create_at = new Date(category.create_at)
-								category.update_at = new Date(category.update_at)
-							})
-						});
+						$scope.products.forEach(product => {
+							product.create_at = new Date(product.create_at)
+							product.update_at = new Date(product.update_at)
+						})
 					});
+
+					$http.get($scope.urlCate + "store/" + storeid).then(resp => {
+						$scope.showBtnCate = true;
+						$scope.categorys = resp.data;
+
+						$scope.categorys.forEach(category => {
+							category.create_at = new Date(category.create_at)
+							category.update_at = new Date(category.update_at)
+						})
+					});
+				});
 			});
 	}
 
@@ -265,42 +263,40 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				.then(resp => {
 					$scope.userid = resp.data;
 					// Lấy storeid
-					$http.get("/api/store/list/" + $scope.userid)
-						.then(resp => {
-							$scope.stores = resp.data[0];
-							const storeid = $scope.stores.id;
+					$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
 
-							cate.create_at = new Date();
-							cate.update_at = new Date();
-							cate.deleted = false;
+						cate.create_at = new Date();
+						cate.update_at = new Date();
+						cate.deleted = false;
 
-							$http.post($scope.urlCate + "store/" + storeid, cate).then(resp => {
-								resp.data.create_at = new Date(resp.data.create_at)
-								resp.data.update_at = new Date(resp.data.update_at)
+						$http.post($scope.urlCate + "store/" + storeid, cate).then(resp => {
+							resp.data.create_at = new Date(resp.data.create_at)
+							resp.data.update_at = new Date(resp.data.update_at)
 
-								$scope.categorys.push(resp.data);
-								// console.log('data: ', $scope.categorys);    
+							$scope.categorys.push(resp.data);
+							// console.log('data: ', $scope.categorys);    
 
-								$scope.formCate = {
-									create_at: null,
-									update_at: null,
-								};
-								$scope.reset();
-								$scope.init();
+							$scope.formCate = {
+								create_at: null,
+								update_at: null,
+							};
+							$scope.reset();
+							$scope.init();
 
-								Swal.fire({
-									icon: 'success',
-									title: 'Thêm thành công!'
-								});
-							}).catch(error => {
-
-								Swal.fire({
-									icon: 'error',
-									title: 'Thêm thất bại!'
-								});
-								console.log("Error: ", error);
+							Swal.fire({
+								icon: 'success',
+								title: 'Thêm thành công!'
 							});
+						}).catch(error => {
+
+							Swal.fire({
+								icon: 'error',
+								title: 'Thêm thất bại!'
+							});
+							console.log("Error: ", error);
 						});
+					});
 				});
 		}
 
@@ -510,27 +506,26 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 			.then(resp => {
 				$scope.userid = resp.data;
 				// Lấy storeid
-				$http.get("/api/store/list/" + $scope.userid)
-					.then(resp => {
-						$scope.stores = resp.data[0];
-						const storeid = $scope.stores.id;
-						if($scope.nameProduct == ""){
-							$scope.init();
-						}else{
-							$http.get($scope.url + $scope.nameProduct + "/" + storeid).then(resp => {
-								$scope.products = resp.data;
-		
-								$scope.products.forEach(product => {
-									product.create_at = new Date(product.create_at)
-									product.update_at = new Date(product.update_at)
-								})
-		
-								// console.log("Sp: ", resp.data);
-							}).catch(error => {
-								console.log("Error", error);
-							});
-						}
-					});
+				$http.get("/api/getStoreToken").then(resp => {
+					const storeid = resp.data;
+
+					if ($scope.nameProduct == "") {
+						$scope.init();
+					} else {
+						$http.get($scope.url + $scope.nameProduct + "/" + storeid).then(resp => {
+							$scope.products = resp.data;
+
+							$scope.products.forEach(product => {
+								product.create_at = new Date(product.create_at)
+								product.update_at = new Date(product.update_at)
+							})
+
+							// console.log("Sp: ", resp.data);
+						}).catch(error => {
+							console.log("Error", error);
+						});
+					}
+				});
 			});
 	}
 
@@ -549,19 +544,18 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				.then(resp => {
 					$scope.userid = resp.data;
 					// Lấy storeid
-					$http.get("/api/store/list/" + $scope.userid)
-						.then(resp => {
-							$scope.stores = resp.data[0];
-							const storeid = $scope.stores.id;
-							$http.get($scope.url + "sort/a-z/" + storeid)
-								.then(resp => {
-									$scope.products = resp.data;
-									$scope.products.forEach(product => {
-										product.create_at = new Date(product.create_at)
-										product.update_at = new Date(product.update_at)
-									})
-								});
-						});
+					$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
+
+						$http.get($scope.url + "sort/a-z/" + storeid)
+							.then(resp => {
+								$scope.products = resp.data;
+								$scope.products.forEach(product => {
+									product.create_at = new Date(product.create_at)
+									product.update_at = new Date(product.update_at)
+								})
+							});
+					});
 				});
 		}
 		// ======= Z-A
@@ -571,20 +565,19 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				.then(resp => {
 					$scope.userid = resp.data;
 					// Lấy storeid
-					$http.get("/api/store/list/" + $scope.userid)
-						.then(resp => {
-							$scope.stores = resp.data[0];
-							const storeid = $scope.stores.id;
-							$http.get($scope.url + "sort/z-a/" + storeid)
-								.then(resp => {
-									$scope.products = resp.data;
+					$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
 
-									$scope.products.forEach(product => {
-										product.create_at = new Date(product.create_at)
-										product.update_at = new Date(product.update_at)
-									})
-								});
-						});
+						$http.get($scope.url + "sort/z-a/" + storeid)
+							.then(resp => {
+								$scope.products = resp.data;
+
+								$scope.products.forEach(product => {
+									product.create_at = new Date(product.create_at)
+									product.update_at = new Date(product.update_at)
+								})
+							});
+					});
 				});
 		}
 		// ======= 0-9
@@ -594,20 +587,19 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				.then(resp => {
 					$scope.userid = resp.data;
 					// Lấy storeid
-					$http.get("/api/store/list/" + $scope.userid)
-						.then(resp => {
-							$scope.stores = resp.data[0];
-							const storeid = $scope.stores.id;
-							$http.get($scope.url + "sort/0-9/" + storeid)
-								.then(resp => {
-									$scope.products = resp.data;
+					$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
 
-									$scope.products.forEach(product => {
-										product.create_at = new Date(product.create_at)
-										product.update_at = new Date(product.update_at)
-									})
-								});
-						});
+						$http.get($scope.url + "sort/0-9/" + storeid)
+							.then(resp => {
+								$scope.products = resp.data;
+
+								$scope.products.forEach(product => {
+									product.create_at = new Date(product.create_at)
+									product.update_at = new Date(product.update_at)
+								})
+							});
+					});
 				});
 		}
 		// ======= 9-0
@@ -617,20 +609,19 @@ app.controller("product__management-ctrl", function($scope, $http, $location) {
 				.then(resp => {
 					$scope.userid = resp.data;
 					// Lấy storeid
-					$http.get("/api/store/list/" + $scope.userid)
-						.then(resp => {
-							$scope.stores = resp.data[0];
-							const storeid = $scope.stores.id;
-							$http.get($scope.url + "sort/9-0/" + storeid)
-								.then(resp => {
-									$scope.products = resp.data;
+					$http.get("/api/getStoreToken").then(resp => {
+						const storeid = resp.data;
 
-									$scope.products.forEach(product => {
-										product.create_at = new Date(product.create_at)
-										product.update_at = new Date(product.update_at)
-									})
-								});
-						});
+						$http.get($scope.url + "sort/9-0/" + storeid)
+							.then(resp => {
+								$scope.products = resp.data;
+
+								$scope.products.forEach(product => {
+									product.create_at = new Date(product.create_at)
+									product.update_at = new Date(product.update_at)
+								})
+							});
+					});
 				});
 		}
 	}

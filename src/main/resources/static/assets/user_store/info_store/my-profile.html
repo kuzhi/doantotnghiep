@@ -112,7 +112,8 @@
 			  </div>
   
 			  <div class="mt-3 text-center">
-				  <button ng-click="update(userStore)" class="btn btn-info text-white w-50" >Lưu thay đổi</button>
+				  <button ng-disabled="profileForm.$invalid" ng-click="update(userStore)" 
+				  class="btn btn-info text-white w-50" >Lưu thay đổi</button>
 			  </div>
   
 			  </form>

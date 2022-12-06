@@ -77,15 +77,16 @@ app.controller("sales-channel-ctrl", function ($scope, $http, $location) {
     }
   };
   // tìm theo id, tên người dùng
-  $scope.storeName = "";
+  $scope.namePack = "";
   $scope.findByName = function () {
-    if ($scope.storeName == "") {
-      $scope.init();
-    } else {
+    console.log($scope.namePack);
+
+    if ($scope.nameUser == "") {
       $http
-        .get("/api/store/name/" + $scope.storeName)
+        .get("/api/store/" + $scope.namePack)
         .then((resp) => {
           $scope.stores = resp.data;
+          console.log({ resp });
           if ($scope.stores != "") {
             $scope.stores.forEach((u) => {
               u.create_at = new Date(u.create_at);
@@ -96,12 +97,14 @@ app.controller("sales-channel-ctrl", function ($scope, $http, $location) {
               icon: "error",
               title: "Không có kết quả phù hợp!",
             });
-            // $scope.init();
+            $scope.init();
           }
         })
         .catch((error) => {
           console.log("Error", error);
         });
+    } else {
+      $scope.init();
     }
   };
 });
