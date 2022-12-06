@@ -66,7 +66,6 @@ public class Account_UserStoreController {
 		String password= req.getParameter("password");
 	
 		String Check = authen.loginStore(username, password);
-			System.out.println(Check);		
 
 		
 		if(!Check.equalsIgnoreCase("storenotexited")){

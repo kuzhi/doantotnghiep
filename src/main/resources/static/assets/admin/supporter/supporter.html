@@ -1,165 +1,262 @@
 <nav aria-label="breadcrumb">
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item">{{titleBreadcrumb}}</li>
-		<li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
-	</ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{titleBreadcrumb}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{titleBread}}</li>
+  </ol>
 </nav>
 
 <div class="container shadow-sm p-3 mb-3 bg-body rounded">
+  <div class="col-xl-12 col-md-12 col-12">
+    <div class="row">
+      <form class="d-flex align-items-center">
+        <div class="d-flex align-items-center w-75">
+          <div
+            class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded"
+          >
+            <i class="fas fa-search mx-2"></i>
+            <input
+              type="search"
+              class="form-control form-control-sm border-0"
+              placeholder="Nhập mã nhân viên..."
+            />
+          </div>
 
-	<div class="col-xl-12 col-md-12 col-12">
-		<div class="row">
-			<form class="d-flex align-items-center">
-				<div class="d-flex align-items-center w-75">
-					<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input type="search" class="form-control form-control-sm border-0" placeholder="Nhập mã nhân viên...">
-					</div>
-	
-					<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
-						<i class="fas fa-search mx-2"></i>
-						<input type="search" class="form-control form-control-sm border-0" placeholder="Nhập tên nhân viên...">
-					</div>
-				</div>
-					
-				<!-- Tìm kiếm -->	
-				<div class="w-25">
-					<button  ng-click="findByName()" type="submit" class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
-				</div>
-			</form>
-		</div>
-		
-		<div class="row my-2">
-			<!-- Select -->
-			<div class="text-start">
-				<select ng-change="getUsersbyFilter()" ng-model="list" ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
-				  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
-				</select>
-			</div>
-		</div>
-		
-		<div class="row mt-3">
-			<div class="table-responsive">
-				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
-					<thead class="table_primary">
-                     	<tr>
-			                 
-			                 <th>Tên kênh</th>
-			                 <th>Chủ kênh</th>
-			                 <th>Nhân viên</th>
-			                 <th>Trạng thái</th>
-			                 <th></th>
-			             </tr>
-			         </thead>
-			         <tbody>
-			             <tr ng-repeat="support in supports">
-			                 <td>{{support.store.name}}</td>
-			                 <td>{{support.store.userstoreId.username}}</td>                             
-			                 <td>{{support.userApp.fullname}}</td>
-			                 <td>{{support.status ? 'Hoàn thành':'Đang chờ hỗ trợ'}}</td>
-			                 <td class="text-center align-middle">
-			                 	<!-- Edit -->
-								<button type="button" ng-click="edit(support)" class="btn btn-info btn-sm text-white"
-								data-bs-toggle="modal" data-bs-target="#editModal"> <i class="fa-regular fa-pen-to-square"></i> </button>
-								<!-- Remove -->
-								<button ng-click="delete(support)" class="btn btn-danger btn-sm"> <i class="fa-regular fa-trash-can"></i> </button>
-							</td>
-			             </tr>
-			         </tbody>
-			     </table>
-			 </div>
-		</div>
+          <div
+            class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded"
+          >
+            <i class="fas fa-search mx-2"></i>
+            <input
+              ng-model="nameUser"
+              type="search"
+              class="form-control form-control-sm border-0"
+              placeholder="Nhập tên nhân viên..."
+            />
+          </div>
+        </div>
 
-	</div>
+        <!-- Tìm kiếm -->
+        <div class="w-25">
+          <button
+            ng-click="findByName()"
+            type="submit"
+            class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
+          >
+            Tìm kiếm
+          </button>
+        </div>
+      </form>
+    </div>
 
-	<div class="row mt-3 text-start">
-		<div class="col-xl text-end">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-end mb-0">
-					<li class="page-item">
-						<a ng-click="pager.first()" class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.prev()" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
-					</li>
-					<li class="page-item">
-						<span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
+    <div class="row my-2">
+      <!-- Select -->
+      <div class="text-start">
+        <select
+          ng-change="getUsersbyFilter()"
+          ng-model="list"
+          ng-options="f.id as f.name for f in listFilter"
+          class="px-2 border-0 form-select form-select-sm"
+        >
+          <option value="" class="fw-bold bg-info text-white">
+            --Vui lòng chọn--
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="table-responsive">
+        <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+          <thead class="table_primary">
+            <tr>
+              <th>Tên kênh</th>
+              <th>Chủ kênh</th>
+              <th>Nhân viên</th>
+              <th>Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="support in supports">
+              <td>{{support.store.name}}</td>
+              <td>{{support.store.userstoreId.username}}</td>
+              <td>{{support.userApp.fullname}}</td>
+              <td>{{support.status ? 'Hoàn thành':'Đang chờ hỗ trợ'}}</td>
+              <td class="text-center align-middle">
+                <!-- Edit -->
+                <button
+                  type="button"
+                  ng-click="edit(support)"
+                  class="btn btn-info btn-sm text-white"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
+                >
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <!-- Remove -->
+                <button
+                  ng-click="delete(support)"
+                  class="btn btn-danger btn-sm"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 text-start">
+    <div class="col-xl text-end">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end mb-0">
+          <li class="page-item">
+            <a ng-click="pager.first()" class="page-link text-dark">
+              <i class="fas fa-step-backward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.prev()" class="page-link text-dark">
+              <i class="fas fa-backward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.next()" class="page-link text-dark">
+              <i class="fas fa-forward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.last()" class="page-link text-dark">
+              <i class="fas fa-step-forward"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>
 
 <!-- Full screen modal add category -->
-<div class="modal fade" id="editModal" tabindex="-1"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-		        <h1 class="modal-title fs-5" id="exampleModalLabel">Chi tiết</h1>
-		    </div>
-			<div class="modal-body">
-				<form action="" name="chanelForm" novalidate>
-					
-                    <!-- Name -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Tên kênh <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <input ng-model="formSupport.store.name"  type="text" name="name"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" readonly>
-                    </div>
-                    <!-- Chủ kênh -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Chủ kênh <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <input ng-model="formSupport.store.userstoreId.username"  type="text" name="user"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" readonly>
-                    </div>
-                    <!-- Nhân viên -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Nhân viên <span class="text-red">*</span> </label>
-                      	<select class="form-select" id="selectUser"  aria-label="Default select example">
-							<option selected>--Vui lòng chọn--</option>
-							<option ng-model="formSupport.userApp" 
-						  	ng-repeat="user in users" ng-selected="user.id == formSupport.userApp.id"
-						  	value="{{user.id}}"
-						  >{{user.fullname}}</option>
-						</select>
-                    </div>
-                    <!-- Status -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Trạng thái <span class="text-red">*</span> </label>
-                        <div class="d-flex">
-                        
-                        	<div class="form-check me-2">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" ng-model="formSupport.status" ng-value="false" checked >
-								<label class="form-check-label" for="gridRadios1" > Đang chờ hỗ trợ </label>
-							 </div> 
-							 
-							 <div class="form-check">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" ng-model="formSupport.status" ng-value="true" > 
-								<label class="form-check-label" for="gridRadios2" > Hoàn thành </label>
-							 </div>
-                        </div>
-                    </div>
-				</form>
-				
-				<div class="row mt-2">
-					<div class="col-xl-6">
-						<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
-					</div>
-					<div class="col-xl-6">
-						<button ng-click="update()" class="btn btn-info text-white w-100">Lưu</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Chi tiết</h1>
+      </div>
+      <div class="modal-body">
+        <form action="" name="chanelForm" novalidate>
+          <!-- Name -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Tên kênh <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formSupport.store.name"
+              type="text"
+              name="name"
+              class="w-full form-control"
+              placeholder="--Vui lòng nhập--"
+              readonly
+            />
+          </div>
+          <!-- Chủ kênh -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Chủ kênh <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formSupport.store.userstoreId.username"
+              type="text"
+              name="user"
+              class="w-full form-control"
+              placeholder="--Vui lòng nhập--"
+              readonly
+            />
+          </div>
+          <!-- Nhân viên -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Nhân viên <span class="text-red">*</span>
+            </label>
+            <select
+              class="form-select"
+              id="selectUser"
+              aria-label="Default select example"
+            >
+              <option selected>--Vui lòng chọn--</option>
+              <option
+                ng-model="formSupport.userApp"
+                ng-repeat="user in users"
+                ng-selected="user.id == formSupport.userApp.id"
+                value="{{user.id}}"
+              >
+                {{user.fullname}}
+              </option>
+            </select>
+          </div>
+          <!-- Status -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Trạng thái <span class="text-red">*</span>
+            </label>
+            <div class="d-flex">
+              <div class="form-check me-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios1"
+                  ng-model="formSupport.status"
+                  ng-value="false"
+                  checked
+                />
+                <label class="form-check-label" for="gridRadios1">
+                  Đang chờ hỗ trợ
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios2"
+                  ng-model="formSupport.status"
+                  ng-value="true"
+                />
+                <label class="form-check-label" for="gridRadios2">
+                  Hoàn thành
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-2">
+          <div class="col-xl-6">
+            <button class="btn btn-danger w-100" data-bs-dismiss="modal">
+              Hủy
+            </button>
+          </div>
+          <div class="col-xl-6">
+            <button ng-click="update()" class="btn btn-info text-white w-100">
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

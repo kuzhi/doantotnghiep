@@ -16,32 +16,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fpoly.chickens.entity.Store;
-import fpoly.chickens.entity.User;
 import fpoly.chickens.service.StoreService;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/store")
 public class StoreAPI {
-	@Autowired StoreService storeService;
-	
+	@Autowired
+	StoreService storeService;
+
 	@GetMapping
 	public List<Store> findAll() {
 		return storeService.findAll();
 	}
-	
+
 	@GetMapping("{userid}")
 	public Store findAll(@PathVariable("userid") Optional<Integer> userid) {
-		
+
 		return storeService.findByUserid(userid.get());
 	}
-	
+
 	@GetMapping("getCurrentStore/{storeid}")
 	public Store findById(@PathVariable("storeid") Optional<Integer> storeid) {
-		
+
 		return storeService.findById(storeid.get());
 	}
-
 
 	@GetMapping("/getOneStore/{userid}")
 	public Integer getOneStore(@PathVariable("userid") Optional<Integer> userid) {
@@ -53,12 +52,12 @@ public class StoreAPI {
 		return storeService.findStoreById(userid.get());
 	}
 
-// update
+	// update
 	@PatchMapping("{id}")
-	public ResponseEntity<Object> update(@PathVariable("id") Optional<Integer> id,
+	public ResponseEntity<Store> update(@PathVariable("id") Optional<Integer> id,
 			@RequestBody Store Store) {
-		storeService.update(Store);
-		return ResponseEntity.ok().build();
+		
+		return ResponseEntity.ok(storeService.update(Store));
 	}
 
 	// Delete
@@ -71,27 +70,28 @@ public class StoreAPI {
 	@PostMapping
 	public ResponseEntity<Store> create(@RequestBody Optional<Store> store) {
 		if (store.isPresent()) {
-			storeService.create(store.get());
+			   storeService.create(store.get());
+			
 		}
 
 		return ResponseEntity.ok().build();
 	}
 
-	
 	// Find by name
 	@GetMapping("/name/{storeName}")
 	public ResponseEntity<List<Store>> findByName(@PathVariable("storeName") Optional<String> storeName) {
 		return ResponseEntity.ok(storeService.findStoreByName("%" + storeName.get() + "%"));
 	}
-	// Sort A-Z
-		@GetMapping("/sort/a-z")
-		public List<Store> sortAZ() {
-			return storeService.sortAZ();
-		}
 
-		// Sort A-Z
-		@GetMapping("/sort/z-a")
-		public List<Store> sortZA() {
-			return storeService.sortZA();
-		}
+	// Sort A-Z
+	@GetMapping("/sort/a-z")
+	public List<Store> sortAZ() {
+		return storeService.sortAZ();
+	}
+
+	// Sort A-Z
+	@GetMapping("/sort/z-a")
+	public List<Store> sortZA() {
+		return storeService.sortZA();
+	}
 }
