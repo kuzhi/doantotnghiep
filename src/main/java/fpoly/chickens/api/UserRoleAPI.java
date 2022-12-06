@@ -68,7 +68,7 @@ public class UserRoleAPI {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<Void> delete(@PathVariable("id") Integer id ){
+	public ResponseEntity<UserRoleApp> delete(@PathVariable("id") Integer id ){
 		if (!uService.existsById(id)) {
 			return ResponseEntity.badRequest().build();
 		}

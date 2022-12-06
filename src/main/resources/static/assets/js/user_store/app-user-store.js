@@ -117,6 +117,7 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 		$scope.stores = $scope.formSupport;
 		if ($scope.formSupport) {
 			$http.post("/api/storeToken", $scope.formSupport.id);
+			
 		}
 		else {
 			$scope.getEmpleadoInfo()
@@ -126,7 +127,8 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.create= function(){
 		let data = {
 			status: false,
-			store: $scope.stores
+			store: $scope.stores,
+		
 
 		}
 		const swalWithBootstrapButtons = Swal.mixin({

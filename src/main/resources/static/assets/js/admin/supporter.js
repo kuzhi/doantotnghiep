@@ -60,9 +60,12 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
   $scope.edit = function (support) {
     $scope.titleTable = "Cập nhật";
     $scope.formSupport = angular.copy(support);
-    console.log({ support });
+    
   };
 
+  $scope.reset=function(){
+    $scope.formSupport=null;
+  }
   // Update
   $scope.update = function () {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -93,11 +96,10 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
         if (result.isConfirmed) {
           //====================================== Bắt đầu xử lý
           var user = document.querySelector("#selectUser").value;
-          $scope.formSupport.userApp.id = JSON.parse(user);
-
+          
+          $scope.formSupport.userApp = $scope.users[user];
           var support = angular.copy($scope.formSupport);
           var url = $scope.url;
-          console.log({ support });
 
           $http
             .patch("/api/support/update", support)
@@ -110,6 +112,7 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
                 "Cập nhật thành công!",
                 "success"
               );
+              // $scope.reset()
             })
             .catch((error) => {
               // Thông báo
