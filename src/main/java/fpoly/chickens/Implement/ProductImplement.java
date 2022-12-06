@@ -109,9 +109,15 @@ public class ProductImplement implements ProductService {
 	}
 
 	@Override
-	public List<Product> sortCategory(Integer storeid) {
+	public List<Product> sortCategory(Integer id) {
 		// TODO Auto-generated method stub
+		return productDAO.sortCategory(id);
+	}
+
+	@Override
+	public List<Product> findAllProductByStore(Integer storeid, Boolean delete) {
 		Store store = storeDAO.findById(storeid).get();
-		return productDAO.sortCategory(store);
+		// TODO Auto-generated method stub
+		return productDAO.findByStore(store, delete);
 	}
 }
