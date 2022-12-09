@@ -96,6 +96,9 @@ public class OrderImplement implements OrderService {
 		Page<Order> page = orderDao.findAllByStore(store, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
+			if(pageNumber<0) {
+				pageNumber=0;
+			}
 			pageable = PageRequest.of(pageNumber, 10, sort);
 			page = orderDao.findAllByStore(store, pageable);
 		}
@@ -133,6 +136,9 @@ public class OrderImplement implements OrderService {
 		Page<Order> page = orderDao.findAllByStoreAndStatus(store, status, pageable);
 		if (pageNumber >= page.getTotalPages() - 1) {
 			pageNumber = page.getTotalPages() - 1;
+			if(pageNumber<0) {
+				pageNumber=0;
+			}
 			pageable = PageRequest.of(pageNumber, 10, sort);
 			page = orderDao.findAllByStoreAndStatus(store, status, pageable);
 		}
