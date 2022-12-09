@@ -156,7 +156,7 @@ public class Register {
                 storeService.create(store);
                 model.addAttribute("store", new UserStore());
 
-                model.addAttribute("error", "Đăng Ký thành công");
+                model.addAttribute("message", "Đăng Ký thành công");
 
                 return "home/account/registerStore";
               }
