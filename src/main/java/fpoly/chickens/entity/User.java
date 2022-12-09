@@ -47,6 +47,9 @@ public class User {
 	
 	@Column(name = "Photo")
 	private String Photo;
+	
+	@Column(name = "Address")
+	private String Address;
 
 	@Column(name = "Birthday")
 	private Date Birthday;

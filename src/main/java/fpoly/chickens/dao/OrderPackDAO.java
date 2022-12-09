@@ -20,7 +20,7 @@ public interface OrderPackDAO extends JpaRepository<OrderPack, Integer> {
 	@Query("SELECT o FROM OrderPack o")
 	Page<OrderPack> findAllOrderpack(Pageable pageable);
 
-	@Query("SELECT o FROM OrderPack o WHERE o.Orderpackcode LIKE ?1")
+	@Query("SELECT o FROM OrderPack o WHERE o.orderpackcode LIKE ?1")
 	Page<OrderPack> findOrderpackbyKey(String keyword, Pageable pageable);
 
 	@Query("SELECT o FROM OrderPack o WHERE o.store = ?1")

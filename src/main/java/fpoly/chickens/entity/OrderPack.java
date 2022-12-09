@@ -29,8 +29,8 @@ public class OrderPack implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer Id;
 	
-	@Column(name = "Orderpackcode")
-	private String Orderpackcode;
+	@Column(name = "orderpackcode")
+	private String orderpackcode;
 	
 	@ManyToOne
 	@JoinColumn(name="Storeid")
