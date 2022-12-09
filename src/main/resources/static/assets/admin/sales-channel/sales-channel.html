@@ -148,6 +148,64 @@
 							</tbody>
 						</table>
 					</div>
+					<div class="table-responsive">
+					<label class="fw-bold">Lịch sử gia hạn</label>
+				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+					<thead class="table_primary">
+                        <tr>
+							<th>Mã</th>
+							<th>Tên gói</th>
+							<th>Giá</th>
+							<th>Thời hạn</th>
+							<th>Trạng thái</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="o in orderpack" >
+							<td class="align-middle"> {{o.orderpackcode}} </td>
+							<td class="align-middle"> {{o.pack.name}} </td>
+							<td class="align-middle"> {{o.pack.price}} </td>
+							<td class="align-middle"> {{o.pack.date}} </td>
+							  <td>
+                    <div
+                      ng-if="o.status == 1"
+                      class="d-flex align-items-center"
+                    >
+                      <div class="fade-loading bg-secondary me-2"></div>
+                      <p class="small text-secondary mb-0 fst-italic">
+                        Đang xử lý
+                      </p>
+                    </div>
+                    <div
+                      ng-if="o.status == 2"
+                      class="d-flex align-items-center"
+                    >
+                      <div class="fade-loading bg-warning me-2"></div>
+                      <p class="small text-warning mb-0 fst-italic">Đã duyệt</p>
+                    </div>
+                    <div
+                      ng-if="o.status == 3"
+                      class="d-flex align-items-center"
+                    >
+                      <div class="fade-loading bg-danger me-2"></div>
+                      <p class="small text-danger mb-0 fst-italic">
+                        Bị hủy bởi <b>khách hàng</b>
+                      </p>
+                    </div>
+                    <div
+                      ng-if="o.status == 4"
+                      class="d-flex align-items-center"
+                    >
+                      <div class="fade-loading bg-danger me-2"></div>
+                      <p class="small text-danger mb-0 fst-italic">
+                        Bị hủy bởi <b>bạn</b>
+                      </p>
+                    </div>
+                  </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 				</div>
 			</form>
 		</div>
