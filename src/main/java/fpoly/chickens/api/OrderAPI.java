@@ -60,6 +60,11 @@ public class OrderAPI {
 		return ResponseEntity.ok(orderService.getOrdersbyStatus(storeid.get(), userid.get(), status.get()));
 	}
 
+	@GetMapping("/api/check-status/order/{storeid}/{status}")
+	public ResponseEntity<Integer> checkOrderLoading(@PathVariable("storeid") Optional<Integer> storeid) {
+		return ResponseEntity.ok(orderService.countOrdersbyStatus(storeid.get(), 1));
+	}
+
 	@PostMapping("/api/order/add")
 	public ResponseEntity<Void> addOrder(@RequestBody JsonNode orderData) {
 		orderService.addOrder(orderData);

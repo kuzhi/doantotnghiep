@@ -78,14 +78,14 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.userid = 0;
 	$scope.stores = [];
 
-	$scope.create = function(){
-		var data= {
-			status:false,
-			store:$scope.stores,
+	$scope.create = function() {
+		var data = {
+			status: false,
+			store: $scope.stores,
 			create_at: new Date(),
 			userApp: $scope.userid,
 		}
-		$http.post("/api/support",data).then((resp)=>{
+		$http.post("/api/support", data).then((resp) => {
 			var a = resp.data;
 			console.log(a)
 		})
@@ -109,7 +109,10 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 					$scope.listStoreByUserId = resp.data;
 
 				})
-				
+				$http.get("/api/getStoreToken").then(resp => {
+					const storeid = resp.data;
+					$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
+				})
 			})
 
 	}; $scope.getEmpleadoInfo();
@@ -117,18 +120,18 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 		$scope.stores = $scope.formSupport;
 		if ($scope.formSupport) {
 			$http.post("/api/storeToken", $scope.formSupport.id);
-			
+
 		}
 		else {
 			$scope.getEmpleadoInfo()
 		}
 
 	}
-	$scope.create= function(){
+	$scope.create = function() {
 		let data = {
 			status: false,
 			store: $scope.stores,
-		
+
 
 		}
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -150,30 +153,30 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 			})
 			.then((result) => {
 				if (result.isConfirmed) {
-		$http.post("/api/support", data).then((resp)=>{
-			if(resp.data){
-				// Thông báo
-				swalWithBootstrapButtons.fire(
-					"Thành công",
-					"Gọi hỗ trợ thành công!",
-					"success"
-				);				
-			}
+					$http.post("/api/support", data).then((resp) => {
+						if (resp.data) {
+							// Thông báo
+							swalWithBootstrapButtons.fire(
+								"Thành công",
+								"Gọi hỗ trợ thành công!",
+								"success"
+							);
+						}
+					})
+						.catch((error) => {
+							// Thông báo
+							Swal.fire({
+								icon: "error",
+								title: "Gọi hỗ trợ thất bại!",
+							});
+							console.log("Error", error);
+						});
+
+				} else if (
+					/* Read more about handling dismissals below */
+					result.dismiss === Swal.DismissReason.cancel
+				) {
+				}
 			})
-			.catch((error) => {
-				// Thông báo
-				Swal.fire({
-					icon: "error",
-					title: "Gọi hỗ trợ thất bại!",
-				});
-				console.log("Error", error);
-			});
-	
-		}else if (
-			/* Read more about handling dismissals below */
-			result.dismiss === Swal.DismissReason.cancel
-		) {
-		}
-	})		
 	}
 });

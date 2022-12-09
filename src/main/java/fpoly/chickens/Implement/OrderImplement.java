@@ -184,4 +184,11 @@ public class OrderImplement implements OrderService {
 		
 		return orderDao.countOrderInDateWithStatus2(store, dateStar, dateEnd, Status);
 	}
+
+	@Override
+	public Integer countOrdersbyStatus(Integer storeid, Integer status) {
+		Store store = storeDao.findById(storeid).get();
+		
+		return orderDao.countOrdersStatus(store, status);
+	}
 }

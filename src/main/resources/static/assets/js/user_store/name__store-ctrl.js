@@ -175,17 +175,13 @@ app.controller("name__store-ctrl", function($scope, $http, $location, $q, $filte
 		store.enddate= endDate;
 		$http
 			.post("/api/store/", store)
-			.then((resp) => {
-				if(resp.data){
+			.then((resp) => { console.log(resp.data)
+				
 					Swal.fire({
 						icon: "success",
 						title: "Thêm thành công!",
 					});
-				}
-				Swal.fire({
-					icon: "error",
-					title: "Trùng tên hoặc số điện thoại hoặc địa chỉ!",
-				});
+				
 				$scope.init();
 			
 			})

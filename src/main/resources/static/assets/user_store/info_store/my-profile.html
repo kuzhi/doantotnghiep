@@ -12,8 +12,10 @@
 		<div class="nav flex-column nav-pills me-3 py-auto w-100" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 			<div class="image-upload text-center mb-3">
 			  <label for="file-input" style="cursor:pointer;">
-				  <img class="rounded w-50" style="width: 200px !important; " alt="{{userStore.photo}}"
-					  ng-src="/assets/images/User/{{userStore.photo==''?'default__image.png':userStore.photo}}">
+				  <img ng-if="userStore.photo!=null" class="rounded w-50" style="width: 200px !important; " alt="{{userStore.photo}}"
+					  ng-src="/assets/images/User/{{userStore.photo}}">
+				  <img ng-if="userStore.photo==null" class="rounded w-50" style="width: 200px !important; " alt="{{userStore.photo}}"
+					  ng-src="/assets/images/User/default__image.png">
 			  </label>
 		  </div>
 		  <button class="nav-link active bg-app my-2" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" 
@@ -35,8 +37,10 @@
 				<div class="row">
 					<div class="image-upload text-center">
 					  <label for="file-input" style="cursor:pointer;">
-						  <img class="img__store rounded-circle mb-2" alt="{{userStore.photo}}"
-							  ng-src="/assets/images/User/{{userStore.photo==''?'default__image.png':userStore.photo}}">
+						  <img ng-if="userStore.photo!=null" class="img__store rounded-circle mb-2" style="width: 200px !important; " alt="{{userStore.photo}}"
+							  ng-src="/assets/images/User/{{userStore.photo}}">
+						  <img ng-if="userStore.photo==null" class="img__store rounded-circle mb-2" style="width: 200px !important; " alt="{{userStore.photo}}"
+							  ng-src="/assets/images/User/default__image.png">
 					  </label>
 					  <div class="small font-italic text-muted my-4">
 						  Ảnh có kích thước nhỏ hơn 10MB

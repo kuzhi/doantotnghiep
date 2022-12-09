@@ -107,6 +107,13 @@
 							Đăng nhập ngay
 						</a>
 					</div>
+					
+					<th:block th:if="${message !=null}">
+						<!-- Error Alert -->
+				        <div class="mt-5 text-center">
+				        	<small th:text="${message}" class="alert alert-success" role="alert"></small>
+				        </div>
+					</th:block>
 				</form>
 			</div>
 		</div>

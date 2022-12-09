@@ -19,6 +19,7 @@ public interface OrderService {
 	Page<Order> getOrderStore(Integer storeid, Integer pageNumber,String field, Integer sort);
 
 	List<Order> getOrdersbyStatus(Integer storeid, Integer userid, Integer status);
+	Integer countOrdersbyStatus(Integer storeid, Integer status);
 
 	Order findOrderById(Integer id);
 
