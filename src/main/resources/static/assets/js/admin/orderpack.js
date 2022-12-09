@@ -5,7 +5,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 	$scope.status = 1;
 	$scope.showBtn = true;
 	$scope.pageNumber = 0;
-	$scope.pageField = "Orderpackcode";
+	$scope.pageField = "orderpackcode";
 	$scope.pageSort = 0;
 	$scope.page = []
 	$scope.orderPack = {}
