@@ -84,15 +84,15 @@
 							<small class="form-label">Tên người nhận:</small> <input
 								ng-model="order.fullname" type="text"
 								class="form-control form-control-sm"
-								placeholder="--Vui lòng nhập--"> <small
+								placeholder="--Vui lòng nhập--" ng-value="myProfile.fullname" ><small
 								class="form-label">Số điện thoại:</small> <input
 								ng-model="order.phone" type="text"
 								class="form-control form-control-sm"
 								placeholder="--Vui lòng nhập--"> <small
-								class="form-label">Địa chỉ nhận hàng:</small> <input
+								class="form-label">Địa chỉ nhận hàng:</small> <textarea
 								ng-model="order.address" type="text"
 								class="form-control form-control-sm"
-								placeholder="--Vui lòng nhập--">
+								placeholder="--Vui lòng nhập--" ng-value="myProfile.address" rows="4" ></textarea>
 						</div>
 					</div>
 					<div class="row">
@@ -107,7 +107,7 @@
 							<div ng-repeat="pay in payment" class="form-check text-start">
 								<input class="form-check-input" type="radio"
 									ng-model="order.paymentType" ng-value="pay" name="payment"
-									id="payment" checked> <label class="form-check-label"
+									id="payment" checked  > <label class="form-check-label"
 									for="payment"> {{pay.paymentName}} </label>
 							</div>
 						</div>
@@ -125,7 +125,7 @@
 							<div ng-repeat="s in ship" class="form-check text-start">
 								<input class="form-check-input" type="radio"
 									ng-model="order.shippingType" ng-value="s" name="shipping"
-									id="s.id" checked> <label class="form-check-label"
+									id="s.id" checked ng-click="checkaddress(s)"> <label class="form-check-label"
 									for="ship"> {{s.shippingName}} </label>
 							</div>
 						</div>
