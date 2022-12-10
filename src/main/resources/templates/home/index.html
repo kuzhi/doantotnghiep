@@ -47,12 +47,12 @@
             <div class="collapse show" id="collapseCate">
               <div class="form-check">
                 <input
-                  ng-click="listProducts()"
+                  ng-model="selectedAll"
+                  ng-Click="listProducts()"
                   class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                  checked
+                  type="radio"
+                  name="radioCate"
+                  id="checkBoxAll"
                 />
                 <label class="form-check-label" for="flexCheckDefault">
                   Tất cả
@@ -60,11 +60,14 @@
               </div>
               <div ng-repeat="c in cates" class="form-check">
                 <input
+                  ng-model="selected"
+                  ng-checked="exist(c)"
+                  ng-Click="getUsersbyFilter(c.id)"
                   class="form-check-input"
-                  type="checkbox"
-                  ng-click="getUsersbyFilter(c.id)"
+                  type="radio"
+                  name="radioCate"
                   value="{{c.id}}"
-                  id="flexCheckDefault"
+                  id="cateCheckBox"
                 />
                 <label class="form-check-label" for="flexCheckDefault">
                   {{c.name}}
