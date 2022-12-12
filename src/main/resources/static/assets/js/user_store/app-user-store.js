@@ -72,7 +72,7 @@ app.config(function($routeProvider) {
 
 );
 
-app.controller("app-ctrl", function($scope, $http, $location) {
+app.controller("app-ctrl", function($scope, $http, $location, $q) {
 	// Láy userid
 
 	$scope.userid = 0;
@@ -87,7 +87,7 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 		}
 		$http.post("/api/support", data).then((resp) => {
 			var a = resp.data;
-			console.log(a)
+			
 		})
 	}
 
@@ -96,11 +96,21 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 		$http.get("/api/get")
 			.then(resp => {
 				$scope.userid = resp.data;
+				var def = $q.defer();
 				// Lấy storeid
 				$http.get("/api/store/list/" + $scope.userid)
 					.then(resp => {
 						$scope.stores = resp.data[0];
-						$http.post("/api/storeToken", $scope.stores.id);
+						$http.post("/api/storeToken", $scope.stores.id).then(resp=>{
+							def.resolve(
+								$http.get("/api/getStoreToken").then(resp => {
+									const storeid = resp.data;
+									console.log(storeid)
+
+									$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
+								})
+							)
+						});
 					})
 				$http.get("/api/user/get-user-store/" + $scope.userid).then(resp => {
 					$scope.userStore = resp.data;
@@ -109,10 +119,8 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 					$scope.listStoreByUserId = resp.data;
 
 				})
-				$http.get("/api/getStoreToken").then(resp => {
-					const storeid = resp.data;
-					$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
-				})
+				
+				
 			})
 
 	}; $scope.getEmpleadoInfo();

@@ -6,13 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fpoly.chickens.dao.SupportDAO;
 import fpoly.chickens.dao.UserAppDAO;
 import fpoly.chickens.dao.UserRoleAppDAO;
-import fpoly.chickens.entity.Support;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserRoleApp;
-import fpoly.chickens.service.SupportService;
 import fpoly.chickens.service.UserRoleAppService;
 
 @Service
@@ -67,6 +64,7 @@ public class UserRoleAppImplement  implements UserRoleAppService{
     @Override
     public Optional<UserRoleApp> findById(Integer id) {
         // TODO Auto-generated method stub
+        
         return uDao.findById(id);
     }
 
@@ -80,5 +78,11 @@ public class UserRoleAppImplement  implements UserRoleAppService{
     public Integer countRoleByUserId(Integer userId) {
         // TODO Auto-generated method stub
         return uDao.countRoleByUserId(userId);
+    }
+
+    @Override
+    public List<UserRoleApp> findUserRoleAppByUserId(Integer userid) {
+        // TODO Auto-generated method stub
+        return uDao.findUserRoleByUserId(userid);
     }
 }

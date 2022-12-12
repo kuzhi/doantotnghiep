@@ -66,13 +66,18 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
         $http.get("/api/getUserApp")
 	    .then(resp => {
 	        $scope.userid = resp.data;
+			console.log($scope.userid)
 	       //$scope.userid = 2;
 			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
 				$scope.userApp = resp.data;
 				$scope.userApp.birthday = new Date($scope.userApp.birthday)
 			})
-			$http.get("/api/authorities/"+$scope.userid).then(resp=>{
-				$scope.userRole = resp.data; 
+			$http.get("/api/authorities/"+$scope.userid).then( (resp)=>{
+
+				let userRole = [];
+				userRole = resp.data; 
+				userRole.
+				if(userRole.permission)
 			})
 	    })
     }; $scope.getEmpleadoInfo();

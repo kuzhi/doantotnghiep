@@ -9,7 +9,7 @@ import fpoly.chickens.entity.UserRoleApp;
 public interface UserRoleAppService {
 	List<UserRoleApp> findAll();
 
-
+	List<UserRoleApp> findUserRoleAppByUserId(Integer userid);
 	UserRoleApp create(UserRoleApp support);
 
 
