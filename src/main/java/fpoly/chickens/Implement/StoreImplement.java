@@ -132,4 +132,10 @@ public class StoreImplement implements StoreService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Store> loadListStore() {
+		// TODO Auto-generated method stub
+		return storeDAO.loadListStore();
+	}
 }
