@@ -30,6 +30,11 @@ public class StoreAPI {
 		return storeService.findAll();
 	}
 
+	@GetMapping("liststore")
+	public List<Store> listStore() {
+		return storeService.loadListStore();
+	}
+
 	@GetMapping("{userid}")
 	public Store findAll(@PathVariable("userid") Optional<Integer> userid) {
 
