@@ -25,4 +25,8 @@ public class SessionService {
 	public void remove(String name) {
 		session.removeAttribute(name);
 	}
+
+	public void invalidate() {
+		session.invalidate();
+	}
 }

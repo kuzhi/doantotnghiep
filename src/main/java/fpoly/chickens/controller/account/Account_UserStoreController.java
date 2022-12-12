@@ -113,13 +113,17 @@ public class Account_UserStoreController {
 	
 	@GetMapping("logout-store")
 	public String logoutStore(){
-		sessionService.remove("tokenStore");
+		sessionService.invalidate();
+		String checkSessionStore = userService.getTokenStore();
+		System.out.println(checkSessionStore);
 		return "home/account/login";
 	}
 
 	@GetMapping("logout-user")
 	public String logoutUser(){
-		sessionService.remove("tokenUser");
+		sessionService.invalidate();
+		String checkSessionStore = userService.getTokenUser();
+		System.out.println(checkSessionStore);		
 		return "home/account/login";
 	}
 }
