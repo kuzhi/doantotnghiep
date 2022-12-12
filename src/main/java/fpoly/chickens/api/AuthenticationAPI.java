@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,7 +54,6 @@ public class AuthenticationAPI {
 	public ResponseEntity<Void>  setTokenStore(HttpSession session, @RequestBody Optional<String> id) {
 		if(id.isPresent()){
 			sessionService.set("tokenStoreSelected", id.get());
-			
 			return  ResponseEntity.ok().build();
 		}
 		return  ResponseEntity.badRequest().build();
@@ -63,8 +61,7 @@ public class AuthenticationAPI {
 
 	@RequestMapping(value = "/api/getStoreToken", method = RequestMethod.GET, headers="Accept=*/*")
 	public @ResponseBody Object getStoreToken(HttpSession session) {
-	    String  tokenStoreId =  (String) session.getAttribute("tokenStoreSelected");
-
+	    String  tokenStoreId =  (String) sessionService.get("tokenStoreSelected");
 	    return tokenStoreId ;
 	}
 }
