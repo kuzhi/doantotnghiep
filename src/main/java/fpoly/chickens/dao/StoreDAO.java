@@ -12,6 +12,10 @@ import fpoly.chickens.entity.UserApp;
 public interface StoreDAO extends JpaRepository<Store, Integer> {
 	@Query(value = "SELECT * FROM Store WHERE UserstoreId = ?1  and Deleted = 0", nativeQuery = true)
 	List<Store> findByUserStore(int userStoreId);
+	
+	// Load store with status user store
+	@Query(value = "SELECT o FROM Store o WHERE o.UserstoreId.Status = true and Deleted = 0")
+	List<Store> loadListStore();
 
 	@Query(value = "SELECT * FROM Store WHERE UserstoreId = ?1", nativeQuery = true)
 	Store findByUserid(int userStoreId);

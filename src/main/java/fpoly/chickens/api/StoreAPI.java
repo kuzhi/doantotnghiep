@@ -27,7 +27,7 @@ public class StoreAPI {
 
 	@GetMapping
 	public List<Store> findAll() {
-		return storeService.findAll();
+		return storeService.loadListStore();
 	}
 
 	@GetMapping("{userid}")

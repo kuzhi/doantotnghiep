@@ -8,6 +8,7 @@ import fpoly.chickens.entity.UserStore;
 
 public interface StoreService {
 	List<Store> findAll();
+	List<Store> loadListStore();
 
 	List<Store> findStoreById(Integer userid);
 
