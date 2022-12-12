@@ -757,7 +757,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
 
   //================================ Load danh sách cửa hàng
   $scope.listStore = [];
-  $http.get("/api/store").then((resp) => {
+  $http.get("/api/store/liststore").then((resp) => {
     $scope.listStore = resp.data;
     $scope.listStore.forEach((store) => {
       store.phone =
