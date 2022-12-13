@@ -61,12 +61,13 @@ app.config(function($routeProvider) {
 app.controller("admin-ctrl", function($scope, $http, $location) {
 	// Láy userid
 	//$scope.userid=0;
+	$scope.error=0;
 	$scope.getEmpleadoInfo = function () {
 		// Lấy userid
         $http.get("/api/getUserApp")
 	    .then(resp => {
 	        $scope.userid = resp.data;
-			console.log($scope.userid)
+			
 	       //$scope.userid = 2;
 			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
 				$scope.userApp = resp.data;
@@ -74,11 +75,16 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 			})
 			$http.get("/api/authorities/"+$scope.userid).then( (resp)=>{
 
-				let userRole = [];
-				userRole = resp.data; 
-				userRole.
-				if(userRole.permission)
+				
+				$scope.userRole = resp.data; 
+				$scope.userRole.filter((x)=>{
+					if(x.permission === "ADMIN"){
+						$scope.error = 1;
+					}
+				})
+				
 			})
+			
 	    })
     }; $scope.getEmpleadoInfo();
     

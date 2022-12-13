@@ -190,20 +190,13 @@
             <label class="form-label">
               Nhân viên <span class="text-red">*</span>
             </label>
-            <select
+            <select   ng-model="formSupport.userApp"
               class="form-select"
               id="selectUser"
               aria-label="Default select example"
+              ng-options="u as u.fullname for u in users track by u.id"
             >
-              
-              <option
-                ng-model="formSupport.userApp"
-                ng-repeat="user in users"
-                ng-selected="user.id == formSupport.userApp.id"
-                value="{{user.id}}"
-              >
-                {{user.fullname}}
-              </option>
+            
             </select>
           </div>
           <!-- Status -->

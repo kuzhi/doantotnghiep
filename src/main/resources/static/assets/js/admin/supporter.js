@@ -18,9 +18,7 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
     $http.get("/api/userApp").then((resp) => {
       $scope.users = resp.data;
     });
-    $http.get("/api/userApp/getamin").then((resp) => {
-      let a = resp.data;
-    });
+    
   };
 
   // Phân trang và điều hướng
@@ -95,10 +93,11 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
       .then((result) => {
         if (result.isConfirmed) {
           //====================================== Bắt đầu xử lý
-          var user = document.querySelector("#selectUser").value;
+          // var user = document.querySelector("#selectUser").value;
           
-          $scope.formSupport.userApp = $scope.users[user];
+          // $scope.formSupport.userApp = $scope.users[user];
           var support = angular.copy($scope.formSupport);
+          console.log({support})
           var url = $scope.url;
 
           $http
