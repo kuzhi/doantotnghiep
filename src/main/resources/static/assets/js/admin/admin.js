@@ -2,6 +2,7 @@ app = angular.module("my_app", ["ngRoute"]);
 
 // Định tuyến trang admin chủ cửa hàng
 app.config(function($routeProvider) {
+	
 	$routeProvider
 		// Kênh bán hàng
 		.when("/sales-channel", {
@@ -82,7 +83,7 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 						$scope.error = 1;
 					}
 				})
-				
+				console.log($scope.error)			
 			})
 			
 	    })

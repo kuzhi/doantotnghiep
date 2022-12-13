@@ -1,14 +1,40 @@
-app.controller("sales-channel-ctrl", function($scope, $http, $location) {
+app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 	$scope.titleBreadcrumb = "Kênh bán hàng";
 	$scope.titleBread = "Kênh quản lý";
 	$scope.stores = [];
 	$scope.orderpack = [];
-
+	let defer = $q.defer();
 	$scope.init = function() {
-		$http.get("/api/store").then((resp) => {
-			$scope.stores = resp.data;
-		});
-	};
+		$http.get("/api/authorities/"+$scope.userid).then( (resp)=>{
+
+				
+			$scope.userRole = resp.data; 
+			$scope.userRole.filter((x)=>{
+				if(x.permission === "ADMIN"){
+					$scope.error = 1;
+				}
+			})
+			if($scope.error == 1){
+				defer.resolve(
+			
+					$http.get("/api/store").then((resp) => {
+						$scope.stores = resp.data;
+					})
+				)
+			}
+			
+			else{
+				defer.resolve(
+				$http.get("/api/support").then((resp) => {
+					$scope.stores = resp.data;
+				  })
+			)
+		
+			}
+				
+		
+	});
+	}
 
 	// Phân trang và điều hướng
 	$scope.pager = {
@@ -40,7 +66,8 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location) {
 			this.page = this.count - 1;
 		},
 	};
-	$scope.init();
+	defer.resolve($scope.init());
+	
 
 	// Edit sale
 	$scope.formStore = {};
