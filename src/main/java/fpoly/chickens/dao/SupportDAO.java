@@ -23,6 +23,6 @@ public interface SupportDAO extends JpaRepository<Support, Integer> {
     @Query(value = "SELECT * FROM Support, UserApp WHERE Deleted = 0 and UserApp.ID = Support.UserAppId ORDER BY Fullname DESC", nativeQuery = true)
     List<Support> sortZA();
 
-    @Query(value = "SELECT o FROM Support o WHERE o.store.id = ?1 and o.status=0")
-    Support findByStore(int storeId);
+    @Query(value = "SELECT o FROM Support o WHERE o.userStore.id = ?1 and o.status=0")
+    Support findByUserStore(int userStoreId);
 }

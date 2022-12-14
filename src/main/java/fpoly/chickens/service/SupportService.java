@@ -14,7 +14,7 @@ public interface SupportService {
 	void delete(Integer supportId);
 
 	Support findById(Integer supportId);
-	Support findByStoreId(Integer storeId);
+	Support findByUserStoreId(Integer userStoreId);
 
 	List<Support> findByUserAppId(Integer supportId);
 

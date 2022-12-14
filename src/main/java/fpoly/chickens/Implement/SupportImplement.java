@@ -20,7 +20,7 @@ public class SupportImplement implements SupportService {
     public Support create(Support support) {
         // TODO Auto-generated method stub
 
-        Support sup = this.findByStoreId(support.getStore().getId());
+        Support sup = this.findByUserStoreId(support.getUserStore().getId());
         if (sup != null) {
             sup.setUpdate_at(new Date());
             return supDao.saveAndFlush(sup);
@@ -79,8 +79,8 @@ public class SupportImplement implements SupportService {
     }
 
     @Override
-    public Support findByStoreId(Integer storeId) {
+    public Support findByUserStoreId(Integer userStoreId) {
         // TODO Auto-generated method stub
-        return supDao.findByStore(storeId);
+        return supDao.findByUserStore(userStoreId);
     }
 }

@@ -28,8 +28,8 @@ public class Support {
     
    
 	@ManyToOne
-	@JoinColumn(name="Storeid")
-	Store store;
+	@JoinColumn(name="Userstoreid")
+	UserStore userStore;
 
     @ManyToOne
 	@JoinColumn(name="Userappid")
