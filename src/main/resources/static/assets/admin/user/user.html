@@ -139,23 +139,7 @@
 						</div>
 					</div>
 
-					<!-- Password -->
-					<div class="form-group mx-auto">
-						<label class="form-label"> Mật khẩu <span class="text-red">*</span> </label>
-						<!-- Input -->
-						<input id="password" type="password" name="password" class="form-control"
-				 		minlength="5" ng-model="formUserStore.password" placeholder="--Vui lòng nhập--" required>
-						
-						<div ng-show="userForm.password.$dirty && userForm.password.$invalid">
-							<small class="text-danger fst-italic" ng-show="userForm.password.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-							<small ng-show="userForm.password.$invalid" id="passwordhelpId" class="form-text fst-italic text-danger">
-								Mật khẩu ít nhất 5 ký tự và tối đa 15 ký tự <b>*</b>
-							</small>	
-						</div>
-					</div>
-
+					
 					<!-- Fullname -->
 					<div class="form-group mx-auto">
 						<label class="form-label"> Họ và tên <span class="text-red">*</span> </label>

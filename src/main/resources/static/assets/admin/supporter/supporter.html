@@ -198,6 +198,7 @@
                   ng-model="formSupport.status"
                   ng-value="false"
                   checked
+                  ng-disabled="formSupport.status==true"
                 />
                 <label class="form-check-label" for="gridRadios1">
                   Đang chờ hỗ trợ
@@ -228,7 +229,7 @@
             </button>
           </div>
           <div class="col-xl-6">
-            <button ng-click="update()" class="btn btn-info text-white w-100">
+            <button ng-click="update()"  class="btn btn-info text-white w-100">
               Lưu
             </button>
           </div>

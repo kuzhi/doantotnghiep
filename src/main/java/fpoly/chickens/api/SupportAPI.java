@@ -41,6 +41,7 @@ public class SupportAPI {
 	@GetMapping("/api/support/findByNhanVien/{supportId}")
 	public ResponseEntity<List<Support>> findByNhanVien(@PathVariable("supportId") Optional<Integer> supportId) {
 		if (supportId.isPresent()) {
+			
 			return ResponseEntity.ok(supportService.findByUserAppId(supportId.get()));
 
 		}

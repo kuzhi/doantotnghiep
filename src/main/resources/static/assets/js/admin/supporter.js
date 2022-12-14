@@ -7,11 +7,18 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
   // 	$scope.titleTable = 'Cấp quyền hỗ trợ cho kênh';
 
   // }
-
   $scope.init = function () {
-    $http.get("/api/support").then((resp) => {
-      $scope.supports = resp.data;
-    });
+    if($scope.error == 1){
+      $http.get("/api/support").then((resp) => {
+        $scope.supports = resp.data;
+      });
+    }
+    else{
+      $http.get("/api/support/findByNhanVien/"+$scope.userid).then((resp) => {
+        $scope.supports = resp.data;
+      });
+    }
+    
   };
 
   $scope.initUsers = function () {
@@ -99,8 +106,8 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
           var support = angular.copy($scope.formSupport);
           console.log({support})
           var url = $scope.url;
-
-          $http
+          if(support.status == false){
+            $http
             .patch("/api/support/update", support)
             .then((resp) => {
               $scope.init();
@@ -121,6 +128,15 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
               });
               console.log("Error", error);
             });
+            
+          }
+          else{
+            Swal.fire({
+              icon: "error",
+              title: "Không thể cập nhật khi đơn đã hoàn thành!",
+            });
+          
+          }
           //====================================== Kết thúc xử lý
         } else if (
           /* Read more about handling dismissals below */

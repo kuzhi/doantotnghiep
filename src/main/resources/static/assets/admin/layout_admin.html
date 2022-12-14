@@ -106,7 +106,7 @@
 								class="text-decoration-none fw-semibold text-body mb-2"
 							> <i class="fas fa-street-view size-icon text-muted"></i>  Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
-							<a href="#!supporter" class="text-decoration-none text-body fw-semibold mb-2" ng-if="error ==1">
+							<a href="#!supporter" class="text-decoration-none text-body fw-semibold mb-2" >
 								<i class="fas fa-people-arrows size-icon text-muted"></i>  Phân công hỗ trợ 
 							</a>
 							<!-- Phân quyền -->
@@ -130,12 +130,12 @@
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Nhân viên </a> <br> 
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Khách hàng </a> 
+								> Khách hàng-Chủ kênh</a> 
 							</del>
 							<!-- Gói dịch vụ -->
 							<li 
@@ -184,7 +184,7 @@
 							><i class="fas fa-street-view size-icon text-muted"></i> Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
 							<a href="#!supporter"
-								class="text-decoration-none text-body fw-semibold mb-3" ng-if="error ==1">
+								class="text-decoration-none text-body fw-semibold mb-3" >
 								<i class="fas fa-people-arrows size-icon text-muted"></i> Phân công hỗ trợ </a>
 							<!-- Phân quyền -->
 								<a 
@@ -207,13 +207,13 @@
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Nhân viên </a> 
 								<br>
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Khách hàng </a>
+								> Khách hàng - Chủ kênh </a>
 								<br>
 								<a 
 									href="#!customs"

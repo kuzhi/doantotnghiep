@@ -25,8 +25,18 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 			
 			else{
 				defer.resolve(
-				$http.get("/api/support").then((resp) => {
-					$scope.stores = resp.data;
+				$http.get("/api/support/findByNhanVien/"+$scope.userid).then((resp) => {
+					let support  = resp.data;
+					support.filter(storeSupport =>{
+						$http.get("/api/store/list/" +storeSupport.userStore.id).then((resp) => {
+							let listStore = resp.data;
+							listStore.filter(store=>{
+								$scope.stores.push(store);
+
+							})
+						})
+					})
+
 				  })
 			)
 		

@@ -8,7 +8,6 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.StoreDAO;
 import fpoly.chickens.entity.Store;
-import fpoly.chickens.entity.User;
 import fpoly.chickens.service.StoreService;
 
 @SessionScope

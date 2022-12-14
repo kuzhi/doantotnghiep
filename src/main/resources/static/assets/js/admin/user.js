@@ -11,8 +11,12 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 	$scope.users = [];
 	$scope.deleted = false;
 	$scope.init = function() {
-		$http.get($scope.url + "deleted/" + $scope.deleted).then(resp => {
-			$scope.users = resp.data;
+		$http.get("/api/support/findByNhanVien/"+$scope.userid).then(resp => {
+			let support  = resp.data;
+			support.filter(storeSupport =>{
+
+				$scope.users.push(storeSupport.userStore);
+			})
 
 			$scope.users.forEach(user => {
 				user.create_at = new Date(user.create_at)
