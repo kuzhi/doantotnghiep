@@ -72,35 +72,43 @@ app.config(function($routeProvider) {
 
 );
 
-app.controller("app-ctrl", function($scope, $http, $location) {
+app.controller("app-ctrl", function($scope, $http, $location, $q) {
 	// Láy userid
 
 	$scope.userid = 0;
 	$scope.stores = [];
+	
 
-	$scope.create = function() {
-		var data = {
-			status: false,
-			store: $scope.stores,
-			create_at: new Date(),
-			userApp: $scope.userid,
-		}
-		$http.post("/api/support", data).then((resp) => {
-			var a = resp.data;
-			console.log(a)
-		})
-	}
+	
 
 	$scope.getEmpleadoInfo = function() {
 		// Lấy userid
 		$http.get("/api/get")
 			.then(resp => {
 				$scope.userid = resp.data;
+				var def = $q.defer();
 				// Lấy storeid
 				$http.get("/api/store/list/" + $scope.userid)
 					.then(resp => {
 						$scope.stores = resp.data[0];
-						$http.post("/api/storeToken", $scope.stores.id);
+						$http.post("/api/storeToken", $scope.stores.id).then(resp=>{
+							def.resolve(
+								$http.get("/api/getStoreToken").then(resp => {
+									const storeid = resp.data;
+									
+
+									$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
+									$http.get("/api/store/notification/" + storeid ).then(resp => { 
+										$scope.notis = resp.data;
+										if($scope.notis.notes==null){
+
+											$scope.notis.notes="Không có thông báo nào"
+										}
+									})
+
+								})
+							)
+						});
 					})
 				$http.get("/api/user/get-user-store/" + $scope.userid).then(resp => {
 					$scope.userStore = resp.data;
@@ -109,12 +117,14 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 					$scope.listStoreByUserId = resp.data;
 
 				})
-				$http.get("/api/getStoreToken").then(resp => {
-					const storeid = resp.data;
-					$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
+				$http.get("/api/support/findUserAppByUserStore/" + $scope.userid).then((resp) => {
+					$scope.userApp=  resp.data;
+					
 				})
+				
+				
 			})
-
+			
 	}; $scope.getEmpleadoInfo();
 	$scope.click = function() {
 		$scope.stores = $scope.formSupport;
@@ -130,9 +140,10 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 	$scope.create = function() {
 		let data = {
 			status: false,
-			store: $scope.stores,
-
-
+			userStore: $scope.userStore,
+			create_at: new Date(),
+			userApp: $scope.userApp,
+			notes: "Cửa hàng " + $scope.stores.name +" bị lỗi thuộc người dùng "+$scope.userStore.username,
 		}
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
@@ -155,6 +166,7 @@ app.controller("app-ctrl", function($scope, $http, $location) {
 				if (result.isConfirmed) {
 					$http.post("/api/support", data).then((resp) => {
 						if (resp.data) {
+							console.log(data)
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Thành công",

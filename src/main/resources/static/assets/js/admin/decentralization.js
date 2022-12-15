@@ -68,7 +68,14 @@ $scope.roles = [];
 	
 	
 	$scope.authority_changed = function(a, r){
-		let userRole = $scope.userRole;
+		let userRole ;
+
+		 $scope.userRole.filter((x)=>{
+			if(x.permission === "ADMIN"){
+				userRole = x;
+			}
+		})
+		
 		if(userRole.permission != "STAFF"){
 			let authority = $scope.authority_of(a, r);
 		

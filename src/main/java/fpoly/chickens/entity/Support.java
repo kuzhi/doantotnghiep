@@ -28,8 +28,8 @@ public class Support {
     
    
 	@ManyToOne
-	@JoinColumn(name="Storeid")
-	Store store;
+	@JoinColumn(name="Userstoreid")
+	UserStore userStore;
 
     @ManyToOne
 	@JoinColumn(name="Userappid")
@@ -37,6 +37,9 @@ public class Support {
 
     @Column(name = "Status")
 	private Boolean status;	
+
+	@Column(name = "Notes")
+	private String notes;	
 
     @Column(name = "Create_at")
 	@CreationTimestamp

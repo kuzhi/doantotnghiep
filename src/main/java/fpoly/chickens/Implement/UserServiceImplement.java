@@ -47,7 +47,6 @@ public class UserServiceImplement implements UserService {
 			UserApp userApp = userAppDao.findByUsernames(username);
 			// this.setToken(userApp.getId());
 			String passwordApp = userApp.getPassword().trim();
-			System.out.println(userApp + passwordApp);
 
 			String[] role = userRoleDao.findUserRoleIDByUsername(userApp.getId()).toArray(new String[0]);
 

@@ -33,4 +33,6 @@ public interface StoreService {
 
 	Store findById(Integer storeid);
 
+	String checkEndDate(Integer storeid);
+	Integer countStore(Integer userStoreId);
 }

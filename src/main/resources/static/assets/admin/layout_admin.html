@@ -55,6 +55,16 @@
 					<img class="img-fluid d-block w-25" src="/assets/images/logo_chicken.png" alt="Logo">
 				</div>
 				<div class="btn-group account__user">
+					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
+					<ul class="dropdown-menu">
+						
+						<li ng-repeat="noti in notis">
+							<a class="dropdown-item" >{{noti.notes}}</a>
+						</li>
+					</ul>
+					
+				</div>
+				<div class="btn-group account__user">
 					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > {{userApp.fullname}} </label>
 					<ul class="dropdown-menu">
 						<li>
@@ -64,8 +74,18 @@
 							<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
 						</li>
 					</ul>
+					
 				</div>
-
+				<div class="dropdown dropstart account__user-mobile">
+					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
+					<ul class="dropdown-menu">
+						
+						<li>
+							<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
+						</li>
+					</ul>
+					
+				</div>
 				<div class="dropdown dropstart account__user-mobile">
 					<label aria-expanded="false" data-bs-toggle="dropdown" class="btn dropdown-toggle" > 
 						{{userApp.fullname}}
@@ -106,11 +126,11 @@
 								class="text-decoration-none fw-semibold text-body mb-2"
 							> <i class="fas fa-street-view size-icon text-muted"></i>  Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
-							<a href="#!supporter" class="text-decoration-none text-body fw-semibold mb-2">
-								<i class="fas fa-people-arrows size-icon text-muted"></i>  Phân công quản trị 
+							<a href="#!supporter" class="text-decoration-none text-body fw-semibold mb-2" ng-if="error ==1">
+								<i class="fas fa-people-arrows size-icon text-muted"></i>  Phân công hỗ trợ 
 							</a>
 							<!-- Phân quyền -->
-							<a href="#!decentralization" class="text-decoration-none text-body fw-semibold mb-2">
+							<a href="#!decentralization" class="text-decoration-none text-body fw-semibold mb-2" ng-if="error ==1">
 								<i class="fas fa-user-cog size-icon text-muted"></i>  Phân quyền 
 							</a>
 							<!-- Người dùng -->
@@ -130,12 +150,12 @@
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Nhân viên </a> <br> 
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Khách hàng </a> 
+								> Khách hàng-Chủ kênh</a> 
 							</del>
 							<!-- Gói dịch vụ -->
 							<li 
@@ -184,12 +204,12 @@
 							><i class="fas fa-street-view size-icon text-muted"></i> Kênh quản lý </a>
 							<!-- Người hỗ trợ -->
 							<a href="#!supporter"
-								class="text-decoration-none text-body fw-semibold mb-3">
+								class="text-decoration-none text-body fw-semibold mb-3" ng-if="error ==1">
 								<i class="fas fa-people-arrows size-icon text-muted"></i> Phân công hỗ trợ </a>
 							<!-- Phân quyền -->
 								<a 
 									href="#!decentralization"
-									class="text-decoration-none text-body fw-semibold mb-3"
+									class="text-decoration-none text-body fw-semibold mb-3" ng-if="error ==1"
 								><i class="fas fa-user-cog size-icon text-muted"></i> Phân quyền </a>
 							<!-- Người dùng -->
 							<li 
@@ -207,13 +227,13 @@
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Nhân viên </a> 
 								<br>
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
-								> Khách hàng </a>
+								> Khách hàng - Chủ kênh </a>
 								<br>
 								<a 
 									href="#!customs"
@@ -240,7 +260,7 @@
 								> Duyệt gói </a> <br>
 								<a 
 									href="#!pack"
-									class="text-decoration-none text-black-50 fw-semibold list__item"
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Quản lý </a>
 							</del>
 							<!-- Báo cáo -->

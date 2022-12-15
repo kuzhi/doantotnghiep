@@ -2,7 +2,6 @@ package fpoly.chickens.controller.account;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,16 +113,14 @@ public class Account_UserStoreController {
 	@GetMapping("logout-store")
 	public String logoutStore(){
 		sessionService.invalidate();
-		String checkSessionStore = userService.getTokenStore();
-		System.out.println(checkSessionStore);
+	
 		return "home/account/login";
 	}
 
 	@GetMapping("logout-user")
 	public String logoutUser(){
 		sessionService.invalidate();
-		String checkSessionStore = userService.getTokenUser();
-		System.out.println(checkSessionStore);		
+		
 		return "home/account/login";
 	}
 }

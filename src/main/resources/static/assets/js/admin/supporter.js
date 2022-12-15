@@ -7,20 +7,28 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
   // 	$scope.titleTable = 'Cấp quyền hỗ trợ cho kênh';
 
   // }
-
   $scope.init = function () {
-    $http.get("/api/support").then((resp) => {
-      $scope.supports = resp.data;
-    });
+   
+      $http.get("/api/support").then((resp) => {
+        $scope.supports = resp.data;
+        $scope.supports.filter(sup=>{
+          sup.create_at = new Date(sup.create_at);
+        })
+      });
+    // }
+    // else{
+    //   $http.get("/api/support/findByNhanVien/"+$scope.userid).then((resp) => {
+    //     $scope.supports = resp.data;
+    //   });
+    // }
+    
   };
 
   $scope.initUsers = function () {
     $http.get("/api/userApp").then((resp) => {
       $scope.users = resp.data;
     });
-    $http.get("/api/userApp/getamin").then((resp) => {
-      let a = resp.data;
-    });
+    
   };
 
   // Phân trang và điều hướng
@@ -95,13 +103,14 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
       .then((result) => {
         if (result.isConfirmed) {
           //====================================== Bắt đầu xử lý
-          var user = document.querySelector("#selectUser").value;
+          // var user = document.querySelector("#selectUser").value;
           
-          $scope.formSupport.userApp = $scope.users[user];
+          // $scope.formSupport.userApp = $scope.users[user];
           var support = angular.copy($scope.formSupport);
+          console.log({support})
           var url = $scope.url;
-
-          $http
+          // if(support.status == false){
+            $http
             .patch("/api/support/update", support)
             .then((resp) => {
               $scope.init();
@@ -112,6 +121,7 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
                 "Cập nhật thành công!",
                 "success"
               );
+              //location.reload()
               // $scope.reset()
             })
             .catch((error) => {
@@ -122,6 +132,15 @@ app.controller("supporter-ctrl", function ($scope, $http, $location) {
               });
               console.log("Error", error);
             });
+            
+          //}
+          // else{
+          //   Swal.fire({
+          //     icon: "error",
+          //     title: "Không thể cập nhật khi đơn đã hoàn thành!",
+          //   });
+          
+          // }
           //====================================== Kết thúc xử lý
         } else if (
           /* Read more about handling dismissals below */

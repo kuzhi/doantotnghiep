@@ -1,14 +1,56 @@
-app.controller("sales-channel-ctrl", function($scope, $http, $location) {
+app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 	$scope.titleBreadcrumb = "Kênh bán hàng";
 	$scope.titleBread = "Kênh quản lý";
 	$scope.stores = [];
 	$scope.orderpack = [];
-
+	let defer = $q.defer();
 	$scope.init = function() {
-		$http.get("/api/store").then((resp) => {
-			$scope.stores = resp.data;
-		});
-	};
+		$http.get("/api/authorities/"+$scope.userid).then( (resp)=>{
+
+				
+			$scope.userRole = resp.data; 
+			$scope.userRole.filter((x)=>{
+				if(x.permission === "ADMIN"){
+					$scope.error = 1;
+				}
+			})
+			if($scope.error == 1){
+				defer.resolve(
+			
+					$http.get("/api/store").then((resp) => {
+						$scope.stores = resp.data;
+						$scope.stores.filter((store)=>{
+							store.enddate = new Date(store.enddate)
+						})
+
+					})
+				)
+			}
+			
+			else{
+				defer.resolve(
+				$http.get("/api/support/findByNhanVien/"+$scope.userid).then((resp) => {
+					let support  = resp.data;
+					support.filter(storeSupport =>{
+						$http.get("/api/store/list/" +storeSupport.userStore.id).then((resp) => {
+							let listStore = resp.data;
+							listStore.filter(store=>{
+								store.enddate = new Date(store.enddate)
+							
+								$scope.stores.push(store);
+								
+							})
+						})
+					})
+
+				  })
+			)
+		
+			}
+				
+		
+	});
+	}
 
 	// Phân trang và điều hướng
 	$scope.pager = {
@@ -40,7 +82,8 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location) {
 			this.page = this.count - 1;
 		},
 	};
-	$scope.init();
+	defer.resolve($scope.init());
+	
 
 	// Edit sale
 	$scope.formStore = {};
@@ -51,6 +94,77 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location) {
 		})
 	};
 
+	$scope.update = function () {
+		const swalWithBootstrapButtons = Swal.mixin({
+		  customClass: {
+			confirmButton: "btn btn-danger ms-2",
+			cancelButton: "btn btn-success",
+		  },
+		  buttonsStyling: false,
+		});
+	
+		swalWithBootstrapButtons
+		  .fire({
+			title: "Thông báo",
+			icon: "warning",
+			text: "Bạn có chắc muốn thực hiện?",
+			showCancelButton: true,
+			confirmButtonText: "OK",
+			cancelButtonText: "Quay lại",
+			reverseButtons: true,
+			showClass: {
+			  popup: "animate__animated animate__fadeInDownBig",
+			},
+			hideClass: {
+			  popup: "animate__animated animate__fadeOutUpBig",
+			},
+		  })
+		  .then((result) => {
+			if (result.isConfirmed) {
+			  //====================================== Bắt đầu xử lý
+			 
+			  var store = angular.copy($scope.formStore);
+			  console.log({store})
+			  var url = $scope.url;
+			  if(store.enddate == false){
+				$http
+				.patch("/api/store/update", store)
+				.then((resp) => {
+				  $scope.init();
+	
+				  // Thông báo
+				  swalWithBootstrapButtons.fire(
+					"Thành công",
+					"Cập nhật thành công!",
+					"success"
+				  );
+				  // $scope.reset()
+				})
+				.catch((error) => {
+				  // Thông báo
+				  Swal.fire({
+					icon: "error",
+					title: "Cập nhật thất bại!",
+				  });
+				  console.log("Error", error);
+				});
+				
+			  }
+			  else{
+				Swal.fire({
+				  icon: "error",
+				  title: "Không thể cập nhật khi đơn đã hoàn thành!",
+				});
+			  
+			  }
+			  //====================================== Kết thúc xử lý
+			} else if (
+			  /* Read more about handling dismissals below */
+			  result.dismiss === Swal.DismissReason.cancel
+			) {
+			}
+		  });
+	  };
 	//
 	$scope.listFilter = [
 		{ id: 1, name: "Fullname giảm dần A-Z" },

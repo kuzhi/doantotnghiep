@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import fpoly.chickens.entity.Notification;
 import fpoly.chickens.entity.Support;
+import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.service.SupportService;
 
 @CrossOrigin("*")
@@ -41,6 +44,7 @@ public class SupportAPI {
 	@GetMapping("/api/support/findByNhanVien/{supportId}")
 	public ResponseEntity<List<Support>> findByNhanVien(@PathVariable("supportId") Optional<Integer> supportId) {
 		if (supportId.isPresent()) {
+			
 			return ResponseEntity.ok(supportService.findByUserAppId(supportId.get()));
 
 		}
@@ -60,7 +64,6 @@ public class SupportAPI {
 	@PostMapping("/api/support")
 	public ResponseEntity<Support> update(@RequestBody Optional<Support> support) {
 		if (support.isPresent()) {
-
 			return ResponseEntity.ok(supportService.create(support.get()));
 
 		}
@@ -96,4 +99,21 @@ public class SupportAPI {
 		return supportService.sortZA();
 	}
 
+	@GetMapping("/api/support/findUserAppByUserStore/{userStoreid}")
+	public UserApp findUserAppByUserStore(@PathVariable("userStoreid") Optional<Integer> userStoreid) {
+		if(userStoreid.isPresent()){
+			return supportService.findUserAppByUserStore(userStoreid.get());
+			
+		}
+		return	null;
+	}
+
+	@GetMapping("/api/support/getNotify/{userAppid}")
+	public List<Notification> getNotiSup(@PathVariable("userAppid") Optional<Integer> userAppid) {
+		if(userAppid.isPresent()){
+			return supportService.getNotiSup(userAppid.get());
+			
+		}
+		return	null;
+	}
 }

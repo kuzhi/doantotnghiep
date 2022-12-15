@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import fpoly.chickens.entity.Notification;
 import fpoly.chickens.entity.Store;
 import fpoly.chickens.service.StoreService;
 
@@ -98,5 +99,29 @@ public class StoreAPI {
 	@GetMapping("/sort/z-a")
 	public List<Store> sortZA() {
 		return storeService.sortZA();
+	}
+
+
+	
+	@GetMapping("notification/{storeid}")
+	public Notification getNoti(@PathVariable("storeid") Optional<Integer> storeid) {
+		if(storeid.isPresent()){
+			Notification noti = new Notification();
+			String getNoti= storeService.checkEndDate(storeid.get());
+			noti.setNotes(getNoti);
+			return noti;
+		}
+		
+		 return null;
+	}
+
+	@GetMapping("countStore/{userStoreId}")
+	public Integer countStore(@PathVariable("userStoreId") Optional<Integer> userStoreId) {
+		if(userStoreId.isPresent()){
+			Integer countStore = storeService.countStore(userStoreId.get());
+			return countStore;
+		}
+		
+		 return null;
 	}
 }

@@ -42,25 +42,26 @@
 					<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
 						<thead class="table_primary">
 	                     	<tr>
-								<th>UserName</th>
 								<th>FullName</th>
 								<th>Email</th>
 								<th>Số Điện Thoại</th>
 								<th>Ngày sinh</th>
 								<th>Giới tính</th>
 								<th>Hoạt động</th>
+								<th>Số lượng cửa hàng</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="u in pager.users">
-								<td class="align-middle"> {{u.username}} </td>
 								<td class="align-middle"> {{u.fullname}} </td>
 								<td class="align-middle"> {{u.email}} </td>
 								<td class="align-middle"> {{u.phone}} </td>
 								<td class="align-middle"> {{u.birthday!=null ? u.birthday : "" | date: 'dd-MM-yyyy'}} </td>
 								<td class="align-middle"> {{u.gender ? 'Nam' : 'Nữ'}} </td>
 								<td class="align-middle"> {{u.status ? 'Hoạt động' : 'Ngừng hoạt động'}} </td>
+								<td class="align-middle"> {{u.status ? 'Hoạt động' : 'Ngừng hoạt động'}} </td>
+
 								<td class="text-center align-middle">
 									<!-- Edit -->
 									<button ng-click="edit(u)" class="btn btn-info btn-sm text-white" 
@@ -139,23 +140,7 @@
 						</div>
 					</div>
 
-					<!-- Password -->
-					<div class="form-group mx-auto">
-						<label class="form-label"> Mật khẩu <span class="text-red">*</span> </label>
-						<!-- Input -->
-						<input id="password" type="password" name="password" class="form-control"
-				 		minlength="5" ng-model="formUserStore.password" placeholder="--Vui lòng nhập--" required>
-						
-						<div ng-show="userForm.password.$dirty && userForm.password.$invalid">
-							<small class="text-danger fst-italic" ng-show="userForm.password.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-							<small ng-show="userForm.password.$invalid" id="passwordhelpId" class="form-text fst-italic text-danger">
-								Mật khẩu ít nhất 5 ký tự và tối đa 15 ký tự <b>*</b>
-							</small>	
-						</div>
-					</div>
-
+					
 					<!-- Fullname -->
 					<div class="form-group mx-auto">
 						<label class="form-label"> Họ và tên <span class="text-red">*</span> </label>
@@ -249,7 +234,8 @@
 							</div>
 						</div>
 					</div>
-
+					
+					
 					<div class="row mt-2">
 						<div class="col-xl-6">
 							<button type="button" class="btn btn-danger w-100" ng-click="reset()" data-bs-dismiss="modal">Hủy</button>

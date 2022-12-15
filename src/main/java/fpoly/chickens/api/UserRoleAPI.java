@@ -42,13 +42,14 @@ public class UserRoleAPI {
 
     
 	@GetMapping("{id}")
-	public ResponseEntity<UserRoleApp> findUsersRoleById(@PathVariable("id") Optional<Integer> id) {
+	public ResponseEntity<List<UserRoleApp>> findUsersRoleById(@PathVariable("id") Optional<Integer> id) {
 		if(id.isPresent()) {
-			Optional<UserRoleApp> student = uService.findById(id.get());
-			if (!student.isPresent()) {
+			List<UserRoleApp> student = uService.findUserRoleAppByUserId(id.get());
+			if (student.isEmpty()) {
+				
 				return ResponseEntity.notFound().build();
 			}
-			return ResponseEntity.ok(student.get());
+			return ResponseEntity.ok(student);
 		}
 		return ResponseEntity.notFound().build();
 	}

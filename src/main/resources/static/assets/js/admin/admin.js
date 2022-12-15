@@ -2,6 +2,7 @@ app = angular.module("my_app", ["ngRoute"]);
 
 // Định tuyến trang admin chủ cửa hàng
 app.config(function($routeProvider) {
+	
 	$routeProvider
 		// Kênh bán hàng
 		.when("/sales-channel", {
@@ -61,18 +62,33 @@ app.config(function($routeProvider) {
 app.controller("admin-ctrl", function($scope, $http, $location) {
 	// Láy userid
 	//$scope.userid=0;
+	$scope.error=0;
 	$scope.getEmpleadoInfo = function () {
 		// Lấy userid
         $http.get("/api/getUserApp")
 	    .then(resp => {
 	        $scope.userid = resp.data;
+			
 	       //$scope.userid = 2;
 			$http.get("/api/userApp/get-user-app/"+$scope.userid).then(resp=>{
 				$scope.userApp = resp.data;
 				$scope.userApp.birthday = new Date($scope.userApp.birthday)
 			})
-			$http.get("/api/authorities/"+$scope.userid).then(resp=>{
+			$http.get("/api/authorities/"+$scope.userid).then( (resp)=>{
+
+				
 				$scope.userRole = resp.data; 
+				$scope.userRole.filter((x)=>{
+					if(x.permission === "ADMIN"){
+						$scope.error = 1;
+					}
+				})
+			})
+			$http.get("/api/support/getNotify/"+$scope.userid).then( (resp)=>{
+
+				$scope.notis = resp.data
+			
+				
 			})
 	    })
     }; $scope.getEmpleadoInfo();

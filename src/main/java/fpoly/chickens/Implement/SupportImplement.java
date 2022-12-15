@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fpoly.chickens.dao.SupportDAO;
+import fpoly.chickens.entity.Notification;
 import fpoly.chickens.entity.Support;
+import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.service.SupportService;
 
 @Service
@@ -20,11 +22,7 @@ public class SupportImplement implements SupportService {
     public Support create(Support support) {
         // TODO Auto-generated method stub
 
-        Support sup = this.findByStoreId(support.getStore().getId());
-        if (sup != null) {
-            sup.setUpdate_at(new Date());
-            return supDao.saveAndFlush(sup);
-        }
+      
         return supDao.saveAndFlush(support);
     }
 
@@ -79,8 +77,21 @@ public class SupportImplement implements SupportService {
     }
 
     @Override
-    public Support findByStoreId(Integer storeId) {
+    public Support findByUserStoreId(Integer userStoreId) {
         // TODO Auto-generated method stub
-        return supDao.findByStore(storeId);
+        return supDao.findByUserStore(userStoreId);
+    }
+
+    @Override
+    public UserApp findUserAppByUserStore(int userStoreId) {
+        // TODO Auto-generated method stubs
+        
+        return supDao.findUserAppByUserStore(userStoreId);
+    }
+
+    @Override
+    public List<Notification> getNotiSup(int userAppId) {
+        // TODO Auto-generated method stub
+        return supDao.notiSup(userAppId);
     }
 }

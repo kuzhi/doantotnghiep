@@ -68,7 +68,6 @@
         <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
           <thead class="table_primary">
             <tr>
-              <th>Tên kênh</th>
               <th>Chủ kênh</th>
               <th>Nhân viên</th>
               <th>Trạng thái</th>
@@ -77,8 +76,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="support in supports">
-              <td>{{support.store.name}}</td>
-              <td>{{support.store.userstoreId.username}}</td>
+              <td>{{support.userStore.username}}</td>
               <td>{{support.userApp.fullname}}</td>
               <td>{{support.status ? 'Hoàn thành':'Đang chờ hỗ trợ'}}</td>
               <td class="text-center align-middle">
@@ -155,21 +153,7 @@
       </div>
       <div class="modal-body">
         <form action="" name="chanelForm" novalidate>
-          <!-- Name -->
-          <div class="form-group mx-auto">
-            <label class="form-label">
-              Tên kênh <span class="text-red">*</span>
-            </label>
-            <!-- Input -->
-            <input
-              ng-model="formSupport.store.name"
-              type="text"
-              name="name"
-              class="w-full form-control"
-              placeholder="--Vui lòng nhập--"
-              readonly
-            />
-          </div>
+          
           <!-- Chủ kênh -->
           <div class="form-group mx-auto">
             <label class="form-label">
@@ -177,7 +161,7 @@
             </label>
             <!-- Input -->
             <input
-              ng-model="formSupport.store.userstoreId.username"
+              ng-model="formSupport.userStore.username"
               type="text"
               name="user"
               class="w-full form-control"
@@ -190,22 +174,30 @@
             <label class="form-label">
               Nhân viên <span class="text-red">*</span>
             </label>
-            <select
+            <select   ng-model="formSupport.userApp"
               class="form-select"
               id="selectUser"
               aria-label="Default select example"
+              ng-options="u as u.fullname for u in users track by u.id"
             >
-              
-              <option
-                ng-model="formSupport.userApp"
-                ng-repeat="user in users"
-                ng-selected="user.id == formSupport.userApp.id"
-                value="{{user.id}}"
-              >
-                {{user.fullname}}
-              </option>
+            
             </select>
           </div>
+          <!--NOtes-->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Ghi chú <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formSupport.notes"
+              type="text"
+              name="user"
+              class="w-full form-control"
+              readonly
+            />
+          </div>
+
           <!-- Status -->
           <div class="form-group mx-auto">
             <label class="form-label">
@@ -221,6 +213,7 @@
                   ng-model="formSupport.status"
                   ng-value="false"
                   checked
+                  ng-disabled="formSupport.status==true"
                 />
                 <label class="form-check-label" for="gridRadios1">
                   Đang chờ hỗ trợ
@@ -239,9 +232,24 @@
                 <label class="form-check-label" for="gridRadios2">
                   Hoàn thành
                 </label>
+                
               </div>
+             
+             
             </div>
           </div>
+
+          <!--Create Date-->
+         
+           <div class="form-group mx-auto">
+            <label class="form-label">
+              Ngày tạo <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input ng-model="formSupport.create_at" type="date" class="w-100 form-control" readonly>
+
+          </div>
+
         </form>
 
         <div class="row mt-2">
@@ -251,7 +259,7 @@
             </button>
           </div>
           <div class="col-xl-6">
-            <button ng-click="update()" class="btn btn-info text-white w-100">
+            <button ng-click="update()"  class="btn btn-info text-white w-100">
               Lưu
             </button>
           </div>
