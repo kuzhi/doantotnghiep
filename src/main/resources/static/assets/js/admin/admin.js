@@ -83,9 +83,13 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 						$scope.error = 1;
 					}
 				})
-				console.log($scope.error)			
 			})
+			$http.get("/api/support/getNotify/"+$scope.userid).then( (resp)=>{
+
+				$scope.notis = resp.data
 			
+				
+			})
 	    })
     }; $scope.getEmpleadoInfo();
     

@@ -183,6 +183,21 @@
             
             </select>
           </div>
+          <!--NOtes-->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Ghi chú <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formSupport.notes"
+              type="text"
+              name="user"
+              class="w-full form-control"
+              readonly
+            />
+          </div>
+
           <!-- Status -->
           <div class="form-group mx-auto">
             <label class="form-label">
@@ -217,9 +232,24 @@
                 <label class="form-check-label" for="gridRadios2">
                   Hoàn thành
                 </label>
+                
               </div>
+             
+             
             </div>
           </div>
+
+          <!--Create Date-->
+         
+           <div class="form-group mx-auto">
+            <label class="form-label">
+              Ngày tạo <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input ng-model="formSupport.create_at" type="date" class="w-100 form-control" readonly>
+
+          </div>
+
         </form>
 
         <div class="row mt-2">

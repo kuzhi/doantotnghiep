@@ -77,19 +77,9 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 
 	$scope.userid = 0;
 	$scope.stores = [];
+	
 
-	$scope.create = function() {
-		var data = {
-			status: false,
-			store: $scope.stores,
-			create_at: new Date(),
-			userApp: $scope.userid,
-		}
-		$http.post("/api/support", data).then((resp) => {
-			var a = resp.data;
-			
-		})
-	}
+	
 
 	$scope.getEmpleadoInfo = function() {
 		// Lấy userid
@@ -105,9 +95,17 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 							def.resolve(
 								$http.get("/api/getStoreToken").then(resp => {
 									const storeid = resp.data;
-									console.log(storeid)
+									
 
 									$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
+									$http.get("/api/store/notification/" + storeid ).then(resp => { 
+										$scope.notis = resp.data;
+										if($scope.notis.notes==null){
+
+											$scope.notis.notes="Không có thông báo nào"
+										}
+									})
+
 								})
 							)
 						});
@@ -119,10 +117,14 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 					$scope.listStoreByUserId = resp.data;
 
 				})
+				$http.get("/api/support/findUserAppByUserStore/" + $scope.userid).then((resp) => {
+					$scope.userApp=  resp.data;
+					
+				})
 				
 				
 			})
-
+			
 	}; $scope.getEmpleadoInfo();
 	$scope.click = function() {
 		$scope.stores = $scope.formSupport;
@@ -138,9 +140,10 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 	$scope.create = function() {
 		let data = {
 			status: false,
-			store: $scope.stores,
-
-
+			userStore: $scope.userStore,
+			create_at: new Date(),
+			userApp: $scope.userApp,
+			notes: "Cửa hàng " + $scope.stores.name +" bị lỗi thuộc người dùng "+$scope.userStore.username,
 		}
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
@@ -163,6 +166,7 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 				if (result.isConfirmed) {
 					$http.post("/api/support", data).then((resp) => {
 						if (resp.data) {
+							console.log(data)
 							// Thông báo
 							swalWithBootstrapButtons.fire(
 								"Thành công",

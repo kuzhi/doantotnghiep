@@ -38,6 +38,9 @@ public class Support {
     @Column(name = "Status")
 	private Boolean status;	
 
+	@Column(name = "Notes")
+	private String notes;	
+
     @Column(name = "Create_at")
 	@CreationTimestamp
 	private Date Create_at;

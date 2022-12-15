@@ -9,20 +9,40 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 
 	// Load list users
 	$scope.users = [];
+	$scope.countStore = [];
 	$scope.deleted = false;
 	$scope.init = function() {
-		$http.get("/api/support/findByNhanVien/"+$scope.userid).then(resp => {
-			let support  = resp.data;
-			support.filter(storeSupport =>{
-
-				$scope.users.push(storeSupport.userStore);
-			})
-
-			$scope.users.forEach(user => {
-				user.create_at = new Date(user.create_at)
-				user.update_at = new Date(user.update_at)
-			})
-		});
+		if($scope.error==1){
+			$http.get($scope.url + "deleted/" + $scope.deleted).then(resp => {
+				$scope.users = resp.data;
+	
+				$scope.users.forEach(user => {
+					user.create_at = new Date(user.create_at)
+					user.update_at = new Date(user.update_at)
+					// $http.get("/api/store/countStore/" + user.id).then(resp =>{
+						
+					// 	users.push({
+					// 		countStore: resp.data,
+					// 	})
+					
+						
+					// })
+				})
+			});
+		}
+		else{
+			$http.get("/api/support/findByNhanVien/"+$scope.userid).then(resp => {
+				let support  = resp.data;
+				support.filter(storeSupport =>{
+	
+					$scope.users.push(storeSupport.userStore);
+				})
+	
+				
+			});
+		}
+		
+		
 	}
 	$scope.init();
 

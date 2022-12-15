@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,14 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import fpoly.chickens.entity.Store;
+import fpoly.chickens.entity.Support;
 import fpoly.chickens.entity.User;
 import fpoly.chickens.entity.UserApp;
 import fpoly.chickens.entity.UserStore;
 import fpoly.chickens.service.StoreService;
+import fpoly.chickens.service.SupportService;
 import fpoly.chickens.service.UserAdminKHService;
 import fpoly.chickens.service.UserAdminNVService;
 import fpoly.chickens.service.UserAdminService;
-import fpoly.chickens.service.UserService;
 
 @Controller
 @RequestMapping("home/register")
@@ -49,6 +49,9 @@ public class Register {
 
     @Autowired
     UserAdminNVService userAdminNVService ;
+
+    @Autowired
+    SupportService supportService ;
 
     @GetMapping("form-user")
     public String getFormU(Model model){
@@ -117,6 +120,8 @@ public class Register {
     public String createNewStore(Model model, @ModelAttribute Optional<UserStore> userStore){
         model.addAttribute("store", userStore);
         String confirmPass = req.getParameter("password2");
+        Support support = new Support();
+
 
         if(userStore.isPresent()){
             //model.addAttribute("error", "user");
@@ -139,6 +144,7 @@ public class Register {
             && checkPhoneUStore.size() == 0 && checkPhoneUApp.size() == 0 && checkPhoneU.size() == 0){
               if(check){
                 userStore.get().setDeleted(false);
+                userStore.get().setGender(true);
                 UserStore uStore = userStore.get();
 
                 userAdminKHService.create(uStore);
@@ -152,8 +158,16 @@ public class Register {
                 store.setUserstoreId(uStore);
                 store.setName(uStore.getUsername() + uStore.getId());
                 store.setEnddate(endDate);
+                
                 store.setDeleted(false);
                 storeService.create(store);
+
+                support.setCreate_at(new Date());
+                support.setStatus(false);
+                support.setUserStore(uStore);
+                support.setNotes("Cửa hàng của người dùng "+ uStore.getUsername()+" mới tạo cần người hỗ trợ");
+                supportService.create(support);
+
                 model.addAttribute("store", new UserStore());
 
                 model.addAttribute("message", "Đăng Ký thành công");

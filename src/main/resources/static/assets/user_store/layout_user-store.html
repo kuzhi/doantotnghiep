@@ -167,9 +167,10 @@
                             	<i class="fa-solid fa-bars-staggered me-1"></i> Bị hủy
                             </a>
                         </div>
-                    </div>
+                    </div>  
                     
-                    <button type="button" ng-click="create()" class="btn btn-dark mt-2">Gọi hỗ trợ</button>
+                    <button type="button" ng-click="create()" class="btn btn-dark mx-1 my-2">Gọi hỗ trợ</button>
+                    <div class="text-primary font-weight-bold text-capitalize">Số điện thoại hỗ trợ: {{userApp.phone}}</div>
                 </div>
             <!-- Navbar End -->
             
@@ -194,6 +195,17 @@
 				</select> 
                 
                 <div class="navbar-nav align-items-center ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                           
+                            <span class="d-none d-lg-inline-flex">Thông báo </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-second border-0 rounded-0 rounded-bottom m-0">
+                            
+                                <a class="dropdown-item" >{{notis.notes}}</a>
+                           
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" ng-src="/assets/images/User/{{userStore.photo==''?'default__image.png':userStore.photo}}"

@@ -64,6 +64,13 @@ public class Account_UserAppController {
 	}
 
 
+
+	@RequestMapping("/user-app/logoff")
+	public void logout(){
+		sessionService.invalidate();
+
+	}
+
 	// @GetMapping("/user-app/access/denied")
 	// public String errorStore(Model model) {
 	// 	sessionService.remove("tokenUserApp");

@@ -43,6 +43,7 @@
 							<th>Tên kênh</th>
 							<th>Địa chỉ</th>
 							<th>Số điện thoại</th>
+							<th>Ngày hết hạn</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -52,6 +53,7 @@
 							<td class="align-middle"> {{store.name}} </td>
 							<td class="align-middle"> {{store.address}} </td>
 							<td class="align-middle"> {{store.phone}} </td>
+							<td class="align-middle"> {{store.enddate | date: 'dd-MM-yyyy'}} </td>
 							<td class="text-center align-middle">
 								<!-- Edit -->
 								<button type="button" ng-click="edit(store)" class="btn btn-info btn-sm text-white"
@@ -125,6 +127,13 @@
 									<td class="fw-bold">Địa chỉ</td>
 									<td>
 										<input ng-model="formStore.address" type="text" class="w-100 form-control" disabled readonly>
+									</td>
+								</tr>
+								<tr>
+									<td class="fw-bold">Ngày hết hạn </td>
+									<td>
+										<input ng-model="formStore.enddate" type="date" class="w-100 form-control" readonly
+										>
 									</td>
 								</tr>
 								<tr>
@@ -208,6 +217,18 @@
 			</div>
 				</div>
 			</form>
+			<div class="row mx-2 my-2">
+				<div class="col-xl-6 ">
+				  <button class="btn btn-danger w-100" data-bs-dismiss="modal">
+					Hủy
+				  </button>
+				</div>
+				<div class="col-xl-6">
+				  <button ng-click="update()"  class="btn btn-info text-white w-100">
+					Lưu
+				  </button>
+				</div>
+			  </div>
 		</div>
 	</div>
 </div>

@@ -1,5 +1,7 @@
 package fpoly.chickens.Implement;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,5 +138,32 @@ public class StoreImplement implements StoreService {
 	public List<Store> loadListStore() {
 		// TODO Auto-generated method stub
 		return storeDAO.loadListStore();
+	}
+
+	@Override
+	public String checkEndDate(Integer storeid) {
+		// TODO Auto-generated method stub
+		Store store = this.findById(storeid);
+		if(store.getDeleted()==false){
+			Date today = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(today);
+                calendar.add(Calendar.DATE,3);
+				
+                today = calendar.getTime();
+			Boolean checkDateAfter= today.after(store.getEnddate());
+
+		
+			if(checkDateAfter){
+				return "Còn gần ba ngày nữa là hết hạn gói đăng ký của bạn vui lòng liên hệ nhân viên hỗ trợ để gia hạn thêm!";
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Integer countStore(Integer userStoreId) {
+		// TODO Auto-generated method stub
+		return storeDAO.countStoreByUserStore(userStoreId);
 	}
 }
