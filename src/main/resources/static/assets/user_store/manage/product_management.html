@@ -21,18 +21,19 @@
 				class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
 			</div>
 			<div class="col-xl-4 col-12 mt-2 d-flex justify-content-end">
-
 				<!-- Thêm -->
 				<button ng-click="insert()" class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
 				data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="add"> Thêm mới </button>
-
-				<!-- Select -->
-				<div class="text-end">
-					<select ng-change="getProductsbyFilter()" ng-model="list"
-					ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
-					  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
-					</select>
-				</div>
+			</div>
+		</div>
+		
+		<div class="row mt-2">
+			<!-- Select -->
+			<div class="text-end">
+				<select ng-change="getProductsbyFilter()" ng-model="list"
+				ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
+				  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
+				</select>
 			</div>
 		</div>
 		

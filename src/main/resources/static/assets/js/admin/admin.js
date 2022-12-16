@@ -91,6 +91,16 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 				
 			})
 	    })
+	    
+	    $http.get("/api/countorderpackloading").then(resp => {
+			$scope.checkOrderPackLoading = resp.data;	
+			if($scope.checkOrderPackLoading > 0) {
+				Swal.fire({
+					icon: 'warning',
+					title: 'Có gói dịch vụ đang chờ bạn xử lý!'
+				});	
+			}
+		})
     }; $scope.getEmpleadoInfo();
     
 });
