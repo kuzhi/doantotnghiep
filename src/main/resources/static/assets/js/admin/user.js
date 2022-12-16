@@ -19,14 +19,6 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 				$scope.users.forEach(user => {
 					user.create_at = new Date(user.create_at)
 					user.update_at = new Date(user.update_at)
-					// $http.get("/api/store/countStore/" + user.id).then(resp =>{
-						
-					// 	users.push({
-					// 		countStore: resp.data,
-					// 	})
-					
-						
-					// })
 				})
 			});
 		}
@@ -100,7 +92,9 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 		$scope.reset();
 		user.birthday = new Date(user.birthday);
 		$scope.formUserStore = angular.copy(user);
-
+		$http.get("/api/store/countStore/" + user.id).then(resp =>{
+			$scope.count = resp.data;
+		})
 	}
 
 
@@ -148,8 +142,9 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 										$scope.store.name = $scope.userz[$scope.userz.length - 1].username + $scope.userz[$scope.userz.length - 1].id;
 										$scope.store.userstoreId = $scope.userz[$scope.userz.length - 1];
 										$scope.store.enddate = new Date(end);
-										$scope.store.delete = false;
+										$scope.store.deleted = false;
 										$scope.store.create_at = new Date();
+										$scope.store.image = 'icon_cart_blank.png';										
 										console.log($scope.store);
 										$http.post($scope.url + "store/", $scope.store).then(resp => {
 											$scope.reset();
@@ -506,6 +501,7 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 		$scope.formUserStore = {
 			create_at: null,
 			update_at: null,
+			photo: 'default__image.png'
 		};
 		// Set độ tuổi
 		const now = new Date();

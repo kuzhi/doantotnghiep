@@ -77,9 +77,9 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 
 	$scope.userid = 0;
 	$scope.stores = [];
-	
 
-	
+
+
 
 	$scope.getEmpleadoInfo = function() {
 		// Lấy userid
@@ -91,18 +91,27 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 				$http.get("/api/store/list/" + $scope.userid)
 					.then(resp => {
 						$scope.stores = resp.data[0];
-						$http.post("/api/storeToken", $scope.stores.id).then(resp=>{
+						$http.post("/api/storeToken", $scope.stores.id).then(resp => {
 							def.resolve(
 								$http.get("/api/getStoreToken").then(resp => {
 									const storeid = resp.data;
-									
 
-									$http.get("/api/check-status/order/" + storeid + "/1").then(resp => { $scope.checkOrder = resp.data;})
-									$http.get("/api/store/notification/" + storeid ).then(resp => { 
+
+									$http.get("/api/check-status/order/" + storeid + "/1")
+									.then(resp => {
+										$scope.checkOrder = resp.data;
+										if($scope.checkOrder > 0) {
+											Swal.fire({
+												icon: 'warning',
+												title: 'Bạn có đơn hàng mới!'
+											});
+										}
+									})
+									$http.get("/api/store/notification/" + storeid).then(resp => {
 										$scope.notis = resp.data;
-										if($scope.notis.notes==null){
+										if ($scope.notis.notes == null) {
 
-											$scope.notis.notes="Không có thông báo nào"
+											$scope.notis.notes = "Không có thông báo nào"
 										}
 									})
 
@@ -118,13 +127,18 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 
 				})
 				$http.get("/api/support/findUserAppByUserStore/" + $scope.userid).then((resp) => {
-					$scope.userApp=  resp.data;
-					
+					$scope.userApp = resp.data;
+					$scope.userApp.phone =
+			        $scope.userApp.phone.substr(0, 3) +
+			        "-" +
+			        $scope.userApp.phone.substr(3, 3) +
+			        "-" +
+			        $scope.userApp.phone.substr(6, 4);
 				})
-				
-				
+
+
 			})
-			
+
 	}; $scope.getEmpleadoInfo();
 	$scope.click = function() {
 		$scope.stores = $scope.formSupport;
@@ -143,7 +157,7 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 			userStore: $scope.userStore,
 			create_at: new Date(),
 			userApp: $scope.userApp,
-			notes: "Cửa hàng " + $scope.stores.name +" bị lỗi thuộc người dùng "+$scope.userStore.username,
+			notes: "Cửa hàng " + $scope.stores.name + " bị lỗi thuộc người dùng " + $scope.userStore.username,
 		}
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {

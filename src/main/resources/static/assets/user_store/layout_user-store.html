@@ -169,8 +169,7 @@
                         </div>
                     </div>  
                     
-                    <button type="button" ng-click="create()" class="btn btn-dark mx-1 my-2">Gọi hỗ trợ</button>
-                    <div class="text-primary font-weight-bold text-capitalize">Số điện thoại hỗ trợ: {{userApp.phone}}</div>
+                    <button type="button" ng-click="create()" class="btn btn-dark mx-1 my-2">Hỗ trợ: {{userApp.phone}}</button>
                 </div>
             <!-- Navbar End -->
             
@@ -195,6 +194,7 @@
 				</select> 
                 
                 <div class="navbar-nav align-items-center ms-auto">
+                <!-- 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                            
@@ -206,6 +206,7 @@
                            
                         </div>
                     </div>
+               	 -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" ng-src="/assets/images/User/{{userStore.photo==''?'default__image.png':userStore.photo}}"

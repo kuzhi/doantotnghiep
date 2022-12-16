@@ -108,4 +108,10 @@ public class OrderPackImplement implements OrderPackService {
 		return orderPackDao.getSale(dateStart, dateEnd, status);
 	}
 
+	@Override
+	public Integer countOrderPackLoading() {
+		// TODO Auto-generated method stub
+		return orderPackDao.countOrderPackLoading();
+	}
+
 }

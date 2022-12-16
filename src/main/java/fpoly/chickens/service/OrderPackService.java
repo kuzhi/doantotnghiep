@@ -9,6 +9,8 @@ import fpoly.chickens.entity.OrderPack;
 import fpoly.chickens.entity.ReportPack;
 
 public interface OrderPackService {
+	
+	Integer countOrderPackLoading();
 
 	void addOrderPack(OrderPack orderPackData);
 

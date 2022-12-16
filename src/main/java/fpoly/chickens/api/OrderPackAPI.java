@@ -25,6 +25,11 @@ public class OrderPackAPI {
 
 	@Autowired
 	OrderPackService orderPackService;
+	
+	@GetMapping("/api/countorderpackloading")
+	public Integer countOrderPackLoading() {
+		return orderPackService.countOrderPackLoading();
+	}
 
 	@GetMapping("/api/orderpackall/{page}/{field}/{sort}")
 	public ResponseEntity<Page<OrderPack>> getOrderPack(@PathVariable("page") Optional<Integer> page,@PathVariable("field") Optional<String> field,@PathVariable("sort") Optional<Integer> checkSort) {

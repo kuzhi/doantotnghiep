@@ -17,6 +17,9 @@ public interface OrderPackDAO extends JpaRepository<OrderPack, Integer> {
 	@Query("SELECT COUNT(o) FROM OrderPack o")
 	Integer countOrderPack();
 
+	@Query("SELECT COUNT(o) FROM OrderPack o WHERE o.Status = 1")
+	Integer countOrderPackLoading();
+
 	@Query("SELECT o FROM OrderPack o")
 	Page<OrderPack> findAllOrderpack(Pageable pageable);
 
@@ -25,17 +28,15 @@ public interface OrderPackDAO extends JpaRepository<OrderPack, Integer> {
 
 	@Query("SELECT o FROM OrderPack o WHERE o.store = ?1")
 	List<OrderPack> findAllByStore(Store store);
-	
+
 //	Count orderPack
 	@Query("SELECT COUNT(o) FROM OrderPack o WHERE o.Create_at BETWEEN ?1 AND ?2 AND o.Status = ?3")
 	Integer countOrderPackByDate(Date dateStart, Date dateEnd, Integer status);
+
 // Lấy doanh thu
 	@Query("SELECT new ReportPack(o.pack.Name, o.pack.Price, (count(o.pack.Id)*o.pack.Price), count(o.pack.Id)) "
-			+ " FROM OrderPack o "
-			+ " WHERE o.Create_at BETWEEN ?1 AND ?2 AND o.Status = ?3 "
-			+ " GROUP BY o.pack.Name, o.pack.Price "
-			+ " ORDER BY (count(o.pack.Id)*o.pack.Price) DESC ")
+			+ " FROM OrderPack o " + " WHERE o.Create_at BETWEEN ?1 AND ?2 AND o.Status = ?3 "
+			+ " GROUP BY o.pack.Name, o.pack.Price " + " ORDER BY (count(o.pack.Id)*o.pack.Price) DESC ")
 	List<ReportPack> getSale(Date dateStart, Date dateEnd, Integer status);
-	
-	
+
 }
