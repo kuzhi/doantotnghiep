@@ -165,27 +165,45 @@ app.controller(
       today.setDate(today.getDate() + 3);
       let endDate = today;
       store.enddate = endDate;
-      $http
-        .post("/api/store/", store)
-        .then((resp) => {
-          console.log(resp.data);
-
-          Swal.fire({
-            icon: "success",
-            title: "Thêm thành công!",
-          });
-
-          $scope.init();
-        })
-        .catch((error) => {
+      for (var i = 0; i < $scope.listStoreByUserId.length; i++) {
+        if (store.phone == $scope.listStoreByUserId[i].phone) {
           Swal.fire({
             icon: "error",
             title: "Thêm thất bại!",
+            text: "số điện thoại không được trùng với các cửa hàng khác !!!",
           });
-          console.log("Error: ", error);
-        });
-      $scope.init();
-      $scope.reset();
+        } else {
+          if (store.address == $scope.listStoreByUserId[i].address) {
+            Swal.fire({
+              icon: "error",
+              title: "Thêm thất bại!",
+              text: "địa chỉ không được trùng với các cửa hàng khác!!!",
+            });
+          } else {
+            $scope.value = true;
+          }
+        }
+      }
+      if ($scope.value == true) {
+        $http
+          .post("/api/store/", store)
+          .then((resp) => {
+            console.log(resp.data);
+            Swal.fire({
+              icon: "success",
+              title: "Thêm thành công!",
+            });
+            $scope.init();
+            $scope.reset();
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Thêm thất bại!",
+            });
+            console.log("Error: ", error);
+          });
+      }
     };
 
     //detele
@@ -234,6 +252,8 @@ app.controller(
                     "Đã xóa thành công!",
                     "success"
                   );
+                  $scope.reset();
+                  $scope.init();
                 })
                 .catch((error) => {
                   // Thông báo
