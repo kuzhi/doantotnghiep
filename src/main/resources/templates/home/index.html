@@ -17,7 +17,7 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a
-              	id="listStore"
+                id="listStore"
                 th:href="@{/home/client/list-store/view}"
                 class="text-decoration-none text-dark"
                 >Danh sách cửa hàng</a
@@ -93,24 +93,28 @@
               <div class="form-check">
                 <input
                   class="form-check-input"
-                  type="checkbox"
+                  type="radio"
+                  ng-value="true"
                   value="true"
+                  name="sortBy"
                   ng-click="sortBy('-price')"
-                  id="flexCheckDefault"
+                  id="radioSort"
                 />
-                <label class="form-check-label" for="flexCheckDefault">
+                <label class="form-check-label" for="gridRadios1">
                   Cao - Thấp
                 </label>
               </div>
               <div class="form-check">
                 <input
                   class="form-check-input"
-                  type="checkbox"
+                  type="radio"
+                  ng-value="false"
+                  name="sortBy"
                   value="false"
                   ng-click="sortBy('price')"
-                  id="flexCheckDefault"
+                  id="radioSort"
                 />
-                <label class="form-check-label" for="flexCheckDefault">
+                <label class="form-check-label" for="gridRadios2">
                   Thấp - Cao
                 </label>
               </div>
