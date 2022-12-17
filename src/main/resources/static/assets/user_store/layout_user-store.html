@@ -194,11 +194,16 @@
 				</select> 
                 
                 <div class="navbar-nav align-items-center ms-auto">
-                <!-- 
+                <!-- -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                            
                             <span class="d-none d-lg-inline-flex">Thông báo </span>
+                            <span ng-if="notis.notes != 'Không có thông báo nào'" 
+                            class="position-absolute top-25 start-100 translate-middle p-2 bg-danger 
+                            border border-light rounded-circle">
+							    <span class="visually-hidden">New alerts</span>
+							</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-second border-0 rounded-0 rounded-bottom m-0">
                             
@@ -206,7 +211,7 @@
                            
                         </div>
                     </div>
-               	 -->
+               	 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" ng-src="/assets/images/User/{{userStore.photo==''?'default__image.png':userStore.photo}}"
