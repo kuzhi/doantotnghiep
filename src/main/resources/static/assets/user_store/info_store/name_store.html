@@ -35,21 +35,20 @@
       <div class="card-body text-center image-upload">
         <label for="file-input">
           <img
-            ng-if="listStoreByStoreId.image != null"
-            ng-src="/assets/images/{{listStoreByStoreId.image}}"
+            ng-src="/assets/images/Store/{{listStoreByStoreId.image}}"
+            alt="{{listStoreByStoreId.image}}"
             class="img__store rounded-circle mb-2"
-            src="/assets/images/{{listStoreByStoreId.image}}"
-          />
-          <img
-            ng-if="listStoreByStoreId.image == null"
-            class="img__store rounded-circle mb-2"
-            src="/assets/images/default__image.png"
           />
         </label>
         <div class="small font-italic text-muted mb-4">
           Ảnh có kích thước nhỏ hơn 10MB
         </div>
-        <input id="file-input" type="file" />
+        <input
+          id="file-input"
+          type="file"
+          name="image"
+          onchange="angular.element(this).scope().ImageChanged2(this.files)"
+        />
       </div>
     </div>
   </div>
@@ -139,7 +138,7 @@
   <div class="col-xl-12 text-start my-2">
     <button
       ng-disabled="nameStoreForm.$invalid"
-      ng-click="update()"
+      ng-click="update2()"
       type="submit"
       class="btn__app"
     >
@@ -408,10 +407,10 @@
 
             <div class="card mb-4 w-75 mx-auto">
               <div class="card-body text-center image-upload">
-                <label for="file-input">
+                <label for="file-input2">
                   <img
                     ng-if="formStore.image != null"
-                    ng-src="/assets/images/{{formStore.image}}"
+                    ng-src="{{'/assets/images/Store/'+formStore.image}}"
                     class="img__store rounded-circle mb-2"
                     alt="Ảnh logo cửa hàng"
                   />
@@ -424,7 +423,12 @@
                 <div class="small font-italic text-muted mb-4">
                   Ảnh có kích thước nhỏ hơn 10MB
                 </div>
-                <input id="file-input" type="file" />
+                <input
+                  id="file-input2"
+                  type="file"
+                  name="image"
+                  onchange="angular.element(this).scope().ImageChanged(this.files)"
+                />
               </div>
             </div>
           </div>
@@ -554,7 +558,7 @@
                 <th>Tên cửa hàng</th>
                 <th>Số điện thoại</th>
                 <th>Địa chỉ</th>
-                <th>Trạng thái</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -563,7 +567,7 @@
                   <img
                     ng-if="store.image != null"
                     class="rounded-circle"
-                    ng-src="/assets/images/{{store.image}}"
+                    ng-src="{{'/assets/images/Store/'+store.image}}"
                     alt="{{item.image}}"
                     style="width: 40px; height: 40px"
                   />
