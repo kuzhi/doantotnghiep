@@ -49,6 +49,9 @@ public class OrderPack implements Serializable {
 	@Column(name = "Status")
 	private Integer Status;
 
+	@ManyToOne
+	@JoinColumn(name="Userappid")
+	UserApp userapp;
 	
 	
 }

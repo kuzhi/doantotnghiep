@@ -15,10 +15,12 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import fpoly.chickens.dao.OrderPackDAO;
 import fpoly.chickens.dao.StoreDAO;
+
 import fpoly.chickens.entity.OrderPack;
 import fpoly.chickens.entity.Pack;
 import fpoly.chickens.entity.ReportPack;
 import fpoly.chickens.entity.Store;
+
 import fpoly.chickens.service.OrderPackService;
 
 @SessionScope
@@ -30,6 +32,9 @@ public class OrderPackImplement implements OrderPackService {
 
 	@Autowired
 	StoreDAO storeDao;
+	
+	
+	
 
 	@Override
 	public void addOrderPack(OrderPack orderPackData) {
@@ -43,6 +48,7 @@ public class OrderPackImplement implements OrderPackService {
 	@Override
 	public void updateOrderPack(OrderPack orderPackData) {
 		OrderPack orderPack = orderPackDao.findById(orderPackData.getId()).get();
+		
 		if (orderPackData.getStatus() == 2) {
 			Store store = orderPack.getStore();
 			Pack pack = orderPack.getPack();
@@ -53,6 +59,7 @@ public class OrderPackImplement implements OrderPackService {
 			storeDao.saveAndFlush(store);
 		}
 		orderPack.setStatus(orderPackData.getStatus());
+		orderPack.setUserapp(orderPackData.getUserapp());
 		orderPack.setUpdate_at(new Date());
 		orderPackDao.saveAndFlush(orderPack);
 	}
