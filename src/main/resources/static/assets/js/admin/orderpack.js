@@ -20,7 +20,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 	}
 
 	$scope.find = function() {
-		$http.get("/api/orderpackkeyword/"+$scope.keyword).then(resp => {
+		$http.get("/api/orderpackkeyword/" + $scope.keyword).then(resp => {
 			$scope.page = resp.data;
 
 		})
@@ -51,18 +51,22 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 			reverseButtons: true
 		}).then((result) => {
 			if (result.isConfirmed) {
-				data = {
-					id: orderpackid,
-					status: 2
-				}
-				$http.put("/api/orderpack/update", data).then(resp => {
+				$http.get("/api/getUserApp").then(resp => {
+					data = {
+						id: orderpackid,
+						status: 2,
+						userapp: { id: resp.data }
+					}
+					$http.put("/api/orderpack/update", data).then(resp => {
 
+					})
+					swalWithBootstrapButtons.fire(
+						'Thành công',
+						'Đã cập nhật thay đổi!',
+						'success'
+					)
 				})
-				swalWithBootstrapButtons.fire(
-					'Thành công',
-					'Đã cập nhật thay đổi!',
-					'success'
-				)
+
 			} else if (
 				/* Read more about handling dismissals below */
 				result.dismiss === Swal.DismissReason.cancel

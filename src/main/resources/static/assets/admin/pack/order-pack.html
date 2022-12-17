@@ -10,47 +10,54 @@
 	<div class="col-xl-12 col-md-12 col-12">
 		<div class="row mb-3 text-start">
 			<div class="col-9 d-flex mt-2">
-				<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
-					<i class="fas fa-search mx-2"></i>
-					<input type="search" ng-model="keyword" 
-					class="form-control form-control-sm border-0" placeholder="Nhập tên gói...">
+				<div
+					class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-second rounded">
+					<i class="fas fa-search mx-2"></i> <input type="search"
+						ng-model="keyword" class="form-control form-control-sm border-0"
+						placeholder="Nhập tên gói...">
 				</div>
-				
-				<!-- Tìm kiếm -->	
-				<button ng-click="find()" type="submit" 
-				class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
-				
+
+				<!-- Tìm kiếm -->
+				<button ng-click="find()" type="submit"
+					class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm
+					kiếm</button>
+
 			</div>
 		</div>
 
 		<div class="row mt-3">
 			<div class="table-responsive">
-				<table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+				<table
+					class="table border text-nowrap text-md-nowrap table-hover mb-0">
 					<thead class="table_primary">
 						<tr>
-							<th ng-click="load(0,'Orderpackcode',pageSort+1)">Mã đăng kí</th>
-							<th ng-click="load(0,'Create_at',pageSort+1)">Ngày tạo</th>
-							<th ng-click="load(0,'Update_at',pageSort+1)">Ngày cập nhật gần
-								nhất</th>
-							<th ng-click="load(0,'Status',pageSort+1)">Trạng thái</th>
+							<th ng-click="load(0,'orderpackcode',pageSort+1)">Mã đăng kí</th>
+							<th>Ngày tạo</th>
+							<th>Ngày cập nhật gần nhất</th>
+							<th>Trạng thái</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="p in page.content">
 							<td class="align-middle">{{p.orderpackcode}}</td>
-							<td class="align-middle">{{p.create_at | date:'dd-MM-yyyy hh:mm:ss a'}}</td>
-							<td class="align-middle">{{p.update_at | date:'dd-MM-yyyy hh:mm:ss a'}}</td>
+							<td class="align-middle">{{p.create_at | date:'dd-MM-yyyy
+								hh:mm:ss a'}}</td>
+							<td class="align-middle">{{p.update_at | date:'dd-MM-yyyy
+								hh:mm:ss a'}}</td>
 							<td ng-if="p.status==1" class="align-middle">Đang xử lý</td>
 							<td ng-if="p.status==2" class="align-middle">Thành công</td>
 							<td ng-if="p.status==3" class="align-middle">Đã hủy</td>
 							<td ng-if="p.status==4" class="align-middle">Bị hủy</td>
 							<td class="text-center align-middle">
 								<!-- Edit -->
-								<button type="button" ng-click="edit(p.id)" class="btn btn-info btn-sm text-white" 
-								data-bs-toggle="modal" data-bs-target="#exampleModal"> <i class="fa-regular fa-pen-to-square"></i> </button>
-								<!-- Remove -->
-								<button ng-if="p.status==1" ng-click="becancel(p.id)" class="btn btn-danger btn-sm">
+								<button type="button" ng-click="edit(p.id)"
+									class="btn btn-info btn-sm text-white" data-bs-toggle="modal"
+									data-bs-target="#exampleModal">
+									<i class="fa-regular fa-pen-to-square"></i>
+								</button> <!-- Remove -->
+								<button ng-if="p.status==1" ng-click="becancel(p.id)"
+									class="btn btn-danger btn-sm">
 									<i class="fa-regular fa-trash-can"></i>
 								</button>
 							</td>
@@ -64,20 +71,24 @@
 			<div class="col-xl text-end">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
-						<li class="page-item">
-							<a ng-click="load(0,pageField,pageSort)" class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
-						</li>
-						<li class="page-item">
-							<a ng-click="load(page.number-1,pageField,pageSort)" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
-						</li>
-						<li class="page-item"><span class="page-link bg-white text-dark">{{page.number+1}}</span>
-						</li>
-						<li class="page-item">
-							<a ng-click="load(page.number+1,pageField,pageSort)" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
-						</li>
-						<li class="page-item">
-							<a ng-click="load(page.totalPages-1,pageField,pageSort)" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
-						</li>
+						<li class="page-item"><a
+							ng-click="load(0,pageField,pageSort)" class="page-link text-dark">
+								<i class="fas fa-step-backward"></i>
+						</a></li>
+						<li class="page-item"><a
+							ng-click="load(page.number-1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-backward"></i>
+						</a></li>
+						<li class="page-item"><span
+							class="page-link bg-white text-dark">{{page.number+1}}</span></li>
+						<li class="page-item"><a
+							ng-click="load(page.number+1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-forward"></i>
+						</a></li>
+						<li class="page-item"><a
+							ng-click="load(page.totalPages-1,pageField,pageSort)"
+							class="page-link text-dark"> <i class="fas fa-step-forward"></i>
+						</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -126,6 +137,13 @@
 					<label class="col-sm-3 col-form-label">Ngày tạo:</label>
 					<div class="col-sm-9">
 						<input type="text" ng-value="orderPack.create_at"
+							class="form-control">
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label class="col-sm-3 col-form-label">Người duyệt:</label>
+					<div class="col-sm-9">
+						<input type="text" ng-value="orderPack.userapp.fullname"
 							class="form-control">
 					</div>
 				</div>
