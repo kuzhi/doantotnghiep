@@ -19,12 +19,13 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.countAmount($scope.sid);
 
 	$scope.loadTitleStore = function() {
-		$scope.sid;
+		// $scope.sid;
 		$http.get("/api/store/" + $scope.sid).then((resp) => {
 			$scope.titleStore = resp.data;
+			// console.log($scope.titleStore)
 		});
 	};
-	$scope.loadTitleStore();
+	// $scope.loadTitleStore();
 
 	//================================ Load list products
 	$scope.url = "/api/product";
@@ -428,7 +429,7 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.loadStore = function() {
 		$http.get("/api/store/getCurrentStore/" + $scope.sid).then((resp) => {
 			$scope.store = resp.data;
-			console.log($scope.store);
+			// console.log($scope.store);
 		});
 	};
 
@@ -790,14 +791,16 @@ app.controller("cart-ctrl", function($scope, $http, $location) {
 	$scope.listStore = [];
 	$http.get("/api/store/liststore").then((resp) => {
 		$scope.listStore = resp.data;
-		$scope.listStore.forEach((store) => {
-			store.phone =
-				store.phone.substr(0, 3) +
-				"-" +
-				store.phone.substr(3, 3) +
-				"-" +
-				store.phone.substr(6, 4);
-		});
+		if($scope.listStore != null) {
+			$scope.listStore.forEach((store) => {
+				store.phone =
+					store.phone.substr(0, 3) +
+					"-" +
+					store.phone.substr(3, 3) +
+					"-" +
+					store.phone.substr(6, 4);
+			});
+		}
 	});
 	// Phân trang và điều hướng
 	$scope.pager = {

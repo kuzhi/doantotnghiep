@@ -57,6 +57,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 				}
 				$http.put("/api/orderpack/update", data).then(resp => {
 
+				$scope.load($scope.pageNumber, $scope.pageField, $scope.pageSort);
 				})
 				swalWithBootstrapButtons.fire(
 					'Thành công',
@@ -95,6 +96,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 				}
 				$http.put("/api/orderpack/update", data).then(resp => {
 
+					$scope.load($scope.pageNumber, $scope.pageField, $scope.pageSort)
 				})
 				swalWithBootstrapButtons.fire(
 					'Thành công',
