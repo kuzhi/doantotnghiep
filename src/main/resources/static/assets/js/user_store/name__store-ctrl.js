@@ -89,6 +89,7 @@ app.controller(
     };
 
     $scope.init();
+
     //update
     $scope.update = function () {
       const swalWithBootstrapButtons = Swal.mixin({
@@ -151,10 +152,113 @@ app.controller(
           }
         });
     };
+
+    //update
+    $scope.update2 = function () {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success ms-2",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Thông báo",
+          icon: "warning",
+          text: "Bạn chắc chắn muốn thay đổi?",
+          showCancelButton: true,
+          confirmButtonText: "OK",
+          cancelButtonText: "Quay lại",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            //====================================== Bắt đầu xử lý
+            var store = angular.copy($scope.listStoreByStoreId);
+            var url = $scope.url;
+            $http
+              .patch("/api/store/" + $scope.stores.id, store)
+              .then((resp) => {
+                if (resp.data) {
+                  // Thông báo
+                  swalWithBootstrapButtons.fire(
+                    "Thành công",
+                    "Cập nhật thành công!",
+                    "success"
+                  );
+                  $scope.init();
+                } else {
+                  Swal.fire({
+                    icon: "error",
+                    title:
+                      "cửa hàng hay địa chỉ và số diện thoại đã được sử dụng!",
+                  });
+                  $scope.init();
+                }
+                $scope.init();
+              })
+              .catch((error) => {
+                // Thông báo
+                Swal.fire({
+                  icon: "error",
+                  title: "Cập nhật thất bại!",
+                });
+                console.log("Error", error);
+              });
+            $scope.reset();
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+          }
+        });
+    };
+
     //reset
     $scope.reset = function () {
       $scope.formStore = null;
     };
+
+    //Change image
+    $scope.ImageChanged = function (files) {
+      var data = new FormData();
+      data.append("file", files[0]);
+      $http
+        .post("/api/upload/Store", data, {
+          transformRequest: angular.identity,
+          headers: { "Content-Type": undefined },
+        })
+        .then((resp) => {
+          // console.log('data: ', resp.data)
+          $scope.formStore.image = resp.data.name;
+        })
+        .catch((error) => {
+          alert("Lỗi tải hình ảnh");
+          // console.log('error: ', error)
+        });
+    };
+
+    //Change image
+    $scope.ImageChanged2 = function (files) {
+      var data = new FormData();
+      data.append("file", files[0]);
+      $http
+        .post("/api/upload/Store", data, {
+          transformRequest: angular.identity,
+          headers: { "Content-Type": undefined },
+        })
+        .then((resp) => {
+          // console.log('data: ', resp.data)
+          $scope.listStoreByStoreId.image = resp.data.name;
+        })
+        .catch((error) => {
+          alert("Lỗi tải hình ảnh");
+          // console.log('error: ', error)
+        });
+    };
+
     // Create
     $scope.create = function () {
       var store = angular.copy($scope.formStore);

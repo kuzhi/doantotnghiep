@@ -48,7 +48,6 @@
             <div class="collapse show" id="collapseCate">
               <div class="form-check">
                 <input
-                  ng-model="selectedAll"
                   ng-Click="listProducts()"
                   class="form-check-input"
                   type="radio"
@@ -130,7 +129,7 @@
               class="col-xl-3 col-md-4 col-12 card border border-2"
             >
               <div class="p-2">
-                <a th:href="@{/home/product/detail?id={{product.id}}}">
+                <a th:href="@{/home/product/detail?id={{product.id}}} ">
                   <img
                     ng-src="/assets/images/Products/{{product.image==''?'icon_food.png':product.image}}"
                     class="card-img-top"
