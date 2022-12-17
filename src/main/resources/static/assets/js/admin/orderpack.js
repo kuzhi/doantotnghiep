@@ -59,14 +59,12 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 					}
 					$http.put("/api/orderpack/update", data).then(resp => {
 
-					})
-					swalWithBootstrapButtons.fire(
-						'Thành công',
-						'Đã cập nhật thay đổi!',
-						'success'
-					)
 				})
-
+				swalWithBootstrapButtons.fire(
+					'Thành công',
+					'Đã cập nhật thay đổi!',
+					'success'
+				)
 			} else if (
 				/* Read more about handling dismissals below */
 				result.dismiss === Swal.DismissReason.cancel
@@ -99,6 +97,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 				}
 				$http.put("/api/orderpack/update", data).then(resp => {
 
+					$scope.load($scope.pageNumber, $scope.pageField, $scope.pageSort)
 				})
 				swalWithBootstrapButtons.fire(
 					'Thành công',
