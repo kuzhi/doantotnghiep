@@ -33,7 +33,7 @@
 						<tr>
 							<th ng-click="load(0,'orderpackcode',pageSort+1)">Mã đăng kí</th>
 							<th>Ngày tạo</th>
-							<th>Ngày cập nhật gần nhất</th>
+							<th>Số điện thoại đăng ký</th>
 							<th>Trạng thái</th>
 							<th>Hành động</th>
 						</tr>
@@ -43,8 +43,7 @@
 							<td class="align-middle">{{p.orderpackcode}}</td>
 							<td class="align-middle">{{p.create_at | date:'dd-MM-yyyy
 								hh:mm:ss a'}}</td>
-							<td class="align-middle">{{p.update_at | date:'dd-MM-yyyy
-								hh:mm:ss a'}}</td>
+							<td class="align-middle">{{p.store.userstoreId.phone}}</td>
 							<td ng-if="p.status==1" class="align-middle">Đang xử lý</td>
 							<td ng-if="p.status==2" class="align-middle">Thành công</td>
 							<td ng-if="p.status==3" class="align-middle">Đã hủy</td>
@@ -136,7 +135,7 @@
 				<div class="mb-3 row">
 					<label class="col-sm-3 col-form-label">Ngày tạo:</label>
 					<div class="col-sm-9">
-						<input type="text" ng-value="orderPack.create_at"
+						<input type="text" ng-value="dateStr"
 							class="form-control">
 					</div>
 				</div>

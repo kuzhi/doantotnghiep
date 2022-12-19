@@ -6,7 +6,7 @@
 </nav>
 
 <div class="row">
-	<label class="fw-bold mb-2 fs-4">Báo cáo gói dịch vụ</label>
+	<label class="fw-bold mb-2 fs-4">Báo cáo gói dịch vụ đã duyệt</label>
 </div>
 
 <div class="row g-2">
@@ -70,7 +70,7 @@
             <h6>Báo cáo nhanh</h6>
             <hr class="bg-primary" style="height: 2px;">
             <div class="row">
-            	<span>Doanh thu hôm nay: <b>{{DTForDay == '' ? 0 : DTForDay | currency:'':0}}</b> đ</span>
+            	<span>Doanh thu hôm nay: <b>{{totalDT == '' ? 0 : totalDT | currency:'':0}}</b> đ</span>
             	<span>Doanh thu tháng {{monthNow}}: <b>{{DTForMonth == '' ? 0 : DTForMonth | currency:'':0}}</b> đ</span>
             </div>
         </div>

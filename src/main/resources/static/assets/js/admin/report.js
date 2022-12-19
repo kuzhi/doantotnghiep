@@ -13,7 +13,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		$scope.dateStart.setTime(exampleDate.getTime());
 		$scope.dateEnd.setTime(exampleDate.getTime() + end);
 		
-		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.packForDay = resp.data;
 		})
@@ -35,7 +35,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
 		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
 		
-		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.packForMonth = resp.data;
 		})
@@ -56,7 +56,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setMonth(0);
 		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setMonth(11);
 		
-		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.packForYear = resp.data;
 		})
@@ -101,7 +101,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		.catch(error => {
             console.log('error: ', error)
         })
-	}; $scope.loadPackSuccess(3);
+	}; $scope.loadPackSuccess(2);
 	$scope.loadPackCancel = function(status) {
 		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
 		const end =  24 * 60 * 60 * 1000 - 1;
@@ -119,7 +119,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		.catch(error => {
             console.log('error: ', error)
         })
-	}; $scope.loadPackCancel(4);
+	}; $scope.loadPackCancel(3);
 	$scope.loadPackCanceled = function(status) {
 		const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
 		const end =  24 * 60 * 60 * 1000 - 1;
@@ -137,7 +137,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		.catch(error => {
             console.log('error: ', error)
         })
-	}; $scope.loadPackCanceled(5);
+	}; $scope.loadPackCanceled(4);
 	
 	// Load doanh thu hôm nay
 	$scope.loadDTDate = function() {
@@ -149,10 +149,18 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		
 		$scope.dateStart.setTime(exampleDate.getTime());
 		$scope.dateEnd.setTime(exampleDate.getTime() + end);
+		// console.log('s: ', $scope.dateStart)
+		// console.log('e: ', $scope.dateEnd)
 		
-		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.DTForDay = resp.data;
+			$scope.totalDT = 0;
+			for(let i in $scope.DTForDay) {
+				$scope.totalDT += $scope.DTForDay[i].total;
+				i++;
+			}
+			// console.log($scope.totalDT)
 		})
 		.catch(error => {
             console.log('error: ', error)
@@ -169,7 +177,7 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
 		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
 		
-		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.data = resp.data;
 			$scope.DTForMonth=0;
@@ -259,7 +267,8 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		else if ($scope.list == 12) {
 			$scope.month = 12;
 			$scope.loadDTForMonth(now.getFullYear(), now.getMonth(now.setMonth(11)), 1, now.getDate(now.setDate(0)));
-		}
+		} 
+
 	}
 	
 	$scope.loadDTForMonth = function(year, month) {
@@ -272,17 +281,22 @@ app.controller("report-ctrl", function($scope, $http, $location) {
 		$scope.dateStart.setTime(exampleDate.getTime()); $scope.dateStart.setDate(1); $scope.dateStart.setMonth(month);
 		$scope.dateEnd.setTime(exampleDate.getTime() + end); $scope.dateEnd.setDate(0); $scope.dateEnd.setMonth(month);
 		
-		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 3)
+		$http.get("/api/report-orderpack-sale/" + $scope.dateStart + "/" +  $scope.dateEnd + "/" + 2)
 		.then(resp => {
 			$scope.datas = resp.data;
 			$scope.DTForMonthNow=0;
 			for(let i in $scope.datas) {
 				$scope.DTForMonthNow += $scope.datas[i].total
 			}
-			console.log($scope.DTForMonthNow)
+			// console.log($scope.DTForMonthNow)
 		})
 		.catch(error => {
             console.log('error: ', error)
         })
-	}; $scope.loadDTForMonth(now.getFullYear(), now.getMonth(now.setMonth(10)), 1, now.getDate(now.setDate(0)));
+	}; 
+	if($scope.list == undefined) {
+		// console.log(now.getMonth())
+		$scope.loadDTForMonth(now.getFullYear(), now.getMonth(), 1, now.getDate(now.setDate(0)));
+	}
+	// $scope.loadDTForMonth(now.getFullYear(), now.getMonth(now.setMonth(10)), 1, now.getDate(now.setDate(0)));
 })
