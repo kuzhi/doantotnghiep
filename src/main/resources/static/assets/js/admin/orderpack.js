@@ -1,4 +1,4 @@
-app.controller("order-pack-ctrl", function($scope, $http, $location) {
+app.controller("order-pack-ctrl", function ($scope, $http, $location) {
 	$scope.titleBreadcrumb = 'Gói dịch vụ';
 	$scope.titleBread = 'Duyệt gói dịch vụ trong hệ thống';
 	$scope.keyword = "";
@@ -9,7 +9,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 	$scope.pageSort = 0;
 	$scope.page = []
 	$scope.orderPack = {}
-	$scope.load = function(number, field, sort) {
+	$scope.load = function (number, field, sort) {
 		$http.get("/api/orderpackall/" + number + "/" + field + "/" + sort).then(resp => {
 			$scope.page = resp.data;
 			$scope.pageNumber = number;
@@ -19,20 +19,25 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 		})
 	}
 
-	$scope.find = function() {
+	$scope.find = function () {
 		$http.get("/api/orderpackkeyword/" + $scope.keyword).then(resp => {
 			$scope.page = resp.data;
 
 		})
 	}
 
-	$scope.edit = function(orderpackid) {
+	$scope.edit = function (orderpackid) {
 		$http.get("/api/orderpackid/" + orderpackid).then(resp => {
 			$scope.orderPack = resp.data;
+			var date = new Date($scope.orderPack.create_at);
+			$scope.dateStr =
+				("00" + date.getDate()).slice(-2) + "/" +
+				("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+				date.getFullYear();
 		})
 	}
 
-	$scope.confirm = function(orderpackid) {
+	$scope.confirm = function (orderpackid) {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
 				confirmButton: 'btn btn-success ms-2',
@@ -57,14 +62,16 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 						status: 2,
 						userapp: { id: resp.data }
 					}
-					$http.put("/api/orderpack/update", data).then(resp => {
+					$http.put("/api/orderpack/update", data).then(resp => { 
+						$scope.load($scope.pageNumber, $scope.pageField, $scope.pageSort)
+					})
 
+					swalWithBootstrapButtons.fire(
+						'Thành công',
+						'Đã cập nhật thay đổi!',
+						'success'
+					)
 				})
-				swalWithBootstrapButtons.fire(
-					'Thành công',
-					'Đã cập nhật thay đổi!',
-					'success'
-				)
 			} else if (
 				/* Read more about handling dismissals below */
 				result.dismiss === Swal.DismissReason.cancel
@@ -72,7 +79,7 @@ app.controller("order-pack-ctrl", function($scope, $http, $location) {
 		})
 	}
 
-	$scope.becancel = function(orderpackid) {
+	$scope.becancel = function (orderpackid) {
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
 				confirmButton: 'btn btn-success ms-2',

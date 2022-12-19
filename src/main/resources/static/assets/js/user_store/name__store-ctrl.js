@@ -395,7 +395,7 @@ app.controller(
 
     $scope.orderPack = {};
 
-    $scope.status = 1;
+    // $scope.status = 1;
     $scope.listPack = [];
     $scope.loadPack = function () {
       $http.get("/api/pack").then((resp) => {

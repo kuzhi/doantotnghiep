@@ -94,7 +94,7 @@ public class Register {
                 user.get().setDeleted(false);
                 user.get().setStatus(true);
                 userAdminService.create(user.get());
-                model.addAttribute("error", "Đăng Ký thành công");
+                model.addAttribute("message", "Đăng Ký thành công");
                 model.addAttribute("user", new User());
                 return "home/account/registerUser";
               }
@@ -145,6 +145,7 @@ public class Register {
               if(check){
                 userStore.get().setDeleted(false);
                 userStore.get().setGender(true);
+                userStore.get().setStatus(true);
                 UserStore uStore = userStore.get();
 
                 userAdminKHService.create(uStore);
@@ -158,7 +159,7 @@ public class Register {
                 store.setUserstoreId(uStore);
                 store.setName(uStore.getUsername() + uStore.getId());
                 store.setEnddate(endDate);
-                
+                store.setCreate_at(new Date());
                 store.setDeleted(false);
                 storeService.create(store);
 
