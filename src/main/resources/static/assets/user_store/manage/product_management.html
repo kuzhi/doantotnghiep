@@ -6,338 +6,549 @@
 </nav>
 
 <div class="row shadow-sm bg-second mx-3 py-3 rounded mb-3">
+  <div class="col-xl-12 col-md-12 col-12">
+    <div class="row">
+      <div class="col-xl-8 d-flex mt-2">
+        <div
+          class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-light rounded"
+        >
+          <i class="fas fa-search mx-2"></i>
+          <input
+            type="search"
+            ng-model="nameProduct"
+            class="form-control form-control-sm border-0"
+            placeholder="Nhập tên sản phẩm..."
+          />
+        </div>
 
-	<div class="col-xl-12 col-md-12 col-12">
-		<div class="row">
-			<div class="col-xl-8 d-flex mt-2">
-				<div class="d-flex align-items-center bg-white w-50 px-2 py-0 border border-light rounded">
-					<i class="fas fa-search mx-2"></i>
-					<input type="search" ng-model="nameProduct" 
-					class="form-control form-control-sm border-0" placeholder="Nhập tên sản phẩm...">
-				</div>
-				
-				<!-- Tìm kiếm -->	
-				<button ng-click="findByName()" type="submit" 
-				class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold">Tìm kiếm</button>
-			</div>
-			<div class="col-xl-4 col-12 mt-2 d-flex justify-content-end">
-				<!-- Thêm -->
-				<button ng-click="insert()" class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
-				data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="add"> Thêm mới </button>
-			</div>
-		</div>
-		
-		<div class="row mt-2">
-			<!-- Select -->
-			<div class="text-end">
-				<select ng-change="getProductsbyFilter()" ng-model="list"
-				ng-options="f.id as f.name for f in listFilter" class="px-2 border-0 form-select form-select-sm">
-				  <option value="" class="fw-bold bg-info text-white"> --Vui lòng chọn-- </option>
-				</select>
-			</div>
-		</div>
-		
-		<div class="row mt-3">
-			<div class="table-responsive">
-			     <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
-                     <thead class="table_primary">
-			             <tr>
-			                 <th>Mã món</th>
-			                 <th>Tên món</th>
-			                 <th>Loại món</th>
-			                 <th>Trạng thái</th>
-			                 <th>Giá</th>
-			                 <th></th>
-			             </tr>
-			         </thead>
-			         <tbody>
-			         	<tr ng-if="pager.products == 0">
-				            <th colspan="6" class="text-center">
-								<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
-							</th>
-				        </tr>
-			             <tr ng-repeat="product in pager.products" >
-			                 <td class="text-start">SP{{product.id}}</td>
-			                 <td class="text-start">{{product.name}}</td>
-			                 <td class="text-start">{{product.category.name}}</td>
-			                 <td class="text-start">{{product.status == true ? 'Đang bán' : 'Hết hàng'}}</td>                             
-			                 <td class="text-end">{{product.price | currency:'':0}} đ</td>
-			                 <td class="text-center align-middle">
-								<!-- Edit -->
-								<button ng-click="edit(product)" class="btn btn-info btn-sm text-white"
-									data-bs-toggle="modal" data-bs-target="#editModal" > <i class="fa-regular fa-pen-to-square"></i> </button>
-								<!-- Remove -->
-								<button ng-click="delete(product)" class="btn btn-danger btn-sm" > <i class="fa-regular fa-trash-can"></i> </button>
-							</td>
-			             </tr>
-			         </tbody>
-			     </table>
-			 </div>
-		</div>
-	</div>
-	
-	<div class="row mt-3 text-start">
-		<div class="col-xl text-end">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-end mb-0">
-					<li class="page-item">
-						<a ng-click="pager.first()" class="page-link text-dark"> <i class="fas fa-step-backward"></i> </a>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.prev()" class="page-link text-dark"> <i class="fas fa-backward"></i> </a>
-					</li>
-					<li class="page-item">
-						<span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.next()" class="page-link text-dark"> <i class="fas fa-forward"></i> </a>
-					</li>
-					<li class="page-item">
-						<a ng-click="pager.last()" class="page-link text-dark"> <i class="fas fa-step-forward"></i> </a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
+        <!-- Tìm kiếm -->
+        <button
+          ng-click="findByName()"
+          type="submit"
+          class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
+        >
+          Tìm kiếm
+        </button>
+      </div>
+      <div class="col-xl-4 col-12 mt-2 d-flex justify-content-end">
+        <!-- Thêm -->
+        <button
+          ng-click="insert()"
+          class="btn btn-info btn-sm mx-2 px-4 text-white fw-bold"
+          data-bs-toggle="modal"
+          data-bs-target="#editModal"
+          data-bs-whatever="add"
+        >
+          Thêm mới
+        </button>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <!-- Select -->
+      <div class="text-end">
+        <select
+          ng-change="getProductsbyFilter()"
+          ng-model="list"
+          ng-options="f.id as f.name for f in listFilter"
+          class="px-2 border-0 form-select form-select-sm"
+        >
+          <option value="" class="fw-bold bg-info text-white">
+            --Vui lòng chọn--
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="table-responsive">
+        <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
+          <thead class="table_primary">
+            <tr>
+              <th>Mã món</th>
+              <th>Tên món</th>
+              <th>Loại món</th>
+              <th>Trạng thái</th>
+              <th>Giá</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-if="pager.products == 0">
+              <th colspan="6" class="text-center">
+                <img
+                  alt=""
+                  src="/assets/images/icon_cart_blank.png"
+                  class="w-50"
+                />
+              </th>
+            </tr>
+            <tr ng-repeat="product in pager.products">
+              <td class="text-start">SP{{product.id}}</td>
+              <td class="text-start">{{product.name}}</td>
+              <td class="text-start">{{product.category.name}}</td>
+              <td class="text-start">
+                {{product.status == true ? 'Đang bán' : 'Hết hàng'}}
+              </td>
+              <td class="text-end">{{product.price | currency:'':0}} đ</td>
+              <td class="text-center align-middle">
+                <!-- Edit -->
+                <button
+                  ng-click="edit(product)"
+                  class="btn btn-info btn-sm text-white"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal"
+                >
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+                <!-- Remove -->
+                <button
+                  ng-click="delete(product)"
+                  class="btn btn-danger btn-sm"
+                >
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 text-start">
+    <div class="col-xl text-end">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end mb-0">
+          <li class="page-item">
+            <a ng-click="pager.first()" class="page-link text-dark">
+              <i class="fas fa-step-backward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.prev()" class="page-link text-dark">
+              <i class="fas fa-backward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <span class="page-link bg-white text-dark">{{pager.page + 1}}</span>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.next()" class="page-link text-dark">
+              <i class="fas fa-forward"></i>
+            </a>
+          </li>
+          <li class="page-item">
+            <a ng-click="pager.last()" class="page-link text-dark">
+              <i class="fas fa-step-forward"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>
 
 <!-- Full screen modal add product -->
-<div class="modal fade" id="editModal" tabindex="-2" aria-labelledby="exModalLabel" aria-hidden="true" >
-	<div class="modal-dialog modal-xl modal-dialog-scrollable">
-		<div class="modal-content">
-			<div class="modal-body">
-				<h5 class="color-text text-center">{{titleTable}}</h5>
-				
-				<form action="" class="px-2" name="productForm" novalidate>
-					<!-- Image -->
-					<div class="row">
-                        <label class="form-label"> Hình ảnh <span class="text-red">*</span> </label>
-                        <div class="card mb-4 w-75 mx-auto">
-							<div class="card-body text-center image-upload">
-								<label for="file-input"> 
-									<img 
-			                          	ng-src="{{'/assets/images/Products/' + formProduct.image}}" 
-			                          	alt="{{formProduct.image}}" class="img__store rounded mb-2"
-			                          >
-								</label>
-								<div class="small font-italic text-muted mb-4">
-									Ảnh có kích thước nhỏ hơn 10MB
-								</div>
-								<input id="file-input" type="file" name="image"
-                        		onchange="angular.element(this).scope().ImageChanged(this.files)"/>
-							</div>
-						</div>
-                    </div>
-                    <!-- Name -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Tên món <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <input ng-model="formProduct.name" type="text" name="name"
-                        class="form-control" placeholder="--Vui lòng nhập--" required>
-                         
-                        <div ng-show="productForm.name.$dirty && productForm.name.$invalid">
-							<small class="text-danger fst-italic" ng-show="productForm.name.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-					    </div>
-                    </div>
-                    <!-- Price -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Giá bán <span class="text-red">*</span> </label>
-                        <!-- Input --> 
-                        <input ng-model="formProduct.price" type="number" name="price" min="1" 
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" required>
-                          
-                        <div ng-show="productForm.price.$dirty && productForm.price.$invalid">
-							<small class="text-danger fst-italic" ng-show="productForm.price.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-							<small class="text-danger fst-italic error" ng-show="productForm.price.$invalid">
-								Giá bán không phù hợp <b>*</b>
-							</small>
-					  	</div>	
-                    </div>
-                    <!-- Cate -->
-					<div class="form-group mx-auto">
-                        <div class="d-flex align-items-center py-2">
-                        	<label class="form-label"> Loại sản phẩm <span class="text-red">*</span> </label>
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-2"
+  aria-labelledby="exModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5 class="color-text text-center">{{titleTable}}</h5>
 
-							<a class="btn btn-info mx-2 btn-sm text-white" 
-							data-bs-toggle="modal" data-bs-target="#addCateModal" data-bs-dismiss="modal"> 
-								<i class="fa-solid fa-plus"></i> Thêm loại mới
-							</a>
-                        </div>
-                   		
-                   		<select id="selectCbbL" class="form-select">
-						  <option selected>--Vui lòng chọn--</option>
-						  <option ng-model="formProduct.category" ng-repeat="category in categorys"
-					  	  ng-selected="category.id == formProduct.category.id" value="{{category.id}}">
-						  	{{category.name}}
-						  </option>
-						</select>
-                    </div>
-                    <!-- Unit -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Trạng thái <span class="text-red">*</span> </label>
-                        <div class="d-flex">
-                        
-                        	<div class="form-check me-2">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" 
-								ng-model="formProduct.status" ng-value="true">
-								<label class="form-check-label" for="gridRadios1"> Đang bán </label>
-							 </div> 
-							 
-							 <div class="form-check">
-								<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" 
-								ng-model="formProduct.status" ng-value="false" > 
-								<label class="form-check-label" for="gridRadios2"> Hết hàng </label>
-							 </div>
-                        </div>
-                    </div>
-                    <!-- describe -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Mô tả <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <textarea ng-model="formProduct.description" name="description" rows="4"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" required></textarea>
-                        
-                        <div ng-show="productForm.description.$dirty && productForm.description.$invalid" >
-							<small class="text-danger fst-italic" ng-show="productForm.description.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-						  </div>
-                    </div>
-                    <!-- Create_at -->
-                    <div class="form-group mx-auto">
-                        <div class="d-flex align-items-center">
-                        	<label ng-if="formProduct.create_at != null"class="form-label"> Ngày tạo: </label>
-                        	<small class="mx-2">{{formProduct.create_at | date: 'dd-MM-yyyy'}}</small>
-                        </div>
-                        <div class="d-flex align-items-center">
-	                        <label ng-if="formProduct.update_at != null" class="form-label"> Thay đổi gần nhất: </label>
-	                        <small class="mx-2">{{formProduct.update_at | date: 'dd-MM-yyyy'}}</small>
-                        </div>
-                    </div>
-				</form>
-				
-				<div class="row mt-2">
-					<div class="col-xl-6 mt-1">
-						<button ng-click="reset()" class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
-					</div>
-					<div class="col-xl-6 mt-1">
-						<button ng-if="showBtn == true" ng-click="create()" 
-						ng-disabled="productForm.$invalid" class="btn btn-info text-white w-100">Lưu</button>
-						<button ng-if="showBtn == false" ng-click="update()"
-						ng-disabled="productForm.$invalid" class="btn btn-info text-white w-100">Lưu thay đổi</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <form action="" class="px-2" name="productForm" novalidate>
+          <!-- Image -->
+          <div class="row">
+            <label class="form-label">
+              Hình ảnh <span class="text-red">*</span>
+            </label>
+            <div class="card mb-4 w-75 mx-auto">
+              <div class="card-body text-center image-upload">
+                <label for="file-input">
+                  <img
+                    ng-src="{{'/assets/images/Products/' + formProduct.image}}"
+                    alt="{{formProduct.image}}"
+                    class="img__store rounded mb-2"
+                  />
+                </label>
+                <div class="small font-italic text-muted mb-4">
+                  Ảnh có kích thước nhỏ hơn 10MB
+                </div>
+                <input
+                  id="file-input"
+                  type="file"
+                  name="image"
+                  onchange="angular.element(this).scope().ImageChanged(this.files)"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Name -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Tên món <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formProduct.name"
+              type="text"
+              name="name"
+              class="form-control"
+              placeholder="--Vui lòng nhập--"
+              required
+            />
+
+            <div ng-show="productForm.name.$dirty && productForm.name.$invalid">
+              <small
+                class="text-danger fst-italic"
+                ng-show="productForm.name.$error.required"
+              >
+                Vui lòng không để trống <b>*</b>
+              </small>
+            </div>
+          </div>
+          <!-- Price -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Giá bán <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formProduct.price"
+              type="number"
+              name="price"
+              min="1"
+              class="w-full form-control"
+              placeholder="--Vui lòng nhập--"
+              required
+            />
+
+            <div
+              ng-show="productForm.price.$dirty && productForm.price.$invalid"
+            >
+              <small
+                class="text-danger fst-italic"
+                ng-show="productForm.price.$error.required"
+              >
+                Vui lòng không để trống <b>*</b>
+              </small>
+              <small
+                class="text-danger fst-italic error"
+                ng-show="productForm.price.$invalid"
+              >
+                Giá bán không phù hợp <b>*</b>
+              </small>
+            </div>
+          </div>
+          <!-- Cate -->
+          <div class="form-group mx-auto">
+            <div class="d-flex align-items-center py-2">
+              <label class="form-label">
+                Loại sản phẩm <span class="text-red">*</span>
+              </label>
+
+              <a
+                class="btn btn-info mx-2 btn-sm text-white"
+                data-bs-toggle="modal"
+                data-bs-target="#addCateModal"
+                data-bs-dismiss="modal"
+              >
+                <i class="fa-solid fa-plus"></i> Thêm loại mới
+              </a>
+            </div>
+
+            <select id="selectCbbL" class="form-select">
+              <option selected>--Vui lòng chọn--</option>
+              <option
+                ng-model="formProduct.category"
+                ng-repeat="category in categorys"
+                ng-selected="category.id == formProduct.category.id"
+                value="{{category.id}}"
+              >
+                {{category.name}}
+              </option>
+            </select>
+          </div>
+          <!-- Unit -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Trạng thái <span class="text-red">*</span>
+            </label>
+            <div class="d-flex">
+              <div class="form-check me-2">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios1"
+                  ng-model="formProduct.status"
+                  ng-value="true"
+                />
+                <label class="form-check-label" for="gridRadios1">
+                  Đang bán
+                </label>
+              </div>
+
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios2"
+                  ng-model="formProduct.status"
+                  ng-value="false"
+                />
+                <label class="form-check-label" for="gridRadios2">
+                  Hết hàng
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- describe -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Mô tả <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <textarea
+              ng-model="formProduct.description"
+              name="description"
+              rows="4"
+              class="w-full form-control"
+              placeholder="--Vui lòng nhập--"
+              required
+            ></textarea>
+
+            <div
+              ng-show="productForm.description.$dirty && productForm.description.$invalid"
+            >
+              <small
+                class="text-danger fst-italic"
+                ng-show="productForm.description.$error.required"
+              >
+                Vui lòng không để trống <b>*</b>
+              </small>
+            </div>
+          </div>
+          <!-- Create_at -->
+          <div class="form-group mx-auto">
+            <div class="d-flex align-items-center">
+              <label ng-if="formProduct.create_at != null" class="form-label">
+                Ngày tạo:
+              </label>
+              <small class="mx-2"
+                >{{formProduct.create_at | date: 'dd-MM-yyyy'}}</small
+              >
+            </div>
+            <div class="d-flex align-items-center">
+              <label ng-if="formProduct.update_at != null" class="form-label">
+                Thay đổi gần nhất:
+              </label>
+              <small class="mx-2"
+                >{{formProduct.update_at | date: 'dd-MM-yyyy'}}</small
+              >
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-2">
+          <div class="col-xl-6 mt-1">
+            <button
+              ng-click="reset()"
+              class="btn btn-danger w-100"
+              data-bs-dismiss="modal"
+            >
+              Hủy
+            </button>
+          </div>
+          <div class="col-xl-6 mt-1">
+            <button
+              ng-if="showBtn == true"
+              ng-click="create()"
+              ng-disabled="productForm.$invalid"
+              class="btn btn-info text-white w-100"
+            >
+              Lưu
+            </button>
+            <button
+              ng-if="showBtn == false"
+              ng-click="update()"
+              ng-disabled="productForm.$invalid"
+              class="btn btn-info text-white w-100"
+            >
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Full screen modal add category -->
-<div class="modal fade" id="addCateModal" tabindex="-1"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-xl modal-dialog-scrollable ">
-		<div class="modal-content">
-			<div class="modal-body">
-				<h5 class="color-text text-center">Chi tiết loại sản phẩm</h5>
+<div
+  class="modal fade"
+  id="addCateModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h5 class="color-text text-center">Chi tiết loại sản phẩm</h5>
 
-				<form action="" name="cateForm" novalidate>
-                    <!-- Name -->
-					<div class="form-group mx-auto">
-                        <label class="form-label"> Tên loại sản phẩm <span class="text-red">*</span> </label>
-                        <!-- Input -->
-                        <input ng-model="formCate.name" type="text" name="name"
-                        class="w-full form-control" placeholder="--Vui lòng nhập--" required>
-                        <input type="hidden" ng-model="formCate.deleted">
-                          
-                       	<div ng-show="cateForm.name.$dirty && cateForm.name.$invalid">
-							<small class="text-danger fst-italic" ng-show="cateForm.name.$error.required">
-								Vui lòng không để trống <b>*</b>
-							</small>
-					    </div>
-                    </div>
-				</form>
-				
-				<div class="progress mt-3" style="height: 2px;">
-				  <div class="progress-bar" role="progressbar"
-				  style="width: 100%; background-color: #3498db !important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-				</div>
-				
-				<div class="row mt-3">
-					<div class="table-responsive">
-					     <table class="table border text-nowrap text-md-nowrap table-hover mb-0">
-                     		<thead class="table_primary">	
-					             <tr>
-					                 <th>Mã loại</th>
-					                 <th>Tên loại</th>
-					                 <th>Ngày tạo</th>
-					                 <th>Ngày cập nhật</th>
-					                 <th></th>
-					             </tr>
-					         </thead>
-					         <tbody>
-					         	<tr ng-if="pagerCate.cates == 0">
-						            <th colspan="5" class="text-center">
-										<img alt="" src="/assets/images/icon_cart_blank.png" class="w-50">
-									</th>
-						        </tr>
-					             <tr ng-repeat="cate in pagerCate.cates">
-					                 <td class="text-start">{{cate.id}}</td>
-					                 <td class="text-start">{{cate.name}}</td>
-					                 <td class="text-start">{{cate.create_at | date: 'dd-MM-yyyy'}}</td>
-					                 <td class="text-start">{{cate.update_at | date: 'dd-MM-yyyy'}}</td>
-					                 <td class="text-center align-middle">
-					                 	<!-- Edit -->
-										<button ng-click="editCate(cate)" class="btn btn-info btn-sm text-white"> 
-											<i class="fa-regular fa-pen-to-square"></i> 
-										</button>
-										<!-- Delete -->
-										<button ng-click="deleteCate(cate)" class="btn btn-danger btn-sm"> 
-											<i class="fa-regular fa-trash-can"></i>
-										</button>
-									</td>
-					             </tr>
-					         </tbody>
-					     </table>
-					 </div>
-				</div>
-				
-				<div class="row mt-3 text-start">
-					<div class="col-xl text-end">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination justify-content-end mb-0">
-								<li class="page-item">
-									<a ng-click="pagerCate.first()" class="page-link text-dark" > <i class="fas fa-step-backward"></i> </a>
-								</li>
-								<li class="page-item">
-									<a ng-click="pagerCate.prev()" class="page-link text-dark" > <i class="fas fa-backward"></i> </a>
-								</li>
-								<li class="page-item">
-									<span class="page-link bg-white text-dark">{{pagerCate.page + 1}}</span>
-								</li>
-								<li class="page-item">
-									<a ng-click="pagerCate.next()" class="page-link text-dark" > <i class="fas fa-forward"></i> </a>
-								</li>
-								<li class="page-item">
-									<a ng-click="pagerCate.last()" class="page-link text-dark" > <i class="fas fa-step-forward"></i> </a>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-xl-6 mt-2">
-						<button class="btn btn-danger w-100" data-bs-dismiss="modal">Hủy</button>
-					</div>
-					<div class="col-xl-6 mt-2">
-						<button ng-click="createCate()" ng-disabled="cateForm.$invalid" class="btn btn-info text-white w-100">Lưu thay đổi</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <form action="" name="cateForm" novalidate>
+          <!-- Name -->
+          <div class="form-group mx-auto">
+            <label class="form-label">
+              Tên loại sản phẩm <span class="text-red">*</span>
+            </label>
+            <!-- Input -->
+            <input
+              ng-model="formCate.name"
+              type="text"
+              name="name"
+              class="w-full form-control"
+              placeholder="--Vui lòng nhập--"
+              required
+            />
+            <input type="hidden" ng-model="formCate.deleted" />
+
+            <div ng-show="cateForm.name.$dirty && cateForm.name.$invalid">
+              <small
+                class="text-danger fst-italic"
+                ng-show="cateForm.name.$error.required"
+              >
+                Vui lòng không để trống <b>*</b>
+              </small>
+            </div>
+          </div>
+        </form>
+
+        <div class="progress mt-3" style="height: 2px">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: 100%; background-color: #3498db !important"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="table-responsive">
+            <table
+              class="table border text-nowrap text-md-nowrap table-hover mb-0"
+            >
+              <thead class="table_primary">
+                <tr>
+                  <th>Mã loại</th>
+                  <th>Tên loại</th>
+                  <th>Ngày tạo</th>
+                  <th>Ngày cập nhật</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-if="pagerCate.cates == 0">
+                  <th colspan="5" class="text-center">
+                    <img
+                      alt=""
+                      src="/assets/images/icon_cart_blank.png"
+                      class="w-50"
+                    />
+                  </th>
+                </tr>
+                <tr ng-repeat="cate in pagerCate.cates">
+                  <td class="text-start">{{cate.id}}</td>
+                  <td class="text-start">{{cate.name}}</td>
+                  <td class="text-start">
+                    {{cate.create_at | date: 'dd-MM-yyyy'}}
+                  </td>
+                  <td class="text-start">
+                    {{cate.update_at | date: 'dd-MM-yyyy'}}
+                  </td>
+                  <td class="text-center align-middle">
+                    <!-- Edit -->
+                    <button
+                      ng-click="editCate(cate)"
+                      class="btn btn-info btn-sm text-white"
+                    >
+                      <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <!-- Delete -->
+                    <button
+                      ng-click="deleteCate(cate)"
+                      class="btn btn-danger btn-sm"
+                    >
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row mt-3 text-start">
+          <div class="col-xl text-end">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-end mb-0">
+                <li class="page-item">
+                  <a ng-click="pagerCate.first()" class="page-link text-dark">
+                    <i class="fas fa-step-backward"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a ng-click="pagerCate.prev()" class="page-link text-dark">
+                    <i class="fas fa-backward"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <span class="page-link bg-white text-dark"
+                    >{{pagerCate.page + 1}}</span
+                  >
+                </li>
+                <li class="page-item">
+                  <a ng-click="pagerCate.next()" class="page-link text-dark">
+                    <i class="fas fa-forward"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a ng-click="pagerCate.last()" class="page-link text-dark">
+                    <i class="fas fa-step-forward"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-6 mt-2">
+            <button class="btn btn-danger w-100" data-bs-dismiss="modal">
+              Hủy
+            </button>
+          </div>
+          <div class="col-xl-6 mt-2">
+            <button
+              ng-click="createCate()"
+              ng-disabled="cateForm.$invalid"
+              class="btn btn-info text-white w-100"
+            >
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

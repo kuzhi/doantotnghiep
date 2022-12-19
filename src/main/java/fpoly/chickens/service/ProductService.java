@@ -50,4 +50,10 @@ public interface ProductService {
 
 	// Find product by id
 	Product findById(Integer id);
+
+	// Find product by id
+	Product findByIdProduct(Integer id);
+
+	// find product category by id
+	Integer findByCategory(Integer id);
 }
