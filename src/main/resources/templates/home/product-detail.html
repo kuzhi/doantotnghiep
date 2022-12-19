@@ -19,7 +19,7 @@
           </div>
           <div class="col-xl-6 col-sm-12 py-3 px-3">
             <div class="row">
-              <h3 th:text="${product.name}"></h3>
+              <h3>[[${product.name}]]</h3>
             </div>
             <div class="row">
               <div class="col-12 text-start">
@@ -54,55 +54,58 @@
             </div>
           </div>
         </div>
-      </form>
 
-      <div class="row">
-        <div class="col">
-          <h3 class="mx-3">Sản phẩm cùng loại:</h3>
-        </div>
-      </div>
-      <div class="progress my-2" style="height: 1px">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-label="Example 1px high"
-          style="width: 75%"
-          aria-valuenow="25"
-          aria-valuemin="0"
-          aria-valuemax="100"
-        ></div>
-      </div>
-      <div class="row px-2">
-        <div
-          ng-repeat="product in pager2.products | orderBy: propertyName"
-          class="col-xl-3 col-md-4 col-12 card border border-2 mb-3"
-        >
-          <div class="p-2">
-            <a th:href="@{/home/product/detail?id={{product.id}}}">
-              <img
-                ng-src="/assets/images/Products/{{product.image==''?'icon_food.png':product.image}}"
-                class="card-img-top"
-                alt="{{product.image}}"
-                style="width: 100%; height: 12.5em"
-              />
-            </a>
+        <div class="row">
+          <div class="col">
+            <h3 class="mx-3">Sản phẩm cùng loại:</h3>
           </div>
-          <div class="card-body px-0">
-            <h5 class="card-title text-truncate">{{product.name}}</h5>
+        </div>
+        <div class="progress my-2" style="height: 1px">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            aria-label="Example 1px high"
+            style="width: 75%"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+        <div class="row px-2">
+          <div
+            th:each="CateProduct : ${cateProduct.?[category.id == product.category.id]}"
+            th:value="${product.category.id}"
+            class="col-xl-3 col-md-4 col-12 card border border-2 mb-3"
+          >
+            [[${product.category.id}]]
+            <div class="p-2">
+              <a th:href="@{/home/product/detail?id={{CateProduct.id}}}">
+                <img
+                  th:src="@{/assets/images/Products/}+${CateProduct.image}"
+                  class="card-img-top"
+                  alt="{{product.image}}"
+                  style="width: 100%; height: 12.5em"
+                />
+              </a>
+            </div>
+            <div class="card-body px-0">
+              <h5 class="card-title text-truncate">{{product.name}}</h5>
 
-            <div class="d-flex justify-content-between">
-              <div class="col-xl-10 col-10">
-                <div class="d-flex">
-                  <span class="fw-bold text-truncate text-secondary me-1">
-                    {{product.price | currency:'':0}}
-                  </span>
-                  <span class="fw-bold text-secondary">đ</span>
+              <div class="d-flex justify-content-between">
+                <div class="col-xl-10 col-10">
+                  <div class="d-flex">
+                    <span class="fw-bold text-truncate text-secondary me-1">
+                      [[${#numbers.formatDecimal(product.price, 0, 'COMMA', 0,
+                      'POINT')}]]
+                    </span>
+                    <span class="fw-bold text-secondary">đ</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </section>
   </body>
 </html>
