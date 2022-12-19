@@ -70,18 +70,14 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
     });
   };
 
-  $scope.products2 = [];
-  $scope.listProducts2 = function (id) {
-    $http.get("/api/product/sort/" + id).then((resp) => {
-      $scope.products2 = resp.data;
-
-      $scope.products.forEach((us) => {
-        us.create_at = new Date(us.create_at);
-        us.update_at = new Date(us.update_at);
-      });
+  $scope.productById = [];
+  $scope.editProduct = function (id) {
+    location.href = "/home/product/detail";
+    $http.get("/api/product/79").then((resp) => {
+      $scope.productById = resp.data;
+      console.log(productById);
     });
   };
-  $scope.listProducts2();
   $scope.listProducts($scope.sid);
 
   // Phân trang và điều hướng

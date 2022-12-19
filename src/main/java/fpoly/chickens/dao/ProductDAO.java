@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import fpoly.chickens.entity.Product;
 import fpoly.chickens.entity.Store;
 
-public interface ProductDAO extends JpaRepository<Product, Integer>{
-	
+public interface ProductDAO extends JpaRepository<Product, Integer> {
+
 	// Load product by store
 	@Query("SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = ?2 ")
 	List<Product> findByStore(Store storeid, Boolean delete);
@@ -19,14 +19,22 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 	// Load product by store with status == true
 	@Query("SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Status = ?2")
 	List<Product> findByStoreWithStatus(Store storeid, Boolean status);
-	
+
 	@Query("SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Status = ?2")
 	Page<Product> loadByStoreWithStatus(Pageable pageable, Store storeid, Boolean status);
-	
+
 	// Find by name
 	@Query(value = "SELECT o FROM Product o WHERE o.Name LIKE ?1 AND o.Deleted = 0 AND o.category.store LIKE ?2 ")
 	List<Product> findByName(String name, Store storeid);
-	
+
+	// Find category by id
+	@Query(value = "select CategoryId from Product where ID = ?1 and Deleted=0", nativeQuery = true)
+	Integer findByCategory(Integer id);
+
+	// Find category by id
+	@Query(value = "select * from Product where ID = ?1", nativeQuery = true)
+	Product findByIdProduct(Integer id);
+
 	// Sort A-Z
 	@Query(value = "SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = 0 ORDER BY o.Name ASC")
 	List<Product> sortAZ(Store storeid);
@@ -34,18 +42,17 @@ public interface ProductDAO extends JpaRepository<Product, Integer>{
 	// Sort A-Z
 	@Query(value = "SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = 0 ORDER BY o.Name DESC")
 	List<Product> sortZA(Store storeid);
-	
+
 	// Sort A-Z
 	@Query(value = "SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = 0 ORDER BY o.Price ASC")
 	List<Product> sort09(Store storeid);
-	
+
 	// Sort A-Z
 	@Query(value = "SELECT o FROM Product o WHERE o.category.store LIKE ?1 AND o.Deleted = 0 ORDER BY o.Price DESC")
 	List<Product> sort90(Store storeid);
 
-	
 	// Sort Category
 	@Query(value = "SELECT o FROM Product o WHERE o.category.id= ?1 AND o.Deleted = 0")
 	List<Product> sortCategory(Integer id);
-	
+
 }

@@ -120,4 +120,17 @@ public class ProductImplement implements ProductService {
 		// TODO Auto-generated method stub
 		return productDAO.findByStore(store, delete);
 	}
+
+	@Override
+	public Integer findByCategory(Integer id) {
+		// TODO Auto-generated method stub
+		return productDAO.findByCategory(id);
+
+	}
+
+	@Override
+	public Product findByIdProduct(Integer id) {
+		// TODO Auto-generated method stub
+		return productDAO.findByIdProduct(id);
+	}
 }

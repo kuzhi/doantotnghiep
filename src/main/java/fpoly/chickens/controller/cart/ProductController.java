@@ -32,8 +32,9 @@ public class ProductController {
 			Integer ProductId = id.get();
 			Product sp = ProductService.findById(ProductId);
 			model.addAttribute("product", sp);
+			Integer categoryId = ProductService.findByCategory(ProductId);
 			List<Product> products = new ArrayList<>();
-			products = ProductService.sortCategory(4);
+			products = ProductService.sortCategory(categoryId);
 			model.addAttribute("cateProduct", products);
 
 		} else {
