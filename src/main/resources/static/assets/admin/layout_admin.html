@@ -54,45 +54,46 @@
 				<div class="text-center div__logo">
 					<img class="img-fluid d-block w-25" src="/assets/images/logo_chicken.png" alt="Logo">
 				</div>
-				<!--  -->
+				
 				<div class="btn-group account__user">
-					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
-					<ul class="dropdown-menu">
+					<!--  -->
+					<div class="mx-3">
+						<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
+						<ul class="dropdown-menu">
+							<li ng-repeat="noti in notis">
+								<a class="dropdown-item" >{{noti.notes}}</a>
+							</li>
+						</ul>
 						
+					</div>
+
+					<div>
+						<label id="user" aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > {{userApp.fullname}} </label>
+						<ul for="user" class="dropdown-menu dropdown-menu-end">
+							<li>
+								<a class="dropdown-item" href="#!profile"> Cá nhân </a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="dropdown account__user-mobile">
+					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
+					<ul class="dropdown-menu dropdown-menu-end">
 						<li ng-repeat="noti in notis">
 							<a class="dropdown-item" >{{noti.notes}}</a>
 						</li>
 					</ul>
 					
 				</div>
-				
-				<div class="btn-group account__user">
-					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > {{userApp.fullname}} </label>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#!profile"> Cá nhân </a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
-						</li>
-					</ul>
-					
-				</div>
-				<div class="dropdown dropstart account__user-mobile">
-					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
-					<ul class="dropdown-menu">
-						
-						<li>
-							<a class="dropdown-item" href="/user-app/logoff"> Đăng xuất </a>
-						</li>
-					</ul>
-					
-				</div>
-				<div class="dropdown dropstart account__user-mobile">
+				<div class="dropdown account__user-mobile">
 					<label aria-expanded="false" data-bs-toggle="dropdown" class="btn dropdown-toggle" > 
 						{{userApp.fullname}}
 					</label>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu dropdown-menu-end">
 						<li>
 							<a class="dropdown-item" href="#!profile"> Cá nhân </a>
 						</li>
