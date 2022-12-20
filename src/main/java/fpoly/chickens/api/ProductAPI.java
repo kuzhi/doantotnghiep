@@ -29,7 +29,13 @@ public class ProductAPI {
 	ProductService productService;
 	@Autowired
 	UploadService uploadService;
-	
+
+	// find product by id
+	@GetMapping("{id}")
+	public void findbyIdProduct(@PathVariable("id") Integer id) {
+		productService.findByIdProduct(id);
+	}
+
 	// Load
 	@GetMapping
 	public List<Product> findAll() {
@@ -40,7 +46,7 @@ public class ProductAPI {
 	@GetMapping("store/{storeid}")
 	public List<Product> findAllByStore(@PathVariable("storeid") Optional<Integer> storeid) {
 		Boolean delete = false;
-		
+
 		return productService.findAllProductByStore(storeid.get(), delete);
 	}
 
@@ -50,59 +56,59 @@ public class ProductAPI {
 			@PathVariable("status") Optional<Boolean> status) {
 		return productService.findAllProductByStoreWithStatus(storeid.get(), status.get());
 	}
-	
+
 	// Create
 	@PostMapping
 	public ResponseEntity<Product> create(@RequestBody Optional<Product> product) {
-		if(product.isPresent()) {
+		if (product.isPresent()) {
 			productService.create(product.get());
 		}
-			
-		return  ResponseEntity.ok().build();
+
+		return ResponseEntity.ok().build();
 	}
-	
+
 	// Update
 	@PutMapping("{id}")
 	public ResponseEntity<Void> update(@PathVariable("id") Optional<String> id,
 			@RequestBody Product product) {
 		productService.update(product);
-		
+
 		return ResponseEntity.ok().build();
 	}
-	
+
 	// Delete
 	@DeleteMapping("{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		productService.delete(id);
 	}
-	
+
 	// Find by name
 	@GetMapping("/{nameProduct}/{storeid}")
 	public ResponseEntity<List<Product>> findByName(
 			@PathVariable("nameProduct") Optional<String> nameProduct,
 			@PathVariable("storeid") Optional<Integer> storeid) {
-		
-		return ResponseEntity.ok(productService.findProductByName("%"+nameProduct.get()+"%", storeid.get()));
+
+		return ResponseEntity.ok(productService.findProductByName("%" + nameProduct.get() + "%", storeid.get()));
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/a-z/{storeid}")
 	public List<Product> sortAZ(@PathVariable("storeid") Optional<Integer> storeid) {
 		return productService.sortAZ(storeid.get());
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/z-a/{storeid}")
 	public List<Product> sortZA(@PathVariable("storeid") Optional<Integer> storeid) {
 		return productService.sortZA(storeid.get());
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/0-9/{storeid}")
 	public List<Product> sort09(@PathVariable("storeid") Optional<Integer> storeid) {
 		return productService.sort09(storeid.get());
 	}
-	
+
 	// Sort A-Z
 	@GetMapping("/sort/9-0/{storeid}")
 	public List<Product> sort90(@PathVariable("storeid") Optional<Integer> storeid) {
