@@ -155,7 +155,7 @@ public class StoreImplement implements StoreService {
 
 		
 			if(checkDateAfter){
-				return "Còn gần ba ngày nữa là hết hạn gói đăng ký của bạn vui lòng liên hệ nhân viên hỗ trợ để gia hạn thêm!";
+				return "Ngày hết hạn gói đăng ký vào ngày "+ store.getEnddate() +" vui lòng liên hệ nhân viên hỗ trợ để gia hạn thêm!";
 			}
 		}
 		return null;
