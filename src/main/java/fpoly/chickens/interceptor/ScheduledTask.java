@@ -20,7 +20,7 @@ public class ScheduledTask {
     @Autowired
     StoreDAO storeDao;
 
-    @Scheduled(cron = "0 42 17 * * ?")
+    @Scheduled(cron = "0 41 18 * * ?")
     public void run() throws InterruptedException{
         Date today = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -28,16 +28,15 @@ public class ScheduledTask {
 
         List<Store> list = storeDao.findAll();
 
-       ListIterator<Store> listIter = list.listIterator();
-
-       while(listIter.hasNext()){
-        Store stores = listIter.next();
-        Boolean checkEqualDate = today.after(listIter.next().getEnddate());
+       for(Store stores : list){
+        Boolean checkEqualDate = today.after(stores.getEnddate());
         if(checkEqualDate){
-            stores.setDeleted(true);
-            System.out.println(stores);
-            storeDao.saveAndFlush(stores);
-        }
+                    stores.setDeleted(true);
+                    storeDao.saveAndFlush(stores);
+                }
        }
+
+    //   
+       
     }
 }
