@@ -184,6 +184,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   };
 
   $scope.add = function (pd) {
+    console.log({pd})
     //thêm sp vào giỏ
     if ($scope.userid == 0) {
       location.href = "/home/auth/form";
