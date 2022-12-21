@@ -4,7 +4,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   $scope.amountItems = 0;
   $scope.userid = Number(document.getElementById("userid").value);
   $scope.sid = Number(document.getElementById("storeid").value);
-  console.log($scope.sid)
+  console.log($scope.sid);
 
   $scope.regexPhone =
     /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
@@ -71,14 +71,14 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
     });
   };
 
-  $scope.productById = [];
-  $scope.editProduct = function (id) {
-    location.href = "/home/product/detail";
-    $http.get("/api/product/79").then((resp) => {
-      $scope.productById = resp.data;
-      console.log(productById);
-    });
-  };
+  // $scope.productById = [];
+  // $scope.editProduct = function (id) {
+  //   location.href = "/home/product/detail";
+  //   $http.get("/api/product/79").then((resp) => {
+  //     $scope.productById = resp.data;
+  //     console.log(productById);
+  //   });
+  // };
   $scope.listProducts($scope.sid);
 
   // Phân trang và điều hướng
@@ -184,7 +184,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   };
 
   $scope.add = function (pd) {
-    console.log({pd})
+    console.log({ pd });
     //thêm sp vào giỏ
     if ($scope.userid == 0) {
       location.href = "/home/auth/form";
