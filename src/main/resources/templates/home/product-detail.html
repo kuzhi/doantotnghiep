@@ -46,7 +46,7 @@
             <div class="text-secondary" style="height: 5px"><hr /></div>
             <div class="row my-1">
               <div class="col text-center">
-                <button ng-Click="add(product)" class="btn btn-primary w-75">
+                <button ng-click="add(product)" class="btn btn-primary w-75">
                   <i class="fas fa-shopping-basket"></i>
                   Thêm vào giỏ
                 </button>
@@ -75,17 +75,18 @@
         <div class="row px-2">
           <div
             th:each="CateProduct,iterStat : ${cateProduct} "
-            th:if="${iterStat.count} < 5"
+            th:if="${iterStat.count < 5}"
             class="col-xl-3 col-md-4 col-12 card border border-2 mb-3"
           >
             <div class="p-2">
-              <a th:href="@{/home/product/detail?id={{CateProduct.id}}}">
+              <a th:href="@{/home/product/detail?id=}+${CateProduct.Id}">
                 <img
                   th:src="@{/assets/images/Products/}+${CateProduct.image}"
                   class="card-img-top"
                   alt="{{CateProduct.image}}"
                   style="width: 100%; height: 12.5em"
                 />
+                
               </a>
             </div>
             <div class="card-body px-0">

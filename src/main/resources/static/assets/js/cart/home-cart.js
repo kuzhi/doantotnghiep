@@ -184,6 +184,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   };
 
   $scope.add = function (pd) {
+    console.log({pd})
     //thêm sp vào giỏ
     if ($scope.userid == 0) {
       location.href = "/home/auth/form";
@@ -195,7 +196,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
         amount: 1,
       };
       $http.post("/api/cart/add", cart).then((resp) => {
-        location.href = "/home/cart/view/" + $scope.sid;
+        //location.href = "/home/cart/view/" + $scope.sid;
         $scope.loadCart($scope.sid, $scope.userid);
       });
     }
