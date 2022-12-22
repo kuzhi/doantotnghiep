@@ -71,9 +71,9 @@ public class OrderPackImplement implements OrderPackService {
 		}
 		Sort sort;
 		if (checkSort % 2 == 0) {
-			sort = Sort.by(Direction.DESC, field);
-		} else {
 			sort = Sort.by(Direction.ASC, field);
+		} else {
+			sort = Sort.by(Direction.DESC, field);
 		}
 		Pageable pageable = PageRequest.of(pageNumber, 10, sort);
 		Page<OrderPack> page = orderPackDao.findAllOrderpack(pageable);

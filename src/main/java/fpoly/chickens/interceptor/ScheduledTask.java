@@ -20,7 +20,7 @@ public class ScheduledTask {
     @Autowired
     StoreDAO storeDao;
 
-    @Scheduled(cron = "0 41 18 * * ?")
+    @Scheduled(cron = "0 43 19 * * ?")
     public void run() throws InterruptedException{
         Date today = new Date();
         Calendar calendar = Calendar.getInstance();
