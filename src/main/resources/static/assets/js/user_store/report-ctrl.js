@@ -7,10 +7,10 @@ app.controller("report-all-ctrl", function($scope, $http, $location) {
 		$http.get("/api/get")
 			.then(resp => {
 				$scope.userid = resp.data;
-				console.log(resp.data)
+				// console.log(resp.data)
 				// Lấy storeid
 				$http.get("/api/getStoreToken").then(resp => {
-					console.log(resp.data)
+					// console.log(resp.data)
 						const storeid = resp.data;
 
 						const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));

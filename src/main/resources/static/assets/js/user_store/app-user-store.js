@@ -129,12 +129,14 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 				})
 				$http.get("/api/support/findUserAppByUserStore/" + $scope.userid).then((resp) => {
 					$scope.userApp = resp.data;
-					$scope.userApp.phone =
-			        $scope.userApp.phone.substr(0, 3) +
-			        "-" +
-			        $scope.userApp.phone.substr(3, 3) +
-			        "-" +
-			        $scope.userApp.phone.substr(6, 4);
+					if($scope.userApp.phone != null) {
+						$scope.userApp.phone =
+						$scope.userApp.phone.substr(0, 3) +
+						"-" +
+						$scope.userApp.phone.substr(3, 3) +
+						"-" +
+						$scope.userApp.phone.substr(6, 4);
+					}
 				})
 
 
