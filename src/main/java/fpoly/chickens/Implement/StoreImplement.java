@@ -88,8 +88,7 @@ public class StoreImplement implements StoreService {
 		if (findStore.getName().equalsIgnoreCase(store.getName())
 				|| findStore.getPhone().equalsIgnoreCase(store.getPhone())
 				|| findStore.getAddress().equalsIgnoreCase(store.getAddress())) {
-			System.out.println(findStore.getName());
-			System.out.println(store.getName());
+			
 			return storeDAO.saveAndFlush(store);
 
 		}
@@ -128,10 +127,8 @@ public class StoreImplement implements StoreService {
 	public Store findById(Integer storeid) {
 		// TODO Auto-generated method stub
 		Store getStore = storeDAO.findById(storeid).get();
-		if (getStore.getDeleted() == false) {
 			return getStore;
-		}
-		return null;
+		
 	}
 
 	@Override

@@ -124,9 +124,8 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 			  //====================================== Bắt đầu xử lý
 			 
 			  var store = angular.copy($scope.formStore);
-			  console.log({store})
 			  var url = $scope.url;
-			  if(store.enddate == false){
+			  
 				$http
 				.patch("/api/store/update", store)
 				.then((resp) => {
@@ -138,25 +137,10 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 					"Cập nhật thành công!",
 					"success"
 				  );
-				  // $scope.reset()
-				})
-				.catch((error) => {
-				  // Thông báo
-				  Swal.fire({
-					icon: "error",
-					title: "Cập nhật thất bại!",
-				  });
-				  console.log("Error", error);
-				});
+				  
 				
-			  }
-			  else{
-				Swal.fire({
-				  icon: "error",
-				  title: "Không thể cập nhật khi đơn đã hoàn thành!",
-				});
-			  
-			  }
+				
+			  })
 			  //====================================== Kết thúc xử lý
 			} else if (
 			  /* Read more about handling dismissals below */
