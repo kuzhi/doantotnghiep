@@ -27,7 +27,7 @@
                 th:text="'Giá: '+*{#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}+' đ'"
               ></h4>
               <small
-                >Mã sản phẩm: <b>SP-<b th:text="*{id}"></b></b>
+                >Mã sản phẩm: <b>SP-<b th:text="${product.id}"></b></b>
               </small>
             </div>
           </div>
