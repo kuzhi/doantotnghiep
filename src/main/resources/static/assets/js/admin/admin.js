@@ -85,9 +85,11 @@ app.controller("admin-ctrl", function($scope, $http, $location) {
 				})
 			})
 			$http.get("/api/support/getNotify/"+$scope.userid).then( (resp)=>{
-
+				
 				$scope.notis = resp.data
-			
+			if ($scope.notis.notes == null) {
+											$scope.notis.notes = "Không có thông báo nào"
+										}
 				
 			})
 	    })

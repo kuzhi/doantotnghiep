@@ -62,10 +62,19 @@ public class StoreAPI {
 	@PatchMapping("{id}")
 	public ResponseEntity<Store> update(@PathVariable("id") Optional<Integer> id,
 			@RequestBody Store Store) {
+			
 		
 		return ResponseEntity.ok(storeService.update(Store));
 	}
 
+	@PatchMapping("update")
+	public ResponseEntity<Store> updateSale(@RequestBody Optional <Store> Store) {
+			
+		if(Store.isPresent()){
+			return ResponseEntity.ok(storeService.update(Store.get()));
+		}
+		return null;
+	}
 	// Delete
 	@DeleteMapping("/{storeid}")
 	public void delete(@PathVariable("storeid") Integer storeid) {

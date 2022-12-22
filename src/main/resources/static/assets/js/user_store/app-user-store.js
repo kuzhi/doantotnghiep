@@ -109,6 +109,7 @@ app.controller("app-ctrl", function($scope, $http, $location, $q) {
 									})
 									$http.get("/api/store/notification/" + storeid).then(resp => {
 										$scope.notis = resp.data;
+										
 										if ($scope.notis.notes == null) {
 
 											$scope.notis.notes = "Không có thông báo nào"
