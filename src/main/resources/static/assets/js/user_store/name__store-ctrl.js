@@ -261,6 +261,7 @@ app.controller(
 
     // Create
     $scope.create = function () {
+      var defer = $q.defer();
       var store = angular.copy($scope.formStore);
       store.userstoreId = $scope.listStoreByStoreId.userstoreId;
       store.deleted = false;
@@ -289,7 +290,11 @@ app.controller(
         }
       }
       if ($scope.value == true) {
-        $http
+        $http.get("/api/store/countStore/"+$scope.userid).then(resp =>{
+          let countStore = resp.data;
+          if(countStore<5){
+            defer.resolve(
+              $http
           .post("/api/store/", store)
           .then((resp) => {
             console.log(resp.data);
@@ -306,7 +311,18 @@ app.controller(
               title: "Thêm thất bại!",
             });
             console.log("Error: ", error);
-          });
+          })
+            )
+          }
+          else{
+            Swal.fire({
+              icon: "error",
+              title: "Chỉ được tạo tối đa năm cửa hàng!",
+            });
+            
+          }
+        })
+        
       }
     };
 
