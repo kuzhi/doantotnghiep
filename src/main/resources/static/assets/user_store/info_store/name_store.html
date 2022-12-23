@@ -185,7 +185,7 @@
             >
             <span>Giá: {{p.price | currency:'':0}} đ</span> <br />
             <a
-              ng-click="registerOrderPack(p.id)"
+              ng-click="registerOrderPack(p.id, p.price)"
               class="btn btn-info w-100 mt-1 text-white fw-bold"
               >Đăng ký ngay</a
             >

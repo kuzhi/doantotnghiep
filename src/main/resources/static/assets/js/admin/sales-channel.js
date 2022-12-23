@@ -149,6 +149,66 @@ app.controller("sales-channel-ctrl", function($scope, $http, $location, $q) {
 			}
 		  });
 	  };
+
+	  $scope.trial = function(store){
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+			  confirmButton: "btn btn-danger ms-2",
+			  cancelButton: "btn btn-success",
+			},
+			buttonsStyling: false,
+		  });
+	  
+		  swalWithBootstrapButtons
+			.fire({
+			  title: "Thông báo",
+			  icon: "warning",
+			  text: "Bạn có chắc muốn thực hiện?",
+			  showCancelButton: true,
+			  confirmButtonText: "OK",
+			  cancelButtonText: "Quay lại",
+			  reverseButtons: true,
+			  showClass: {
+				popup: "animate__animated animate__fadeInDownBig",
+			  },
+			  hideClass: {
+				popup: "animate__animated animate__fadeOutUpBig",
+			  },
+			})
+			.then((result) => {
+			  if (result.isConfirmed) {
+				//====================================== Bắt đầu xử lý
+				if(store.enddate<new Date()){
+
+					$http
+					.patch("/api/store/trial", store)
+					.then((resp) => {
+					  $scope.init();
+		
+					  // Thông báo
+					  swalWithBootstrapButtons.fire(
+						"Thành công",
+						'Tài khoản đã được mở khóa đến cuối ngày!',
+						"success"
+					  );
+					})
+				}else{
+					Swal.fire({
+						icon: 'info',
+						title: 'Cửa hàng chưa hết hạn!'
+					});
+				}
+				//====================================== Kết thúc xử lý
+			  } else if (
+				/* Read more about handling dismissals below */
+				result.dismiss === Swal.DismissReason.cancel
+			  ) {
+			  }
+			});
+		// console.log(store)
+		
+	  }
+
 	//
 	$scope.listFilter = [
 		{ id: 1, name: "Fullname giảm dần A-Z" },

@@ -75,6 +75,17 @@ public class StoreAPI {
 		}
 		return null;
 	}
+
+	@PatchMapping("trial")
+	public ResponseEntity<Store> trial(@RequestBody Optional <Store> Store) {
+			
+		if(Store.isPresent()){
+			return ResponseEntity.ok(storeService.trial(Store.get()));
+		}
+		return null;
+	}
+
+
 	// Delete
 	@DeleteMapping("/{storeid}")
 	public void delete(@PathVariable("storeid") Integer storeid) {
