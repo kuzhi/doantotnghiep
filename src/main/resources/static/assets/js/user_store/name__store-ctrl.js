@@ -292,7 +292,7 @@ app.controller(
       if ($scope.value == true) {
         $http.get("/api/store/countStore/"+$scope.userid).then(resp =>{
           let countStore = resp.data;
-          if(countStore<5){
+          if(countStore<=5){
             defer.resolve(
               $http
           .post("/api/store/", store)

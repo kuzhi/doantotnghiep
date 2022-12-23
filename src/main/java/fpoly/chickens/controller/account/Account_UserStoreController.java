@@ -81,7 +81,7 @@ public class Account_UserStoreController {
 						return "home/account/login";
 
 					}
-					model.addAttribute("messageS", "Cửa hàng của bạn đã bị xóa!");
+					model.addAttribute("messageS", "Cửa hàng của bạn tạm ngưng hoạt động vui lòng liên hệ đến công ty để hỗ trợ!");
 					return "home/account/login";
 					
 				}
