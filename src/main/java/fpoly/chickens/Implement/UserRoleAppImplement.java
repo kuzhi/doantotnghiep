@@ -50,7 +50,6 @@ public class UserRoleAppImplement  implements UserRoleAppService{
     @Override
     public UserRoleApp update(UserRoleApp support) {
         // TODO Auto-generated method stub
-        System.out.println(support);
         return uDao.saveAndFlush(support);
     }
 
