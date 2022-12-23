@@ -45,7 +45,7 @@ app.controller(
               $http.get("/api/store/list/" + $scope.userid).then((resp) => {
                 if (resp.data) {
                   $scope.listStoreByUserId = resp.data;
-                  console.log(resp.data);
+                  // console.log(resp.data);
                 } else {
                   Swal.fire({
                     icon: "error",
@@ -415,7 +415,11 @@ app.controller(
 
     $scope.orderPack = {};
 
-    $scope.registerOrderPack = function (packid) {
+    $scope.registerOrderPack = function (packid, packprice) {
+      const pPrice = new Intl.NumberFormat('vi-VI', {
+        style: 'currency',
+        currency: 'VND'
+      })
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: "btn btn-success ms-2",
@@ -426,9 +430,12 @@ app.controller(
 
       swalWithBootstrapButtons
         .fire({
-          title: "Thông báo",
-          icon: "warning",
-          text: "Bạn chắc chắn muốn đăng ký gói này?",
+          title: "Giá: "+pPrice.format(packprice),
+          // icon: "warning",
+          text: "Vui lòng thanh toán, để đăng ký dịch vụ! (Nội dung chuyển khoản là *tên đăng nhập + tên cửa hàng* của bạn!)",
+          imageUrl: "/assets/images/qr.jpg",
+          imageWidth: 400,
+          imageHeight: 400,
           showCancelButton: true,
           confirmButtonText: "OK",
           cancelButtonText: "Quay lại",
@@ -486,7 +493,7 @@ app.controller(
             $http.put("/api/orderpack/update", order).then((resp) => {});
             swalWithBootstrapButtons.fire(
               "Thành công",
-              "Đã đăng ký thành công gói gia hạn!",
+              "Gói gia hạn đã được hủy!",
               "success"
             );
           } else if (

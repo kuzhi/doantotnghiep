@@ -75,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="support in supports">
+            <tr ng-repeat="support in pager.stores">
               <td>{{support.userStore.username}}</td>
               <td>{{support.userApp.fullname}}</td>
               <td>{{support.status ? 'Hoàn thành':'Đang chờ hỗ trợ'}}</td>

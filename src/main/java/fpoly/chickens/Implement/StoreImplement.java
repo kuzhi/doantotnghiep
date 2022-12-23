@@ -1,5 +1,6 @@
 package fpoly.chickens.Implement;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -88,7 +89,7 @@ public class StoreImplement implements StoreService {
 		if (findStore.getName().equalsIgnoreCase(store.getName())
 				|| findStore.getPhone().equalsIgnoreCase(store.getPhone())
 				|| findStore.getAddress().equalsIgnoreCase(store.getAddress())) {
-			
+
 			return storeDAO.saveAndFlush(store);
 
 		}
@@ -127,8 +128,8 @@ public class StoreImplement implements StoreService {
 	public Store findById(Integer storeid) {
 		// TODO Auto-generated method stub
 		Store getStore = storeDAO.findById(storeid).get();
-			return getStore;
-		
+		return getStore;
+
 	}
 
 	@Override
@@ -141,18 +142,18 @@ public class StoreImplement implements StoreService {
 	public String checkEndDate(Integer storeid) {
 		// TODO Auto-generated method stub
 		Store store = this.findById(storeid);
-		if(store.getDeleted()==false){
+		if (store.getDeleted() == false) {
 			Date today = new Date();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(today);
-                calendar.add(Calendar.DATE,3);
-				
-                today = calendar.getTime();
-			Boolean checkDateAfter= today.after(store.getEnddate());
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(today);
+			calendar.add(Calendar.DATE, 3);
 
-		
-			if(checkDateAfter){
-				return "Ngày hết hạn gói đăng ký vào ngày "+ store.getEnddate() +" vui lòng liên hệ nhân viên hỗ trợ để gia hạn thêm!";
+			today = calendar.getTime();
+			Boolean checkDateAfter = today.after(store.getEnddate());
+
+			if (checkDateAfter) {
+				return "Ngày hết hạn gói đăng ký vào ngày " + store.getEnddate()
+						+ " vui lòng liên hệ nhân viên hỗ trợ để gia hạn thêm!";
 			}
 		}
 		return null;
@@ -162,5 +163,26 @@ public class StoreImplement implements StoreService {
 	public Integer countStore(Integer userStoreId) {
 		// TODO Auto-generated method stub
 		return storeDAO.countStoreByUserStore(userStoreId);
+	}
+
+	@Override
+	public Store trial(Store store) {
+		Store findStore = this.findById(store.getId());
+		
+		if(findStore!=null){
+			Calendar cal = Calendar.getInstance();
+			cal.set(Calendar.HOUR_OF_DAY, 23);
+			cal.set(Calendar.MINUTE, 59);
+			cal.set(Calendar.SECOND, 59);
+
+			Date endDate = cal.getTime();
+			// System.out.println(endDate);
+			if(findStore.getEnddate().before(endDate)){
+				findStore.setEnddate(endDate);
+				storeDAO.saveAndFlush(findStore);
+			}
+		}
+		
+		return null;
 	}
 }

@@ -35,4 +35,5 @@ public interface StoreService {
 
 	String checkEndDate(Integer storeid);
 	Integer countStore(Integer userStoreId);
+    Store trial(Store store);
 }
