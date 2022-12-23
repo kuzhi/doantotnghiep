@@ -14,7 +14,7 @@ public interface StoreDAO extends JpaRepository<Store, Integer> {
 	List<Store> findByUserStore(int userStoreId);
 	
 	// Load store with status user store
-	@Query(value = "SELECT o FROM Store o WHERE o.UserstoreId.Status = true and Deleted = 0")
+	@Query(value = "SELECT o FROM Store o WHERE o.UserstoreId.Status = true and Deleted = false and o.UserstoreId.Deleted = false")
 	List<Store> loadListStore();
 
 	@Query(value = "SELECT * FROM Store WHERE UserstoreId = ?1", nativeQuery = true)

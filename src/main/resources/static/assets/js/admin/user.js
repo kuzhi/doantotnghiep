@@ -136,12 +136,13 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 									$http.get($scope.url + "deleted/" + $scope.deleted).then(resp => {
 										$scope.userz = resp.data;
 
-										const exampleDate = new Date(new Date().setHours(0, 0, 0, 0));
-										const end = (24 * 60 * 60 * 1000 - 1)*3;
+										var date = new Date();
+
+										console.log(date.addDays(3));
 										$scope.store = {};
 										$scope.store.name = $scope.userz[$scope.userz.length - 1].username + $scope.userz[$scope.userz.length - 1].id;
 										$scope.store.userstoreId = $scope.userz[$scope.userz.length - 1];
-										$scope.store.enddate = new Date(end);
+										$scope.store.enddate = date.addDays(3);
 										$scope.store.deleted = false;
 										$scope.store.create_at = new Date();
 										$scope.store.image = 'icon_cart_blank.png';										
@@ -163,6 +164,13 @@ app.controller("user-ctrl", function($scope, $http, $location) {
 				}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); });
 			}
 		}).catch(error => { Swal.fire({ icon: 'error', title: 'Lỗi!' + error }); });
+	}
+
+	// add date
+	Date.prototype.addDays = function(days) {
+		var date = new Date(this.valueOf());
+		date.setDate(date.getDate() + days);
+		return date;
 	}
 
 	// Update user

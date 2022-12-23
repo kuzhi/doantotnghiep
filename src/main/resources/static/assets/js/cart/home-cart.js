@@ -4,7 +4,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   $scope.amountItems = 0;
   $scope.userid = Number(document.getElementById("userid").value);
   $scope.sid = Number(document.getElementById("storeid").value);
-  console.log($scope.sid);
+  // console.log($scope.sid);
 
   $scope.regexPhone =
     /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
@@ -32,7 +32,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   //================================ Load list products
   $scope.url = "/api/product";
   $scope.products = [];
-  $scope.listProducts = function (storeid) {
+  $scope.listProducts = function () {
     $http.get($scope.url + "/store/" + $scope.sid + "/" + true).then((resp) => {
       $scope.products = resp.data;
       if ($scope.products.length == 0) {
@@ -79,9 +79,12 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   //     console.log(productById);
   //   });
   // };
-  $scope.listProducts($scope.sid);
+  if($scope.sid != 0) {
+    $scope.listProducts();
+  }
 
   // Phân trang và điều hướng
+  if($scope.sid != 0) {
   $scope.pager2 = {
     page: 0,
     size: 8,
@@ -111,29 +114,30 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
       this.page = this.count - 1;
     },
   };
+}
 
   //================================ Load loại để lọc
-  $scope.listProducts();
+  // $scope.listProducts();
   $scope.cates = [];
   $scope.listCategory = function () {
     $http.get("/api/category/" + "store/" + $scope.sid).then((resp) => {
       $scope.cates = resp.data;
     });
   };
-  $scope.listCategory();
+  // $scope.listCategory();
   $scope.selected = [];
   $scope.exist = function (item) {
     return $scope.selected.indexOf(item) > -1;
   };
 
-  if ($scope.sid != 0) {
+  if($scope.sid != 0) {
     $scope.listCategory();
   }
   $scope.getUsersbyFilter = function (id) {
     // ======= A-Z
     $http.get("/api/product/sort/" + id).then((resp) => {
       if (resp.data == 0) {
-        $scope.listProducts();
+        if($scope.sid != 0) { $scope.listProducts();}
         Swal.fire({
           icon: "error",
           title: "Lọc sản phẩm thất bại!",
@@ -184,7 +188,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
   };
 
   $scope.add = function (pd) {
-    console.log({ pd });
+    // console.log({ pd });
     //thêm sp vào giỏ
     if ($scope.userid == 0) {
       location.href = "/home/auth/form";
@@ -264,7 +268,9 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
         }
       });
   };
-  $scope.loadCart($scope.sid, $scope.userid); // lấy danh sách giỏ hàng
+  if($scope.sid != 0) {  
+    $scope.loadCart($scope.sid, $scope.userid); // lấy danh sách giỏ hàng
+  }
 
   $scope.loadShip = function () {
     //lấy danh sách các loại thanh toán
@@ -398,7 +404,7 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
                 "Đơn hàng của bạn đang được xử lý",
                 "success"
               );
-              $scope.all();
+              if($scope.sid != 0) { $scope.all(); }
               $scope.deleteall();
               $scope.countAmount($scope.sid);
             });
@@ -782,7 +788,9 @@ app.controller("cart-ctrl", function ($scope, $http, $location) {
       });
   };
 
-  $scope.all();
+  if($scope.sid != 0) {
+    $scope.all();
+  }
 
   //================================ Load danh sách cửa hàng
   $scope.listStore = [];

@@ -60,7 +60,7 @@
 					<div class="mx-3">
 						<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
 						<ul class="dropdown-menu">
-							<li ng-repeat="noti in notis">
+							<li ng-repeat="noti in notis" class="border-bottom">
 								<a class="dropdown-item text-wrap" >{{noti.notes}}</a>
 							</li>
 						</ul>
@@ -83,7 +83,7 @@
 				<div class="dropdown account__user-mobile">
 					<label aria-expanded="false" class="dropdown-toggle" data-bs-toggle="dropdown" > Thông báo </label>
 					<ul class="dropdown-menu dropdown-menu-end">
-						<li ng-repeat="noti in notis">
+						<li ng-repeat="noti in notis" class="border-bottom">
 							<a class="dropdown-item" >{{noti.notes}}</a>
 						</li>
 					</ul>
@@ -153,8 +153,8 @@
 							<del class="collapse text-decoration-none" id="collapseUser">
 								<a 
 									href="#!user_admin"
-									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
-								> Nhân viên </a> <br> 
+									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error==1"
+								> Nhân viên </a> <br ng-if="error==1"> 
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
@@ -232,7 +232,7 @@
 									href="#!user_admin"
 									class="text-decoration-none text-black-50 fw-semibold list__item" ng-if="error ==1"
 								> Nhân viên </a> 
-								<br>
+								<br ng-if="error==1">
 								<a 
 									href="#!user"
 									class="text-decoration-none text-black-50 fw-semibold list__item"
